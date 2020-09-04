@@ -4,8 +4,24 @@ import 'package:kepler/views/home.dart';
 
 void main() {
   runApp(GetMaterialApp(
+    title: 'Kepler',
     darkTheme: ThemeData(brightness: Brightness.dark),
     debugShowCheckedModeBanner: false,
     home: HomeView(),
+    builder: (context, child) {
+      return ScrollConfiguration(
+        behavior: RemoveGlow(),
+        child: child,
+      );
+    },
   ));
+}
+
+//Remove Glow OverScroll effect behaviour
+class RemoveGlow extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
 }

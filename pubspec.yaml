@@ -32,6 +32,7 @@ dependencies:
   http: any
   google_fonts: ^1.1.0
   slimy_card: 1.0.4
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
   flutter_test:

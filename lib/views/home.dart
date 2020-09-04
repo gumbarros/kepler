@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/planetsController.dart';
 import 'package:kepler/models/planets.dart';
+import 'package:kepler/shared/loading.dart';
 import 'package:kepler/widgets/planetCard.dart';
 
 class HomeView extends StatelessWidget {
@@ -13,10 +14,10 @@ class HomeView extends StatelessWidget {
     return GetBuilder<PlanetsController>(
       init: PlanetsController(),
       builder: (_) => Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("Kepler"),
-        ),
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: Text("Kepler"),
+        // ),
         body: Container(
           width: Get.width,
           height: Get.height,
@@ -26,6 +27,7 @@ class HomeView extends StatelessWidget {
               switch (snapshot.connectionState) {
                 case ConnectionState.done:
                   return ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return PlanetCard(
@@ -34,7 +36,7 @@ class HomeView extends StatelessWidget {
                         );
                       });
                 default:
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: Loading());
               }
             },
           ),
