@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
-import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/planetsController.dart';
 import 'package:kepler/models/planets.dart';
-import 'package:kepler/shared/loading.dart';
-import 'package:kepler/widgets/planetCard.dart';
+import 'package:kepler/widgets/progress/loading.dart';
+import 'package:kepler/widgets/cards/planetCard.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -14,15 +13,37 @@ class HomeView extends StatelessWidget {
     return GetBuilder<PlanetsController>(
       init: PlanetsController(),
       builder: (_) => Scaffold(
-        // appBar: AppBar(
-        //   centerTitle: true,
-        //   title: Text("Kepler"),
-        // ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.home),
+          onPressed: () {},
+        ),
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          child: BottomNavigationBar(
+            currentIndex: 1,
+            type: BottomNavigationBarType.fixed,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.insert_chart),
+                title: Text("Graphics"),
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                    size: 0,
+                  ),
+                  title: Text("")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.filter_list), title: Text("Filters"))
+            ],
+          ),
+        ),
         body: Container(
           width: Get.width,
           height: Get.height,
           child: FutureBuilder<List<PlanetData>>(
-            future: API.getAllPlanets(),
+            future: _.getAllPlanets(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.done:
