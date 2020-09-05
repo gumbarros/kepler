@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/views/home.dart';
+import 'package:kepler/views/homeView.dart';
 
 void main() {
   runApp(GetMaterialApp(

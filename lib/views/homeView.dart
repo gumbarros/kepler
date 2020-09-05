@@ -40,13 +40,15 @@ class Home extends StatelessWidget {
                 Column(
                   children: [
                     MenuCard(
-                        onTap: () => Navigator.of(context).push(_planetPageRoute()),
+                        onTap: () =>
+                            Navigator.of(context).push(_planetPageRoute()),
                         text: "Planet View"),
                     SizedBox(
                       height: 30,
                     ),
                     MenuCard(
-                        onTap: () => Navigator.of(context).push(_planetPageRoute()),
+                        onTap: () =>
+                            Navigator.of(context).push(_planetPageRoute()),
                         text: "Graphics View"),
                     SizedBox(
                       height: 30,
