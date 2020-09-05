@@ -28,8 +28,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
 
     _scalecontroller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _scaleanimation =
-        Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
+    _scaleanimation = Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
 
     super.initState();
   }
@@ -69,16 +68,14 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                                 return Column(
                                   children: [
                                     SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height / 10,
+                                      height: MediaQuery.of(context).size.height / 10,
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10.0),
+                                            padding: const EdgeInsets.only(left: 10.0),
                                             child: Text('Planet View',
                                                 style: GoogleFonts.josefinSans(
                                                     fontSize: 50)),
@@ -94,8 +91,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                                       ],
                                     ),
                                     SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height / 7,
+                                      height: Get.height / 7,
                                     ),
                                   ],
                                 );
