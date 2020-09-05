@@ -7,7 +7,7 @@ void main() {
     title: 'Kepler',
     darkTheme: ThemeData(brightness: Brightness.dark),
     debugShowCheckedModeBanner: false,
-    home: HomeView(),
+    home: Home(),
     builder: (context, child) {
       return ScrollConfiguration(
         behavior: RemoveGlow(),

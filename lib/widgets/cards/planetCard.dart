@@ -23,8 +23,10 @@ class PlanetCard extends StatelessWidget {
           planets[index].planetName,
           style: GoogleFonts.roboto(fontSize: 26.5),
         ),
-        bottomCardWidget: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        // To prevent overflow, use wrap
+        bottomCardWidget: Wrap(
+          direction: Axis.horizontal,
+          alignment: WrapAlignment.center,
           children: [
             Text(
               "Star: ${planets[index].star}",

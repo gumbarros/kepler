@@ -1,68 +1,78 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'package:get/get.dart';
-import 'package:kepler/controllers/planetsController.dart';
-import 'package:kepler/models/planets.dart';
-import 'package:kepler/widgets/progress/loading.dart';
-import 'package:kepler/widgets/cards/planetCard.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:kepler/views/planetview.dart';
 
-class HomeView extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.put<PlanetsController>(PlanetsController());
-    return GetBuilder<PlanetsController>(
-      init: PlanetsController(),
-      builder: (_) => Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.home),
-          onPressed: () {},
-        ),
-        bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          child: BottomNavigationBar(
-            currentIndex: 1,
-            type: BottomNavigationBarType.fixed,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.insert_chart),
-                title: Text("Graphics"),
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    size: 0,
+    return Scaffold(
+      body: SafeArea(
+          child: Container(
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Kepler',
+                    style: TextStyle(
+                      fontSize: 60,
+                    ),
                   ),
-                  title: Text("")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.filter_list), title: Text("Filters"))
-            ],
-          ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 7,
+            ),
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(_planetPageRoute());
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 10,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xFFF667EEA), Color(0xFFF764BA2)])),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('Planet View', style: GoogleFonts.josefinSans(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+              ],
+            )
+          ],
         ),
-        body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: FutureBuilder<List<PlanetData>>(
-            future: _.getAllPlanets(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.done:
-                  return ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return PlanetCard(
-                          index: index,
-                          planets: snapshot.data,
-                        );
-                      });
-                default:
-                  return Center(child: Loading());
-              }
-            },
-          ),
-        ),
-      ),
+      )),
     );
   }
+}
+
+Route _planetPageRoute() {
+  return CupertinoPageRoute(builder: (context) => PlanetView());
 }
