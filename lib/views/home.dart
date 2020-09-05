@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
       children: [
         Background(),
         Scaffold(
+          backgroundColor: Colors.transparent,
           body: SafeArea(
               child: Container(
             child: ListView(
