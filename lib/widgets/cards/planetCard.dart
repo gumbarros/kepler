@@ -21,7 +21,7 @@ class PlanetCard extends StatelessWidget {
         borderRadius: 15,
         topCardWidget: Text(
           planets[index].planetName,
-          style: GoogleFonts.roboto(fontSize: 26.5),
+          style: GoogleFonts.robotoCondensed(fontSize: 26.5),
         ),
         // To prevent overflow, use wrap
         bottomCardWidget: Wrap(
