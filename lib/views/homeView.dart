@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:kepler/views/graphicsView.dart';
 import 'package:kepler/views/planetView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 
@@ -40,16 +41,19 @@ class Home extends StatelessWidget {
                 Column(
                   children: [
                     MenuCard(
-                        onTap: () =>
-                            Navigator.of(context).push(_planetPageRoute()),
-                        text: "Planet View"),
+                      onTap: () => Navigator.of(context)
+                          .push(_planetPageRoute(PlanetView())),
+                      text: "Planet View",
+                      colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
+                    ),
                     SizedBox(
                       height: 30,
                     ),
                     MenuCard(
-                        onTap: () =>
-                            Navigator.of(context).push(_planetPageRoute()),
-                        text: "Graphics View"),
+                        onTap: () => Navigator.of(context)
+                            .push(_planetPageRoute(GraphicsView())),
+                        text: "Graphics View",
+                        colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
                     SizedBox(
                       height: 30,
                     ),
@@ -64,8 +68,8 @@ class Home extends StatelessWidget {
   }
 }
 
-Route _planetPageRoute() {
-  return CupertinoPageRoute(builder: (context) => PlanetView());
+Route _planetPageRoute(Widget child) {
+  return CupertinoPageRoute(builder: (context) => child);
 }
 
 class Background extends StatelessWidget {
