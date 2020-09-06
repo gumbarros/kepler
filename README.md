@@ -10,10 +10,9 @@
 - Refactoring the code to better performance
 - Helping in the algorithm to discover the planet color
 - Translating the app
+> The only requirements to contribute are to speak English and know Flutter
 
 ## API Credits - [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/) 🚀
-
-> The only requirements to contribute are to speak English and know Flutter
 
 # How to translate the app 🇧🇷 🇺🇸 🇻🇳
 
