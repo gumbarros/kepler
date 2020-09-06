@@ -5,7 +5,7 @@
 ![Home](https://i.ibb.co/R93L784/home.png)
 
 # How to contribute
-- Creating the local database
+- New API querys
 - Developing the graphics (largest planets, longest orbits)
 - Refactoring the code to better performance
 - Helping in the algorithm to discover the planet color
