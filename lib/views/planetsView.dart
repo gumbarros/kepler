@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kepler/controllers/planetsController.dart';
 import 'package:kepler/models/planets.dart';
+import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
-import 'package:kepler/widgets/cards/planetCard.dart';
 
 class PlanetView extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
   AnimationController _fadecontroller;
 
   AnimationController _scalecontroller;
+
   @override
   void initState() {
     _fadecontroller =
@@ -31,7 +33,8 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
 
     _scalecontroller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _scaleanimation = Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
+    _scaleanimation =
+        Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
 
     super.initState();
   }
@@ -48,18 +51,20 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
       },
       child: MixinBuilder<PlanetsController>(
         builder: (_) => Scaffold(
+          resizeToAvoidBottomPadding: false,
           body: SingleChildScrollView(
             child: Container(
               width: Get.width,
               height: Get.height,
               child: Column(children: [
                 Header('Planets',
-                    fadeController: _fadecontroller, scaleController: _scalecontroller),
+                    fadeController: _fadecontroller,
+                    scaleController: _scalecontroller),
                 Column(
                   children: [
                     SearchBar(
-                      onChanged: (String value) {
-                        _.search.value = value;
+                      searchFunc: (value) {
+                        compute(expensiveSearchFunction, value);
                       },
                     ),
                     Container(
@@ -73,7 +78,6 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                             case ConnectionState.done:
                               _fadecontroller.forward();
                               _scalecontroller.forward();
-
                               if (snapshot.data.isNull) {
                                 return Center(
                                   child: Text(
@@ -89,11 +93,13 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                                   child: ListView.builder(
                                       physics: BouncingScrollPhysics(),
                                       itemCount: snapshot.data.length,
-                                      itemBuilder: (BuildContext context, int index) {
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
                                         return Obx(
                                           () => Visibility(
-                                            visible: PlanetsController.to
-                                                .find(snapshot.data[index].planetName),
+                                            visible: PlanetsController.to.find(
+                                                snapshot
+                                                    .data[index].planetName),
                                             child: PlanetCard(
                                               index: index,
                                               planets: snapshot.data,
@@ -118,4 +124,9 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
       ),
     );
   }
+}
+
+expensiveSearchFunction(value) {
+  PlanetsController _;
+  _.search.value = value;
 }
