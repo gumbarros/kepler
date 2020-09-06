@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:kepler/backgrounds/homeBackground.dart';
 import 'package:kepler/views/graphicsView.dart';
 import 'package:kepler/views/planetsView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
@@ -72,11 +73,10 @@ Route _planetPageRoute(Widget child) {
   return CupertinoPageRoute(builder: (context) => child);
 }
 
-class Background extends StatelessWidget {
+class Something extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
       child: Column(
         children: [
           Container(
