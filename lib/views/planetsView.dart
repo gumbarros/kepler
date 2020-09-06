@@ -61,7 +61,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                 SearchBar(
                   searchFunc: (value) {
                     compute(expensiveSearchFunction,
-                        value); //Replacement function to isolate processes
+                        value); //Isolate function (create its own thread to run on, avoid block UI thread)
                   },
                 ),
                 Container(
@@ -120,8 +120,9 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
   }
 }
 
+
 //Error function
 expensiveSearchFunction(value) {
-  PlanetsController _; // <--This part
+  PlanetsController _;
   _.search.value = value;
 }
