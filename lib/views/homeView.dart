@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/backgrounds/homeBackground.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/graphicsView.dart';
 import 'package:kepler/views/planetsView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
@@ -28,7 +29,7 @@ class Home extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Kepler',
+                        string.text("app_title"),
                         style: TextStyle(
                           fontSize: 60,
                         ),
@@ -44,7 +45,7 @@ class Home extends StatelessWidget {
                     MenuCard(
                       onTap: () =>
                           Navigator.of(context).push(_planetPageRoute(PlanetView())),
-                      text: "Planets",
+                      text: string.text("planets"),
                       colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                     ),
                     SizedBox(
@@ -53,7 +54,7 @@ class Home extends StatelessWidget {
                     MenuCard(
                         onTap: () =>
                             Navigator.of(context).push(_planetPageRoute(GraphicsView())),
-                        text: "Graphics", //Explore Data?
+                        text: string.text("graphics"), //Explore Data?
                         colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
                     SizedBox(
                       height: 30,

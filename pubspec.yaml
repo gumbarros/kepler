@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter  
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -31,6 +33,7 @@ dependencies:
   syncfusion_flutter_charts: ^18.2.48
   http: any
   google_fonts: ^1.1.0
+  get_storage: ^1.2.1
   slimy_card: 1.0.4
   flutter_spinkit: ^4.1.2+1
 
@@ -50,8 +53,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - lib/locale/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

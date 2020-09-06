@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kepler/controllers/planetsController.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planets.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
@@ -51,7 +52,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
         builder: (_) => Scaffold(
           resizeToAvoidBottomPadding: false,
           body: ListView(children: [
-            Header('Planets',
+            Header(string.text('planets'),
                 fadeController: _fadecontroller, scaleController: _scalecontroller),
             Column(
               children: [
@@ -75,7 +76,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                           if (snapshot.data.isNull) {
                             return Center(
                               child: Text(
-                                "No planets were found.",
+                                string.text("no_planet"),
                                 style: GoogleFonts.roboto(),
                               ),
                             );

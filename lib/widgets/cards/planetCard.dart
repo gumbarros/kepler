@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planets.dart';
 import 'package:slimy_card/slimy_card.dart';
 
@@ -29,23 +30,23 @@ class PlanetCard extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             Text(
-              "Star: ${planets[index].star}",
+              "${string.text("star")}: ${planets[index].star}",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
             Text(
-              "Orbital Period: ${planets[index].orbitalPeriod.truncate()} days",
+              "${string.text("orbital_period")}: ${planets[index].orbitalPeriod.truncate()} ${string.text("days")}",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
             Text(
-              "Mass: ${planets[index].jupiterMass.isNull ? 'Unknown' : planets[index].jupiterMass.toString() + ' Jupiter'} ",
+              "${string.text("mass")}: ${planets[index].jupiterMass.isNull ? 'Unknown' : planets[index].jupiterMass.toString() + ' Jupiter'} ",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
             Text(
-              "Density: ${planets[index].density.isNull ? 'Unknown' : planets[index].density.toString() + '  g/cm³'}",
+              "${string.text("density")}: ${planets[index].density.isNull ? 'Unknown' : planets[index].density.toString() + '  g/cm³'}",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
             Text(
-              "Radius: ${planets[index].radius.isNull ? 'Unknown' : planets[index].radius.toString() + '  Jupiter Radius'} ",
+              "${string.text("radius")}: ${planets[index].radius.isNull ? 'Unknown' : planets[index].radius.toString() + string.text("jupiter_radius")} ",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
           ],
