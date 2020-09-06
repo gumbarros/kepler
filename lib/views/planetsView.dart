@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
@@ -33,8 +32,7 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
 
     _scalecontroller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _scaleanimation =
-        Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
+    _scaleanimation = Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
 
     super.initState();
   }
@@ -49,19 +47,18 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
         await _scalecontroller.reverse();
         return true;
       },
-      child: MixinBuilder<PlanetsController>(
+      child: GetBuilder<PlanetsController>(
         builder: (_) => Scaffold(
           resizeToAvoidBottomPadding: false,
           body: ListView(children: [
             Header('Planets',
-                fadeController: _fadecontroller,
-                scaleController: _scalecontroller),
+                fadeController: _fadecontroller, scaleController: _scalecontroller),
             Column(
               children: [
                 SearchBar(
-                  searchFunc: (value) {
-                    compute(expensiveSearchFunction,
-                        value); //Isolate function (create its own thread to run on, avoid block UI thread)
+                  searchFunc: (String value) {
+                    _.search.value = value;
+                    _.upd();
                   },
                 ),
                 Container(
@@ -69,8 +66,8 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                   height: Get.height / 1.55,
                   child: FutureBuilder<List<PlanetData>>(
                     future: PlanetsController.to.getAllPlanets(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<PlanetData>> snapshot) {
+                    builder:
+                        (BuildContext context, AsyncSnapshot<List<PlanetData>> snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.done:
                           _fadecontroller.forward();
@@ -90,16 +87,13 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
                               child: ListView.builder(
                                   physics: BouncingScrollPhysics(),
                                   itemCount: snapshot.data.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Obx(
-                                      () => Visibility(
-                                        visible: PlanetsController.to.find(
-                                            snapshot.data[index].planetName),
-                                        child: PlanetCard(
-                                          index: index,
-                                          planets: snapshot.data,
-                                        ),
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Visibility(
+                                      visible: PlanetsController.to
+                                          .find(snapshot.data[index].planetName),
+                                      child: PlanetCard(
+                                        index: index,
+                                        planets: snapshot.data,
                                       ),
                                     );
                                   }),
@@ -118,11 +112,4 @@ class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
       ),
     );
   }
-}
-
-
-//Error function
-expensiveSearchFunction(value) {
-  PlanetsController _;
-  _.search.value = value;
 }
