@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SearchBar extends StatelessWidget {
-  final Function onChanged;
-  SearchBar({@required this.onChanged});
+class SearchBar extends StatefulWidget {
+  final Function searchFunc;
+
+  SearchBar({@required this.searchFunc});
+
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  String value = '';
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +35,8 @@ class SearchBar extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      onChanged: (String value) {
-                        onChanged(value);
+                      onChanged: (getValue) {
+                        value = getValue;
                       },
                       style: GoogleFonts.robotoCondensed(),
                       keyboardType: TextInputType.text,
@@ -44,6 +52,7 @@ class SearchBar extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(Icons.search, color: Colors.white54),
                     onPressed: () {
+                      widget.searchFunc(value);
                       FocusScopeNode currentFocus = FocusScope.of(context);
                       if (!currentFocus.hasPrimaryFocus) {
                         currentFocus.unfocus();

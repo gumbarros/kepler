@@ -7,7 +7,8 @@ class GraphicsView extends StatefulWidget {
   _GraphicsViewState createState() => _GraphicsViewState();
 }
 
-class _GraphicsViewState extends State<GraphicsView> with TickerProviderStateMixin {
+class _GraphicsViewState extends State<GraphicsView>
+    with TickerProviderStateMixin {
   // ignore: unused_field
   Animation _fadeanimation;
 
@@ -26,8 +27,10 @@ class _GraphicsViewState extends State<GraphicsView> with TickerProviderStateMix
 
     _scalecontroller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _scaleanimation = Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
-
+    _scaleanimation =
+        Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
+    _fadecontroller.forward();
+    _scalecontroller.forward();
     super.initState();
   }
 
@@ -44,10 +47,16 @@ class _GraphicsViewState extends State<GraphicsView> with TickerProviderStateMix
         body: Container(
             width: Get.width,
             height: Get.height,
-            child: Column(
+            child: ListView(
               children: [
                 Header("Graphics",
-                    fadeController: _fadecontroller, scaleController: _scalecontroller)
+                    fadeController: _fadecontroller,
+                    scaleController: _scalecontroller),
+                FadeTransition(
+                  opacity: _fadeanimation,
+                  child: ScaleTransition(
+                      scale: _scaleanimation, child: Text('Dummy')),
+                ),
               ],
             )),
       ),
