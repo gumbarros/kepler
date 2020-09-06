@@ -1,0 +1,14 @@
+{
+    "app_title":"Kepler",
+    "planets":"Planetas",
+    "graphics":"Gráficos",
+    "star":"Estrela",
+    "orbital_period":"Periodo Orbital",
+    "days":"dias",
+    "mass":"Massa",
+    "density":"Densidade",
+    "radius":"Raio",
+    "jupiter_radius":"  Raio de Jupiter",
+    "settings":"Configurações",
+    "no_planets":"Nenhum planeta foi encontrado"
+}
