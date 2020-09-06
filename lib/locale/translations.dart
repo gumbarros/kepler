@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
+
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -7,7 +8,7 @@ import 'package:get_storage/get_storage.dart';
 /// Storage related
 ///
 const String _storageKey = "MyApplication_";
-const List<String> _supportedLanguages = ['en', 'br'];
+const List<String> _supportedLanguages = ['en', 'br', 'vn'];
 final GetStorage getStorage = GetStorage();
 
 class GlobalTranslations {

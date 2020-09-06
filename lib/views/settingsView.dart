@@ -48,7 +48,9 @@ class Settings extends StatelessWidget {
                       width: Get.width / 3,
                       child: FlatButton(
                         child: Text("Vietnamese"),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          await _.setLanguage("vn");
+                        },
                       )),
                   Container(
                       width: Get.width / 3,
