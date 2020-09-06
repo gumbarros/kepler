@@ -12,5 +12,4 @@
 
 ## API Credits - [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/)
 
-
-
+> The only requirements to contribute are to speak English and know Flutter

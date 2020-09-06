@@ -6,13 +6,12 @@ class SearchBar extends StatefulWidget {
   final Function searchFunc;
 
   SearchBar({@required this.searchFunc});
-
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
-  String value = '';
+  String search = '';
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,8 @@ class _SearchBarState extends State<SearchBar> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      onChanged: (getValue) {
-                        value = getValue;
+                      onChanged: (String value) {
+                        search = value;
                       },
                       style: GoogleFonts.robotoCondensed(),
                       keyboardType: TextInputType.text,
@@ -52,7 +51,7 @@ class _SearchBarState extends State<SearchBar> {
                   child: IconButton(
                     icon: Icon(Icons.search, color: Colors.white54),
                     onPressed: () {
-                      widget.searchFunc(value);
+                      widget.searchFunc(search);
                       FocusScopeNode currentFocus = FocusScope.of(context);
                       if (!currentFocus.hasPrimaryFocus) {
                         currentFocus.unfocus();
