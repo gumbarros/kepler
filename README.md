@@ -1,8 +1,8 @@
 # Kepler: Discover exoplanets with NASA data
 
+![Home](https://i.ibb.co/PmrxkLm/home.png)
+![Planets](https://i.ibb.co/0qMRbdk/planets.png)
 
-![Planets](https://i.ibb.co/6DTWtX4/planets.png)
-![Home](https://i.ibb.co/R93L784/home.png)
 
 # How to contribute
 - New API querys
