@@ -23,9 +23,8 @@ class PlanetsController extends GetxController {
       return true;
     else if (name.toLowerCase().contains(search.value.toLowerCase()))
       return true;
-    else {
+    else
       return false;
-    }
   }
 
   void upd() {

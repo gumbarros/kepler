@@ -66,13 +66,11 @@ class _PlanetsViewState extends State<PlanetsView> with TickerProviderStateMixin
                   width: Get.width,
                   height: Get.height / 1.55,
                   child: FutureBuilder<List<PlanetData>>(
-                    future: PlanetsController.to.getAllPlanets(),
+                    future: _.getAllPlanets(),
                     builder:
                         (BuildContext context, AsyncSnapshot<List<PlanetData>> snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.done:
-                          _fadecontroller.forward();
-                          _scalecontroller.forward();
                           if (snapshot.data.isNull) {
                             return Center(
                               child: Text(
