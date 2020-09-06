@@ -30,11 +30,11 @@ class PlanetCard extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             Text(
-              "${string.text("star")}: ${planets[index].star}",
+              "${string.text("star")}: ${planets[index].star.isNull ? 'Unknown' : planets[index].star}",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
             Text(
-              "${string.text("orbital_period")}: ${planets[index].orbitalPeriod.truncate()} ${string.text("days")}",
+              "${string.text("orbital_period")}: ${planets[index].orbitalPeriod.isNull ? "Unknown" : planets[index].orbitalPeriod.truncate()} ${string.text("days")}",
               style: GoogleFonts.roboto(fontSize: 18.5),
             ),
             Text(

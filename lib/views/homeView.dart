@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/backgrounds/homeBackground.dart';
+import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/views/graphicsView.dart';
-import 'package:kepler/views/planetsView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 
-class Home extends StatelessWidget {
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -20,6 +18,15 @@ class Home extends StatelessWidget {
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () {
+                      Get.toNamed('/settings');
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: Get.height / 10,
                 ),
@@ -31,7 +38,7 @@ class Home extends StatelessWidget {
                       Text(
                         string.text("app_title"),
                         style: TextStyle(
-                          fontSize: 60,
+                          fontSize: 50,
                         ),
                       ),
                     ],
@@ -43,8 +50,7 @@ class Home extends StatelessWidget {
                 Column(
                   children: [
                     MenuCard(
-                      onTap: () =>
-                          Navigator.of(context).push(_planetPageRoute(PlanetView())),
+                      onTap: () => Get.toNamed('/planets'),
                       text: string.text("planets"),
                       colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                     ),
@@ -52,8 +58,7 @@ class Home extends StatelessWidget {
                       height: 30,
                     ),
                     MenuCard(
-                        onTap: () =>
-                            Navigator.of(context).push(_planetPageRoute(GraphicsView())),
+                        onTap: () => Get.toNamed('/graphics'),
                         text: string.text("graphics"), //Explore Data?
                         colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
                     SizedBox(
@@ -66,33 +71,6 @@ class Home extends StatelessWidget {
           )),
         ),
       ],
-    );
-  }
-}
-
-Route _planetPageRoute(Widget child) {
-  return CupertinoPageRoute(builder: (context) => child);
-}
-
-class Something extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            height: Get.height / 5,
-            width: Get.width / 3,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-              topLeft: Radius.zero,
-              topRight: Radius.zero,
-              bottomLeft: Radius.zero,
-              bottomRight: Radius.circular(360),
-            )),
-          )
-        ],
-      ),
     );
   }
 }

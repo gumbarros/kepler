@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/translations.dart';
 
-class Settings extends StatelessWidget {
+class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
@@ -14,6 +14,15 @@ class Settings extends StatelessWidget {
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+              ),
               SizedBox(
                 height: Get.height / 10,
               ),
@@ -25,7 +34,7 @@ class Settings extends StatelessWidget {
                     Text(
                       string.text("settings"),
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 50,
                       ),
                     ),
                   ],

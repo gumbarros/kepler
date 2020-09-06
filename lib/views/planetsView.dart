@@ -11,12 +11,12 @@ import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
-class PlanetView extends StatefulWidget {
+class PlanetsView extends StatefulWidget {
   @override
-  _PlanetViewState createState() => _PlanetViewState();
+  _PlanetsViewState createState() => _PlanetsViewState();
 }
 
-class _PlanetViewState extends State<PlanetView> with TickerProviderStateMixin {
+class _PlanetsViewState extends State<PlanetsView> with TickerProviderStateMixin {
   Animation _fadeanimation;
 
   Animation _scaleanimation;

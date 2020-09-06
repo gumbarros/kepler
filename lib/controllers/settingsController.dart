@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:kepler/locale/translations.dart';
 
 class SettingsController extends GetxController {

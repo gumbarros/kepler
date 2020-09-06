@@ -14,6 +14,7 @@ class PlanetsController extends GetxController {
 
   Future<List<PlanetData>> getPlanetsByName(String name) async {
     List<PlanetData> _planets = await API.getPlanetsByName(name);
+    print(_planets);
     return _planets;
   }
 
