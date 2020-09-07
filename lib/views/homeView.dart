@@ -4,6 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/views/testView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 
@@ -68,6 +69,10 @@ class HomeView extends StatelessWidget {
                       SizedBox(
                         height: 30,
                       ),
+                      MenuCard(
+                          onTap: () => Get.to(TestView()),
+                          text: "Test View", //Explore Data?
+                          colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
                     ],
                   )
                 ],
