@@ -48,6 +48,14 @@ class SettingsView extends StatelessWidget {
                   Container(
                       width: Get.width / 3,
                       child: FlatButton(
+                        child: Text("English"),
+                        onPressed: () async {
+                          _.setLanguage("en");
+                        },
+                      )),
+                  Container(
+                      width: Get.width / 3,
+                      child: FlatButton(
                         child: Text("Brazilian Portuguese"),
                         onPressed: () async {
                           await _.setLanguage("br");
@@ -59,14 +67,6 @@ class SettingsView extends StatelessWidget {
                         child: Text("Vietnamese"),
                         onPressed: () async {
                           await _.setLanguage("vn");
-                        },
-                      )),
-                  Container(
-                      width: Get.width / 3,
-                      child: FlatButton(
-                        child: Text("English"),
-                        onPressed: () async {
-                          _.setLanguage("en");
                         },
                       )),
                 ],
