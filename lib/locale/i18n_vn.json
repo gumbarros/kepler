@@ -1,14 +1,14 @@
 {
-  "app_title": "Kepler",
-  "explore": "Khám Phá",
-  "graphics": "Biểu đồ trực quan",
-  "star": "Sao",
-  "orbital_period": "Chu kì quỹ đạo",
-  "days": "Ngày",
-  "mass": "Khối lượng",
-  "density": "Tỉ trọng",
-  "radius": "Bán kính",
-  "jupiter_radius": "  Bán kính Sao Mộc",
-  "settings": "Cài Đặt",
-  "no_planet": "Không tìm thấy hành tinh"
+    "app_title": "Kepler",
+    "explore": "Khám Phá",
+    "graphics": "Biểu đồ trực quan",
+    "star": "Sao",
+    "orbital_period": "Chu kì quỹ đạo",
+    "days": "Ngày",
+    "mass": "Khối lượng",
+    "density": "Tỉ trọng",
+    "radius": "Bán kính",
+    "jupiter_radius": "  Bán kính Sao Mộc",
+    "settings": "Cài Đặt",
+    "no_planet": "Không tìm thấy hành tinh"
 }
