@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/locale/translations.dart';
 
 class SettingsController extends GetxController {
@@ -9,6 +10,7 @@ class SettingsController extends GetxController {
       string.setPreferredLanguage(string.currentLanguage);
     });
     upd();
+    HomeController.to.upd();
   }
 
   void upd() {

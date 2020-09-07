@@ -15,6 +15,7 @@ class PlanetData {
     this.jupiterMass,
     this.density,
     this.radius,
+    this.discoveryMethod,
     this.telescope,
   });
 
