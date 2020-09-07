@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/models/planets.dart';
 
-class PlanetsController extends GetxController {
-  static PlanetsController get to => Get.find();
+class ExploreController extends GetxController {
+  static ExploreController get to => Get.find();
 
   final RxString search = "".obs;
 
@@ -14,7 +14,6 @@ class PlanetsController extends GetxController {
 
   Future<List<PlanetData>> getPlanetsByName(String name) async {
     List<PlanetData> _planets = await API.getPlanetsByName(name);
-    print(_planets);
     return _planets;
   }
 
