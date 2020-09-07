@@ -1,5 +1,6 @@
 # Kepler: Discover exoplanets with NASA data 🪐
 
+![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
 ![Home](https://i.ibb.co/PmrxkLm/home.png)
 ![Planets](https://i.ibb.co/0qMRbdk/planets.png)
 
