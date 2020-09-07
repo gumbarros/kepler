@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 
 class HomeView extends StatelessWidget {
@@ -50,8 +50,8 @@ class HomeView extends StatelessWidget {
                 Column(
                   children: [
                     MenuCard(
-                      onTap: () => Get.toNamed('/planets'),
-                      text: string.text("planets"),
+                      onTap: () => Get.toNamed('/explore'),
+                      text: string.text("explore"),
                       colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                     ),
                     SizedBox(

@@ -11,12 +11,13 @@ import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
-class PlanetsView extends StatefulWidget {
+class ExploreView extends StatefulWidget {
   @override
-  _PlanetsViewState createState() => _PlanetsViewState();
+  _ExploreViewState createState() => _ExploreViewState();
 }
 
-class _PlanetsViewState extends State<PlanetsView> with TickerProviderStateMixin {
+class _ExploreViewState extends State<ExploreView>
+    with TickerProviderStateMixin {
   Animation _fadeanimation;
 
   Animation _scaleanimation;
@@ -52,8 +53,9 @@ class _PlanetsViewState extends State<PlanetsView> with TickerProviderStateMixin
         builder: (_) => Scaffold(
           resizeToAvoidBottomPadding: false,
           body: ListView(children: [
-            Header(string.text('planets'),
-                fadeController: _fadecontroller, scaleController: _scalecontroller),
+            Header(string.text('explore'),
+                fadeController: _fadecontroller,
+                scaleController: _scalecontroller),
             Column(
               children: [
                 SearchBar(

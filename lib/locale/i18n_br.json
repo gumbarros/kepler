@@ -1,14 +1,14 @@
 {
-    "app_title":"Kepler",
-    "planets":"Planetas",
-    "graphics":"Gráficos",
-    "star":"Estrela",
-    "orbital_period":"Periodo Orbital",
-    "days":"dias",
-    "mass":"Massa",
-    "density":"Densidade",
-    "radius":"Raio",
-    "jupiter_radius":"  Raio de Jupiter",
-    "settings":"Configurações",
-    "no_planet":"Nenhum planeta foi encontrado"
+    "app_title": "Kepler",
+    "explore": "explorar",
+    "graphics": "Gráficos",
+    "star": "Estrela",
+    "orbital_period": "Periodo Orbital",
+    "days": "dias",
+    "mass": "Massa",
+    "density": "Densidade",
+    "radius": "Raio",
+    "jupiter_radius": "  Raio de Jupiter",
+    "settings": "Configurações",
+    "no_planet": "Nenhum planeta foi encontrado"
 }
