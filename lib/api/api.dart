@@ -7,9 +7,8 @@ class API {
       "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?";
 
   static Future<List<PlanetData>> getAllPlanets() async {
-    //Before:&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_radj,pl_disc,pl_locale,pl_telescope,pl_status
-    final http.Response response = await http
-        .get(url + "table=exoplanets&columns=pl_name&format=json&where=pl_status=3");
+    final http.Response response = await http.get(url +
+        "table=exoplanets&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_radj,pl_disc,pl_locale,pl_telescope,pl_status&format=json&where=pl_status=3");
     print("HTTP GET - " +
         url +
         "table=exoplanets&columns=pl_name&format=json&where=pl_status=3");

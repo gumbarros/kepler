@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kepler/views/exploreView.dart';
-import 'package:kepler/views/graphicsView.dart';
+import 'package:kepler/views/chartsView.dart';
 import 'package:kepler/views/homeView.dart';
 import 'package:kepler/views/settingsView.dart';
 
@@ -10,7 +10,7 @@ class Routes {
       GetPage(name: '/home', page: () => HomeView()),
       GetPage(name: '/settings', page: () => SettingsView()),
       GetPage(name: '/explore', page: () => ExploreView()),
-      GetPage(name: '/graphics', page: () => GraphicsView())
+      GetPage(name: '/charts', page: () => ChartsView())
     ];
   }
 }

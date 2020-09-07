@@ -63,8 +63,8 @@ class HomeView extends StatelessWidget {
                         height: 30,
                       ),
                       MenuCard(
-                          onTap: () => Get.toNamed('/graphics'),
-                          text: string.text("graphics"), //Explore Data?
+                          onTap: () => Get.toNamed('/charts'),
+                          text: string.text("charts"), //Explore Data?
                           colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
                       SizedBox(
                         height: 30,

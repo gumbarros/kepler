@@ -305,14 +305,14 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "18.2.48"
+    version: "18.2.56"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "18.2.48"
+    version: "18.2.56"
   term_glyph:
     dependency: transitive
     description:
