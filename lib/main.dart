@@ -11,7 +11,9 @@ void main() async {
   runApp(GetMaterialApp(
     title: string.text('app_title'),
     defaultTransition: Transition.cupertino,
-    darkTheme: ThemeData(brightness: Brightness.dark),
+    darkTheme: ThemeData(
+      brightness: Brightness.dark,
+    ),
     debugShowCheckedModeBanner: false,
     supportedLocales: string.supportedLocales(),
     initialRoute: "/home",

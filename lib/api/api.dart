@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:json_async/json_async.dart';
-import 'dart:convert';
 import 'package:kepler/models/planets.dart';
 
 class API {

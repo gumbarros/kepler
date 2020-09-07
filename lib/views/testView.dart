@@ -30,7 +30,8 @@ class _TestViewState extends State<TestView> with TickerProviderStateMixin {
 
     _scalecontroller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _scaleanimation = Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
+    _scaleanimation =
+        Tween<double>(begin: 0.85, end: 1).animate(_scalecontroller);
     _fadecontroller.forward();
     _scalecontroller.forward();
     super.initState();
@@ -38,48 +39,41 @@ class _TestViewState extends State<TestView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      //Animation on Route Pop from back button
-      onWillPop: () async {
-        _fadecontroller.reverse();
-        await _scalecontroller.reverse();
-        return true;
-      },
-      child: Scaffold(
-        body: Container(
-            width: Get.width,
-            height: Get.height,
-            child: ListView(
-              children: [
-                Header("Test View",
-                    fadeController: _fadecontroller, scaleController: _scalecontroller),
-                Container(
-                  width: Get.width,
-                  height: Get.height / 1.55,
-                  child: FutureBuilder(
-                    future: API.getTestData(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.done:
-                          print(snapshot.data);
-                          if (snapshot.data == null) {
-                            return Center(
-                              child: Text(
-                                string.text("no_planet"),
-                                style: GoogleFonts.roboto(),
-                              ),
-                            );
-                          }
-                          return Text(snapshot.data.toString());
-                        default:
-                          return Center(child: Loading());
-                      }
-                    },
-                  ),
+    return Scaffold(
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: ListView(
+            children: [
+              Header(
+                "Test View",
+              ),
+              Container(
+                width: Get.width,
+                height: Get.height / 1.55,
+                child: FutureBuilder(
+                  future: API.getTestData(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.done:
+                        print(snapshot.data);
+                        if (snapshot.data == null) {
+                          return Center(
+                            child: Text(
+                              string.text("no_planet"),
+                              style: GoogleFonts.roboto(),
+                            ),
+                          );
+                        }
+                        return Text(snapshot.data.toString());
+                      default:
+                        return Center(child: Loading());
+                    }
+                  },
                 ),
-              ],
-            )),
-      ),
+              ),
+            ],
+          )),
     );
   }
 }
