@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kepler/controllers/exploreController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planets.dart';
@@ -16,17 +15,11 @@ class HeaderController extends GetxController {
   RxDouble position = 0.0.obs;
 
   changeminus() {
-    if (position.value >= -Get.height / 2) {
       position.value -= 10;
-    }
-    print(position.value);
   }
 
   changeplus() {
-    if (position.value <= -10) {
       position.value += 10;
-    }
-    print(position.value);
   }
 
   changezero() {
@@ -48,10 +41,10 @@ class _ExploreViewState extends State<ExploreView> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
+          ScrollDirection.reverse && controller.position.value >= -Get.height / 2) {
         controller.changeminus();
       } else if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
+          ScrollDirection.forward && controller.position.value <= -10) {
         controller.changeplus();
         if (_scrollController.offset == 0) {
           controller.changezero();
@@ -81,7 +74,7 @@ class _ExploreViewState extends State<ExploreView> {
                       return Center(
                         child: Text(
                           string.text("no_planet"),
-                          style: GoogleFonts.roboto(),
+                          style: TextStyle(fontFamily: "Roboto"),
                         ),
                       );
                     }

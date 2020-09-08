@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Header extends StatelessWidget {
   final String title;
@@ -22,8 +21,13 @@ class Header extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(title,
-                        style: GoogleFonts.josefinSans(fontSize: 50)),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                          fontFamily: "JosefinSans",
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 IconButton(

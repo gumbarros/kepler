@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: Get.height / 10,
+                    height: Get.height / 13,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
@@ -65,14 +65,14 @@ class HomeView extends StatelessWidget {
                       MenuCard(
                           onTap: () => Get.toNamed('/charts'),
                           text: string.text("charts"), //Explore Data?
-                          colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
+                          colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)]),
                       SizedBox(
                         height: 30,
                       ),
                       MenuCard(
                           onTap: () => Get.to(TestView()),
                           text: "Test View", //Explore Data?
-                          colorList: [Color(0xFFF30CFD0), Color(0XFFF330867)]),
+                          colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)]),
                     ],
                   )
                 ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MenuCard extends StatefulWidget {
   final Function onTap;
@@ -53,9 +52,10 @@ class _MenuCardState extends State<MenuCard> with TickerProviderStateMixin {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.text,
-                  style: GoogleFonts.josefinSans(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                  style: TextStyle(
+                      fontFamily: "JosefinSans",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold
                   ),
                 ),
               ),

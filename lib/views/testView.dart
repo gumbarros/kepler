@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -61,7 +60,7 @@ class _TestViewState extends State<TestView> with TickerProviderStateMixin {
                           return Center(
                             child: Text(
                               string.text("no_planet"),
-                              style: GoogleFonts.roboto(),
+                              style: TextStyle(fontFamily: "Roboto"),
                             ),
                           );
                         }
