@@ -37,7 +37,15 @@ dependencies:
   slimy_card: 1.0.4
   flutter_spinkit: ^4.1.2+1
   expansion_card: ^0.1.0
+  flutter_launcher_icons: ^0.7.3
 
+  #flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "assets/icon/main.png"
+  adaptive_icon_foreground: "assets/icon/foreground.png"
+  adaptive_icon_background: "#000000"
 dev_dependencies:
   flutter_test:
     sdk: flutter
