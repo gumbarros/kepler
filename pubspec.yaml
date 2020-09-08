@@ -36,6 +36,7 @@ dependencies:
   syncfusion_flutter_charts: ^18.2.56
   slimy_card: 1.0.4
   flutter_spinkit: ^4.1.2+1
+  expansion_card: ^0.1.0
 
 dev_dependencies:
   flutter_test:

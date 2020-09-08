@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
+import 'package:kepler/locale/languageEntry.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:expansion_card/expansion_card.dart';
 
 class SettingsView extends StatelessWidget {
   @override
@@ -43,34 +45,23 @@ class SettingsView extends StatelessWidget {
               SizedBox(
                 height: Get.height / 7,
               ),
-              Row(
-                children: [
-                  Container(
-                      width: Get.width / 3,
-                      child: FlatButton(
-                        child: Text("English"),
-                        onPressed: () async {
-                          _.setLanguage("en");
-                        },
-                      )),
-                  Container(
-                      width: Get.width / 3,
-                      child: FlatButton(
-                        child: Text("Brazilian Portuguese"),
-                        onPressed: () async {
-                          await _.setLanguage("br");
-                        },
-                      )),
-                  Container(
-                      width: Get.width / 3,
-                      child: FlatButton(
-                        child: Text("Vietnamese"),
-                        onPressed: () async {
-                          await _.setLanguage("vn");
-                        },
-                      )),
-                ],
-              )
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                child: ExpansionCard(
+                  title: Text(
+                    'Languages',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  children: [
+                    LanguageEntry(),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: Get.height / 17,
+              ),
             ],
           ),
         )),

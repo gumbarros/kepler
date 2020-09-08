@@ -53,7 +53,10 @@ class _ExploreViewState extends State<ExploreView> {
     });
     super.initState();
   }
-
+void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+}
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ExploreController>(
