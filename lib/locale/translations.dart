@@ -8,7 +8,7 @@ import 'package:get_storage/get_storage.dart';
 /// Storage related
 ///
 const String _storageKey = "MyApplication_";
-const List<String> _supportedLanguages = ['en', 'br', 'vn'];
+const List<String> _supportedLanguages = ['en', 'br', 'vn', 'hi'];
 final GetStorage getStorage = GetStorage();
 
 class GlobalTranslations {
@@ -79,8 +79,8 @@ class GlobalTranslations {
     _locale = Locale(language, "");
 
     // Load the language strings
-    String jsonContent =
-        await rootBundle.loadString("lib/locale/i18n_${_locale.languageCode}.json");
+    String jsonContent = await rootBundle
+        .loadString("lib/locale/i18n_${_locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
 
     // If we are asked to save the new language in the application preferences
@@ -123,7 +123,8 @@ class GlobalTranslations {
   ///
   /// Singleton Factory
   ///
-  static final GlobalTranslations _translations = new GlobalTranslations._internal();
+  static final GlobalTranslations _translations =
+      new GlobalTranslations._internal();
   factory GlobalTranslations() {
     return _translations;
   }
