@@ -16,7 +16,7 @@ class LanguageEntry extends StatelessWidget {
 
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Colors.grey[600],
+                color: Theme.of(context).cardColor,
               ),
               width: Get.height - 30,
               child: FlatButton(
@@ -32,7 +32,7 @@ class LanguageEntry extends StatelessWidget {
 
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Colors.grey[600],
+                color: Theme.of(context).cardColor,
               ),
               width: Get.height - 30,
               child: FlatButton(
@@ -48,7 +48,7 @@ class LanguageEntry extends StatelessWidget {
 
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Colors.grey[600],
+                color: Theme.of(context).cardColor,
               ),
               width: Get.height - 30,
               child: FlatButton(

@@ -44,6 +44,7 @@ class HomeView extends StatelessWidget {
                           string.text("app_title"),
                           style: TextStyle(
                             fontSize: 50,
+                            fontFamily: 'Cabin',
                           ),
                         ),
                       ],

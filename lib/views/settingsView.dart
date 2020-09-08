@@ -52,6 +52,7 @@ class SettingsView extends StatelessWidget {
                     'Languages',
                     style: TextStyle(
                       fontSize: 20,
+                      color: Theme.of(context).textTheme.headline4.color,
                     ),
                   ),
                   children: [

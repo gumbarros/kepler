@@ -119,14 +119,14 @@ void dispose() {
                   children: [
                     //Using temporary color
                     Container(
-                      color: Color(0xFFF312F31),
+                      color: Theme.of(context).dialogBackgroundColor,
                       //TODO: Change the colour accordingly to the theme
                       child: Header(
                         string.text('explore'),
                       ),
                     ),
                     Container(
-                      color: Color(0xFFF312F31),
+                      color: Theme.of(context).dialogBackgroundColor,
                       //TODO: Change the colour accordingly to the theme
                       width: Get.width,
                       child: SearchBar(

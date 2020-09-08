@@ -75,6 +75,9 @@ flutter:
    - family: Roboto
      fonts:
        - asset: fonts/Roboto-Regular.ttf
+   - family: Cabin
+     fonts:
+       - asset: fonts/Cabin.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

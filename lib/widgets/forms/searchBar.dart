@@ -52,7 +52,7 @@ class _SearchBarState extends State<SearchBar> {
                   width: 60,
                   height: 60,
                   child: IconButton(
-                    icon: Icon(Icons.search, color: Colors.white54),
+                    icon: Icon(Icons.search, color: Theme.of(context).textTheme.headline4.color),
                     onPressed: () {
                       widget.searchFunc(search);
                       FocusScopeNode currentFocus = FocusScope.of(context);

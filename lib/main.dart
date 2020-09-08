@@ -14,8 +14,21 @@ void main() async {
   runApp(GetMaterialApp(
     title: string.text('app_title'),
     defaultTransition: Transition.cupertino,
+    theme: ThemeData(
+      brightness: Brightness.light,
+      primaryColor: Color(0xFFFe0e0e0),
+      cardColor: Color(0xFFFe0e0e0),
+      textTheme: TextTheme(
+        headline4: TextStyle(
+          color: Colors.black,
+        )
+      )
+    ),
     darkTheme: ThemeData(
       brightness: Brightness.dark,
+      primaryColor: Color(0xFFF20211E),
+      dialogBackgroundColor: Color(0xFFF312F31),
+      cardColor: Colors.grey[600],
     ),
     debugShowCheckedModeBanner: false,
     supportedLocales: string.supportedLocales(),
