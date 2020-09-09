@@ -72,6 +72,21 @@ class LanguageEntry extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
+          Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Theme.of(context).cardColor,
+              ),
+              width: Get.height - 30,
+              child: FlatButton(
+                child: Text("German"),
+                onPressed: () async {
+                  _.setLanguage("de");
+                },
+              )),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
