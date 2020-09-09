@@ -8,7 +8,7 @@ import 'package:get_storage/get_storage.dart';
 /// Storage related
 ///
 const String _storageKey = "MyApplication_";
-const List<String> _supportedLanguages = ['en', 'br', 'vn', 'hi'];
+const List<String> _supportedLanguages = ['en', 'br', 'vn', 'hi', 'de'];
 final GetStorage getStorage = GetStorage();
 
 class GlobalTranslations {
