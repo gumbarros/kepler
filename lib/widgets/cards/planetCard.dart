@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/models/planets.dart';
+import 'package:kepler/models/planetData.dart';
 import 'package:slimy_card/slimy_card.dart';
 
 class PlanetCard extends StatelessWidget {
@@ -30,25 +30,20 @@ class PlanetCard extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             Text(
-              "${string.text("star")}: ${planets[index].star.isNull ? 'Unknown' : planets[index].star}",
-              style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)
-            ),
+                "${string.text("star")}: ${planets[index].star.isNull ? 'Unknown' : planets[index].star}",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
             Text(
-              "${string.text("orbital_period")}: ${planets[index].orbitalPeriod.isNull ? "Unknown" : planets[index].orbitalPeriod.truncate()} ${string.text("days")}",
-              style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)
-            ),
+                "${string.text("orbital_period")}: ${planets[index].orbitalPeriod.isNull ? "Unknown" : planets[index].orbitalPeriod.truncate()} ${string.text("days")}",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
             Text(
-              "${string.text("mass")}: ${planets[index].jupiterMass.isNull ? 'Unknown' : planets[index].jupiterMass.toString() + ' Jupiter'} ",
-              style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)
-            ),
+                "${string.text("mass")}: ${planets[index].jupiterMass.isNull ? 'Unknown' : planets[index].jupiterMass.toString() + ' Jupiter'} ",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
             Text(
-              "${string.text("density")}: ${planets[index].density.isNull ? 'Unknown' : planets[index].density.toString() + '  g/cm³'}",
-              style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)
-            ),
+                "${string.text("density")}: ${planets[index].density.isNull ? 'Unknown' : planets[index].density.toString() + '  g/cm³'}",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
             Text(
-              "${string.text("radius")}: ${planets[index].radius.isNull ? 'Unknown' : planets[index].radius.toString() + string.text("jupiter_radius")} ",
-              style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)
-            ),
+                "${string.text("radius")}: ${planets[index].radius.isNull ? 'Unknown' : planets[index].radius.toString() + string.text("jupiter_radius")} ",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
           ],
         ),
       ),

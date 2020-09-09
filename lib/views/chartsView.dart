@@ -3,7 +3,7 @@ import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/chartsController.dart';
-import 'package:kepler/models/planets.dart';
+import 'package:kepler/models/planetData.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

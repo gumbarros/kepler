@@ -56,7 +56,7 @@ class HomeView extends StatelessWidget {
                   Column(
                     children: [
                       MenuCard(
-                        onTap: () => Get.toNamed('/explore'),
+                        onTap: () => Get.toNamed('/stars'),
                         text: string.text("explore"),
                         colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                       ),
