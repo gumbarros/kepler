@@ -13,7 +13,6 @@ class LanguageEntry extends StatelessWidget {
             height: 10,
           ),
           Container(
-
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Theme.of(context).cardColor,
@@ -29,7 +28,6 @@ class LanguageEntry extends StatelessWidget {
             height: 10,
           ),
           Container(
-
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Theme.of(context).cardColor,
@@ -45,7 +43,6 @@ class LanguageEntry extends StatelessWidget {
             height: 10,
           ),
           Container(
-
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Theme.of(context).cardColor,
@@ -55,6 +52,21 @@ class LanguageEntry extends StatelessWidget {
                 child: Text("Vietnamese"),
                 onPressed: () async {
                   _.setLanguage("vn");
+                },
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Theme.of(context).cardColor,
+              ),
+              width: Get.height - 30,
+              child: FlatButton(
+                child: Text("Hindi"),
+                onPressed: () async {
+                  _.setLanguage("hi");
                 },
               )),
           SizedBox(
