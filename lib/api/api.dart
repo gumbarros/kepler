@@ -8,7 +8,7 @@ class API {
 
   static Future<List<PlanetData>> getAllPlanets() async {
     const String url = API.url +
-        "table=exoplanets&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_radj,pl_disc,pl_locale,pl_telescope,pl_status&format=json&where=pl_status=3";
+        "table=exoplanets&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_rads,pl_disc,pl_locale,pl_telescope,pl_status&format=json&where=pl_status=3";
     final http.Response response = await http.get(url);
     print("HTTP GET - " + url);
     final List data = await jsonDecodeAsync(response.body);
@@ -31,13 +31,13 @@ class API {
   static Future<PlanetData> getPlanetByName(String name) async {
     //TODO: Add more data for single planet
     final String url = API.url +
-        "table=exoplanets&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_radj,pl_disc,pl_locale,pl_telescope,pl_status&format=json&where=pl_status=3%20and%20pl_name%20like%20'$name'";
+        "table=exoplanets&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_rads,pl_disc,pl_locale,pl_telescope,pl_status&format=json&where=pl_status=3%20and%20pl_name%20like%20'$name'";
     final http.Response response = await http.get(url);
     print(response.body);
     print("HTTP GET - " + url);
     final List data = await jsonDecodeAsync(response.body);
     final List<PlanetData> planets =
-        data.map((planet) => PlanetData.fromMap(planet)).toList();
+    data.map((planet) => PlanetData.fromMap(planet)).toList();
     return planets[0];
   }
 

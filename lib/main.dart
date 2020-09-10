@@ -33,7 +33,7 @@ void main() async {
     ),
     debugShowCheckedModeBanner: false,
     supportedLocales: string.supportedLocales(),
-    initialRoute: "/home",
+    initialRoute: "/views",
     getPages: Routes.routes(),
     builder: (context, child) {
       return ScrollConfiguration(

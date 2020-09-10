@@ -26,7 +26,7 @@ class PlanetData {
     star = map['pl_hostname'];
     jupiterMass = map['pl_bmassj'];
     density = map['pl_dens'];
-    radius = map['pl_radj'];
+    radius = map['pl_rads'];
     discoveryMethod = map['pl_disc'];
     telescope = map['pl_telescope'];
     numOfPlanetsSystem = map['pl_pnum'];

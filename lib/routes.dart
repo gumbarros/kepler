@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:kepler/views/chartsView.dart';
+import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/homeView.dart';
 import 'package:kepler/views/settingsView.dart';
-import 'package:kepler/views/explore/starsView.dart';
+import 'package:kepler/views/views.dart';
 
 class Routes {
   static List<GetPage> routes() {
@@ -13,7 +14,8 @@ class Routes {
       GetPage(
         name: '/stars',
         page: () => StarsView(),
-      )
+      ),
+      GetPage(name: '/views', page: () => Views()),
     ];
   }
 }

@@ -1,14 +1,15 @@
 {
     "app_title": "Kepler",
-    "explore": "Explore",
-    "charts": "Charts",
-    "star": "Star",
-    "orbital_period": "Orbital Period",
-    "days": "days",
-    "mass": "Mass",
-    "density": "Density",
-    "radius": "Radius",
-    "jupiter_radius": "  Jupiter Radius",
-    "settings": "Settings",
-    "no_planet": "No planets were found."
+  "explore": "Explore",
+  "charts": "Charts",
+  "star": "Star",
+  "orbital_period": "Orbital Period",
+  "days": "days",
+  "mass": "Mass",
+  "density": "Density",
+  "radius": "Radius",
+  "jupiter_radius": "  Jupiter Radius",
+  "settings": "Settings",
+  "no_planet": "No planets were found.",
+  "solar_radius": "Solar radius"
 }
