@@ -96,11 +96,6 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         physics: BouncingScrollPhysics(),
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if (index == 0) {
-                            return SizedBox(
-                              height: Get.height * 0.3,
-                            );
-                          }
                           return GestureDetector(
                             onTap: () => Get.to(SolarSystemView(
                                 star: snapshot.data[index].star)),
