@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(Icons.settings),
                       onPressed: () {
-                        Get.toNamed('/settings');
+                        Get.toNamed('/views', arguments: 2);
                       },
                     ),
                   ),
@@ -56,7 +56,7 @@ class HomeView extends StatelessWidget {
                   Column(
                     children: [
                       MenuCard(
-                        onTap: () => Get.toNamed('/stars'),
+                        onTap: () => Get.toNamed('/views', arguments: 0),
                         text: string.text("explore"),
                         colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                       ),
@@ -64,15 +64,15 @@ class HomeView extends StatelessWidget {
                         height: 30,
                       ),
                       MenuCard(
-                          onTap: () => Get.toNamed('/charts'),
-                          text: string.text("charts"), //Explore Data?
+                          onTap: () => Get.toNamed('/views', arguments: 1),
+                          text: string.text("charts"),
                           colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)]),
                       SizedBox(
                         height: 30,
                       ),
                       MenuCard(
                           onTap: () => Get.to(TestView()),
-                          text: "Test View", //Explore Data?
+                          text: "Test View",
                           colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)]),
                     ],
                   )
