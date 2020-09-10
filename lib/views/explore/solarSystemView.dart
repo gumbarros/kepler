@@ -8,7 +8,6 @@ import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
-import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -33,6 +32,7 @@ class SolarSystemView extends StatefulWidget {
   final String star;
 
   SolarSystemView({@required this.star});
+
   @override
   _SolarSystemViewState createState() => _SolarSystemViewState();
 }
@@ -96,6 +96,39 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         physics: BouncingScrollPhysics(),
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
+                          if (index == 0) {
+                            return Column(
+                              children: [
+                                SizedBox(height: Get.height / 3),
+                                GestureDetector(
+                                  onTap: () => Get.to(SolarSystemView(
+                                      star: snapshot.data[index].star)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Container(
+                                      width: Get.width - 10,
+                                      height: Get.height / 4,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).primaryColor,
+                                        borderRadius: const BorderRadius.all(
+                                            const Radius.circular(16.0)),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () => Get.to(PlanetView(
+                                          planetName:
+                                              snapshot.data[index].planetName,
+                                        )),
+                                        child: Center(
+                                          child: Text(
+                                              snapshot.data[index].planetName),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            );
+                          }
                           return GestureDetector(
                             onTap: () => Get.to(SolarSystemView(
                                 star: snapshot.data[index].star)),
@@ -115,7 +148,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                   )),
                                   child: Center(
                                     child:
-                                        Text(snapshot.data[index].planetName),
+                                    Text(snapshot.data[index].planetName),
                                   ),
                                 ),
                               ),
