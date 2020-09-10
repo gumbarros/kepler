@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
+import 'package:kepler/controllers/headerController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
@@ -11,22 +12,6 @@ import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
-
-class HeaderController extends GetxController {
-  RxDouble position = 0.0.obs;
-
-  changeminus() {
-    position.value -= 10;
-  }
-
-  changeplus() {
-    position.value += 10;
-  }
-
-  changezero() {
-    position.value = 0;
-  }
-}
 
 class SolarSystemView extends StatefulWidget {
   final String star;
@@ -48,13 +33,13 @@ class _SolarSystemViewState extends State<SolarSystemView> {
       if (_scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
           controller.position.value >= -Get.height / 2) {
-        controller.changeminus();
+        controller.changeMinus();
       } else if (_scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
           controller.position.value <= -10) {
-        controller.changeplus();
+        controller.changePlus();
         if (_scrollController.offset == 0) {
-          controller.changezero();
+          controller.changeZero();
         }
       }
     });
@@ -90,7 +75,6 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         ),
                       );
                     }
-                    //I removed the transitions because it causes a crash - Gustavo 09/06/2020
                     return ListView.builder(
                         controller: _scrollController,
                         physics: BouncingScrollPhysics(),

@@ -1,17 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HeaderController extends GetxController {
+
+  static HeaderController get to => Get.find();
+
+  bool gap = true;
+  int gapNumber;
+  ScrollController scrollController;
   RxDouble position = 0.0.obs;
 
-  changeminus() {
+  changeMinus() {
     position.value -= 10;
   }
 
-  changeplus() {
+  changePlus() {
     position.value += 10;
   }
 
-  changezero() {
+  changeZero() {
     position.value = 0;
   }
 }

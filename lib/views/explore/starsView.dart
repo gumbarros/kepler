@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
+import 'package:kepler/controllers/headerController.dart';
+import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
@@ -12,65 +14,37 @@ import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
-class HeaderControllerS extends GetxController {
-  RxDouble position = 0.0.obs;
+class StarsView extends StatelessWidget{
 
-  changeminus() {
-    position.value -= 10;
-  }
-
-  changeplus() {
-    position.value += 10;
-  }
-
-  changezero() {
-    position.value = 0;
-  }
-}
-
-class StarsView extends StatefulWidget {
-  @override
-  _StarsViewState createState() => _StarsViewState();
-}
-
-class _StarsViewState extends State<StarsView> {
-  bool gap = true;
-  int gapnumber;
-  ScrollController _scrollController;
-  final HeaderControllerS controller = Get.put(HeaderControllerS());
-
-  void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
-          controller.position.value >= -Get.height / 2) {
-        controller.changeminus();
-      } else if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.forward &&
-          controller.position.value <= -10) {
-        controller.changeplus();
-        if (_scrollController.offset == 0) {
-          controller.changezero();
-        }
-      }
-    });
-    super.initState();
-  }
-
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+  final HeaderController controller = Get.put(HeaderController());
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<StarsController>(
+      initState: (state){
+        HeaderController.to.scrollController = ScrollController();
+        HeaderController.to.scrollController.addListener(() {
+          if (HeaderController.to.scrollController.position.userScrollDirection ==
+              ScrollDirection.reverse &&
+              controller.position.value >= -Get.height / 2) {
+            controller.changeMinus();
+          } else if (HeaderController.to.scrollController.position.userScrollDirection ==
+              ScrollDirection.forward &&
+              controller.position.value <= -10) {
+            controller.changePlus();
+            if (HeaderController.to.scrollController.offset == 0) {
+              controller.changeZero();
+            }
+          }
+        });
+      },
+      dispose: (state){
+        HeaderController.to.scrollController.dispose();
+      },
       init: new StarsController(),
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Stack(children: [
-          Background(),
           Container(
             width: Get.width,
             height: Get.height,
@@ -89,7 +63,7 @@ class _StarsViewState extends State<StarsView> {
                       );
                     }
                     return GridView.builder(
-                        controller: _scrollController,
+                        controller: HeaderController.to.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
                         //We can dynamic change this depending on the screen size
@@ -103,8 +77,9 @@ class _StarsViewState extends State<StarsView> {
                             return SizedBox();
                           }
                           return GestureDetector(
-                            onTap: () => Get.to(SolarSystemView(
-                                star: snapshot.data[index].name)),
+                            onTap: () {
+                              PagesController.to.changeView(SolarSystemView(star: snapshot.data[index-2].name));
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Container(
