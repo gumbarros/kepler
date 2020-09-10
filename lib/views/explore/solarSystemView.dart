@@ -45,8 +45,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
+      if (_scrollController.position.userScrollDirection == ScrollDirection.reverse &&
           controller.position.value >= -Get.height / 2) {
         controller.changeminus();
       } else if (_scrollController.position.userScrollDirection ==
@@ -78,8 +77,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
             height: Get.height,
             child: FutureBuilder<List<PlanetData>>(
               future: API.getSolarSystemPlanets(widget.star),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<PlanetData>> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<List<PlanetData>> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.done:
                     if (snapshot.data.isNull) {
@@ -96,14 +94,9 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         physics: BouncingScrollPhysics(),
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if (index == 0) {
-                            return SizedBox(
-                              height: Get.height * 0.3,
-                            );
-                          }
                           return GestureDetector(
-                            onTap: () => Get.to(SolarSystemView(
-                                star: snapshot.data[index].star)),
+                            onTap: () =>
+                                Get.to(SolarSystemView(star: snapshot.data[index].star)),
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Container(
@@ -111,16 +104,15 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                 height: Get.height / 4,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).primaryColor,
-                                  borderRadius: const BorderRadius.all(
-                                      const Radius.circular(16.0)),
+                                  borderRadius:
+                                      const BorderRadius.all(const Radius.circular(16.0)),
                                 ),
                                 child: GestureDetector(
                                   onTap: () => Get.to(PlanetView(
                                     planetName: snapshot.data[index].planetName,
                                   )),
                                   child: Center(
-                                    child:
-                                        Text(snapshot.data[index].planetName),
+                                    child: Text(snapshot.data[index].planetName),
                                   ),
                                 ),
                               ),
