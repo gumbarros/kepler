@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/headerController.dart';
+import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
+import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -162,6 +164,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                       //TODO: Change the colour accordingly to the theme
                       child: Header(
                         widget.star + " System", //TODO: i18n
+                          ()=>PagesController.to.changeView(StarsView())
                       ),
                     ),
                     Container(

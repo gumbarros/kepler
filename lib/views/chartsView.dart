@@ -59,6 +59,7 @@ class _ChartsViewState extends State<ChartsView> with TickerProviderStateMixin {
                     children: [
                       Header(
                         "Charts View",
+                        Get.back
                       ),
                       //TODO: Sort data & fix labels
                       FutureBuilder<List<PlanetData>>(

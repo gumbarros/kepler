@@ -51,16 +51,18 @@ class API {
     final List data = await jsonDecodeAsync(response.body);
     final List<PlanetData> planets =
         data.map((planet) => PlanetData.fromMap(planet)).toList();
+    planets.shuffle();
     return planets;
   }
 
   static Future<List<StarData>> getAllStars() async {
     const String url =
-        API.url + "table=exoplanets&columns=pl_hostname,st_teff&format=json";
+        API.url + "table=exoplanets&columns=pl_hostname,st_teff,st_rad&format=json";
     final http.Response response = await http.get(url);
     print("HTTP GET - " + url);
     final List data = await jsonDecodeAsync(response.body);
     final List<StarData> stars = data.map((star) => StarData.fromMap(star)).toList();
+    stars.shuffle();
     return stars;
   }
 

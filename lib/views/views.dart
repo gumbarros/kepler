@@ -14,6 +14,7 @@ class Views extends StatelessWidget{
         Background(),
           Scaffold(
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Theme.of(context).primaryColor,
             currentIndex: _.currentIndex,
             selectedItemColor: Color(0xFFF69F0AE),
             selectedLabelStyle: TextStyle(color: Color(0xFFF69F0AE)),

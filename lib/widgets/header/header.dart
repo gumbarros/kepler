@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
   final String title;
+  final Function backFunction;
 
-  Header(this.title);
+  Header(this.title, this.backFunction);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class Header extends StatelessWidget {
                 IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () async {
-                      Navigator.pop(context);
+                      backFunction();
                     })
               ],
             ),

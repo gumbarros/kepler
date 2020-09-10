@@ -1,6 +1,7 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/languageEntry.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -58,7 +59,9 @@ class _SettingsViewState extends State<SettingsView>
                   SizedBox(
                     height: Get.height / 400,
                   ),
-                  Header("Settings"),
+                  Header("Settings", ()=>
+                    PagesController.to.changeIndex(1)
+                  ),
                   SizedBox(
                     height: Get.height / 7,
                   ),

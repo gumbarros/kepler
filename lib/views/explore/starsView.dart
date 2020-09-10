@@ -9,7 +9,6 @@ import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
-import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -62,39 +61,37 @@ class StarsView extends StatelessWidget{
                         ),
                       );
                     }
-                    return GridView.builder(
+                    return ListView.builder(
                         controller: HeaderController.to.scrollController,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
                         //We can dynamic change this depending on the screen size
                         physics: BouncingScrollPhysics(),
                         itemCount: snapshot.data.length + 2,
                         itemBuilder: (BuildContext context, int index) {
+                          print(snapshot.data[index].radius);
                           if (index == 0) {
                             return SizedBox();
                           }
                           if (index == 1) {
                             return SizedBox();
                           }
-                          return GestureDetector(
+                          return InkWell(
                             onTap: () {
                               PagesController.to.changeView(SolarSystemView(star: snapshot.data[index-2].name));
                             },
+                            //TODO: Better UI
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
-                              child: Container(
-                                width: Get.width / 4,
-                                height: Get.height / 4,
-                                decoration: BoxDecoration(
-                                  color: _.getStarColor(
-                                      snapshot.data[index - 2].temperature),
-                                  borderRadius: const BorderRadius.all(
-                                      const Radius.circular(16.0)),
-                                ),
-                                child: Center(
-                                  child: Text(snapshot.data[index - 2].name),
-                                ),
-                              ),
+                              child: Column(
+                                children:[ Container(
+                              width: Get.width / snapshot.data[index - 2].radius,
+                                height: Get.height / snapshot.data[index - 2].radius,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: _.getStarColor(
+                                        snapshot.data[index - 2].temperature),
+                                  ),
+                                ),Text(snapshot.data[index-2].name)
+                              ]),
                             ),
                           );
                         });
@@ -120,7 +117,8 @@ class StarsView extends StatelessWidget{
                       color: Theme.of(context).dialogBackgroundColor,
                       //TODO: Change the colour accordingly to the theme
                       child: Header(
-                        "Stars", //TODO: i18n
+                        "Stars",
+                        Get.back
                       ),
                     ),
                     Container(

@@ -62,6 +62,7 @@ class PlanetView extends StatelessWidget {
                     //TODO: Change the colour accordingly to the theme
                     child: Header(
                       planetName, //TODO: i18n
+                      Get.back
                     ),
                   ),
                 ],

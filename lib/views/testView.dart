@@ -46,6 +46,7 @@ class _TestViewState extends State<TestView> with TickerProviderStateMixin {
             children: [
               Header(
                 "Test View",
+                Get.back
               ),
               Container(
                 width: Get.width,
