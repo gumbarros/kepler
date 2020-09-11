@@ -9,7 +9,7 @@ import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
-import 'package:kepler/widgets/cards/menuCard.dart';
+import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -49,8 +49,7 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
               ScrollDirection.reverse &&
           controller.position.value >= -Get.height / 2) {
         controller.changeMinus();
-      } else if (HeaderController
-                  .to.scrollController.position.userScrollDirection ==
+      } else if (HeaderController.to.scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
           controller.position.value <= -10) {
         controller.changePlus();
@@ -84,8 +83,8 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                 height: Get.height,
                 child: FutureBuilder<List<StarData>>(
                   future: API.getAllStars(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<StarData>> snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<List<StarData>> snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.done:
                         if (snapshot.data.isNull) {
@@ -109,48 +108,12 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                               }
                               return Padding(
                                 padding: const EdgeInsets.all(30.0),
-                                child: MenuCard(
-                                  height: Get.height / 8,
-                                  width: Get.width - 20,
-                                  text: "",
-                                  onTap: () {
-                                    PagesController.to.changeView(
-                                        SolarSystemView(
-                                            star:
-                                                snapshot.data[index - 1].name));
-                                  },
-                                  colorList: [
-                                    Theme.of(context).primaryColor,
-                                    Theme.of(context).primaryColor,
-                                  ],
-                                  child: Row(children: [
-                                    Container(
-                                      width: Get.width / 4.5,
-                                      height: Get.width / 4.5,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(360)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: _.getStarColor(snapshot
-                                                  .data[index - 1].temperature),
-                                              blurRadius: 4.0,
-                                              spreadRadius: 15.0,
-                                              offset: Offset(0, 0)),
-                                        ],
-                                        shape: BoxShape.rectangle,
-                                        color: _.getStarColor(snapshot
-                                            .data[index - 1].temperature),
-                                      ),
-                                    ),
-                                    Expanded(child: SizedBox()),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 15.0),
-                                      child:
-                                          Text(snapshot.data[index - 1].name),
-                                    )
-                                  ]),
+                                child: StarCard(
+                                  text: snapshot.data[index - 1].name,
+                                  temperature: snapshot.data[index - 1].temperature,
+                                  onTap: () => PagesController.to.changeView(
+                                      SolarSystemView(
+                                          star: snapshot.data[index - 1].name)),
                                 ),
                               );
                             });

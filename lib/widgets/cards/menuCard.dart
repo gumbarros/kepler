@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class MenuCard extends StatefulWidget {
   final Function onTap;
@@ -10,7 +9,12 @@ class MenuCard extends StatefulWidget {
   final double height;
 
   MenuCard(
-      {@required this.onTap, @required this.text, this.colorList, this.child, this.height, this.width});
+      {@required this.onTap,
+      @required this.text,
+      this.colorList,
+      this.child,
+      this.height,
+      this.width});
 
   @override
   _MenuCardState createState() => _MenuCardState();
