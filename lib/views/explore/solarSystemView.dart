@@ -11,6 +11,7 @@ import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/views/explore/starsView.dart';
+import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -55,6 +56,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
 
   @override
   Widget build(BuildContext context) {
+    print('star ${widget.star}');
     return GetBuilder<SolarSystemController>(
       init: new SolarSystemController(),
       builder: (_) => Scaffold(
@@ -86,59 +88,41 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                             return Column(
                               children: [
                                 SizedBox(height: Get.height / 3),
-                                GestureDetector(
-                                  onTap: () => Get.to(SolarSystemView(
-                                      star: snapshot.data[index].star)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                      width: Get.width - 10,
-                                      height: Get.height / 4,
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).primaryColor,
-                                        borderRadius: const BorderRadius.all(
-                                            const Radius.circular(16.0)),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () => Get.to(PlanetView(
-                                          planetName:
-                                              snapshot.data[index].planetName,
-                                        )),
-                                        child: Center(
-                                          child: Text(
-                                              snapshot.data[index].planetName),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                Center(
+                                  child: MenuCard(
+                                      width: Get.width - 20,
+                                      height: Get.height / 5,
+                                      text: "${snapshot.data[index].planetName}",
+                                      onTap: () => Get.to(PlanetView(
+                                          planetName: snapshot.data[index].planetName)),
+                                      colorList: [
+                                        Theme.of(context).primaryColor,
+                                        Theme.of(context).primaryColor,
+                                      ],
+                                      child: SizedBox()),
                                 )
                               ],
                             );
                           }
-                          return GestureDetector(
-                            onTap: () => Get.to(SolarSystemView(
-                                star: snapshot.data[index].star)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Container(
-                                width: Get.width / 4,
-                                height: Get.height / 4,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
-                                  borderRadius: const BorderRadius.all(
-                                      const Radius.circular(16.0)),
-                                ),
-                                child: GestureDetector(
-                                  onTap: () => Get.to(PlanetView(
-                                    planetName: snapshot.data[index].planetName,
-                                  )),
-                                  child: Center(
-                                    child:
-                                    Text(snapshot.data[index].planetName),
-                                  ),
-                                ),
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: Get.height / 35,
                               ),
-                            ),
+                              Center(
+                                child: MenuCard(
+                                    width: Get.width - 20,
+                                    height: Get.height / 5,
+                                    text: "${snapshot.data[index].planetName}",
+                                    onTap: () => Get.to(PlanetView(
+                                        planetName: snapshot.data[index].planetName)),
+                                    colorList: [
+                                      Theme.of(context).primaryColor,
+                                      Theme.of(context).primaryColor,
+                                    ],
+                                    child: SizedBox()),
+                              ),
+                            ],
                           );
                         });
                   default:
@@ -163,9 +147,8 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                       color: Theme.of(context).dialogBackgroundColor,
                       //TODO: Change the colour accordingly to the theme
                       child: Header(
-                        widget.star + " System", //TODO: i18n
-                          ()=>PagesController.to.changeView(StarsView())
-                      ),
+                          widget.star + " System", //TODO: i18n
+                          () => PagesController.to.changeView(StarsView())),
                     ),
                     Container(
                       color: Theme.of(context).dialogBackgroundColor,

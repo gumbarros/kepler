@@ -34,11 +34,16 @@ class PlanetView extends StatelessWidget {
                         ),
                       );
                     }
-                    return Center(
-                      child: Text(
-                        snapshot.data.planetName + " data is inside this object",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
+                    return Column(
+                      children: [
+                        Text('${snapshot.data.jmk2}'),
+                        Center(
+                          child: Text(
+                            snapshot.data.planetName + " data is inside this object",
+                            style: TextStyle(color: Colors.white, fontSize: 30),
+                          ),
+                        ),
+                      ],
                     );
                   default:
                     return Center(child: Loading());

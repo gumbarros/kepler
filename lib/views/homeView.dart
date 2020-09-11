@@ -60,6 +60,8 @@ class HomeView extends StatelessWidget {
                         text: string.text("explore"),
                         colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                         child: SizedBox(),
+                        height: Get.height / 8,
+                        width: Get.width - 20,
                       ),
                       SizedBox(
                         height: 30,
@@ -69,6 +71,8 @@ class HomeView extends StatelessWidget {
                         text: string.text("charts"),
                         colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)],
                         child: SizedBox(),
+                        height: Get.height / 8,
+                        width: Get.width - 20,
                       ),
                       SizedBox(
                         height: 30,
@@ -78,6 +82,8 @@ class HomeView extends StatelessWidget {
                         text: "Test View",
                         colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)],
                         child: SizedBox(),
+                        height: Get.height / 8,
+                        width: Get.width - 20,
                       ),
                     ],
                   )

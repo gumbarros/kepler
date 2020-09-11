@@ -8,6 +8,7 @@ class PlanetData {
   int discoveryMethod;
   String telescope;
   int numOfPlanetsSystem;
+  double jmk2;
 
   PlanetData(
       {this.planetName,
@@ -18,7 +19,7 @@ class PlanetData {
       this.radius,
       this.discoveryMethod,
       this.telescope,
-      this.numOfPlanetsSystem});
+      this.numOfPlanetsSystem, this.jmk2});
 
   PlanetData.fromMap(Map<String, dynamic> map) {
     planetName = map['pl_name'];
@@ -30,5 +31,6 @@ class PlanetData {
     discoveryMethod = map['pl_disc'];
     telescope = map['pl_telescope'];
     numOfPlanetsSystem = map['pl_pnum'];
+    jmk2 = map['jmk2'] ?? 0.0;
   }
 }

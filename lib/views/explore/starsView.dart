@@ -110,6 +110,8 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                               return Padding(
                                 padding: const EdgeInsets.all(30.0),
                                 child: MenuCard(
+                                  height: Get.height / 8,
+                                  width: Get.width - 20,
                                   text: "",
                                   onTap: () {
                                     PagesController.to.changeView(

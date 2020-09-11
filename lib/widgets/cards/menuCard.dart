@@ -6,9 +6,11 @@ class MenuCard extends StatefulWidget {
   final String text;
   final List<Color> colorList;
   final Widget child;
+  final double width;
+  final double height;
 
   MenuCard(
-      {@required this.onTap, @required this.text, this.colorList, this.child});
+      {@required this.onTap, @required this.text, this.colorList, this.child, this.height, this.width});
 
   @override
   _MenuCardState createState() => _MenuCardState();
@@ -44,8 +46,8 @@ class _MenuCardState extends State<MenuCard> with TickerProviderStateMixin {
         child: Stack(
           children: [
             Container(
-              height: Get.height / 8,
-              width: Get.width - 20,
+              height: widget.height,
+              width: widget.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   gradient: LinearGradient(colors: widget.colorList)),
