@@ -19,4 +19,4 @@
 
 1. Add your language code in translations.dart
 2. Create in /locale a i18n_LANGUAGECODE.json and translate the app
-3. In settings view, add your language in the list and call the function _.setNewLanguage(YourCode)
+3. In languageEntry.dart, add your language in the list and call the function _.setNewLanguage(YourCode)
