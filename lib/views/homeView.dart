@@ -59,21 +59,26 @@ class HomeView extends StatelessWidget {
                         onTap: () => Get.toNamed('/views', arguments: 0),
                         text: string.text("explore"),
                         colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
+                        child: SizedBox(),
                       ),
                       SizedBox(
                         height: 30,
                       ),
                       MenuCard(
-                          onTap: () => Get.toNamed('/views', arguments: 1),
-                          text: string.text("charts"),
-                          colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)]),
+                        onTap: () => Get.toNamed('/views', arguments: 1),
+                        text: string.text("charts"),
+                        colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)],
+                        child: SizedBox(),
+                      ),
                       SizedBox(
                         height: 30,
                       ),
                       MenuCard(
-                          onTap: () => Get.to(TestView()),
-                          text: "Test View",
-                          colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)]),
+                        onTap: () => Get.to(TestView()),
+                        text: "Test View",
+                        colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)],
+                        child: SizedBox(),
+                      ),
                     ],
                   )
                 ],

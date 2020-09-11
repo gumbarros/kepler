@@ -59,7 +59,6 @@ class PlanetView extends StatelessWidget {
                   //Using temporary color
                   Container(
                     color: Theme.of(context).dialogBackgroundColor,
-                    //TODO: Change the colour accordingly to the theme
                     child: Header(
                       planetName, //TODO: i18n
                       Get.back
