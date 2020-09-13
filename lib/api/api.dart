@@ -30,7 +30,6 @@ class API {
   }
 
   static Future<PlanetData> getPlanetByName(String name) async {
-    //TODO: Add more data for single planet
     final String url = API.url +
         "table=exoplanets&columns=pl_name,pl_orbper,pl_hostname,pl_bmassj,pl_dens,pl_rads,pl_disc,pl_locale,pl_telescope,pl_status&format=json&where=pl_status=3%20and%20pl_name%20like%20'$name'";
     final http.Response response = await http.get(url);

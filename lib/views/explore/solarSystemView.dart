@@ -33,8 +33,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
+      if (_scrollController.position.userScrollDirection == ScrollDirection.reverse &&
           controller.position.value >= -Get.height / 2) {
         controller.changeMinus();
       } else if (_scrollController.position.userScrollDirection ==
@@ -67,8 +66,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
             height: Get.height,
             child: FutureBuilder<List<PlanetData>>(
               future: API.getSolarSystemPlanets(widget.star),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<PlanetData>> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<List<PlanetData>> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.done:
                     if (snapshot.data.isNull) {
@@ -84,8 +82,9 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         physics: BouncingScrollPhysics(),
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if (index == 0) {
-                            return Column(
+                          return Visibility(
+                            visible: !index.isEqual(0),
+                            replacement: Column(
                               children: [
                                 SizedBox(height: Get.height / 3),
                                 Center(
@@ -93,8 +92,10 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                       width: Get.width - 20,
                                       height: Get.height / 5,
                                       text: "${snapshot.data[index].planetName}",
-                                      onTap: () => Get.to(PlanetView(
-                                          planetName: snapshot.data[index].planetName)),
+                                      onTap: () =>
+                                          PagesController.to.changeView(PlanetView(
+                                            planetName: snapshot.data[index].planetName,
+                                          )),
                                       colorList: [
                                         Theme.of(context).primaryColor,
                                         Theme.of(context).primaryColor,
@@ -102,27 +103,29 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                       child: SizedBox()),
                                 )
                               ],
-                            );
-                          }
-                          return Column(
-                            children: [
-                              SizedBox(
-                                height: Get.height / 35,
-                              ),
-                              Center(
-                                child: MenuCard(
-                                    width: Get.width - 20,
-                                    height: Get.height / 5,
-                                    text: "${snapshot.data[index].planetName}",
-                                    onTap: () => Get.to(PlanetView(
-                                        planetName: snapshot.data[index].planetName)),
-                                    colorList: [
-                                      Theme.of(context).primaryColor,
-                                      Theme.of(context).primaryColor,
-                                    ],
-                                    child: SizedBox()),
-                              ),
-                            ],
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: Get.height / 35,
+                                ),
+                                Center(
+                                  child: MenuCard(
+                                      width: Get.width - 20,
+                                      height: Get.height / 5,
+                                      text: "${snapshot.data[index].planetName}",
+                                      onTap: () =>
+                                          PagesController.to.changeView(PlanetView(
+                                            planetName: snapshot.data[index].planetName,
+                                          )),
+                                      colorList: [
+                                        Theme.of(context).primaryColor,
+                                        Theme.of(context).primaryColor,
+                                      ],
+                                      child: SizedBox()),
+                                ),
+                              ],
+                            ),
                           );
                         });
                   default:
