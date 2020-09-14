@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/routes.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await Hive.initFlutter();
+  Get.put<FavoritesController>(FavoritesController(), permanent: true);
   await string.init();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -17,14 +22,6 @@ void main() async {
   runApp(GetMaterialApp(
     title: string.text('app_title'),
     defaultTransition: Transition.cupertino,
-    theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Color(0xFFFe0e0e0),
-        cardColor: Color(0xFFFe0e0e0),
-        textTheme: TextTheme(
-            headline4: TextStyle(
-          color: Colors.black,
-        ))),
     darkTheme: ThemeData(
       brightness: Brightness.dark,
       primaryColor: Color(0xFFF20211E),

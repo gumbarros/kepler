@@ -35,7 +35,7 @@ class PagesController extends GetxController {
     }
   }
 
-  void changeView(Widget view){
+  void changeView(Widget view) {
     this.pageView = view;
     update();
   }

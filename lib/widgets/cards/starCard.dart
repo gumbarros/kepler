@@ -63,8 +63,7 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
                   boxShadow: [
                     BoxShadow(
                         color: StarsController.to.getStarColor(widget.temperature),
-                        blurRadius: 4.0,
-                        spreadRadius: 15.0,
+                        spreadRadius: 12.0,
                         offset: Offset(0, 0)),
                   ],
                   shape: BoxShape.rectangle,

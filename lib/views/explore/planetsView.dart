@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:kepler/api/api.dart';
+import 'package:kepler/controllers/favoritesController.dart';
+import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/planetController.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
+import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
@@ -30,26 +34,33 @@ class PlanetView extends StatelessWidget {
                   (BuildContext context, AsyncSnapshot<PlanetData> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.done:
-                    if (snapshot.data.isNull) {
-                      return Center(
-                        child: Text(
-                          "No data found", //TODO: i18n
-                          style: TextStyle(fontFamily: "Roboto"),
-                        ),
-                      );
-                    }
-                    Color color =
-                        PlanetController.to.getPlanetsColor(snapshot.data.jmk2);
-                    print(snapshot.data.jmk2);
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: Get.height / 4,
-                        ),
-                        PlanetsCard(
-                          color: color,
-                        ),
-                      ],
+                    return Container(
+                      width: Get.width,
+                      height: Get.height / 1.1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("${string.text("star")}: ${snapshot.data.star}",
+                              style: TextStyle(
+                                  fontFamily: "Roboto", fontSize: 18.5)),
+                          Text(
+                              "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
+                              style: TextStyle(
+                                  fontFamily: "Roboto", fontSize: 18.5)),
+                          Text(
+                              "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? 'Unknown' : snapshot.data.jupiterMass.toString() + ' Jupiter'} ",
+                              style: TextStyle(
+                                  fontFamily: "Roboto", fontSize: 18.5)),
+                          Text(
+                              "${string.text("density")}: ${snapshot.data.density.isNull ? 'Unknown' : snapshot.data.density.toString() + '  g/cm³'}",
+                              style: TextStyle(
+                                  fontFamily: "Roboto", fontSize: 18.5)),
+                          Text(
+                              "${string.text("radius")}: ${snapshot.data.radius.isNull ? 'Unknown' : snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
+                              style: TextStyle(
+                                  fontFamily: "Roboto", fontSize: 18.5)),
+                        ],
+                      ),
                     );
                   default:
                     return Center(child: Loading());
@@ -72,9 +83,30 @@ class PlanetView extends StatelessWidget {
                     color: Theme.of(context).dialogBackgroundColor,
                     child: Header(
                         planetName, //TODO: i18n
-                        Get.back),
+                        () => PagesController.to.changeView(StarsView())),
                   ),
                 ],
+              ),
+            ),
+          ),
+          GetBuilder<FavoritesController>(
+            builder: (_) => Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                iconSize: 32.0,
+                icon: _.getPlanet(planetName).isNull
+                    ? Icon(Icons.star_border)
+                    : Icon(Icons.star),
+                onPressed: () {
+                  if (_.getPlanet(planetName).isNull) {
+                    _.savePlanet(planetName);
+                    print('ei');
+                  } else {
+                    _.removePlanet(planetName);
+                  }
+                  _.update();
+                  print(_.getPlanet(planetName));
+                },
               ),
             ),
           ),
@@ -164,7 +196,6 @@ class PlanetsCard extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );

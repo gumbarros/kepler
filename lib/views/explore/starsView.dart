@@ -13,6 +13,7 @@ import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class StarsView extends StatefulWidget {
   @override
@@ -95,28 +96,46 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                             ),
                           );
                         }
-                        return ListView.builder(
-                            controller: HeaderController.to.scrollController,
-                            //We can dynamic change this depending on the screen size
-                            physics: BouncingScrollPhysics(),
-                            itemCount: snapshot.data.length + 1,
-                            itemBuilder: (BuildContext context, int index) {
-                              if (index == 0) {
-                                return SizedBox(
-                                  height: Get.height / 4,
+                        return LiquidPullToRefresh(
+                          onRefresh: () async => _.update(),
+                          color: Colors.black87,
+                          child: ListView.builder(
+                              controller: HeaderController.to.scrollController,
+                              physics: BouncingScrollPhysics(),
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Visibility(
+                                  visible: !index.isEqual(0),
+                                  replacement: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: Get.height / 4,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(30.0),
+                                        child: StarCard(
+                                          text: snapshot.data[index].name,
+                                          temperature: snapshot.data[index].temperature,
+                                          onTap: () => PagesController.to.changeView(
+                                              SolarSystemView(
+                                                  star: snapshot.data[index].name)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(30.0),
+                                    child: StarCard(
+                                      text: snapshot.data[index].name,
+                                      temperature: snapshot.data[index].temperature,
+                                      onTap: () => PagesController.to.changeView(
+                                          SolarSystemView(
+                                              star: snapshot.data[index].name)),
+                                    ),
+                                  ),
                                 );
-                              }
-                              return Padding(
-                                padding: const EdgeInsets.all(30.0),
-                                child: StarCard(
-                                  text: snapshot.data[index - 1].name,
-                                  temperature: snapshot.data[index - 1].temperature,
-                                  onTap: () => PagesController.to.changeView(
-                                      SolarSystemView(
-                                          star: snapshot.data[index - 1].name)),
-                                ),
-                              );
-                            });
+                              }),
+                        );
                       default:
                         return Center(child: Loading());
                     }

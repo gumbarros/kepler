@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
+import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/testView.dart';
