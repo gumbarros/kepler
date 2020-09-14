@@ -107,12 +107,12 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                           return Column(
                             children: [
                               SizedBox(
-                                height: Get.height / 35,
+                                height: Get.height / 6,
                               ),
                               Center(
                                 child: MenuCard(
                                     width: Get.width - 20,
-                                    height: Get.height / 5,
+                                    height: Get.height / 6,
                                     text: "${snapshot.data[index].planetName}",
                                     onTap: () => Get.to(PlanetView(
                                         planetName: snapshot.data[index].planetName)),

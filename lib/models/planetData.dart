@@ -31,6 +31,6 @@ class PlanetData {
     discoveryMethod = map['pl_disc'];
     telescope = map['pl_telescope'];
     numOfPlanetsSystem = map['pl_pnum'];
-    jmk2 = map['jmk2'] ?? 0.0;
+    jmk2 = map['st_jmk2'] ?? 0.0;
   }
 }

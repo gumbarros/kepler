@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -9,6 +11,7 @@ import 'package:kepler/widgets/progress/loading.dart';
 
 class PlanetView extends StatelessWidget {
   final String planetName;
+
   PlanetView({@required this.planetName});
 
   @override
@@ -23,7 +26,8 @@ class PlanetView extends StatelessWidget {
             height: Get.height,
             child: FutureBuilder<PlanetData>(
               future: API.getPlanetByName(planetName),
-              builder: (BuildContext context, AsyncSnapshot<PlanetData> snapshot) {
+              builder:
+                  (BuildContext context, AsyncSnapshot<PlanetData> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.done:
                     if (snapshot.data.isNull) {
@@ -34,14 +38,16 @@ class PlanetView extends StatelessWidget {
                         ),
                       );
                     }
+                    Color color =
+                        PlanetController.to.getPlanetsColor(snapshot.data.jmk2);
+                    print(snapshot.data.jmk2);
                     return Column(
                       children: [
-                        Text('${snapshot.data.jmk2}'),
-                        Center(
-                          child: Text(
-                            snapshot.data.planetName + " data is inside this object",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
-                          ),
+                        SizedBox(
+                          height: Get.height / 4,
+                        ),
+                        PlanetsCard(
+                          color: color,
                         ),
                       ],
                     );
@@ -65,15 +71,101 @@ class PlanetView extends StatelessWidget {
                   Container(
                     color: Theme.of(context).dialogBackgroundColor,
                     child: Header(
-                      planetName, //TODO: i18n
-                      Get.back
-                    ),
+                        planetName, //TODO: i18n
+                        Get.back),
                   ),
                 ],
               ),
             ),
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class PlanetsCard extends StatelessWidget {
+  final Color color;
+
+  PlanetsCard({this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: [
+          Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.all(
+                Radius.circular(360),
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 20,
+                  right: 65,
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(360),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 45,
+                  right: 15,
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(360),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 60,
+                  right: 70,
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(360),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 100,
+                  right: 40,
+                  child: Container(
+                    height: 28,
+                    width: 28,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(360),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        ],
       ),
     );
   }
