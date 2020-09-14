@@ -64,11 +64,4 @@ class API {
     return stars;
   }
 
-  static getTestData() async {
-    final http.Response response = await http.get(url +
-        "table=exoplanets&columns=st_umbj,st_bmvj,st_vjmic,st_vjmrc,st_jmh2,st_hmk2,st_jmk2,st_bmy,st_m1,st_c1,st_colorn&format=json&where=pl_name like 'Kepler-452 b'");
-    final List data = await jsonDecodeAsync(response.body);
-    print("data->$data");
-    return data;
-  }
 }

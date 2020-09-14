@@ -11,11 +11,11 @@ class HeaderController extends GetxController {
   RxDouble position = 0.0.obs;
 
   changeMinus() {
-    position.value -= 10;
+    position.value -= 7;
   }
 
   changePlus() {
-    position.value += 10;
+    position.value += 7;
   }
 
   changeZero() {

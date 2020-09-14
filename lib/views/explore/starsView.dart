@@ -9,6 +9,7 @@ import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
+import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -79,13 +80,14 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
           builder: (_) => Scaffold(
             resizeToAvoidBottomPadding: false,
             body: Stack(children: [
+              HomeBackground(),
               Container(
                 width: Get.width,
                 height: Get.height,
                 child: FutureBuilder<List<StarData>>(
                   future: API.getAllStars(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<List<StarData>> snapshot) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<StarData>> snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.done:
                         if (snapshot.data.isNull) {
@@ -98,7 +100,9 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                         }
                         return LiquidPullToRefresh(
                           onRefresh: () async => _.update(),
-                          color: Colors.black87,
+                          color: Theme
+                              .of(context)
+                              .dialogBackgroundColor,
                           child: ListView.builder(
                               controller: HeaderController.to.scrollController,
                               physics: BouncingScrollPhysics(),
@@ -109,7 +113,7 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                                   replacement: Column(
                                     children: [
                                       SizedBox(
-                                        height: Get.height / 4,
+                                        height: Get.height / 3 - 10,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(30.0),
@@ -155,8 +159,26 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                       children: [
                         //Using temporary color
                         Container(
-                          color: Theme.of(context).dialogBackgroundColor,
-                          child: Header("Stars", Get.back),
+                          color: Theme
+                              .of(context)
+                              .dialogBackgroundColor,
+                          child: Column(
+                            children: [
+                              Header("Kepler", Get.back),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Discover the universe', style: TextStyle(
+                                        fontSize: 20
+                                    ),),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         Container(
                           color: Theme.of(context).dialogBackgroundColor,

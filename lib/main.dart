@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/routes.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
@@ -30,7 +30,7 @@ void main() async {
     ),
     debugShowCheckedModeBanner: false,
     supportedLocales: string.supportedLocales(),
-    initialRoute: "/home",
+    initialRoute: "/views",
     getPages: Routes.routes(),
     builder: (context, child) {
       return ScrollConfiguration(
