@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -37,28 +35,39 @@ class PlanetView extends StatelessWidget {
                     return Container(
                       width: Get.width,
                       height: Get.height / 1.1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      child: ListView(
                         children: [
-                          Text("${string.text("star")}: ${snapshot.data.star}",
-                              style: TextStyle(
-                                  fontFamily: "Roboto", fontSize: 18.5)),
-                          Text(
-                              "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
-                              style: TextStyle(
-                                  fontFamily: "Roboto", fontSize: 18.5)),
-                          Text(
-                              "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? 'Unknown' : snapshot.data.jupiterMass.toString() + ' Jupiter'} ",
-                              style: TextStyle(
-                                  fontFamily: "Roboto", fontSize: 18.5)),
-                          Text(
-                              "${string.text("density")}: ${snapshot.data.density.isNull ? 'Unknown' : snapshot.data.density.toString() + '  g/cm³'}",
-                              style: TextStyle(
-                                  fontFamily: "Roboto", fontSize: 18.5)),
-                          Text(
-                              "${string.text("radius")}: ${snapshot.data.radius.isNull ? 'Unknown' : snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
-                              style: TextStyle(
-                                  fontFamily: "Roboto", fontSize: 18.5)),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: Get.height / 4,
+                              ),
+                              PlanetsCard(
+                                color: PlanetController.to
+                                    .getPlanetsColor(snapshot.data.jmk2),
+                              ),
+                              Text(
+                                  "${string.text("star")}: ${snapshot.data.star}",
+                                  style: TextStyle(
+                                      fontFamily: "Roboto", fontSize: 18.5)),
+                              Text(
+                                  "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
+                                  style: TextStyle(
+                                      fontFamily: "Roboto", fontSize: 18.5)),
+                              Text(
+                                  "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? 'Unknown' : snapshot.data.jupiterMass.toString() + ' Jupiter'} ",
+                                  style: TextStyle(
+                                      fontFamily: "Roboto", fontSize: 18.5)),
+                              Text(
+                                  "${string.text("density")}: ${snapshot.data.density.isNull ? 'Unknown' : snapshot.data.density.toString() + '  g/cm³'}",
+                                  style: TextStyle(
+                                      fontFamily: "Roboto", fontSize: 18.5)),
+                              Text(
+                                  "${string.text("radius")}: ${snapshot.data.radius.isNull ? 'Unknown' : snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
+                                  style: TextStyle(
+                                      fontFamily: "Roboto", fontSize: 18.5)),
+                            ],
+                          ),
                         ],
                       ),
                     );
@@ -124,79 +133,75 @@ class PlanetsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Stack(
-        children: [
-          Container(
-            height: 200,
-            width: 200,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.all(
-                Radius.circular(360),
+      child: Container(
+        height: 200,
+        width: 200,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.all(
+            Radius.circular(360),
+          ),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 20,
+              right: 65,
+              child: Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(360),
+                  ),
+                ),
               ),
             ),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 20,
-                  right: 65,
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(360),
-                      ),
-                    ),
+            Positioned(
+              top: 45,
+              right: 15,
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(360),
                   ),
                 ),
-                Positioned(
-                  top: 45,
-                  right: 15,
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(360),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 60,
-                  right: 70,
-                  child: Container(
-                    height: 35,
-                    width: 35,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(360),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 100,
-                  right: 40,
-                  child: Container(
-                    height: 28,
-                    width: 28,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(360),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            Positioned(
+              top: 60,
+              right: 70,
+              child: Container(
+                height: 35,
+                width: 35,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(360),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 100,
+              right: 40,
+              child: Container(
+                height: 28,
+                width: 28,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(360),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
