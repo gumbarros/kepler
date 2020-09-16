@@ -1,0 +1,15 @@
+{
+    "app_title": "Kepler",
+    "explore": "Badaj",
+    "charts": "Wykresy",
+    "star": "Gwiazda",
+    "orbital_period": "Okres Orbitalny",
+    "days": "dni",
+    "mass": "Masa",
+    "density": "Gęstość",
+    "radius": "Promień",
+    "jupiter_radius": "  Promienia Jowisza",
+    "settings": "Ustawienia",
+    "no_planet": "Nie znaleziono planet.",
+    "solar_radius": "Promień Słońca"
+}
