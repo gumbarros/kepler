@@ -6,13 +6,14 @@
 
 
 # How to contribute 💻
-- New API querys
-- Developing the graphics (largest planets, longest orbits)
+- New API queries
+- Developing the graphs (largest planets, longest orbits)
 - Refactoring the code to better performance
 - Helping in the algorithm to discover the planet color
-- Translating the app
+- Helping in developing favourite (starred) system
+- Translating the app 
 > The only requirements to contribute are to speak English and know Flutter
-
+> You can join our discord server by PM-ing RonanHansel#0059 or BeachThanos#0493
 ## API Credits - [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/) 🚀
 
 # How to translate the app 🇧🇷 🇺🇸 🇻🇳
