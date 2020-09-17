@@ -50,7 +50,6 @@ class API {
     final List data = await jsonDecodeAsync(response.body);
     final List<PlanetData> planets =
         data.map((planet) => PlanetData.fromMap(planet)).toList();
-    planets.shuffle();
     return planets;
   }
 
