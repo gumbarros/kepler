@@ -7,6 +7,7 @@ import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/headerController.dart';
 import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
+import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
@@ -94,20 +95,15 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                         width: Get.width - 20,
                                         height: Get.height / 5,
                                         text:
-                                        "${snapshot.data[index].planetName}",
-                                        onTap: () =>
-                                            PagesController.to
-                                                .changeView(PlanetView(
+                                            "${snapshot.data[index].planetName}",
+                                        onTap: () => Navigator.of(context)
+                                                .push(route(PlanetView(
                                               planetName: snapshot
                                                   .data[index].planetName,
-                                            )),
+                                            ))),
                                         colorList: [
-                                          Theme
-                                              .of(context)
-                                              .primaryColor,
-                                          Theme
-                                              .of(context)
-                                              .primaryColor,
+                                          Theme.of(context).primaryColor,
+                                          Theme.of(context).primaryColor,
                                         ],
                                         child: SizedBox()),
                                   )
@@ -116,25 +112,21 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: Get.height / 6,
+                                    height: 15,
                                   ),
                                   Center(
                                     child: MenuCard(
                                         width: Get.width - 20,
                                         height: Get.height / 6,
                                         text:
-                                        "${snapshot.data[index].planetName}",
-                                        onTap: () =>
-                                            Get.to(PlanetView(
+                                            "${snapshot.data[index].planetName}",
+                                        onTap: () => Navigator.of(context).push(
+                                            route(PlanetView(
                                                 planetName: snapshot
-                                                    .data[index].planetName)),
+                                                    .data[index].planetName))),
                                         colorList: [
-                                          Theme
-                                              .of(context)
-                                              .primaryColor,
-                                          Theme
-                                              .of(context)
-                                              .primaryColor,
+                                          Theme.of(context).primaryColor,
+                                          Theme.of(context).primaryColor,
                                         ],
                                         child: SizedBox()),
                                   ),
@@ -164,7 +156,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                       //TODO: Change the colour accordingly to the theme
                       child: Header(
                           widget.star + " System", //TODO: i18n
-                          () => PagesController.to.changeView(StarsView())),
+                          () => Navigator.pop(context)),
                     ),
                     Container(
                       color: Theme.of(context).dialogBackgroundColor,

@@ -10,6 +10,7 @@ import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
+import 'package:kepler/widgets/planets/smallPlanet.dart';
 
 class PlanetView extends StatelessWidget {
   final String planetName;
@@ -46,26 +47,52 @@ class PlanetView extends StatelessWidget {
                                 color: PlanetController.to
                                     .getPlanetsColor(snapshot.data.jmk2),
                               ),
-                              Text(
-                                  "${string.text("star")}: ${snapshot.data.star}",
-                                  style: TextStyle(
-                                      fontFamily: "Roboto", fontSize: 18.5)),
-                              Text(
-                                  "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
-                                  style: TextStyle(
-                                      fontFamily: "Roboto", fontSize: 18.5)),
-                              Text(
-                                  "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? 'Unknown' : snapshot.data.jupiterMass.toString() + ' Jupiter'} ",
-                                  style: TextStyle(
-                                      fontFamily: "Roboto", fontSize: 18.5)),
-                              Text(
-                                  "${string.text("density")}: ${snapshot.data.density.isNull ? 'Unknown' : snapshot.data.density.toString() + '  g/cm³'}",
-                                  style: TextStyle(
-                                      fontFamily: "Roboto", fontSize: 18.5)),
-                              Text(
-                                  "${string.text("radius")}: ${snapshot.data.radius.isNull ? 'Unknown' : snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
-                                  style: TextStyle(
-                                      fontFamily: "Roboto", fontSize: 18.5)),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10)),
+                                      color: Colors.grey.withOpacity(0.5)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            "${string.text("star")}: ${snapshot.data.star}",
+                                            style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 18.5)),
+                                        Text(
+                                            "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
+                                            style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 18.5)),
+                                        Text(
+                                            "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? 'Unknown' : snapshot.data.jupiterMass.toString() + ' Jupiter'} ",
+                                            style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 18.5)),
+                                        Text(
+                                            "${string.text("density")}: ${snapshot.data.density.isNull ? 'Unknown' : snapshot.data.density.toString() + ' g/cm³'}",
+                                            style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 18.5)),
+                                        Text(
+                                            "${string.text("radius")}: ${snapshot.data.radius.isNull ? 'Unknown' : snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
+                                            style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                fontSize: 18.5)),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ],
@@ -89,11 +116,11 @@ class PlanetView extends StatelessWidget {
                 children: [
                   //Using temporary color
                   Container(
-                    color: Theme.of(context).dialogBackgroundColor,
-                    child: Header(
+                      color: Theme.of(context).dialogBackgroundColor,
+                      child: Header(
                         planetName, //TODO: i18n
-                        () => PagesController.to.changeView(StarsView())),
-                  ),
+                        () => Navigator.pop(context),
+                      )),
                 ],
               ),
             ),
@@ -125,84 +152,3 @@ class PlanetView extends StatelessWidget {
   }
 }
 
-class PlanetsCard extends StatelessWidget {
-  final Color color;
-
-  PlanetsCard({this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Container(
-        height: 200,
-        width: 200,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.all(
-            Radius.circular(360),
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: 20,
-              right: 65,
-              child: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(360),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 45,
-              right: 15,
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(360),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 60,
-              right: 70,
-              child: Container(
-                height: 35,
-                width: 35,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(360),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 100,
-              right: 40,
-              child: Container(
-                height: 28,
-                width: 28,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(360),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

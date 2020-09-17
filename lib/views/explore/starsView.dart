@@ -7,6 +7,7 @@ import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/headerController.dart';
 import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/starsController.dart';
+import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
@@ -51,7 +52,8 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
               ScrollDirection.reverse &&
           controller.position.value >= -Get.height / 2) {
         controller.changeMinus();
-      } else if (HeaderController.to.scrollController.position.userScrollDirection ==
+      } else if (HeaderController
+                  .to.scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
           controller.position.value <= -10) {
         controller.changePlus();
@@ -100,9 +102,7 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                         }
                         return LiquidPullToRefresh(
                           onRefresh: () async => _.update(),
-                          color: Theme
-                              .of(context)
-                              .dialogBackgroundColor,
+                          color: Theme.of(context).dialogBackgroundColor,
                           child: ListView.builder(
                               controller: HeaderController.to.scrollController,
                               physics: BouncingScrollPhysics(),
@@ -116,23 +116,25 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                                         height: Get.height / 3 - 10,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(30.0),
-                                        child: StarCard(
-                                          text: snapshot.data[index].name,
-                                          temperature: snapshot.data[index].temperature,
-                                          onTap: () => PagesController.to.changeView(
-                                              SolarSystemView(
-                                                  star: snapshot.data[index].name)),
-                                        ),
-                                      ),
+                                          padding: const EdgeInsets.all(30.0),
+                                          child: StarCard(
+                                            text: snapshot.data[index].name,
+                                            temperature: snapshot
+                                                .data[index].temperature,
+                                            onTap: () => Navigator.of(context)
+                                                .push(route(SolarSystemView(
+                                                    star: snapshot
+                                                        .data[index].name))),
+                                          )),
                                     ],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(30.0),
                                     child: StarCard(
                                       text: snapshot.data[index].name,
-                                      temperature: snapshot.data[index].temperature,
-                                      onTap: () => PagesController.to.changeView(
+                                      temperature:
+                                          snapshot.data[index].temperature,
+                                      onTap: () => Navigator.of(context).pop(
                                           SolarSystemView(
                                               star: snapshot.data[index].name)),
                                     ),
@@ -159,9 +161,7 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                       children: [
                         //Using temporary color
                         Container(
-                          color: Theme
-                              .of(context)
-                              .dialogBackgroundColor,
+                          color: Theme.of(context).dialogBackgroundColor,
                           child: Column(
                             children: [
                               Header("Kepler", Get.back),
@@ -171,9 +171,9 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Discover the universe', style: TextStyle(
-                                        fontSize: 20
-                                    ),),
+                                      'Discover the universe',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
                                   ],
                                 ),
                               )
