@@ -41,31 +41,29 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
         scale: _scaleanimation,
         child: Stack(
           children: [
-            Container(
-              height: Get.height / 8,
-              width: Get.width - 20,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: Theme.of(context).primaryColor),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Align(alignment: Alignment.centerLeft, child: SizedBox()),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                height: Get.height / 8 + 20,
+                width: Get.width * 0.8,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Theme.of(context).primaryColor),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Align(
+                        alignment: Alignment.centerLeft, child: SizedBox()),
+                  ),
                 ),
               ),
             ),
             Row(children: [
               Container(
-                width: Get.width / 4.5,
-                height: Get.width / 4.5,
+                width: Get.width / 3.3,
+                height: Get.width / 3.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(360)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: StarsController.to.getStarColor(widget.temperature),
-                        spreadRadius: 12.0,
-                        offset: Offset(0, 0)),
-                  ],
                   shape: BoxShape.rectangle,
                   color: StarsController.to.getStarColor(widget.temperature),
                 ),

@@ -4,14 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
-import 'package:kepler/controllers/headerController.dart';
-import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
+import 'package:kepler/controllers/systemHeaderController.dart';
 import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
-import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -35,14 +33,14 @@ class _SolarSystemViewState extends State<SolarSystemView> {
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
-          HeaderController.to.position.value >= -Get.height / 2) {
-        HeaderController.to.changeMinus();
+          SystemHeaderController.to.position.value >= -Get.height / 2) {
+        SystemHeaderController.to.changeMinus();
       } else if (_scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
-          HeaderController.to.position.value <= -10) {
-        HeaderController.to.changePlus();
+          SystemHeaderController.to.position.value <= -10) {
+        SystemHeaderController.to.changePlus();
         if (_scrollController.offset == 0) {
-          HeaderController.to.changeZero();
+          SystemHeaderController.to.changeZero();
         }
       }
     });
@@ -140,7 +138,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
           ),
           Obx(
             () => Positioned(
-              top: HeaderController.to.position.value,
+              top: SystemHeaderController.to.position.value,
               bottom: 0,
               left: 0,
               right: 0,

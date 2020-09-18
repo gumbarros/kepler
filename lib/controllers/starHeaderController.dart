@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HeaderController extends GetxController {
-
-  static HeaderController get to => Get.find();
+class StarHeaderController extends GetxController {
+  static StarHeaderController get to => Get.find();
 
   bool gap = true;
   int gapNumber;
