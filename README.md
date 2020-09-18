@@ -3,7 +3,7 @@
 ![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)\
 ![Stars](https://i.ibb.co/G3WrnZz/Screenshot-20200918-213330.jpg)
 ![Planet](https://i.ibb.co/CbcK7yV/Screenshot-20200918-213430.jpg)
-![Home] (https://i.ibb.co/hfRffYK/Screenshot-20200918-213304.jpg)
+![Home](https://i.ibb.co/hfRffYK/Screenshot-20200918-213304.jpg)
 
 
 # How to contribute 💻
