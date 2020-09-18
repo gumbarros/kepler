@@ -8,9 +8,7 @@
 # How to contribute 💻
 - New API queries
 - Developing the graphs (largest planets, longest orbits)
-- Refactoring the code to better performance
-- Helping in the algorithm to discover the planet color
-- Helping in developing favourite (starred) system
+- Refactoring the code to better performance and UI
 - Translating the app 
 > The only requirements to contribute are to speak English and know Flutter
 > You can join our discord server by PM-ing RonanHansel#0059 or BeachThanos#0493
