@@ -23,8 +23,6 @@ class StarsView extends StatefulWidget {
 }
 
 class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
-  final HeaderController controller = Get.put(HeaderController());
-
   AnimationController fadeController;
   Animation fadeAnimation;
   AnimationController scaleController;
@@ -50,15 +48,15 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
     HeaderController.to.scrollController.addListener(() {
       if (HeaderController.to.scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
-          controller.position.value >= -Get.height / 2) {
-        controller.changeMinus();
+          HeaderController.to.position.value >= -Get.height / 2) {
+        HeaderController.to.changeMinus();
       } else if (HeaderController
                   .to.scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
-          controller.position.value <= -10) {
-        controller.changePlus();
+          HeaderController.to.position.value <= -10) {
+        HeaderController.to.changePlus();
         if (HeaderController.to.scrollController.offset == 0) {
-          controller.changeZero();
+          HeaderController.to.changeZero();
         }
       }
     });
@@ -134,9 +132,7 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                                       text: snapshot.data[index].name,
                                       temperature:
                                           snapshot.data[index].temperature,
-                                      onTap: () => Navigator.of(context).pop(
-                                          SolarSystemView(
-                                              star: snapshot.data[index].name)),
+                                      onTap: () => Get.to(SolarSystemView(star: snapshot.data[index].name,)),
                                     ),
                                   ),
                                 );
@@ -150,7 +146,7 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
               ),
               Obx(
                 () => Positioned(
-                  top: controller.position.value,
+                  top: HeaderController.to.position.value,
                   bottom: 0,
                   left: 0,
                   right: 0,

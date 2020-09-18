@@ -28,7 +28,6 @@ class SolarSystemView extends StatefulWidget {
 
 class _SolarSystemViewState extends State<SolarSystemView> {
   ScrollController _scrollController;
-  final HeaderController controller = Get.put(HeaderController());
 
   @override
   void initState() {
@@ -36,14 +35,14 @@ class _SolarSystemViewState extends State<SolarSystemView> {
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
-          controller.position.value >= -Get.height / 2) {
-        controller.changeMinus();
+          HeaderController.to.position.value >= -Get.height / 2) {
+        HeaderController.to.changeMinus();
       } else if (_scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
-          controller.position.value <= -10) {
-        controller.changePlus();
+          HeaderController.to.position.value <= -10) {
+        HeaderController.to.changePlus();
         if (_scrollController.offset == 0) {
-          controller.changeZero();
+          HeaderController.to.changeZero();
         }
       }
     });
@@ -57,7 +56,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
 
   @override
   Widget build(BuildContext context) {
-    print('star ${widget.star}');
+    print(widget.star);
     return GetBuilder<SolarSystemController>(
       init: new SolarSystemController(),
       builder: (_) => Scaffold(
@@ -141,7 +140,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
           ),
           Obx(
             () => Positioned(
-              top: controller.position.value,
+              top: HeaderController.to.position.value,
               bottom: 0,
               left: 0,
               right: 0,
