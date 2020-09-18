@@ -164,19 +164,8 @@ class _StarsViewState extends State<StarsView> with TickerProviderStateMixin {
                           color: Theme.of(context).dialogBackgroundColor,
                           child: Column(
                             children: [
-                              Header("Kepler", Get.back),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Discover the universe',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ],
-                                ),
-                              )
+                              Header("Stars", () => Navigator.pop(context)),
+
                             ],
                           ),
                         ),
