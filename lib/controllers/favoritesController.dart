@@ -15,8 +15,12 @@ class FavoritesController extends GetxController {
     return planets.get(name);
   }
 
-  void savePlanet(String name) {
-    planets.add(name);
+  List getAllPlanets(){
+    return planets.values.map((planet) => planet).toList();
+  }
+
+  void savePlanet(String name) async{
+    planets.put(name,name);
   }
 
   void removePlanet(String name) {

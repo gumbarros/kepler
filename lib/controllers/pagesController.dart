@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/views/chartsView.dart';
 import 'package:kepler/views/explore/starsView.dart';
+import 'package:kepler/views/favoritesView.dart';
 import 'package:kepler/views/settingsView.dart';
 
 class PagesController extends GetxController {
@@ -28,10 +29,10 @@ class PagesController extends GetxController {
         return ChartsView();
         break;
       case 2:
-        return SettingsView();
+        return FavoritesView();
         break;
       default:
-        return StarsView();
+        return SettingsView();
     }
   }
 
