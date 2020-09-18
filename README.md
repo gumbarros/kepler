@@ -1,8 +1,8 @@
 # Kepler: Discover exoplanets with NASA data 🪐
 
 ![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
-![Stars](https://ibb.co/7n1ybPt)
-![Planet](https://ibb.co/71szGcx)
+![Stars](https://i.ibb.co/kSNyhnV/Screenshot-2.png)
+![Planet](https://ibb.co/71szGcx/Screenshot-1.png)
 
 
 # How to contribute 💻
