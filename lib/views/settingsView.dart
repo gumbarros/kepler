@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/languageEntry.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/widgets/header/header.dart';
 
 class SettingsView extends StatefulWidget {
@@ -59,8 +60,9 @@ class _SettingsViewState extends State<SettingsView>
                   SizedBox(
                     height: Get.height / 400,
                   ),
-                  Header("Settings", ()=>
-                    PagesController.to.changeIndex(1)
+                  Header(
+                    "${string.text("settings")}",
+                    () => Navigator.pop(context),
                   ),
                   SizedBox(
                     height: Get.height / 7,

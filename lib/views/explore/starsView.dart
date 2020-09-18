@@ -121,16 +121,18 @@ class _StarsViewState extends State<StarsView>
                                           SizedBox(
                                             height: Get.height / 3.5 - 10,
                                           ),
-                                          StarCard(
-                                            text: snapshot.data[index].name,
-                                            temperature:
-                                            snapshot.data[index].temperature,
-                                            onTap: () =>
-                                                Navigator.of(context)
-                                                    .push(route(SolarSystemView(
-                                                  star: snapshot.data[index]
-                                                      .name,
-                                                ))),
+                                          Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: StarCard(
+                                              text: snapshot.data[index].name,
+                                              temperature:
+                                              snapshot.data[index].temperature,
+                                              onTap: () =>
+                                                  Navigator.of(context)
+                                                      .push(route(SolarSystemView(
+                                                    star: snapshot.data[index].name,
+                                                  ))),
+                                            ),
                                           ),
                                         ],
                                       ),

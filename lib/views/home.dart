@@ -1,8 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/cupertinopageroute.dart';
+import 'package:kepler/locale/translations.dart';
+import 'package:kepler/views/chartsView.dart';
 import 'package:kepler/views/explore/starsView.dart';
+import 'package:kepler/views/favoritesView.dart';
+import 'package:kepler/views/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
+import 'package:kepler/widgets/cards/menuCard.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -35,10 +41,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           body: Container(
             child: ListView(
               children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.of(context).push(route(SettingsView()));
+                      }),
+                ),
                 Column(
                   children: [
                     SizedBox(
-                      height: Get.height / 8,
+                      height: Get.height / 30,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
@@ -68,46 +82,33 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     SizedBox(
                       height: Get.height / 15,
                     ),
-                    GestureDetector(
-                      onTap: () async {
-                        await _scalecontroller.forward();
-                        await _scalecontroller.reverse();
+                    MenuCard(
+                      onTap: () {
                         Navigator.of(context).push(route(StarsView()));
                       },
-                      child: ScaleTransition(
-                        scale: _scaleanimation,
-                        child: Container(
-                          height: Get.height / 7,
-                          width: Get.width - 30,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                  colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.4),
-                                      BlendMode.darken),
-                                  fit: BoxFit.fitWidth,
-                                  image:
-                                      AssetImage('assets/images/cardbg.jpg'))),
-                          child: Center(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Stars',
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'JosefinSans'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
+                      text: '${string.text("explore")}',
+                      image: 'assets/images/explorebg.png',
+                    ),
+                    SizedBox(
+                      height: Get.height / 20,
+                    ),
+                    MenuCard(
+                      onTap: () {
+                        Navigator.of(context).push(route(ChartsView()));
+                      },
+                      text: '${string.text("charts")}',
+                      image: 'assets/images/chartsbg.png',
+                    ),
+                    SizedBox(
+                      height: Get.height / 20,
+                    ),
+                    MenuCard(
+                      onTap: () {
+                        Navigator.of(context).push(route(FavoritesView()));
+                      },
+                      text: 'Favourites', //TODO: i18n
+                      image: 'assets/images/favouritesbg.jpg',
+                    ),
                   ],
                 ),
               ],

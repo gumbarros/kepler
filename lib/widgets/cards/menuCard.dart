@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MenuCard extends StatefulWidget {
   final Function onTap;
@@ -7,10 +8,12 @@ class MenuCard extends StatefulWidget {
   final Widget child;
   final double width;
   final double height;
+  final String image;
 
   MenuCard(
       {@required this.onTap,
       @required this.text,
+        this.image,
       this.colorList,
       this.child,
       this.height,
@@ -47,32 +50,35 @@ class _MenuCardState extends State<MenuCard> with TickerProviderStateMixin {
       },
       child: ScaleTransition(
         scale: _scaleanimation,
-        child: Stack(
-          children: [
-            Container(
-              height: widget.height,
-              width: widget.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  gradient: LinearGradient(colors: widget.colorList)),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      widget.text,
-                      style: TextStyle(
-                          fontFamily: "JosefinSans",
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+        child: Container(
+          height: Get.height / 7,
+          width: Get.width - 30,
+          decoration: BoxDecoration(
+              borderRadius:
+              BorderRadius.all(Radius.circular(10)),
+              image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.4),
+                      BlendMode.darken),
+                  fit: BoxFit.fitWidth,
+                  image:
+                  AssetImage('${widget.image}'))),
+          child: Center(
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 10,
                 ),
-              ),
+                Text(
+                  '${widget.text}',
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'JosefinSans'),
+                ),
+              ],
             ),
-            widget.child,
-          ],
+          ),
         ),
       ),
     );

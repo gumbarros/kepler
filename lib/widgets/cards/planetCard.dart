@@ -1,50 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/locale/translations.dart';
-import 'package:kepler/models/planetData.dart';
-import 'package:slimy_card/slimy_card.dart';
 
-class PlanetCard extends StatelessWidget {
-  final List<PlanetData> planets;
-  final int index;
+class PlanetCard extends StatefulWidget {
+  final Function onTap;
+  final String text;
+  final Widget child;
+  final double width;
+  final double height;
 
-  PlanetCard({@required this.planets, @required this.index});
+  PlanetCard(
+      {@required this.onTap,
+      @required this.text,
+      this.child,
+      this.height,
+      this.width});
+
+  @override
+  _MenuCardState createState() => _MenuCardState();
+}
+
+class _MenuCardState extends State<PlanetCard> with TickerProviderStateMixin {
+  Animation _scaleanimation;
+  AnimationController _scalecontroller;
+
+  @override
+  void initState() {
+    _scalecontroller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 100));
+    _scaleanimation = Tween<double>(
+      begin: 1,
+      end: 0.97,
+    ).animate(
+      _scalecontroller,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: SlimyCard(
-        width: Get.width / 1.3,
-        topCardHeight: Get.height / 3,
-        color: Theme.of(context).primaryColor,
-        bottomCardHeight: 200,
-        borderRadius: 15,
-        topCardWidget: Text(
-          planets[index].planetName,
-          style: TextStyle(fontFamily: "Roboto", fontSize: 26.5),
-        ),
-        // To prevent overflow, use wrap
-        bottomCardWidget: Wrap(
-          direction: Axis.horizontal,
-          alignment: WrapAlignment.center,
-          children: [
-            Text(
-                "${string.text("star")}: ${planets[index].star.isNull ? 'Unknown' : planets[index].star}",
-                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
-            Text(
-                "${string.text("orbital_period")}: ${planets[index].orbitalPeriod.isNull ? "Unknown" : planets[index].orbitalPeriod.truncate()} ${string.text("days")}",
-                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
-            Text(
-                "${string.text("mass")}: ${planets[index].jupiterMass.isNull ? 'Unknown' : planets[index].jupiterMass.toString() + ' Jupiter'} ",
-                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
-            Text(
-                "${string.text("density")}: ${planets[index].density.isNull ? 'Unknown' : planets[index].density.toString() + '  g/cm³'}",
-                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
-            Text(
-                "${string.text("radius")}: ${planets[index].radius.isNull ? 'Unknown' : planets[index].radius.toString() + string.text("jupiter_radius")} ",
-                style: TextStyle(fontFamily: "Roboto", fontSize: 18.5)),
-          ],
+    return GestureDetector(
+      onTap: () async {
+        await _scalecontroller.forward();
+        await _scalecontroller.reverse();
+        widget.onTap();
+      },
+      child: ScaleTransition(
+        scale: _scaleanimation,
+        child: Container(
+          height: Get.height / 7,
+          width: Get.width - 30,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '${widget.text}',
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'JosefinSans'),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

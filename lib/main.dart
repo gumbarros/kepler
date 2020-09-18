@@ -10,7 +10,6 @@ import 'package:kepler/controllers/starHeaderController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/home.dart';
 import 'package:syncfusion_flutter_core/core.dart';
-
 import 'controllers/systemHeaderController.dart';
 
 void main() async {
@@ -29,7 +28,7 @@ void main() async {
       "NT8mJyc2IWhia31hfWN9Z2doYmF8YGJ8ampqanNiYmlmamlmanMDHmg0JiAnMiU8PjImITowOjw3NjEyISE8IBM0PjI6P30wPD4=");
   runApp(GetMaterialApp(
     title: string.text('app_title'),
-    darkTheme: ThemeData(
+    theme: ThemeData(
       brightness: Brightness.dark,
       primaryColor: Color(0xFFF20211E),
       dialogBackgroundColor: Color(0xFFF312F31),

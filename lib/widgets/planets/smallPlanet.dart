@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PlanetsCard extends StatelessWidget {
+class SmallPlanet extends StatelessWidget {
   final Color color;
 
-  PlanetsCard({this.color});
+  SmallPlanet({this.color});
 
   @override
   Widget build(BuildContext context) {

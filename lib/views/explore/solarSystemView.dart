@@ -11,6 +11,7 @@ import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
+import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -88,7 +89,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                 children: [
                                   SizedBox(height: Get.height / 3 + 20),
                                   Center(
-                                    child: MenuCard(
+                                    child: PlanetCard(
                                         width: Get.width - 20,
                                         height: Get.height / 5,
                                         text:
@@ -98,10 +99,6 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                               planetName: snapshot
                                                   .data[index].planetName,
                                             ))),
-                                        colorList: [
-                                          Theme.of(context).primaryColor,
-                                          Theme.of(context).primaryColor,
-                                        ],
                                         child: SizedBox()),
                                   )
                                 ],
@@ -112,19 +109,16 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                     height: 15,
                                   ),
                                   Center(
-                                    child: MenuCard(
+                                    child: PlanetCard(
                                         width: Get.width - 20,
-                                        height: Get.height / 6,
+                                        height: Get.height / 5,
                                         text:
-                                            "${snapshot.data[index].planetName}",
-                                        onTap: () => Navigator.of(context).push(
-                                            route(PlanetView(
-                                                planetName: snapshot
-                                                    .data[index].planetName))),
-                                        colorList: [
-                                          Theme.of(context).primaryColor,
-                                          Theme.of(context).primaryColor,
-                                        ],
+                                        "${snapshot.data[index].planetName}",
+                                        onTap: () => Navigator.of(context)
+                                            .push(route(PlanetView(
+                                          planetName: snapshot
+                                              .data[index].planetName,
+                                        ))),
                                         child: SizedBox()),
                                   ),
                                 ],

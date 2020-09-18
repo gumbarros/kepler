@@ -43,7 +43,7 @@ class PlanetView extends StatelessWidget {
                               SizedBox(
                                 height: Get.height / 4,
                               ),
-                              PlanetsCard(
+                              SmallPlanet(
                                 color: PlanetController.to
                                     .getPlanetsColor(snapshot.data.jmk2),
                               ),
