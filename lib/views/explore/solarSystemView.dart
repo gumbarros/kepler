@@ -14,12 +14,16 @@ import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
 class SolarSystemView extends StatefulWidget {
   final String star;
+  final double starTemp;
+  final int index;
 
-  SolarSystemView({@required this.star});
+  SolarSystemView(
+      {@required this.star, @required this.starTemp, @required this.index});
 
   @override
   _SolarSystemViewState createState() => _SolarSystemViewState();
@@ -71,11 +75,15 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.done:
                     if (snapshot.data.isNull) {
-                      return Center(
-                        child: Text(
-                          string.text("no_planet"),
-                          style: TextStyle(fontFamily: "Roboto"),
-                        ),
+                      return Column(
+                        children: [
+                          Center(
+                            child: Text(
+                              string.text("no_planet"),
+                              style: TextStyle(fontFamily: "Roboto"),
+                            ),
+                          ),
+                        ],
                       );
                     }
                     return ListView.builder(
@@ -87,7 +95,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                               visible: !index.isEqual(0),
                               replacement: Column(
                                 children: [
-                                  SizedBox(height: Get.height / 3 + 20),
+                                  SizedBox(height: Get.height / 2 + 20),
                                   Center(
                                     child: PlanetCard(
                                         width: Get.width - 20,
@@ -113,12 +121,12 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                         width: Get.width - 20,
                                         height: Get.height / 5,
                                         text:
-                                        "${snapshot.data[index].planetName}",
+                                            "${snapshot.data[index].planetName}",
                                         onTap: () => Navigator.of(context)
-                                            .push(route(PlanetView(
-                                          planetName: snapshot
-                                              .data[index].planetName,
-                                        ))),
+                                                .push(route(PlanetView(
+                                              planetName: snapshot
+                                                  .data[index].planetName,
+                                            ))),
                                         child: SizedBox()),
                                   ),
                                 ],
@@ -141,25 +149,28 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                 width: Get.width,
                 child: Column(
                   children: [
-                    //Using temporary color
                     Container(
                       color: Theme.of(context).dialogBackgroundColor,
-                      //TODO: Change the colour accordingly to the theme
                       child: Header(
                           widget.star + " System", //TODO: i18n
                           () => Navigator.pop(context)),
                     ),
-                    Container(
-                      color: Theme.of(context).dialogBackgroundColor,
-                      //TODO: Change the colour accordingly to the theme
-                      width: Get.width,
-                      child: SearchBar(
-                        searchFunc: (String value) {
-                          _.search.value = value;
-                          _.upd();
-                        },
-                      ),
+                    Hero(
+                      tag: "${widget.index}",
+                      child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Star(temperature: widget.starTemp)),
                     ),
+                    // Container(
+                    //   color: Theme.of(context).dialogBackgroundColor,
+                    //   width: Get.width,
+                    //   child: SearchBar(
+                    //     searchFunc: (String value) {
+                    //       _.search.value = value;
+                    //       _.upd();
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

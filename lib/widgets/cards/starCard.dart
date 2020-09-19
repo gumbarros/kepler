@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/starsController.dart';
+import 'package:kepler/widgets/planets/star.dart';
 
 class StarCard extends StatefulWidget {
   final Function onTap;
@@ -59,15 +60,7 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
               ),
             ),
             Row(children: [
-              Container(
-                width: Get.width / 3.3,
-                height: Get.width / 3.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(360)),
-                  shape: BoxShape.rectangle,
-                  color: StarsController.to.getStarColor(widget.temperature),
-                ),
-              ),
+              Star(temperature: widget.temperature),
               Expanded(child: SizedBox()),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0),
