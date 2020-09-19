@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/favoritesController.dart';
-import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
-import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 import 'package:kepler/widgets/planets/smallPlanet.dart';
@@ -74,17 +72,18 @@ class PlanetView extends StatelessWidget {
                                                 fontFamily: "Roboto",
                                                 fontSize: 18.5)),
                                         Text(
-                                            "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? 'Unknown' : snapshot.data.jupiterMass.toString() + ' Jupiter'} ",
+                                            "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? string.text("unknown") : snapshot.data.jupiterMass.toString() + string.text("jupiter")} ",
                                             style: TextStyle(
                                                 fontFamily: "Roboto",
                                                 fontSize: 18.5)),
                                         Text(
-                                            "${string.text("density")}: ${snapshot.data.density.isNull ? 'Unknown' : snapshot.data.density.toString() + ' g/cm³'}",
+                                            "${string.text("density")}: ${snapshot.data.density.isNull ? string.text("unknown") : snapshot.data.density.toString() + ' g/cm³'}",
                                             style: TextStyle(
                                                 fontFamily: "Roboto",
                                                 fontSize: 18.5)),
                                         Text(
-                                            "${string.text("radius")}: ${snapshot.data.radius.isNull ? 'Unknown' : snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
+                                            "${string.text("radius")}: ${snapshot.data.radius.isNull ?
+                                            string.text("unknown"): snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
                                             style: TextStyle(
                                                 fontFamily: "Roboto",
                                                 fontSize: 18.5)),
@@ -136,7 +135,6 @@ class PlanetView extends StatelessWidget {
                 onPressed: () {
                   if (_.getPlanet(planetName).isNull) {
                     _.savePlanet(planetName);
-                    print('ei');
                   } else {
                     _.removePlanet(planetName);
                   }

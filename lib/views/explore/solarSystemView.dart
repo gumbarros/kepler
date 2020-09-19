@@ -10,7 +10,6 @@ import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
-import 'package:kepler/widgets/cards/imageCard.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -146,7 +145,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                       color: Theme.of(context).dialogBackgroundColor,
                       //TODO: Change the colour accordingly to the theme
                       child: Header(
-                          widget.star + " System", //TODO: i18n
+                          widget.star + string.text("system"), //TODO: i18n
                           () => Navigator.pop(context)),
                     ),
                     Container(

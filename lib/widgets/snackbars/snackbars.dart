@@ -17,7 +17,7 @@ class Snackbars {
 
   static void development() {
     if (!Get.isSnackbarOpen)
-      Get.snackbar(string.text("coming_soon"), string.text("work_in_progress"),
+      Get.snackbar(string.text("coming_soon"), string.text("under_development"),
           backgroundColor: Colors.white,
           colorText: Colors.black);
   }

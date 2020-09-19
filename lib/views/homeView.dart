@@ -4,33 +4,32 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/views/chartsView.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/favoritesView.dart';
 import 'package:kepler/views/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
+import 'package:kepler/widgets/snackbars/snackbars.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
+import 'chartsView.dart';
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  Animation _scaleanimation;
-  AnimationController _scalecontroller;
+class HomeView extends StatelessWidget{
+  // Animation _scaleanimation;
+  // AnimationController _scalecontroller;
+  //
+  // void initState() {
+  //   _scalecontroller =
+  //       AnimationController(vsync: this, duration: Duration(milliseconds: 100));
+  //   _scaleanimation = Tween<double>(
+  //     begin: 1,
+  //     end: 0.97,
+  //   ).animate(
+  //     _scalecontroller,
+  //   );
+  //   super.initState();
+  // }
 
-  void initState() {
-    _scalecontroller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 100));
-    _scaleanimation = Tween<double>(
-      begin: 1,
-      end: 0.97,
-    ).animate(
-      _scalecontroller,
-    );
-    super.initState();
-  }
+  // If animation it's not used, let's use Stateless Widgets for better performance
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +93,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ImageCard(
                         onTap: () {
                           Navigator.of(context).push(route(ChartsView()));
+                          Snackbars.development();
                         },
-                        text: '${string.text("charts")}',
+                        text: string.text("charts"),
                         image: 'assets/images/chartsbg.png',
                       ),
                       SizedBox(
@@ -104,8 +104,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ImageCard(
                         onTap: () {
                           Navigator.of(context).push(route(FavoritesView()));
+                          Snackbars.development();
                         },
-                        text: 'Favourites', //TODO: i18n
+                        text: string.text("favourites"),
                         image: 'assets/images/favouritesbg.jpg',
                       ),
                     ],

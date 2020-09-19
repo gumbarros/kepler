@@ -1,11 +1,6 @@
-import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/favoritesController.dart';
-import 'package:kepler/controllers/pagesController.dart';
-import 'package:kepler/controllers/settingsController.dart';
-
-import 'package:kepler/widgets/header/header.dart';
 
 class FavoritesView extends StatefulWidget {
   @override

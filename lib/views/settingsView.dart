@@ -26,8 +26,8 @@ class SettingsView extends StatelessWidget {
           body: SingleChildScrollView(
               child: Stack(
             children: [
-              Header("Settings", () {
-                Navigator.of(context).push(route(Home()));
+              Header(string.text("settings"), () {
+                Navigator.of(context).push(route(HomeView()));
               }),
               Container(
                 height: Get.height,

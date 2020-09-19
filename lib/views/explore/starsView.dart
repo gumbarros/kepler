@@ -7,6 +7,7 @@ import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/starHeaderController.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/cupertinopageroute.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
@@ -97,7 +98,7 @@ class _StarsViewState extends State<StarsView>
                             if (snapshot.data.isNull) {
                               return Center(
                                 child: Text(
-                                  "No stars found", //TODO: i18n
+                                  string.text("no_stars"),
                                   style: TextStyle(fontFamily: "Roboto"),
                                 ),
                               );
@@ -177,7 +178,7 @@ class _StarsViewState extends State<StarsView>
                                       .dialogBackgroundColor,
                                   child: Column(
                                     children: [
-                                      Header("Stars", () =>
+                                      Header(string.text("stars"), () =>
                                           Navigator.pop(context)),
                                     ],
                                   ),
