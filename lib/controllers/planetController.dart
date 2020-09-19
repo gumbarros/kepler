@@ -20,7 +20,7 @@ class PlanetController extends GetxController {
     } else if(-0.02 < vrc && vrc < 0.30) {
       return Colors.blueGrey;
     } else if(0.30 < vrc && vrc < 0.58) {
-      return Colors.green[300];
+      return Colors.green[400];
     } else if(0.58 < vrc && vrc < 0.81) {
       return Colors.yellow[100];
     } else if(0.81 < vrc && vrc < 1.40) {

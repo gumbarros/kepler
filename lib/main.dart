@@ -13,6 +13,7 @@ import 'package:syncfusion_flutter_core/core.dart';
 
 final _assetsToWarmup = [
   AssetFlare(bundle: rootBundle, name: "assets/flare/shine.flr"),
+  AssetFlare(bundle: rootBundle, name: "assets/flare/clouds.flr"),
 ];
 
 Future<void> warmupFlare() async {

@@ -72,6 +72,7 @@ flutter:
     - assets/images/chartsbg.png
     - assets/images/favouritesbg.jpg
     - assets/flare/shine.flr
+    - assets/flare/clouds.flr
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

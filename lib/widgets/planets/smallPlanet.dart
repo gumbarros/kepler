@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class SmallPlanet extends StatelessWidget {
@@ -105,7 +106,8 @@ class SmallPlanet extends StatelessWidget {
                     topRight: Radius.circular(360),
                     topLeft: Radius.circular(360),
                     bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(360),                  ),
+                    bottomRight: Radius.circular(360),
+                  ),
                 ),
               ),
             ),
@@ -124,6 +126,14 @@ class SmallPlanet extends StatelessWidget {
                     bottomRight: Radius.circular(360),
                   ),
                 ),
+              ),
+            ),
+            Container(
+              child: FlareActor(
+                'assets/flare/clouds.flr',
+                animation: 'start',
+                fit: BoxFit.fitHeight,
+                color: Colors.white.withOpacity(0.5),
               ),
             ),
           ],
