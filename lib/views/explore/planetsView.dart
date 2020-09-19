@@ -21,130 +21,112 @@ class PlanetView extends StatelessWidget {
       init: new PlanetController(),
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: Stack(children: [
-          Container(
-            width: Get.width,
-            height: Get.height,
-            child: FutureBuilder<PlanetData>(
-              future: API.getPlanetByName(planetName),
-              builder:
-                  (BuildContext context, AsyncSnapshot<PlanetData> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.done:
-                    return Container(
-                      width: Get.width,
-                      height: Get.height / 1.1,
-                      child: ListView(
+        body: //Stack(children: [
+          FutureBuilder<PlanetData>(
+            future: API.getPlanetByName(planetName),
+            builder:
+                (BuildContext context, AsyncSnapshot<PlanetData> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.done:
+                  return ListView(
+                    children: [
+                      Column(
                         children: [
                           Column(
                             children: [
-                              SizedBox(
-                                height: Get.height / 4,
-                              ),
-                              SmallPlanet(
-                                color: PlanetController.to
-                                    .getPlanetsColor(snapshot.data.jmk2),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10)),
-                                      color: Colors.grey.withOpacity(0.5)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            "${string.text("star")}: ${snapshot.data.star}",
-                                            style: TextStyle(
-                                                fontFamily: "Roboto",
-                                                fontSize: 18.5)),
-                                        Text(
-                                            "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
-                                            style: TextStyle(
-                                                fontFamily: "Roboto",
-                                                fontSize: 18.5)),
-                                        Text(
-                                            "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? string.text("unknown") : snapshot.data.jupiterMass.toString() + string.text("jupiter")} ",
-                                            style: TextStyle(
-                                                fontFamily: "Roboto",
-                                                fontSize: 18.5)),
-                                        Text(
-                                            "${string.text("density")}: ${snapshot.data.density.isNull ? string.text("unknown") : snapshot.data.density.toString() + ' g/cm³'}",
-                                            style: TextStyle(
-                                                fontFamily: "Roboto",
-                                                fontSize: 18.5)),
-                                        Text(
-                                            "${string.text("radius")}: ${snapshot.data.radius.isNull ?
-                                            string.text("unknown"): snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
-                                            style: TextStyle(
-                                                fontFamily: "Roboto",
-                                                fontSize: 18.5)),
-                                      ],
-                                    ),
-                                  ),
+                              //Using temporary color
+                              Container(
+                                  color: Theme.of(context).dialogBackgroundColor,
+                                  child: Header(
+                                    planetName, //TODO: i18n
+                                        () => Navigator.pop(context),
+                                  )),
+                            ],
+                          ),
+                          SmallPlanet(
+                            color: PlanetController.to
+                                .getPlanetsColor(snapshot.data.jmk2),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(10)),
+                                  color: Colors.grey.withOpacity(0.5)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        "${string.text("star")}: ${snapshot.data.star}",
+                                        style: TextStyle(
+                                            fontFamily: "Roboto",
+                                            fontSize: 18.5)),
+                                    Text(
+                                        "${string.text("orbital_period")}: ${snapshot.data.orbitalPeriod.isNull ? "Unknown" : snapshot.data.orbitalPeriod.truncate()} ${string.text("days")}",
+                                        style: TextStyle(
+                                            fontFamily: "Roboto",
+                                            fontSize: 18.5)),
+                                    Text(
+                                        "${string.text("mass")}: ${snapshot.data.jupiterMass.isNull ? string.text("unknown") : snapshot.data.jupiterMass.toString() + string.text("jupiter")} ",
+                                        style: TextStyle(
+                                            fontFamily: "Roboto",
+                                            fontSize: 18.5)),
+                                    Text(
+                                        "${string.text("density")}: ${snapshot.data.density.isNull ? string.text("unknown") : snapshot.data.density.toString() + ' g/cm³'}",
+                                        style: TextStyle(
+                                            fontFamily: "Roboto",
+                                            fontSize: 18.5)),
+                                    Text(
+                                        "${string.text("radius")}: ${snapshot.data.radius.isNull ?
+                                        string.text("unknown"): snapshot.data.radius.toString() + string.text("jupiter_radius")} ",
+                                        style: TextStyle(
+                                            fontFamily: "Roboto",
+                                            fontSize: 18.5)),
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
-                    );
-                  default:
-                    return Center(child: Loading());
-                }
-              },
-            ),
+                    ],
+                  );
+                default:
+                  return Center(child: Loading());
+              }
+            },
           ),
-          Positioned(
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: Get.height / 10,
-              width: Get.width,
-              child: Column(
-                children: [
-                  //Using temporary color
-                  Container(
-                      color: Theme.of(context).dialogBackgroundColor,
-                      child: Header(
-                        planetName, //TODO: i18n
-                        () => Navigator.pop(context),
-                      )),
-                ],
-              ),
-            ),
-          ),
-          GetBuilder<FavoritesController>(
-            builder: (_) => Align(
-              alignment: Alignment.bottomRight,
-              child: IconButton(
-                iconSize: 32.0,
-                icon: _.getPlanet(planetName).isNull
-                    ? Icon(Icons.star_border)
-                    : Icon(Icons.star),
-                onPressed: () {
-                  if (_.getPlanet(planetName).isNull) {
-                    _.savePlanet(planetName);
-                  } else {
-                    _.removePlanet(planetName);
-                  }
-                  _.update();
-                  print(_.getPlanet(planetName));
-                },
-              ),
-            ),
-          ),
-        ]),
+
+
+
+          // GetBuilder<FavoritesController>(
+          //   builder: (_) => Align(
+          //     alignment: Alignment.bottomRight,
+          //     child: IconButton(
+          //       iconSize: 32.0,
+          //       icon: _.getPlanet(planetName).isNull
+          //           ? Icon(Icons.star_border)
+          //           : Icon(Icons.star),
+          //       onPressed: () {
+          //         if (_.getPlanet(planetName).isNull) {
+          //           _.savePlanet(planetName);
+          //         } else {
+          //           _.removePlanet(planetName);
+          //         }
+          //         _.update();
+          //         print(_.getPlanet(planetName));
+          //       },
+          //     ),
+          //   ),
+          // ),
+        //]),
       ),
     );
   }
