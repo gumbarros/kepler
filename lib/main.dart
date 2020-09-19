@@ -4,18 +4,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kepler/controllers/starHeaderController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/homeView.dart';
 import 'package:syncfusion_flutter_core/core.dart';
-import 'controllers/systemHeaderController.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Hive.initFlutter();
-  Get.put<SystemHeaderController>(SystemHeaderController(), permanent: true);
-  Get.put<StarHeaderController>(StarHeaderController(), permanent: true);
   await string.init();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

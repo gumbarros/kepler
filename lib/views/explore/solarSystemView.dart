@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
-import 'package:kepler/controllers/systemHeaderController.dart';
 import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
@@ -15,7 +14,6 @@ import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
-
 class SolarSystemView extends StatefulWidget {
   final String star;
   final double starTemp;
@@ -30,21 +28,36 @@ class SolarSystemView extends StatefulWidget {
 
 class _SolarSystemViewState extends State<SolarSystemView> {
   ScrollController _scrollController;
+  bool gap = true;
+  int gapNumber;
+  ScrollController scrollController;
+  RxDouble position = 0.0.obs;
 
+  changeMinus() {
+    position.value -= 7;
+  }
+
+  changePlus() {
+    position.value += 7;
+  }
+
+  changeZero() {
+    position.value = 0;
+  }
   @override
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
-          SystemHeaderController.to.position.value >= -Get.height / 2) {
-        SystemHeaderController.to.changeMinus();
+          position.value >= -Get.height / 2) {
+        changeMinus();
       } else if (_scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
-          SystemHeaderController.to.position.value <= -10) {
-        SystemHeaderController.to.changePlus();
+          position.value <= -10) {
+        changePlus();
         if (_scrollController.offset == 0) {
-          SystemHeaderController.to.changeZero();
+          changeZero();
         }
       }
     });
@@ -132,14 +145,17 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                               ));
                         });
                   default:
-                    return Center(child: Loading());
+                    return Center(child: Padding(
+                      padding: const EdgeInsets.only(top: 60.0),
+                      child: Loading(),
+                    ));
                 }
               },
             ),
           ),
           Obx(
             () => Positioned(
-              top: SystemHeaderController.to.position.value,
+              top: position.value,
               bottom: 0,
               left: 0,
               right: 0,
@@ -156,9 +172,12 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                     ),
                     Hero(
                       tag: "${widget.index}",
-                      child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Star(temperature: widget.starTemp)),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Star(temperature: widget.starTemp)),
+                      ),
                     ),
                     // Container(
                     //   color: Theme.of(context).dialogBackgroundColor,

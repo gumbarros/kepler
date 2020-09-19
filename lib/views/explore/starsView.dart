@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
-import 'package:kepler/controllers/starHeaderController.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
@@ -14,8 +13,6 @@ import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-
 class StarsView extends StatefulWidget {
   @override
   _StarsViewState createState() => _StarsViewState();
@@ -27,7 +24,22 @@ class _StarsViewState extends State<StarsView>
   Animation fadeAnimation;
   AnimationController scaleController;
   Animation scaleAnimation;
+  bool gap = true;
+  int gapNumber;
+  ScrollController scrollController;
+  RxDouble position = 0.0.obs;
 
+  changeMinus() {
+    position.value -= 7;
+  }
+
+  changePlus() {
+    position.value += 7;
+  }
+
+  changeZero() {
+    position.value = 0;
+  }
   @override
   bool get wantKeepAlive => true;
 
@@ -47,20 +59,19 @@ class _StarsViewState extends State<StarsView>
       end: 1,
     ).animate(scaleController);
     scaleController.forward();
-    StarHeaderController.to.scrollController = ScrollController();
-    StarHeaderController.to.scrollController.addListener(() {
-      if (StarHeaderController
-                  .to.scrollController.position.userScrollDirection ==
+    scrollController = ScrollController();
+    scrollController.addListener(() {
+      if (                 scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
-          StarHeaderController.to.position.value >= -Get.height / 2) {
-        StarHeaderController.to.changeMinus();
-      } else if (StarHeaderController
-                  .to.scrollController.position.userScrollDirection ==
+          position.value >= -Get.height / 2) {
+        changeMinus();
+      } else if (
+                  scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
-          StarHeaderController.to.position.value <= -10) {
-        StarHeaderController.to.changePlus();
-        if (StarHeaderController.to.scrollController.offset == 0) {
-          StarHeaderController.to.changeZero();
+          position.value <= -10) {
+        changePlus();
+        if (scrollController.offset == 0) {
+          changeZero();
         }
       }
     });
@@ -70,11 +81,12 @@ class _StarsViewState extends State<StarsView>
   void dispose() {
     fadeController.dispose();
     scaleController.dispose();
-    StarHeaderController.to.scrollController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
   Widget build(BuildContext context) {
+    print('rebuilt');
     super.build(context);
     return FadeTransition(
       opacity: fadeAnimation,
@@ -102,63 +114,67 @@ class _StarsViewState extends State<StarsView>
                             ),
                           );
                         }
-                        return LiquidPullToRefresh(
-                          onRefresh: () async => _.update(),
-                          color: Theme.of(context).dialogBackgroundColor,
-                          child: ListView.builder(
-                              controller:
-                                  StarHeaderController.to.scrollController,
-                              physics: BouncingScrollPhysics(),
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Visibility(
-                                  visible: !index.isEqual(0),
-                                  replacement: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: Get.height / 3.5 - 10,
-                                      ),
-                                      Hero(
-                                        tag: "$index",
+                        return ListView.builder(
+                            controller:
+                                scrollController,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Visibility(
+                                visible: !index.isEqual(0),
+                                replacement: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: Get.height / 3.5 - 10,
+                                    ),
+                                    Hero(
+                                      tag: "$index",
+                                      child: Material(
+                                        color: Colors.transparent,
                                         child: Padding(
                                           padding: const EdgeInsets.all(15.0),
                                           child: StarCard(
                                             text: snapshot.data[index].name,
                                             temperature: snapshot
                                                 .data[index].temperature,
-                                            onTap: () => Navigator.of(context)
-                                                .push(route(SolarSystemView(
-                                              index: index,
-                                              starTemp: snapshot
-                                                  .data[index].temperature,
-                                              star: snapshot.data[index].name,
-                                            ))),
+                                            onTap: () =>
+                                                Navigator.of(context).push(
+                                              route(
+                                                SolarSystemView(
+                                                  index: index,
+                                                  starTemp: snapshot
+                                                      .data[index].temperature,
+                                                  star:
+                                                      snapshot.data[index].name,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  child: Hero(
-                                    tag: "$index",
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: StarCard(
-                                        text: snapshot.data[index].name,
-                                        temperature:
+                                    ),
+                                  ],
+                                ),
+                                child: Hero(
+                                  tag: "$index",
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: StarCard(
+                                      text: snapshot.data[index].name,
+                                      temperature:
+                                          snapshot.data[index].temperature,
+                                      onTap: () => Navigator.of(context)
+                                          .push(route(SolarSystemView(
+                                        index: index,
+                                        starTemp:
                                             snapshot.data[index].temperature,
-                                        onTap: () => Navigator.of(context)
-                                            .push(route(SolarSystemView(
-                                          index: index,
-                                          starTemp:
-                                              snapshot.data[index].temperature,
-                                          star: snapshot.data[index].name,
-                                        ))),
-                                      ),
+                                        star: snapshot.data[index].name,
+                                      ))),
                                     ),
                                   ),
-                                );
-                              }),
-                        );
+                                ),
+                              );
+                            });
                       default:
                         return Center(child: Loading());
                     }
@@ -167,7 +183,7 @@ class _StarsViewState extends State<StarsView>
               ),
               Obx(
                 () => Positioned(
-                  top: StarHeaderController.to.position.value,
+                  top: position.value,
                   bottom: 0,
                   left: 0,
                   right: 0,
@@ -181,7 +197,8 @@ class _StarsViewState extends State<StarsView>
                           color: Theme.of(context).dialogBackgroundColor,
                           child: Column(
                             children: [
-                              Header(string.text("stars"), () => Navigator.pop(context)),
+                              Header(string.text("stars"),
+                                  () => Navigator.pop(context)),
                             ],
                           ),
                         ),

@@ -35,7 +35,6 @@ dependencies:
   json_async: ^0.1.1
   syncfusion_flutter_charts: ^18.2.56
   flutter_spinkit: ^4.1.2+1
-  liquid_pull_to_refresh: ^2.0.0
   expansion_card: ^0.1.0
   flutter_launcher_icons: ^0.7.3
 # flutter pub run flutter_native_splash:create
