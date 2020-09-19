@@ -1,83 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MenuCard extends StatefulWidget {
-  final Function onTap;
+class SmallMenuCard extends StatelessWidget {
+  final IconData icon;
   final String text;
-  final List<Color> colorList;
-  final Widget child;
-  final double width;
-  final double height;
-  final String image;
-
-  MenuCard(
-      {@required this.onTap,
-      @required this.text,
-        this.image,
-      this.colorList,
-      this.child,
-      this.height,
-      this.width});
-
-  @override
-  _MenuCardState createState() => _MenuCardState();
-}
-
-class _MenuCardState extends State<MenuCard> with TickerProviderStateMixin {
-  Animation _scaleanimation;
-  AnimationController _scalecontroller;
-
-  @override
-  void initState() {
-    _scalecontroller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 100));
-    _scaleanimation = Tween<double>(
-      begin: 1,
-      end: 0.97,
-    ).animate(
-      _scalecontroller,
-    );
-    super.initState();
-  }
+  final Function onTap;
+  SmallMenuCard({@required this.icon, @required this.text, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        await _scalecontroller.forward();
-        await _scalecontroller.reverse();
-        widget.onTap();
-      },
-      child: ScaleTransition(
-        scale: _scaleanimation,
-        child: Container(
-          height: Get.height / 7,
-          width: Get.width - 30,
-          decoration: BoxDecoration(
-              borderRadius:
-              BorderRadius.all(Radius.circular(10)),
-              image: DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.4),
-                      BlendMode.darken),
-                  fit: BoxFit.fitWidth,
-                  image:
-                  AssetImage('${widget.image}'))),
-          child: Center(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  '${widget.text}',
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'JosefinSans'),
-                ),
-              ],
-            ),
+    return Container(
+      height: Get.height / 4,
+      width: Get.width / 3,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(8.0),
+            bottomLeft: Radius.circular(8.0),
+            bottomRight: Radius.circular(8.0),
+            topRight: Radius.circular(8.0)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          focusColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          onTap: onTap,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(icon, color: Colors.white, size: 50),
+              SizedBox(height: 10),
+              Text(
+                text,
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),

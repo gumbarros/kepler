@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/settingsController.dart';
-import 'package:kepler/locale/languageEntry.dart';
+
 import 'package:kepler/widgets/header/header.dart';
 
 class FavoritesView extends StatefulWidget {
