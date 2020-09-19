@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
@@ -47,49 +48,48 @@ class LanguageDialog extends StatelessWidget {
                   width: Get.width / 1,
                   child: Center(
                     child:
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        value: conf.lang,
-                        hint: Text(string
-                            .text("language")),
-                        style: TextStyle(),
-                        onChanged: (value) {
-                          conf.upd();
-                          conf.lang = value;
-                        },
-                        items: <DropdownMenuItem>[
-                          DropdownMenuItem(
-                            child: Text("English"),
-                            value: "en",
-                          ),
-                          DropdownMenuItem(
-                            child: Text(
-                                "Brazilian Portuguese"),
-                            value: "br",
-                          ),
-                          DropdownMenuItem(
-                            child:
-                            Text("Vietnamese"),
-                            value: "vt",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Hindi"),
-                            value: "hi",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("German"),
-                            value: "de",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Polish"),
-                            value: "pl",
-                          ),
-                        ],
-                      ),
+                    DropdownButton(
+                      value: conf.lang,
+                      hint: Text(string
+                          .text("language")),
+                      style: TextStyle(),
+                      onChanged: (value) {
+                        conf.lang = value;
+                        conf.upd();
+                      },
+                      items: <DropdownMenuItem>[
+                        DropdownMenuItem(
+                          child: Text("English"),
+                          value: "en",
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                              "Brazilian Portuguese"),
+                          value: "br",
+                        ),
+                        DropdownMenuItem(
+                          child:
+                          Text("Vietnamese"),
+                          value: "vt",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Hindi"),
+                          value: "hi",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("German"),
+                          value: "de",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Polish"),
+                          value: "pl",
+                        ),
+                      ],
                     ),
                   ),
                 ),
                 RaisedButton(
+                  color: Theme.of(context).primaryColor,
                   child: Text(string.text('save')),
                   onPressed: () {
                     conf.setLanguage(conf.lang);

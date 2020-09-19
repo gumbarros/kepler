@@ -102,63 +102,31 @@ class _StarsViewState extends State<StarsView>
                             ),
                           );
                         }
-                        return LiquidPullToRefresh(
-                          onRefresh: () async => _.update(),
-                          color: Theme.of(context).dialogBackgroundColor,
-                          child: ListView.builder(
-                              controller:
-                                  StarHeaderController.to.scrollController,
-                              physics: BouncingScrollPhysics(),
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Visibility(
-                                  visible: !index.isEqual(0),
-                                  replacement: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: Get.height / 3.5 - 10,
-                                      ),
-                                      Hero(
-                                        tag: "$index",
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: StarCard(
-                                            text: snapshot.data[index].name,
-                                            temperature: snapshot
-                                                .data[index].temperature,
-                                            onTap: () => Navigator.of(context)
-                                                .push(route(SolarSystemView(
-                                              index: index,
-                                              starTemp: snapshot
-                                                  .data[index].temperature,
-                                              star: snapshot.data[index].name,
-                                            ))),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                        return ListView.builder(
+                            controller:
+                                StarHeaderController.to.scrollController,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Hero(
+                                tag: "$index",
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: StarCard(
+                                    text: snapshot.data[index].name,
+                                    temperature:
+                                        snapshot.data[index].temperature,
+                                    onTap: () => Navigator.of(context)
+                                        .push(route(SolarSystemView(
+                                      index: index,
+                                      starTemp:
+                                          snapshot.data[index].temperature,
+                                      star: snapshot.data[index].name,
+                                    ))),
                                   ),
-                                  child: Hero(
-                                    tag: "$index",
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: StarCard(
-                                        text: snapshot.data[index].name,
-                                        temperature:
-                                            snapshot.data[index].temperature,
-                                        onTap: () => Navigator.of(context)
-                                            .push(route(SolarSystemView(
-                                          index: index,
-                                          starTemp:
-                                              snapshot.data[index].temperature,
-                                          star: snapshot.data[index].name,
-                                        ))),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }),
-                        );
+                                ),
+                              );
+                            });
                       default:
                         return Center(child: Loading());
                     }
