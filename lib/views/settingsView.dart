@@ -6,7 +6,7 @@ import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/homeView.dart';
-import 'package:kepler/widgets/cards/menuCard.dart ';
+import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
@@ -43,7 +43,7 @@ class SettingsView extends StatelessWidget {
                         children: <Widget>[
                           Container(
                               width: Get.width / 2.8,
-                              child: SmallMenuCard(
+                              child: MenuCard(
                                 text: string.text("current_language"),
                                 onTap: () async {
                                   return Get.dialog(LanguageDialog());
@@ -52,7 +52,7 @@ class SettingsView extends StatelessWidget {
                               )),
                           Container(
                             width: Get.width / 2.8,
-                            child: SmallMenuCard(
+                            child: MenuCard(
                               text: string.text("dark_mode"),
                               onTap: () {
                                 Snackbars.development();
@@ -68,7 +68,7 @@ class SettingsView extends StatelessWidget {
                         children: <Widget>[
                           Container(
                               width: Get.width / 2.8,
-                              child: SmallMenuCard(
+                              child: MenuCard(
                                 text: string.text("credits"),
                                 onTap: () async {
                                   Snackbars.development();
@@ -77,7 +77,7 @@ class SettingsView extends StatelessWidget {
                               )),
                           Container(
                             width: Get.width / 2.8,
-                            child: SmallMenuCard(
+                            child: MenuCard(
                               text: string.text("reset_favorites"),
                               onTap: () {
                                 Snackbars.development();

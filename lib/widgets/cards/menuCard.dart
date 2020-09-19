@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SmallMenuCard extends StatelessWidget {
+class MenuCard extends StatelessWidget {
   final IconData icon;
   final String text;
   final Function onTap;
-  SmallMenuCard({@required this.icon, @required this.text, @required this.onTap});
+  MenuCard({@required this.icon, @required this.text, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
