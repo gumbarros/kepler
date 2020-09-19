@@ -6,8 +6,9 @@ import 'package:kepler/widgets/planets/star.dart';
 class StarCard extends StatefulWidget {
   final Function onTap;
   final String text;
+  final int index;
   final double temperature;
-  StarCard({@required this.onTap, @required this.text, @required this.temperature});
+  StarCard({@required this.onTap, @required this.text, @required this.temperature, @required this.index});
 
   @override
   _StarCardState createState() => _StarCardState();
@@ -60,7 +61,9 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
               ),
             ),
             Row(children: [
-              Star(temperature: widget.temperature),
+              Hero(
+                  tag: "${widget.index}",
+                  child: Star(temperature: widget.temperature)),
               Expanded(child: SizedBox()),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0),

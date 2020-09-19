@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
+import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
@@ -14,6 +15,7 @@ import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
+
 class SolarSystemView extends StatefulWidget {
   final String star;
   final double starTemp;
@@ -44,6 +46,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
   changeZero() {
     position.value = 0;
   }
+
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -130,22 +133,24 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                   ),
                                   Center(
                                     child: PlanetCard(
-                                        width: Get.width - 20,
-                                        height: Get.height / 5,
-                                        text:
-                                            "${snapshot.data[index].planetName}",
-                                        onTap: () => Navigator.of(context)
-                                                .push(route(PlanetView(
-                                              planetName: snapshot
-                                                  .data[index].planetName,
-                                            ))),
-                                        child: SizedBox()),
+                                          width: Get.width - 20,
+                                          height: Get.height / 5,
+                                          text:
+                                              "${snapshot.data[index].planetName}",
+                                          onTap: () => Navigator.of(context)
+                                                  .push(route(PlanetView(
+                                                planetName: snapshot
+                                                    .data[index].planetName,
+                                              ))),
+                                          child: SizedBox()),
+
                                   ),
                                 ],
                               ));
                         });
                   default:
-                    return Center(child: Padding(
+                    return Center(
+                        child: Padding(
                       padding: const EdgeInsets.only(top: 60.0),
                       child: Loading(),
                     ));
@@ -167,28 +172,15 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                     Container(
                       color: Theme.of(context).dialogBackgroundColor,
                       child: Header(
-                          widget.star + string.text("system"), //TODO: i18n
+                          widget.star + string.text("system"),
+                          //TODO: i18n
                           () => Navigator.pop(context)),
                     ),
-                    Hero(
-                      tag: "${widget.index}",
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Star(temperature: widget.starTemp)),
-                      ),
-                    ),
-                    // Container(
-                    //   color: Theme.of(context).dialogBackgroundColor,
-                    //   width: Get.width,
-                    //   child: SearchBar(
-                    //     searchFunc: (String value) {
-                    //       _.search.value = value;
-                    //       _.upd();
-                    //     },
-                    //   ),
-                    // ),
+                    Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Hero(
+                            tag: '${widget.index}',
+                            child: Star(temperature: widget.starTemp))),
                   ],
                 ),
               ),

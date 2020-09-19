@@ -13,6 +13,7 @@ import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
+
 class StarsView extends StatefulWidget {
   @override
   _StarsViewState createState() => _StarsViewState();
@@ -30,16 +31,18 @@ class _StarsViewState extends State<StarsView>
   RxDouble position = 0.0.obs;
 
   changeMinus() {
-    position.value -= 7;
+    position.value -= 30;
+    print(position.value);
   }
 
   changePlus() {
-    position.value += 7;
+    position.value += 30;
   }
 
   changeZero() {
     position.value = 0;
   }
+
   @override
   bool get wantKeepAlive => true;
 
@@ -61,12 +64,12 @@ class _StarsViewState extends State<StarsView>
     scaleController.forward();
     scrollController = ScrollController();
     scrollController.addListener(() {
-      if (                 scrollController.position.userScrollDirection ==
+      if (scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
           position.value >= -Get.height / 2) {
+        print('minus');
         changeMinus();
-      } else if (
-                  scrollController.position.userScrollDirection ==
+      } else if (scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
           position.value <= -10) {
         changePlus();
@@ -86,7 +89,6 @@ class _StarsViewState extends State<StarsView>
   }
 
   Widget build(BuildContext context) {
-    print('rebuilt');
     super.build(context);
     return FadeTransition(
       opacity: fadeAnimation,
@@ -115,8 +117,7 @@ class _StarsViewState extends State<StarsView>
                           );
                         }
                         return ListView.builder(
-                            controller:
-                                scrollController,
+                            controller: scrollController,
                             physics: BouncingScrollPhysics(),
                             itemCount: snapshot.data.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -127,27 +128,20 @@ class _StarsViewState extends State<StarsView>
                                     SizedBox(
                                       height: Get.height / 3.5 - 10,
                                     ),
-                                    Hero(
-                                      tag: "$index",
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: StarCard(
-                                            text: snapshot.data[index].name,
-                                            temperature: snapshot
-                                                .data[index].temperature,
-                                            onTap: () =>
-                                                Navigator.of(context).push(
-                                              route(
-                                                SolarSystemView(
-                                                  index: index,
-                                                  starTemp: snapshot
-                                                      .data[index].temperature,
-                                                  star:
-                                                      snapshot.data[index].name,
-                                                ),
-                                              ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: StarCard(
+                                        index: index,
+                                        text: snapshot.data[index].name,
+                                        temperature:
+                                            snapshot.data[index].temperature,
+                                        onTap: () => Navigator.of(context).push(
+                                          route(
+                                            SolarSystemView(
+                                              index: index,
+                                              starTemp: snapshot
+                                                  .data[index].temperature,
+                                              star: snapshot.data[index].name,
                                             ),
                                           ),
                                         ),
@@ -155,22 +149,20 @@ class _StarsViewState extends State<StarsView>
                                     ),
                                   ],
                                 ),
-                                child: Hero(
-                                  tag: "$index",
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: StarCard(
-                                      text: snapshot.data[index].name,
-                                      temperature:
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: StarCard(
+                                    index: index,
+                                    text: snapshot.data[index].name,
+                                    temperature:
+                                        snapshot.data[index].temperature,
+                                    onTap: () => Navigator.of(context)
+                                        .push(route(SolarSystemView(
+                                      index: index,
+                                      starTemp:
                                           snapshot.data[index].temperature,
-                                      onTap: () => Navigator.of(context)
-                                          .push(route(SolarSystemView(
-                                        index: index,
-                                        starTemp:
-                                            snapshot.data[index].temperature,
-                                        star: snapshot.data[index].name,
-                                      ))),
-                                    ),
+                                      star: snapshot.data[index].name,
+                                    ))),
                                   ),
                                 ),
                               );
