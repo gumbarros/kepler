@@ -71,6 +71,7 @@ class _StarsViewState extends State<StarsView>
   Widget build(BuildContext context) {
     super.build(context);
     return GetBuilder<StarsController>(
+      autoRemove: false,
       init: new StarsController(),
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,

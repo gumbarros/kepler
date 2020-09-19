@@ -20,6 +20,7 @@ class Star extends StatelessWidget {
             "assets/flare/shine.flr",
             animation: "start",
             fit: BoxFit.fitHeight,
+            color: StarsController.to.getStarColor(temperature).withOpacity(0.5),
           ),
           Center(
             child: Container(

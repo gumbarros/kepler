@@ -8,7 +8,12 @@ class StarCard extends StatefulWidget {
   final String text;
   final int index;
   final double temperature;
-  StarCard({@required this.onTap, @required this.text, @required this.temperature, @required this.index});
+
+  StarCard(
+      {@required this.onTap,
+      @required this.text,
+      @required this.temperature,
+      @required this.index});
 
   @override
   _StarCardState createState() => _StarCardState();
@@ -46,8 +51,8 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
             Align(
               alignment: Alignment.centerRight,
               child: Container(
-                height: Get.height / 8 + 20,
-                width: Get.width * 0.8,
+                height: Get.height / 8 + 50,
+                width: Get.width * 0.75,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Theme.of(context).primaryColor),
@@ -60,16 +65,23 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            Row(children: [
-              Hero(
-                  tag: "${widget.index}",
-                  child: Star(temperature: widget.temperature)),
-              Expanded(child: SizedBox()),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0),
-                child: Text(widget.text),
-              )
-            ]),
+            Center(
+              child: Container(
+                child: Row(children: [
+                  Hero(
+                      tag: "${widget.index}",
+                      child: Star(temperature: widget.temperature)),
+                  Expanded(child: SizedBox()),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Text(
+                      widget.text,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )
+                ]),
+              ),
+            ),
           ],
         ),
       ),
