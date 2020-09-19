@@ -36,11 +36,11 @@ class _SolarSystemViewState extends State<SolarSystemView> {
   RxDouble position = 0.0.obs;
 
   changeMinus() {
-    position.value -= 7;
+    position.value -= 30;
   }
 
   changePlus() {
-    position.value += 7;
+    position.value += 30;
   }
 
   changeZero() {
