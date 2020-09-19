@@ -4,14 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
-import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
-
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';

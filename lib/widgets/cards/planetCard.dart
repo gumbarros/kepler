@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/widgets/planets/smallPlanet.dart';
 
 class PlanetCard extends StatefulWidget {
   final Function onTap;
@@ -8,14 +7,10 @@ class PlanetCard extends StatefulWidget {
   final Widget child;
   final double width;
   final double height;
-  final Color color;
-  final double size;
 
   PlanetCard(
       {@required this.onTap,
       @required this.text,
-      @required this.color,
-        @required this.size,
       this.child,
       this.height,
       this.width});
