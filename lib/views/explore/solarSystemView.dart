@@ -11,7 +11,7 @@ import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
-import 'package:kepler/widgets/forms/searchBar.dart';
+
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';

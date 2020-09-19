@@ -97,7 +97,7 @@ class _StarsViewState extends State<StarsView>
                         if (snapshot.data.isNull) {
                           return Center(
                             child: Text(
-                              "No stars found", //TODO: i18n
+                              string.text("no_stars"), //TODO: i18n
                               style: TextStyle(fontFamily: "Roboto"),
                             ),
                           );
@@ -181,7 +181,7 @@ class _StarsViewState extends State<StarsView>
                           color: Theme.of(context).dialogBackgroundColor,
                           child: Column(
                             children: [
-                              Header("Stars", () => Navigator.pop(context)),
+                              Header(string.text("stars"), () => Navigator.pop(context)),
                             ],
                           ),
                         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/controllers/starsController.dart';
+
 import 'package:kepler/widgets/planets/star.dart';
 
 class StarCard extends StatefulWidget {
