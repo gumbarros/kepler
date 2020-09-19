@@ -28,8 +28,6 @@ class SolarSystemView extends StatefulWidget {
 
 class _SolarSystemViewState extends State<SolarSystemView> {
   ScrollController _scrollController;
-  bool gap = true;
-  int gapNumber;
   ScrollController scrollController;
   RxDouble position = 0.0.obs;
 

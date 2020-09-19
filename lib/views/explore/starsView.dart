@@ -21,8 +21,6 @@ class StarsView extends StatefulWidget {
 
 class _StarsViewState extends State<StarsView>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  bool gap = true;
-  int gapNumber;
   ScrollController scrollController;
   RxDouble position = 0.0.obs;
 
@@ -71,7 +69,6 @@ class _StarsViewState extends State<StarsView>
   Widget build(BuildContext context) {
     super.build(context);
     return GetBuilder<StarsController>(
-      autoRemove: false,
       init: new StarsController(),
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
