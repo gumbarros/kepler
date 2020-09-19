@@ -10,7 +10,7 @@ import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
-import 'package:kepler/widgets/cards/menuCard.dart';
+import 'package:kepler/widgets/cards/imageCard.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';

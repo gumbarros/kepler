@@ -8,7 +8,7 @@ import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/pagesController.dart';
 import 'package:kepler/controllers/starHeaderController.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/views/home.dart';
+import 'package:kepler/views/homeView.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 import 'controllers/systemHeaderController.dart';
 

@@ -1,94 +1,98 @@
-import 'package:expansion_card/expansion_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:kepler/controllers/pagesController.dart';
+import 'package:kepler/cupertinopageroute.dart';
 import 'package:kepler/controllers/settingsController.dart';
-import 'package:kepler/locale/languageEntry.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/views/homeView.dart';
+import 'package:kepler/widgets/cards/menuCard.dart ';
+import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/snackbars/snackbars.dart';
+import '../cupertinopageroute.dart';
 
-class SettingsView extends StatefulWidget {
+class SettingsView extends StatelessWidget {
   @override
-  _SettingsViewState createState() => _SettingsViewState();
-}
-
-class _SettingsViewState extends State<SettingsView>
-    with TickerProviderStateMixin {
-  AnimationController fadeController;
-  Animation fadeAnimation;
-  AnimationController scaleController;
-  Animation scaleAnimation;
-
-  @override
-  void initState() {
-    fadeController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    fadeAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(fadeController);
-    fadeController.forward();
-    scaleController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    scaleAnimation = Tween<double>(
-      begin: 0.85,
-      end: 1,
-    ).animate(scaleController);
-    scaleController.forward();
-    super.initState();
-  }
-
-  void dispose() {
-    fadeController.dispose();
-    scaleController.dispose();
-    super.dispose();
-  }
-
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: fadeAnimation,
-      child: ScaleTransition(
-        scale: scaleAnimation,
-        child: GetBuilder<SettingsController>(
-          init: SettingsController(),
-          builder: (_) => Scaffold(
-            body: SafeArea(
-                child: Container(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  SizedBox(
-                    height: Get.height / 400,
-                  ),
-                  Header(
-                    "${string.text("settings")}",
-                    () => Navigator.pop(context),
-                  ),
-                  SizedBox(
-                    height: Get.height / 7,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                    child: ExpansionCard(
-                      title: Text(
-                        'Languages',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Theme.of(context).textTheme.headline4.color,
-                        ),
+    return WillPopScope(
+      onWillPop: () async {
+        Get.toNamed("/home");
+        return false;
+      },
+      child: GetBuilder<SettingsController>(
+        init: SettingsController(),
+        builder: (conf) => Scaffold(
+          body: SingleChildScrollView(
+              child: Stack(
+            children: [
+              Header("Settings", () {
+                Navigator.of(context).push(route(Home()));
+              }),
+              Container(
+                height: Get.height,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 25.0, left: 10.0, right: 10.0, bottom: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Container(
+                              width: Get.width / 2.8,
+                              child: SmallMenuCard(
+                                text: string.text("current_language"),
+                                onTap: () async {
+                                  return Get.dialog(LanguageDialog());
+                                },
+                                icon: Icons.language,
+                              )),
+                          Container(
+                            width: Get.width / 2.8,
+                            child: SmallMenuCard(
+                              text: string.text("dark_mode"),
+                              onTap: () {
+                                Snackbars.development();
+                              },
+                              icon: Icons.brightness_5,
+                            ),
+                          )
+                        ],
                       ),
-                      children: [
-                        LanguageEntry(),
-                      ],
-                    ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Container(
+                              width: Get.width / 2.8,
+                              child: SmallMenuCard(
+                                text: string.text("credits"),
+                                onTap: () async {
+                                  Snackbars.development();
+                                },
+                                icon: Icons.assignment_ind,
+                              )),
+                          Container(
+                            width: Get.width / 2.8,
+                            child: SmallMenuCard(
+                              text: string.text("reset_favorites"),
+                              onTap: () {
+                                Snackbars.development();
+                              },
+                              icon: Icons.delete,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: Get.height / 17,
-                  ),
-                ],
+                ),
               ),
-            )),
-          ),
+            ],
+          )),
         ),
       ),
     );
