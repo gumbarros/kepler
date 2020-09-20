@@ -6,6 +6,7 @@ import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
+import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
@@ -71,7 +72,7 @@ class _StarsViewState extends State<StarsView> {
             width: Get.width,
             height: Get.height,
             child: FutureBuilder<List<StarData>>(
-              future: API.getAllStars(),
+              future: KeplerDatabase.db.getAllStars(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<StarData>> snapshot) {
                 switch (snapshot.connectionState) {

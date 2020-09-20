@@ -57,20 +57,20 @@ class API {
     return planets;
   }
 
-  static Future<List<StarData>> getAllStars() async {
-    try{
-      const String url = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+hostname,st_teff,st_rad+from+ps';
-      final response = await http.get(url);
-      print(response.body);
-      print("HTTP GET - " + url);
-      List<dynamic> lines = CsvToListConverter().convert(response.body)[0].removeAt(0);
-      List<StarData> stars = <StarData>[];
-      for (var line in lines) stars.add(StarData.fromList(line.split(',')));
-      return stars;
-    }
-    catch(e,s){
-      print(e+s);
-    }
-  }
+  // static Future<List<StarData>> getAllStars() async {
+  //   try{
+  //     const String url = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+hostname,st_teff,st_rad+from+ps';
+  //     final response = await http.get(url);
+  //     print(response.body);
+  //     print("HTTP GET - " + url);
+  //     List<dynamic> lines = CsvToListConverter().convert(response.body)[0].removeAt(0);
+  //     List<StarData> stars = <StarData>[];
+  //     for (var line in lines) stars.add(StarData.fromList(line.split(',')));
+  //     return stars;
+  //   }
+  //   catch(e,s){
+  //     print(e+s);
+  //   }
+  // }
 
 }
