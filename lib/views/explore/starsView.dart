@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/starsController.dart';
-import 'package:kepler/cupertinopageroute.dart';
+import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
@@ -19,14 +19,12 @@ class StarsView extends StatefulWidget {
   _StarsViewState createState() => _StarsViewState();
 }
 
-class _StarsViewState extends State<StarsView>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _StarsViewState extends State<StarsView> {
   ScrollController scrollController;
   RxDouble position = 0.0.obs;
-
+  Function _future;
   changeMinus() {
     position.value -= 30;
-    print(position.value);
   }
 
   changePlus() {
@@ -38,16 +36,12 @@ class _StarsViewState extends State<StarsView>
   }
 
   @override
-  bool get wantKeepAlive => true;
-
-  @override
   void initState() {
     scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
               ScrollDirection.reverse &&
           position.value >= -Get.height / 2) {
-        print('minus');
         changeMinus();
       } else if (scrollController.position.userScrollDirection ==
               ScrollDirection.forward &&
@@ -58,6 +52,7 @@ class _StarsViewState extends State<StarsView>
         }
       }
     });
+    _future = API.getAllStars;
     super.initState();
   }
 
@@ -67,8 +62,8 @@ class _StarsViewState extends State<StarsView>
   }
 
   Widget build(BuildContext context) {
-    super.build(context);
     return GetBuilder<StarsController>(
+      autoRemove: false,
       init: new StarsController(),
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -77,7 +72,7 @@ class _StarsViewState extends State<StarsView>
             width: Get.width,
             height: Get.height,
             child: FutureBuilder<List<StarData>>(
-              future: API.getAllStars(),
+              future: _future(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<StarData>> snapshot) {
                 switch (snapshot.connectionState) {

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
-import 'package:kepler/cupertinopageroute.dart';
+import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/favoritesView.dart';

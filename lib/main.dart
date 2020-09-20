@@ -23,16 +23,7 @@ Future<void> warmupFlare() async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  await Hive.initFlutter();
-  await string.init();
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  SyncfusionLicense.registerLicense(
-      "NT8mJyc2IWhia31hfWN9Z2doYmF8YGJ8ampqanNiYmlmamlmanMDHmg0JiAnMiU8PjImITowOjw3NjEyISE8IBM0PjI6P30wPD4=");
-  FlareCache.doesPrune = false;
-
+  initializeApp();
   warmupFlare().then((_) {
     runApp(GetMaterialApp(
       title: string.text('app_title'),
@@ -45,4 +36,16 @@ void main() async {
       },
     ));
   });
+}
+
+void initializeApp() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  await Hive.initFlutter();
+  await string.init();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SyncfusionLicense.registerLicense(
+      "NT8mJyc2IWhia31hfWN9Z2doYmF8YGJ8ampqanNiYmlmamlmanMDHmg0JiAnMiU8PjImITowOjw3NjEyISE8IBM0PjI6P30wPD4=");
+  FlareCache.doesPrune = false;
 }

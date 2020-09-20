@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
-import 'package:kepler/cupertinopageroute.dart';
+import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
@@ -31,15 +31,17 @@ class _SolarSystemViewState extends State<SolarSystemView> {
   ScrollController scrollController;
   RxDouble position = 0.0.obs;
 
-  changeMinus() {
+  Function _future;
+
+  void changeMinus() {
     position.value -= 30;
   }
 
-  changePlus() {
+  void changePlus() {
     position.value += 30;
   }
 
-  changeZero() {
+  void changeZero() {
     position.value = 0;
   }
 
@@ -60,6 +62,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
         }
       }
     });
+    _future = API.getSolarSystemPlanets;
     super.initState();
   }
 
@@ -103,7 +106,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
               width: Get.width,
               height: Get.height,
               child: FutureBuilder<List<PlanetData>>(
-                future: API.getSolarSystemPlanets(widget.star),
+                future: _future(widget.star),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PlanetData>> snapshot) {
                   switch (snapshot.connectionState) {
@@ -137,8 +140,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                               "${snapshot.data[index].planetName}",
                                           onTap: () => Navigator.of(context)
                                                   .push(route(PlanetView(
-                                                planetName: snapshot
-                                                    .data[index].planetName,
+                                                snapshot.data[index],
                                               ))),
                                           child: SizedBox()),
                                     )
@@ -157,8 +159,8 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                               "${snapshot.data[index].planetName}",
                                           onTap: () => Navigator.of(context)
                                                   .push(route(PlanetView(
-                                                planetName: snapshot
-                                                    .data[index].planetName,
+                                                snapshot
+                                                    .data[index],
                                               ))),
                                           child: SizedBox()),
                                     ),
@@ -168,9 +170,10 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                     default:
                       return Center(
                           child: Padding(
-                        padding: const EdgeInsets.only(top: 60.0),
-                        child: Loading(),
-                      ));
+                                padding: const EdgeInsets.only(top: 60.0),
+                                child: Loading(),
+                                )
+                      );
                   }
                 },
               ),
