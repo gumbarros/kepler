@@ -77,6 +77,10 @@ class LanguageDialog extends StatelessWidget {
                           value: "hi",
                         ),
                         DropdownMenuItem(
+                          child: Text("Telugu"),
+                          value: "te",
+                        ),
+                        DropdownMenuItem(
                           child: Text("German"),
                           value: "de",
                         ),
