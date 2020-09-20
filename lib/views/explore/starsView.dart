@@ -52,7 +52,6 @@ class _StarsViewState extends State<StarsView> {
         }
       }
     });
-    _future = API.getAllStars;
     super.initState();
   }
 
@@ -72,7 +71,7 @@ class _StarsViewState extends State<StarsView> {
             width: Get.width,
             height: Get.height,
             child: FutureBuilder<List<StarData>>(
-              future: _future(),
+              future: API.getAllStars(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<StarData>> snapshot) {
                 switch (snapshot.connectionState) {
