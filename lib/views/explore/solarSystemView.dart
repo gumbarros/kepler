@@ -75,60 +75,62 @@ class _SolarSystemViewState extends State<SolarSystemView> {
       init: new SolarSystemController(),
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: Stack(children: [
-          Container(
-            width: Get.width,
-            height: Get.height,
-            child: FutureBuilder<List<PlanetData>>(
-              future: API.getSolarSystemPlanets(widget.star),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<PlanetData>> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.done:
-                    if (snapshot.data.isNull) {
-                      return Column(
-                        children: [
-                          Center(
-                            child: Text(
-                              string.text("no_planet"),
-                              style: TextStyle(fontFamily: "Roboto"),
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                    return ListView.builder(
-                        controller: _scrollController,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Visibility(
-                              visible: !index.isEqual(0),
-                              replacement: Column(
-                                children: [
-                                  SizedBox(height: Get.height / 2 + 20),
-                                  Center(
-                                    child: PlanetCard(
-                                        width: Get.width - 20,
-                                        height: Get.height / 5,
-                                        text:
-                                            "${snapshot.data[index].planetName}",
-                                        onTap: () => Navigator.of(context)
-                                                .push(route(PlanetView(
-                                              planetName: snapshot
-                                                  .data[index].planetName,
-                                            ))),
-                                        child: SizedBox()),
-                                  )
-                                ],
+        body: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            Column(
+              children: [
+                Container(
+                  color: Theme.of(context).dialogBackgroundColor,
+                  child: Header(
+                      widget.star + string.text("system"),
+                      //TODO: i18n
+                      () => Navigator.pop(context)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Hero(
+                    tag: '${widget.index}',
+                    child: Star(
+                      temperature: widget.starTemp,
+                      size: 200,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              width: Get.width,
+              height: Get.height,
+              child: FutureBuilder<List<PlanetData>>(
+                future: API.getSolarSystemPlanets(widget.star),
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<PlanetData>> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.done:
+                      if (snapshot.data.isNull) {
+                        return Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                string.text("no_planet"),
+                                style: TextStyle(fontFamily: "Roboto"),
                               ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Center(
-                                    child: PlanetCard(
+                            ),
+                          ],
+                        );
+                      }
+                      return ListView.builder(
+                          controller: _scrollController,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Visibility(
+                                visible: !index.isEqual(0),
+                                replacement: Column(
+                                  children: [
+                                    Center(
+                                      child: PlanetCard(
                                           width: Get.width - 20,
                                           height: Get.height / 5,
                                           text:
@@ -139,50 +141,42 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                                     .data[index].planetName,
                                               ))),
                                           child: SizedBox()),
-
-                                  ),
-                                ],
-                              ));
-                        });
-                  default:
-                    return Center(
-                        child: Padding(
-                      padding: const EdgeInsets.only(top: 60.0),
-                      child: Loading(),
-                    ));
-                }
-              },
-            ),
-          ),
-          Obx(
-            () => Positioned(
-              top: position.value,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: Get.height / 10,
-                width: Get.width,
-                child: Column(
-                  children: [
-                    Container(
-                      color: Theme.of(context).dialogBackgroundColor,
-                      child: Header(
-                          widget.star + string.text("system"),
-                          //TODO: i18n
-                          () => Navigator.pop(context)),
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Hero(
-                            tag: '${widget.index}',
-                            child: Star(temperature: widget.starTemp))),
-                  ],
-                ),
+                                    )
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Center(
+                                      child: PlanetCard(
+                                          width: Get.width - 20,
+                                          height: Get.height / 5,
+                                          text:
+                                              "${snapshot.data[index].planetName}",
+                                          onTap: () => Navigator.of(context)
+                                                  .push(route(PlanetView(
+                                                planetName: snapshot
+                                                    .data[index].planetName,
+                                              ))),
+                                          child: SizedBox()),
+                                    ),
+                                  ],
+                                ));
+                          });
+                    default:
+                      return Center(
+                          child: Padding(
+                        padding: const EdgeInsets.only(top: 60.0),
+                        child: Loading(),
+                      ));
+                  }
+                },
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }

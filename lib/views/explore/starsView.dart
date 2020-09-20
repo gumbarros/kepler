@@ -105,6 +105,7 @@ class _StarsViewState extends State<StarsView>
                                 Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: StarCard(
+                                    size: Get.width / 3.3,
                                     index: index,
                                     text: snapshot.data[index].name,
                                     temperature:
@@ -113,8 +114,8 @@ class _StarsViewState extends State<StarsView>
                                       route(
                                         SolarSystemView(
                                           index: index,
-                                          starTemp: snapshot
-                                              .data[index].temperature,
+                                          starTemp:
+                                              snapshot.data[index].temperature,
                                           star: snapshot.data[index].name,
                                         ),
                                       ),
@@ -126,15 +127,14 @@ class _StarsViewState extends State<StarsView>
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: StarCard(
+                                size: Get.width / 3.3,
                                 index: index,
                                 text: snapshot.data[index].name,
-                                temperature:
-                                    snapshot.data[index].temperature,
+                                temperature: snapshot.data[index].temperature,
                                 onTap: () => Navigator.of(context)
                                     .push(route(SolarSystemView(
                                   index: index,
-                                  starTemp:
-                                      snapshot.data[index].temperature,
+                                  starTemp: snapshot.data[index].temperature,
                                   star: snapshot.data[index].name,
                                 ))),
                               ),

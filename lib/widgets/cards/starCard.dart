@@ -8,12 +8,14 @@ class StarCard extends StatefulWidget {
   final String text;
   final int index;
   final double temperature;
+  final double size;
 
   StarCard(
       {@required this.onTap,
       @required this.text,
       @required this.temperature,
-      @required this.index});
+      @required this.index,
+      @required this.size});
 
   @override
   _StarCardState createState() => _StarCardState();
@@ -70,7 +72,8 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
                 child: Row(children: [
                   Hero(
                       tag: "${widget.index}",
-                      child: Star(temperature: widget.temperature)),
+                      child: Star(
+                          size: widget.size, temperature: widget.temperature)),
                   Expanded(child: SizedBox()),
                   Padding(
                     padding: const EdgeInsets.only(right: 15.0),

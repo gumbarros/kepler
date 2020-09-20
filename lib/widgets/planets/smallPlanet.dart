@@ -133,7 +133,6 @@ class SmallPlanet extends StatelessWidget {
                 'assets/flare/clouds.flr',
                 animation: 'start',
                 fit: BoxFit.fitHeight,
-                color: Colors.white.withOpacity(0.5),
               ),
             ),
           ],

@@ -1,19 +1,19 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:get/get.dart';
 import 'package:kepler/controllers/starsController.dart';
 
 class Star extends StatelessWidget {
   final double temperature;
+  final double size;
 
-  Star({@required this.temperature});
+  Star({@required this.temperature, @required this.size});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width / 2.7,
-      height: Get.width / 2.7,
+      width: size * 1.3,
+      height: size * 1.3,
       child: Stack(
         children: [
           FlareActor(
@@ -24,8 +24,8 @@ class Star extends StatelessWidget {
           ),
           Center(
             child: Container(
-              width: Get.width / 3.5,
-              height: Get.width / 3.5,
+              width: size,
+              height: size,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(360)),
                 shape: BoxShape.rectangle,
