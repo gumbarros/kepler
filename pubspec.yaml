@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter  
-  sqflite: ^1.3.0
+  sqflite: any
   hive: ^1.4.4
   hive_flutter: ^0.3.1
   get: ^3.4.2
