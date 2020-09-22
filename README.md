@@ -7,8 +7,7 @@
 
 
 # How to contribute 💻
-- New API queries
-- Developing the graphs (largest planets, longest orbits)
+- Developing the charts (largest planets, longest orbits)
 - Refactoring the code to better performance and UI
 - Translating the app 
 > The only requirements to contribute are to speak English and know Flutter.
