@@ -4,12 +4,13 @@ import 'package:csv/csv.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_async/json_async.dart';
+import 'package:kepler/models/keplerData.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/models/starData.dart';
 
 class API {
   static const String url =
-      "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?";
+      "https://a7ca10107889.ngrok.io";
 
   static Future<List<PlanetData>> getAllPlanets() async {
     const String url = API.url +
@@ -20,6 +21,13 @@ class API {
     final List<PlanetData> planets =
         data.map((planet) => PlanetData.fromMap(planet)).toList();
     return planets;
+  }
+
+  static Future<List>getAllData() async{
+    final http.Response response = await http.get(url);
+    print("HTTP GET - " + url);
+    final List data = await jsonDecodeAsync(response.body);
+    return data;
   }
 
   static Future<List<PlanetData>> getPlanetsByName(String name) async {
