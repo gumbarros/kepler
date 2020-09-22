@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/controllers/settingsController.dart';
@@ -82,7 +83,22 @@ class SettingsView extends StatelessWidget {
                             child: MenuCard(
                               text: "Update Data",
                               onTap: () {
-                                KeplerDatabase.db.updateData();
+                                Get.dialog(Dialog(
+                                  child: Container(
+                                    width: Get.width / 1.3,
+                                    height: Get.height / 3,
+                                    child: Center(
+                                      child: SpinKitDualRing(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ));
+                                KeplerDatabase.db.updateData().then((success) {
+                                  if (success) {
+                                    Get.back();
+                                  }
+                                });
                               },
                               icon: Icons.system_update_alt,
                             ),

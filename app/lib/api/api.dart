@@ -9,8 +9,7 @@ import 'package:kepler/models/planetData.dart';
 import 'package:kepler/models/starData.dart';
 
 class API {
-  static const String url =
-      "https://a7ca10107889.ngrok.io";
+  static const String url = "https://a7ca10107889.ngrok.io";
 
   static Future<List<PlanetData>> getAllPlanets() async {
     const String url = API.url +
@@ -23,7 +22,7 @@ class API {
     return planets;
   }
 
-  static Future<List>getAllData() async{
+  static Future<List> getAllData() async {
     final http.Response response = await http.get(url);
     print("HTTP GET - " + url);
     final List data = await jsonDecodeAsync(response.body);
@@ -66,8 +65,9 @@ class API {
   }
 
   static Future<List<StarData>> getAllStars() async {
-    try{
-      const String url = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+hostname,st_teff,st_rad+from+ps';
+    try {
+      const String url =
+          'https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+hostname,st_teff,st_rad+from+ps';
       final response = await http.get(url);
       print(response.body);
       print("HTTP GET - " + url);
@@ -75,10 +75,8 @@ class API {
       List<StarData> stars = <StarData>[];
       for (var line in lines) stars.add(StarData.fromList(line.split(',')));
       return stars;
-    }
-    catch(e,s){
-      print(e+s);
+    } catch (e, s) {
+      print(e + s);
     }
   }
-
 }

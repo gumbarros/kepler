@@ -9,7 +9,7 @@ class KeplerDatabase {
   KeplerDatabase._();
   static final KeplerDatabase db = KeplerDatabase._();
 
-  final String starTable = "TB_STARS";
+  final String starTable = "tb_kepler";
 
   static Database _database;
 
@@ -25,8 +25,7 @@ class KeplerDatabase {
 
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int newerVersion) async {
-          await db.execute(
-              """CREATE TABLE tb_kepler("
+      await db.execute("""CREATE TABLE tb_kepler(
                   id INTEGER PRIMARY KEY,
                   pl_name TEXT,
                   hostname TEXT,
@@ -39,7 +38,7 @@ class KeplerDatabase {
                   st_rad REAL,
                   sy_kmag REAL
                   )""");
-        });
+    });
   }
 
   // Future<List<StarData>> getAllStars() async {
@@ -49,13 +48,14 @@ class KeplerDatabase {
   //   return stars;
   // }
 
-  Future<void> updateData()async{
+  Future<bool> updateData() async {
     Database db = await database;
     final List data = await API.getAllData();
+    db.batch();
     data.forEach((item) async {
-      await db.insert(starTable, item);
+      await db.insert("tb_kepler", item);
     });
-    close();
+    return true;
   }
 
   Future close() async {
