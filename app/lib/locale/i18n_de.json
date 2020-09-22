@@ -1,0 +1,15 @@
+{
+    "app_title": "Kepler",
+  "explore": "Entdecken",
+  "charts": "Diagramme",
+  "star": "Stern",
+  "orbital_period": "Umlaufzeit",
+  "days": "Tage",
+  "mass": "Masse",
+  "density": "Dichte",
+  "radius": "Radius",
+  "jupiter_radius": "  Jupiter Radius",
+  "settings": "Einstellungen",
+  "no_planet": "Keine Planeten gefunden.",
+  "solar_radius": "Sonnenradius"
+}
