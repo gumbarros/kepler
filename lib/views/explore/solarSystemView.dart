@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
@@ -13,6 +12,8 @@ import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
+import '../../database/database.dart';
+import '../../database/database.dart';
 
 class SolarSystemView extends StatefulWidget {
   final String star;
@@ -31,7 +32,6 @@ class _SolarSystemViewState extends State<SolarSystemView> {
   ScrollController scrollController;
   RxDouble position = 0.0.obs;
 
-  Function _future;
 
   void changeMinus() {
     position.value -= 30;
@@ -62,7 +62,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
         }
       }
     });
-    _future = API.getSolarSystemPlanets;
+    print(KeplerDatabase.db.getSolarSystemPlanets(widget.star));
     super.initState();
   }
 
@@ -106,7 +106,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
               width: Get.width,
               height: Get.height,
               child: FutureBuilder<List<PlanetData>>(
-                future: _future(widget.star),
+                future: KeplerDatabase.db.getSolarSystemPlanets(widget.star),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PlanetData>> snapshot) {
                   switch (snapshot.connectionState) {

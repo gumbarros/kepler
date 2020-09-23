@@ -12,7 +12,6 @@ import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
-import 'package:sqflite/sqflite.dart';
 import '../cupertinoPageRoute.dart';
 
 class SettingsView extends StatelessWidget {

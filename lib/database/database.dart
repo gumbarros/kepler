@@ -1,9 +1,8 @@
-import 'package:json_async/json_async.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:path/path.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
+import '../models/planetData.dart';
 
 class KeplerDatabase {
   KeplerDatabase._();
@@ -41,13 +40,6 @@ class KeplerDatabase {
     });
   }
 
-  // Future<List<StarData>> getAllStars() async {
-  //   Database db = await database;
-  //   List<Map<String, dynamic>> data = await db.query(starTable);
-  //   List<StarData> stars = data.map((star) => StarData.fromMap(star));
-  //   return stars;
-  // }
-
   Future<bool> updateData() async {
     try{
       Database db = await database;
@@ -58,7 +50,7 @@ class KeplerDatabase {
           print(item);
           batch.insert("tb_kepler", item);
         });
-        await batch.commit(noResult: true).then((value)=>print("AEEEEEEE"));
+        await batch.commit(noResult: true);
       });
       return true;
     }
@@ -72,8 +64,14 @@ class KeplerDatabase {
     Database db = await database;
     final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad"]);
     final stars = data.map(( Map<String, dynamic>star) => StarData.fromMap(star)).toList();
-    print(stars); //Prints nothing :(
     return stars.cast<StarData>();
+  }
+
+  Future<List<PlanetData>> getSolarSystemPlanets(String star) async{
+    Database db = await database;
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_massj", "pl_dens", "sy_kmag"], where: "hostname='$star'");
+    final planets = data.map(( Map<String, dynamic>star) => PlanetData.fromMap(star)).toList();
+    return planets.cast<PlanetData>();
   }
 
   Future close() async {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 
 class FavoritesView extends StatefulWidget {

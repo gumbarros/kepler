@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
@@ -13,7 +12,6 @@ import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
-import 'package:kepler/widgets/progress/loading.dart';
 
 class StarsView extends StatefulWidget {
   @override
@@ -23,7 +21,6 @@ class StarsView extends StatefulWidget {
 class _StarsViewState extends State<StarsView> {
   ScrollController scrollController;
   RxDouble position = 0.0.obs;
-  Function _future;
   changeMinus() {
     position.value -= 30;
   }

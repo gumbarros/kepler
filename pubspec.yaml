@@ -31,9 +31,7 @@ dependencies:
   get: ^3.4.2
   http: any
   get_storage: ^1.2.1
-  country_pickers: ^1.3.0
   csv: ^4.0.3
-  dio: ^3.0.10
   sqflite: any
   json_async: ^0.1.1
   syncfusion_flutter_charts: ^18.2.56
