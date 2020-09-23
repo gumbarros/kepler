@@ -6,6 +6,7 @@ import 'package:get/route_manager.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
+import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
@@ -52,6 +53,8 @@ class _StarsViewState extends State<StarsView> {
         }
       }
     });
+
+    print(KeplerDatabase.db.getAllStars());
     super.initState();
   }
 
@@ -71,15 +74,13 @@ class _StarsViewState extends State<StarsView> {
             width: Get.width,
             height: Get.height,
             child: FutureBuilder<List<StarData>>(
-              future: API.getAllStars(),
+              future: KeplerDatabase.db.getAllStars(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<StarData>> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.done:
                     if (snapshot.data.isNull) {
                       return Center(
                         child: Text(
-                          string.text("no_stars"), //TODO: i18n
+                          string.text("no_stars"),
                           style: TextStyle(fontFamily: "Roboto"),
                         ),
                       );
@@ -135,9 +136,7 @@ class _StarsViewState extends State<StarsView> {
                             ),
                           );
                         });
-                  default:
-                    return Center(child: Loading());
-                }
+
               },
             ),
           ),

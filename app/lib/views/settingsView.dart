@@ -1,15 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/controllers/settingsController.dart';
+import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/homeView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
+import 'package:sqflite/sqflite.dart';
 import '../cupertinoPageRoute.dart';
 
 class SettingsView extends StatelessWidget {
@@ -78,11 +81,36 @@ class SettingsView extends StatelessWidget {
                           Container(
                             width: Get.width / 2.8,
                             child: MenuCard(
-                              text: string.text("reset_favorites"),
+                              text: "Update Data",
                               onTap: () {
-                                Snackbars.development();
+                                Get.dialog(WillPopScope(
+                                  onWillPop: () async=> false,
+                                  child: Dialog(
+                                    key: Key("sync"),
+                                    child: Container(
+                                      width: Get.width / 1.3,
+                                      height: Get.height / 3,
+                                      child: Center(
+                                        child: SpinKitDualRing(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ));
+                                Snackbars.snackbar(text: "This may take some time...", title: "Updating data");
+                                KeplerDatabase.db.updateData().then((success) {
+                                  if (success) {
+                                    Get.back();
+                                    Snackbars.snackbar(title: "Success!");
+                                  }
+                                  else{
+                                    Get.back();
+                                    Snackbars.error("Error :(");
+                                  }
+                                });
                               },
-                              icon: Icons.delete,
+                              icon: Icons.system_update_alt,
                             ),
                           )
                         ],
