@@ -12,6 +12,7 @@ import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/progress/loading.dart';
 
 class StarsView extends StatefulWidget {
   @override
@@ -74,66 +75,73 @@ class _StarsViewState extends State<StarsView> {
               future: KeplerDatabase.db.getAllStars(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<StarData>> snapshot) {
-                    if (snapshot.data.isNull) {
-                      return Center(
-                        child: Text(
-                          string.text("no_stars"),
-                          style: TextStyle(fontFamily: "Roboto"),
-                        ),
-                      );
-                    }
-                    return ListView.builder(
-                        controller: scrollController,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Visibility(
-                            visible: !index.isEqual(0),
-                            replacement: Column(
-                              children: [
-                                SizedBox(
-                                  height: Get.height / 3.5 - 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: StarCard(
-                                    size: Get.width / 3.3,
-                                    index: index,
-                                    text: snapshot.data[index].name,
-                                    temperature:
-                                        snapshot.data[index].temperature,
-                                    onTap: () => Navigator.of(context).push(
-                                      route(
-                                        SolarSystemView(
-                                          index: index,
-                                          starTemp:
-                                              snapshot.data[index].temperature,
-                                          star: snapshot.data[index].name,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                switch(snapshot.connectionState) {
+                  case(ConnectionState.waiting):
+                  case(ConnectionState.active):
+                    return Center(child: Loading(),);
+                  default:
+                if (snapshot.data.isNull) {
+                  return Center(
+                    child: Text(
+                      string.text("no_stars"),
+                      style: TextStyle(fontFamily: "Roboto"),
+                    ),
+                  );
+                }
+                return ListView.builder(
+                    controller: scrollController,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Visibility(
+                        visible: !index.isEqual(0),
+                        replacement: Column(
+                          children: [
+                            SizedBox(
+                              height: Get.height / 3.5 - 10,
                             ),
-                            child: Padding(
+                            Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: StarCard(
                                 size: Get.width / 3.3,
                                 index: index,
                                 text: snapshot.data[index].name,
-                                temperature: snapshot.data[index].temperature,
-                                onTap: () => Navigator.of(context)
+                                temperature:
+                                snapshot.data[index].temperature,
+                                onTap: () =>
+                                    Navigator.of(context).push(
+                                      route(
+                                        SolarSystemView(
+                                          index: index,
+                                          starTemp:
+                                          snapshot.data[index].temperature,
+                                          star: snapshot.data[index].name,
+                                        ),
+                                      ),
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: StarCard(
+                            size: Get.width / 3.3,
+                            index: index,
+                            text: snapshot.data[index].name,
+                            temperature: snapshot.data[index].temperature,
+                            onTap: () =>
+                                Navigator.of(context)
                                     .push(route(SolarSystemView(
                                   index: index,
                                   starTemp: snapshot.data[index].temperature,
                                   star: snapshot.data[index].name,
                                 ))),
-                              ),
-                            ),
-                          );
-                        });
-
+                          ),
+                        ),
+                      );
+                    });
+              }
               },
             ),
           ),

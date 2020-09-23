@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
+import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
@@ -12,8 +13,7 @@ import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
-import '../../database/database.dart';
-import '../../database/database.dart';
+
 
 class SolarSystemView extends StatefulWidget {
   final String star;
@@ -62,7 +62,6 @@ class _SolarSystemViewState extends State<SolarSystemView> {
         }
       }
     });
-    print(KeplerDatabase.db.getSolarSystemPlanets(widget.star));
     super.initState();
   }
 
@@ -110,7 +109,10 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PlanetData>> snapshot) {
                   switch (snapshot.connectionState) {
-                    case ConnectionState.done:
+                    case ConnectionState.waiting:
+                    case ConnectionState.active:
+                      return Center(child:Loading());
+                    default:
                       if (snapshot.data.isNull) {
                         return Column(
                           children: [
@@ -167,13 +169,6 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                   ],
                                 ));
                           });
-                    default:
-                      return Center(
-                          child: Padding(
-                                padding: const EdgeInsets.only(top: 60.0),
-                                child: Loading(),
-                                )
-                      );
                   }
                 },
               ),

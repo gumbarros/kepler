@@ -82,7 +82,6 @@ class SettingsView extends StatelessWidget {
                                 Get.dialog(WillPopScope(
                                   onWillPop: () async=> false,
                                   child: Dialog(
-                                    key: Key("sync"),
                                     child: Container(
                                       width: Get.width / 1.3,
                                       height: Get.height / 3,

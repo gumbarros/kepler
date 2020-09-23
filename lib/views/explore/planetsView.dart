@@ -5,7 +5,7 @@ import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/widgets/header/header.dart';
-import 'package:kepler/widgets/planets/mediumPlanet.dart';
+
 import 'package:kepler/widgets/planets/smallPlanet.dart';
 
 class PlanetView extends StatelessWidget {
@@ -39,9 +39,10 @@ class PlanetView extends StatelessWidget {
                     SmallPlanet(
                       color: PlanetController.to.getPlanetsColor(planet.jmk2),
                     ),
-                    MediumPlanet(
-                      color: PlanetController.to.getPlanetsColor(planet.jmk2),
-                    ),
+                    // MediumPlanet(
+                    //   color: PlanetController.to.getPlanetsColor(planet.jmk2),
+                    // ),
+                    //Why 2 planets?
                     SizedBox(
                       height: 10,
                     ),

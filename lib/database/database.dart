@@ -8,7 +8,21 @@ class KeplerDatabase {
   KeplerDatabase._();
   static final KeplerDatabase db = KeplerDatabase._();
 
-  final String starTable = "tb_kepler";
+  final String table = "tb_kepler";
+  final String createTable = """CREATE TABLE tb_kepler(
+                  id INTEGER PRIMARY KEY,
+                  pl_name TEXT,
+                  hostname TEXT,
+                  disc_year INT,
+                  pl_orbper REAL,
+                  pl_radj REAL,
+                  pl_massj REAL,
+                  pl_dens REAL,
+                  st_teff REAL,
+                  st_rad REAL,
+                  sy_jmag REAL,
+                  sy_kmag REAL
+                  )""";
 
   static Database _database;
 
@@ -24,21 +38,10 @@ class KeplerDatabase {
 
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int newerVersion) async {
-      await db.execute("""CREATE TABLE tb_kepler(
-                  id INTEGER PRIMARY KEY,
-                  pl_name TEXT,
-                  hostname TEXT,
-                  disc_year INT,
-                  pl_orbper REAL,
-                  pl_radj REAL,
-                  pl_massj REAL,
-                  pl_dens REAL,
-                  st_teff REAL,
-                  st_rad REAL,
-                  sy_jmag REAL,
-                  sy_kmag REAL
-                  )""");
+      await db.execute(createTable);
+      updateData();
     });
+
   }
 
   Future<bool> updateData() async {
@@ -46,10 +49,10 @@ class KeplerDatabase {
       Database db = await database;
       await API.getAllData().then((data) async{
         final batch = db.batch();
-        batch.rawDelete("delete from tb_kepler");
+        batch.execute("DROP TABLE $table");
+        batch.execute(createTable);
         data.forEach((item) async {
-          print(item);
-          batch.insert("tb_kepler", item);
+          batch.insert(table, item);
         });
         await batch.commit(noResult: true);
       });
@@ -70,7 +73,7 @@ class KeplerDatabase {
 
   Future<List<PlanetData>> getSolarSystemPlanets(String star) async{
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_massj", "pl_dens", "sy_jmag", "sy_kmag"], where: "hostname='$star'");
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_massj", "pl_dens", "sy_jmag", "sy_kmag"], where: "hostname='$star'");
     final planets = data.map(( Map<String, dynamic>star) => PlanetData.fromMap(star)).toList();
     return planets.cast<PlanetData>();
   }
