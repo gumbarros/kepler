@@ -33,6 +33,12 @@ class Star extends StatelessWidget {
               ),
             ),
           ),
+          FlareActor(
+            "assets/flare/pops.flr",
+            animation: "start",
+            fit: BoxFit.fitHeight,
+            color: Colors.white.withOpacity(0.2),
+          ),
         ],
       ),
     );

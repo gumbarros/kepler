@@ -22,7 +22,7 @@ class MediumPlanet extends StatelessWidget {
           Container(
             child: FlareActor(
               'assets/flare/land.flr',
-              color: color.withBlue(4),
+              color: color.withGreen(255),
               fit: BoxFit.fitHeight,
             ),
           ),

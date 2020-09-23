@@ -13,6 +13,7 @@ import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
 import '../cupertinoPageRoute.dart';
+import '../widgets/progress/loading.dart';
 
 class SettingsView extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class SettingsView extends StatelessWidget {
               child: Stack(
             children: [
               Header(string.text("settings"), () {
-                Navigator.of(context).push(route(HomeView()));
+                Navigator.of(context).pop(context);
               }),
               Container(
                 height: Get.height,
@@ -90,9 +91,7 @@ class SettingsView extends StatelessWidget {
                                       width: Get.width / 1.3,
                                       height: Get.height / 3,
                                       child: Center(
-                                        child: SpinKitDualRing(
-                                          color: Colors.white,
-                                        ),
+                                        child: Loading()
                                       ),
                                     ),
                                   ),

@@ -74,6 +74,8 @@ flutter:
     - assets/flare/shine.flr
     - assets/flare/clouds.flr
     - assets/flare/land.flr
+    - assets/flare/pops.flr
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
