@@ -49,13 +49,31 @@ class KeplerDatabase {
   // }
 
   Future<bool> updateData() async {
+    try{
+      Database db = await database;
+      await API.getAllData().then((data) async{
+        final batch = db.batch();
+        batch.rawDelete("delete from tb_kepler");
+        data.forEach((item) async {
+          print(item);
+          batch.insert("tb_kepler", item);
+        });
+        await batch.commit(noResult: true).then((value)=>print("AEEEEEEE"));
+      });
+      return true;
+    }
+    catch(e){
+      print(e);
+      return false;
+    }
+  }
+
+  Future<List<StarData>> getAllStars() async{
     Database db = await database;
-    final List data = await API.getAllData();
-    db.batch();
-    data.forEach((item) async {
-      await db.insert("tb_kepler", item);
-    });
-    return true;
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad"]);
+    final stars = data.map(( Map<String, dynamic>star) => StarData.fromMap(star)).toList();
+    print(stars); //Prints nothing :(
+    return stars.cast<StarData>();
   }
 
   Future close() async {

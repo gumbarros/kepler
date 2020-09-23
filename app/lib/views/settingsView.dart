@@ -83,20 +83,30 @@ class SettingsView extends StatelessWidget {
                             child: MenuCard(
                               text: "Update Data",
                               onTap: () {
-                                Get.dialog(Dialog(
-                                  child: Container(
-                                    width: Get.width / 1.3,
-                                    height: Get.height / 3,
-                                    child: Center(
-                                      child: SpinKitDualRing(
-                                        color: Colors.white,
+                                Get.dialog(WillPopScope(
+                                  onWillPop: () async=> false,
+                                  child: Dialog(
+                                    key: Key("sync"),
+                                    child: Container(
+                                      width: Get.width / 1.3,
+                                      height: Get.height / 3,
+                                      child: Center(
+                                        child: SpinKitDualRing(
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ));
+                                Snackbars.snackbar(text: "This may take some time...", title: "Updating data");
                                 KeplerDatabase.db.updateData().then((success) {
                                   if (success) {
                                     Get.back();
+                                    Snackbars.snackbar(title: "Success!");
+                                  }
+                                  else{
+                                    Get.back();
+                                    Snackbars.error("Error :(");
                                   }
                                 });
                               },
