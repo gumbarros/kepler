@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-
+import 'dart:math';
+import 'package:flutter/material.dart';
 class PlanetData {
   String planetName;
   double orbitalPeriod;
@@ -10,6 +11,8 @@ class PlanetData {
   int discoveryMethod;
   String telescope;
   int numOfPlanetsSystem;
+  double jband;
+  double kband;
   double jmk2;
 
   PlanetData(
@@ -21,7 +24,7 @@ class PlanetData {
       this.radius,
       this.discoveryMethod,
       this.telescope,
-      this.numOfPlanetsSystem, this.jmk2});
+      this.numOfPlanetsSystem});
 
   PlanetData.fromMap(Map<String, dynamic> map) {
     planetName = map['pl_name'];
@@ -32,7 +35,8 @@ class PlanetData {
     radius = map['pl_rads'].toString().isNullOrBlank ? 0.0 : map['pl_rads'];
     discoveryMethod = map['pl_disc'];
     telescope = map['pl_telescope'];
-    jmk2 = map['sy_kmag'].toString().isNullOrBlank ? 0.0 : map['sy_kmag'];
-    print(jmk2);
+    jband = map['sy_jmag'].toString().isNullOrBlank ? 0.0 : map['sy_jmag'];
+    kband = map['sy_kmag'].toString().isNullOrBlank ? 0.0 : map['sy_kmag'];
+    jmk2 = (jband - kband).abs();
   }
 }

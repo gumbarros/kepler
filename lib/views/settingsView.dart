@@ -1,18 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/views/homeView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
-import '../cupertinoPageRoute.dart';
 import '../widgets/progress/loading.dart';
 
 class SettingsView extends StatelessWidget {
