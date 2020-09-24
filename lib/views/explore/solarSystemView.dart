@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
@@ -11,9 +12,9 @@ import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/planets/smallPlanet.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
-
 
 class SolarSystemView extends StatelessWidget {
   final String star;
@@ -26,23 +27,22 @@ class SolarSystemView extends StatelessWidget {
   final ScrollController scrollController = new ScrollController();
   final RxDouble position = 0.0.obs;
 
-
   @override
   Widget build(BuildContext context) {
+    Get.put(PlanetController());
     return GetBuilder<SolarSystemController>(
       init: new SolarSystemController(),
-      dispose: (state){
+      dispose: (state) {
         scrollController.dispose();
       },
-      initState: (state){
+      initState: (state) {
         scrollController.addListener(() {
           if (scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
+                  ScrollDirection.reverse &&
               position.value >= -Get.height / 2) {
             position.value -= 30;
-
           } else if (scrollController.position.userScrollDirection ==
-              ScrollDirection.forward &&
+                  ScrollDirection.forward &&
               position.value <= -10) {
             position.value += 30;
             if (scrollController.offset == 0) {
@@ -60,14 +60,13 @@ class SolarSystemView extends StatelessWidget {
               children: [
                 Container(
                   color: Theme.of(context).dialogBackgroundColor,
-                  child: Header(
-                      star + string.text("system"),
+                  child: Header(star + string.text("system"),
                       () => Navigator.pop(context)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Hero(
-                    tag: index,
+                    tag: 'star$index',
                     child: Star(
                       temperature: starTemp,
                       size: 200,
@@ -86,7 +85,7 @@ class SolarSystemView extends StatelessWidget {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
                     case ConnectionState.active:
-                      return Center(child:Loading());
+                      return Center(child: Loading());
                     default:
                       if (snapshot.data.isNull) {
                         return Column(
@@ -109,17 +108,29 @@ class SolarSystemView extends StatelessWidget {
                                 visible: !index.isEqual(0),
                                 replacement: Column(
                                   children: [
-                                    Center(
-                                      child: PlanetCard(
-                                          width: Get.width - 20,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: PlanetCard(
+                                          width: Get.width - Get.width / 4,
                                           height: Get.height / 5,
                                           text:
                                               "${snapshot.data[index].planetName}",
                                           onTap: () => Navigator.of(context)
-                                                  .push(route(PlanetView(
-                                                snapshot.data[index],
-                                              ))),
-                                          child: SizedBox()),
+                                              .push(route(PlanetView(
+                                            snapshot.data[index],
+                                            index: index,
+                                          ))),
+                                          child: SmallPlanet(
+                                            index: index,
+                                            color: PlanetController.to
+                                                .getPlanetsColor(
+                                                    snapshot.data[index].jmk2),
+                                            size: 100,
+                                          ),
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -128,18 +139,30 @@ class SolarSystemView extends StatelessWidget {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    Center(
-                                      child: PlanetCard(
-                                          width: Get.width - 20,
-                                          height: Get.height / 5,
-                                          text:
-                                              "${snapshot.data[index].planetName}",
-                                          onTap: () => Navigator.of(context)
-                                                  .push(route(PlanetView(
-                                                snapshot
-                                                    .data[index],
-                                              ))),
-                                          child: SizedBox()),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: PlanetCard(
+                                            width: Get.width - Get.width / 4,
+                                            height: Get.height / 5,
+                                            text:
+                                                "${snapshot.data[index].planetName}",
+                                            onTap: () => Navigator.of(context)
+                                                    .push(route(PlanetView(
+                                                  snapshot.data[index],
+                                                  index: index,
+                                                ))),
+                                            child: Hero(
+                                              tag: 'smallPlanet$index',
+                                              child: SmallPlanet(
+                                                color: PlanetController.to
+                                                    .getPlanetsColor(snapshot
+                                                        .data[index].jmk2),
+                                                size: 100,
+                                              ),
+                                            )),
+                                      ),
                                     ),
                                   ],
                                 ));

@@ -71,7 +71,7 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
               child: Container(
                 child: Row(children: [
                   Hero(
-                      tag: "${widget.index}",
+                      tag: "star${widget.index}",
                       child: Star(
                           size: widget.size, temperature: widget.temperature)),
                   Expanded(child: SizedBox()),

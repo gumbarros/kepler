@@ -17,6 +17,7 @@ final _assetsToWarmup = [
   AssetFlare(bundle: rootBundle, name: "assets/flare/clouds.flr"),
   AssetFlare(bundle: rootBundle, name: "assets/flare/land.flr"),
   AssetFlare(bundle: rootBundle, name: "assets/flare/pops.flr"),
+  AssetFlare(bundle: rootBundle, name: "assets/flare/holes.flr"),
 ];
 
 Future<void> warmupFlare() async {
