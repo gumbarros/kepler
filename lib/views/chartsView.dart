@@ -7,16 +7,10 @@ import 'package:kepler/controllers/chartsController.dart';
 class ChartsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Get.toNamed("/home");
-        return false;
-      },
-      child: GetBuilder<ChartsController>(
-        init: ChartsController(),
-        builder: (conf) => Scaffold(
-          body: Container()
-        ),
+    return GetBuilder<ChartsController>(
+      init: ChartsController(),
+      builder: (conf) => Scaffold(
+        body: Container()
       ),
     );
   }

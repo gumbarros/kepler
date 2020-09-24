@@ -66,7 +66,7 @@ class KeplerDatabase {
 
   Future<List<StarData>> getAllStars() async{
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad"]);
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad"], distinct: true);
     final stars = data.map(( Map<String, dynamic>star) => StarData.fromMap(star)).toList();
     return stars.cast<StarData>();
   }
