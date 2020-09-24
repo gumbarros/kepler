@@ -39,7 +39,7 @@ class PlanetView extends StatelessWidget {
                     ),
                     SmallPlanet(
                       index: index,
-                      color: PlanetController.to.getPlanetsColor(planet.jmk2),
+                      color: PlanetController.to.getPlanetsColor(planet.bmvj),
                       size: 200,
                     ),
                     SizedBox(

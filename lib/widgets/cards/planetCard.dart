@@ -69,6 +69,7 @@ class _MenuCardState extends State<PlanetCard> with TickerProviderStateMixin {
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             '${widget.text}',
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,

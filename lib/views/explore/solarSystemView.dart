@@ -126,7 +126,7 @@ class SolarSystemView extends StatelessWidget {
                                             index: index,
                                             color: PlanetController.to
                                                 .getPlanetsColor(
-                                                    snapshot.data[index].jmk2),
+                                                    snapshot.data[index].bmvj),
                                             size: 100,
                                           ),
                                         ),
@@ -153,14 +153,12 @@ class SolarSystemView extends StatelessWidget {
                                                   snapshot.data[index],
                                                   index: index,
                                                 ))),
-                                            child: Hero(
-                                              tag: 'smallPlanet$index',
-                                              child: SmallPlanet(
-                                                color: PlanetController.to
-                                                    .getPlanetsColor(snapshot
-                                                        .data[index].jmk2),
-                                                size: 100,
-                                              ),
+                                            child: SmallPlanet(
+                                              index: index,
+                                              color: PlanetController.to
+                                                  .getPlanetsColor(snapshot
+                                                      .data[index].bmvj),
+                                              size: 100,
                                             )),
                                       ),
                                     ),

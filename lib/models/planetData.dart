@@ -10,9 +10,9 @@ class PlanetData {
   int discoveryMethod;
   String telescope;
   int numOfPlanetsSystem;
-  double jband;
-  double kband;
-  double jmk2;
+  double bband;
+  double vband;
+  double bmvj;
 
   PlanetData(
       {this.planetName,
@@ -34,8 +34,8 @@ class PlanetData {
     radius = map['pl_radj'].toString().isNullOrBlank ? 0.0 : map['pl_radj'];
     discoveryMethod = map['pl_disc'];
     telescope = map['pl_telescope'];
-    jband = map['sy_jmag'].toString().isNullOrBlank ? 0.0 : map['sy_jmag'];
-    kband = map['sy_kmag'].toString().isNullOrBlank ? 0.0 : map['sy_kmag'];
-    jmk2 = (jband - kband).abs();
+    bband = map['sy_jmag'].toString().isNullOrBlank ? 0.0 : map['sy_bmag'];
+    vband = map['sy_kmag'].toString().isNullOrBlank ? 0.0 : map['sy_vmag'];
+    bmvj = (bband - vband).abs();
   }
 }
