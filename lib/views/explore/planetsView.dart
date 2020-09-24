@@ -16,19 +16,16 @@ class PlanetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('view smallPlanet$index');
     return GetBuilder<PlanetController>(
         init: new PlanetController(),
         builder: (_) => Scaffold(
               resizeToAvoidBottomPadding: false,
-              body: //Stack(children: [
-                  ListView(
+              body: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
                   Column(children: [
                     Column(
                       children: [
-                        //Using temporary color
                         Container(
                             color: Theme.of(context).dialogBackgroundColor,
                             child: Header(

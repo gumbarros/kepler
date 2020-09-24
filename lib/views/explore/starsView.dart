@@ -72,50 +72,23 @@ class StarsView extends StatelessWidget{
                     physics: BouncingScrollPhysics(),
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Visibility(
-                        visible: !index.isEqual(0),
-                        replacement: Column(
-                          children: [
-                            SizedBox(
-                              height: Get.height / 3.5 - 10,
+                      return Obx(()=>Visibility(
+                          visible: _.find(snapshot.data[index].name),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: StarCard(
+                              size: Get.width / 3.3,
+                              index: index,
+                              text: snapshot.data[index].name,
+                              temperature: snapshot.data[index].temperature,
+                              onTap: () =>
+                                  Navigator.of(context)
+                                      .push(route(SolarSystemView(
+                                    index: index,
+                                    starTemp: snapshot.data[index].temperature,
+                                    star: snapshot.data[index].name,
+                                  ))),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: StarCard(
-                                size: Get.width / 3.3,
-                                index: index,
-                                text: snapshot.data[index].name,
-                                temperature:
-                                snapshot.data[index].temperature,
-                                onTap: () =>
-                                    Navigator.of(context).push(
-                                      route(
-                                        SolarSystemView(
-                                          index: index,
-                                          starTemp:
-                                          snapshot.data[index].temperature,
-                                          star: snapshot.data[index].name,
-                                        ),
-                                      ),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: StarCard(
-                            size: Get.width / 3.3,
-                            index: index,
-                            text: snapshot.data[index].name,
-                            temperature: snapshot.data[index].temperature,
-                            onTap: () =>
-                                Navigator.of(context)
-                                    .push(route(SolarSystemView(
-                                  index: index,
-                                  starTemp: snapshot.data[index].temperature,
-                                  star: snapshot.data[index].name,
-                                ))),
                           ),
                         ),
                       );
@@ -139,6 +112,7 @@ class StarsView extends StatelessWidget{
                       color: Theme.of(context).dialogBackgroundColor,
                       child: Column(
                         children: [
+
                           Header(string.text("stars"),
                               () => Navigator.pop(context)),
                         ],
@@ -148,9 +122,7 @@ class StarsView extends StatelessWidget{
                       color: Theme.of(context).dialogBackgroundColor,
                       width: Get.width,
                       child: SearchBar(
-                        searchFunc: (String value) {
-                          _.upd();
-                        },
+                        _.search
                       ),
                     ),
                   ],
