@@ -14,57 +14,36 @@ import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
-class StarsView extends StatefulWidget {
-  @override
-  _StarsViewState createState() => _StarsViewState();
-}
+class StarsView extends StatelessWidget{
 
-class _StarsViewState extends State<StarsView> {
-  ScrollController scrollController;
-  RxDouble position = 0.0.obs;
-  changeMinus() {
-    position.value -= 30;
-  }
 
-  changePlus() {
-    position.value += 30;
-  }
-
-  changeZero() {
-    position.value = 0;
-  }
-
-  @override
-  void initState() {
-    scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
-          position.value >= -Get.height / 2) {
-        changeMinus();
-      } else if (scrollController.position.userScrollDirection ==
-              ScrollDirection.forward &&
-          position.value <= -10) {
-        changePlus();
-        if (scrollController.offset == 0) {
-          changeZero();
-        }
-      }
-    });
-
-    print(KeplerDatabase.db.getAllStars());
-    super.initState();
-  }
-
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
+  final position = 0.0.obs;
+  final ScrollController scrollController = new ScrollController();
 
   Widget build(BuildContext context) {
     return GetBuilder<StarsController>(
       autoRemove: false,
       init: new StarsController(),
+      dispose: (state){
+        scrollController.dispose();
+      },
+      initState: (state){
+       scrollController.addListener(() {
+          if (scrollController.position.userScrollDirection ==
+              ScrollDirection.reverse &&
+              position.value >= -Get.height / 2) {
+            position.value -= 30;
+
+          } else if (scrollController.position.userScrollDirection ==
+              ScrollDirection.forward &&
+              position.value <= -10) {
+            position.value += 30;
+            if (scrollController.offset == 0) {
+              position.value = 0;
+            }
+          }
+        });
+      },
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Stack(children: [
@@ -156,7 +135,6 @@ class _StarsViewState extends State<StarsView> {
                 width: Get.width,
                 child: Column(
                   children: [
-                    //Using temporary color
                     Container(
                       color: Theme.of(context).dialogBackgroundColor,
                       child: Column(

@@ -14,23 +14,6 @@ import 'package:kepler/widgets/snackbars/snackbars.dart';
 import 'chartsView.dart';
 
 class HomeView extends StatelessWidget{
-  // Animation _scaleanimation;
-  // AnimationController _scalecontroller;
-  //
-  // void initState() {
-  //   _scalecontroller =
-  //       AnimationController(vsync: this, duration: Duration(milliseconds: 100));
-  //   _scaleanimation = Tween<double>(
-  //     begin: 1,
-  //     end: 0.97,
-  //   ).animate(
-  //     _scalecontroller,
-  //   );
-  //   super.initState();
-  // }
-
-  // If animation it's not used, let's use Stateless Widgets for better performance
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(

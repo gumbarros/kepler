@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
@@ -18,13 +19,12 @@ class PlanetView extends StatelessWidget {
     return GetBuilder<PlanetController>(
         init: new PlanetController(),
         builder: (_) => Scaffold(
-            resizeToAvoidBottomPadding: false,
-            body: //Stack(children: [
-                ListView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                Column(
-                  children: [
+              resizeToAvoidBottomPadding: false,
+              body: //Stack(children: [
+                  ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  Column(children: [
                     Column(
                       children: [
                         //Using temporary color
@@ -82,31 +82,28 @@ class PlanetView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            )));
+                    GetBuilder<FavoritesController>(
+                        init: FavoritesController(),
+                        builder: (_) => Align(
+                              alignment: Alignment.bottomRight,
+                              child: IconButton(
+                                iconSize: 32.0,
+                                icon: _.getPlanet(planet.planetName).isNull
+                                    ? Icon(Icons.star_border)
+                                    : Icon(Icons.star),
+                                onPressed: () {
+                                  if (_.getPlanet(planet.planetName).isNull) {
+                                    _.savePlanet(planet.planetName);
+                                  } else {
+                                    _.removePlanet(planet.planetName);
+                                  }
+                                  _.update();
+                                },
+                              ),
+                            )),
+                  ]),
+                ],
+              ),
+            ));
   }
 }
-
-// GetBuilder<FavoritesController>(
-//   builder: (_) => Align(
-//     alignment: Alignment.bottomRight,
-//     child: IconButton(
-//       iconSize: 32.0,
-//       icon: _.getPlanet(planetName).isNull
-//           ? Icon(Icons.star_border)
-//           : Icon(Icons.star),
-//       onPressed: () {
-//         if (_.getPlanet(planetName).isNull) {
-//           _.savePlanet(planetName);
-//         } else {
-//           _.removePlanet(planetName);
-//         }
-//         _.update();
-//         print(_.getPlanet(planetName));
-//       },
-//     ),
-//   ),
-// ),
-//]),

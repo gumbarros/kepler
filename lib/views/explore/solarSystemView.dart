@@ -15,7 +15,7 @@ import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
 
-class SolarSystemView extends StatefulWidget {
+class SolarSystemView extends StatelessWidget {
   final String star;
   final double starTemp;
   final int index;
@@ -23,58 +23,34 @@ class SolarSystemView extends StatefulWidget {
   SolarSystemView(
       {@required this.star, @required this.starTemp, @required this.index});
 
-  @override
-  _SolarSystemViewState createState() => _SolarSystemViewState();
-}
+  final ScrollController scrollController = new ScrollController();
+  final RxDouble position = 0.0.obs;
 
-class _SolarSystemViewState extends State<SolarSystemView> {
-  ScrollController _scrollController;
-  ScrollController scrollController;
-  RxDouble position = 0.0.obs;
-
-
-  void changeMinus() {
-    position.value -= 30;
-  }
-
-  void changePlus() {
-    position.value += 30;
-  }
-
-  void changeZero() {
-    position.value = 0;
-  }
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
-          position.value >= -Get.height / 2) {
-        changeMinus();
-      } else if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.forward &&
-          position.value <= -10) {
-        changePlus();
-        if (_scrollController.offset == 0) {
-          changeZero();
-        }
-      }
-    });
-    super.initState();
-  }
-
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.star);
     return GetBuilder<SolarSystemController>(
       init: new SolarSystemController(),
+      dispose: (state){
+        scrollController.dispose();
+      },
+      initState: (state){
+        scrollController.addListener(() {
+          if (scrollController.position.userScrollDirection ==
+              ScrollDirection.reverse &&
+              position.value >= -Get.height / 2) {
+            position.value -= 30;
+
+          } else if (scrollController.position.userScrollDirection ==
+              ScrollDirection.forward &&
+              position.value <= -10) {
+            position.value += 30;
+            if (scrollController.offset == 0) {
+              position.value = 0;
+            }
+          }
+        });
+      },
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
         body: ListView(
@@ -85,16 +61,15 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                 Container(
                   color: Theme.of(context).dialogBackgroundColor,
                   child: Header(
-                      widget.star + string.text("system"),
-                      //TODO: i18n
+                      star + string.text("system"),
                       () => Navigator.pop(context)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Hero(
-                    tag: '${widget.index}',
+                    tag: index,
                     child: Star(
-                      temperature: widget.starTemp,
+                      temperature: starTemp,
                       size: 200,
                     ),
                   ),
@@ -105,7 +80,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
               width: Get.width,
               height: Get.height,
               child: FutureBuilder<List<PlanetData>>(
-                future: KeplerDatabase.db.getSolarSystemPlanets(widget.star),
+                future: KeplerDatabase.db.getSolarSystemPlanets(star),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PlanetData>> snapshot) {
                   switch (snapshot.connectionState) {
@@ -126,7 +101,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         );
                       }
                       return ListView.builder(
-                          controller: _scrollController,
+                          controller: scrollController,
                           physics: BouncingScrollPhysics(),
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
