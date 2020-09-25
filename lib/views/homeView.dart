@@ -13,7 +13,7 @@ import 'package:kepler/widgets/snackbars/snackbars.dart';
 
 import 'chartsView.dart';
 
-class HomeView extends StatelessWidget{
+class HomeView extends StatelessWidget {
   // Animation _scaleanimation;
   // AnimationController _scalecontroller;
   //
@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget{
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       init: HomeController(),
-      builder:(home)=> Stack(
+      builder: (home) => Stack(
         children: [
           HomeBackground(),
           Scaffold(
@@ -93,7 +93,6 @@ class HomeView extends StatelessWidget{
                       ImageCard(
                         onTap: () {
                           Navigator.of(context).push(route(ChartsView()));
-                          Snackbars.development();
                         },
                         text: string.text("charts"),
                         image: 'assets/images/chartsbg.png',
