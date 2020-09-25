@@ -36,6 +36,6 @@ class PlanetData {
     telescope = map['pl_telescope'];
     bband = map['sy_jmag'].toString().isNullOrBlank ? 0.0 : map['sy_bmag'];
     vband = map['sy_kmag'].toString().isNullOrBlank ? 0.0 : map['sy_vmag'];
-    bmvj = (bband - vband).abs();
+    bmvj = ((bband.isNullOrBlank ? 0.0 : bband) - (vband.isNullOrBlank ? 0.0 : vband)).abs();
   }
 }

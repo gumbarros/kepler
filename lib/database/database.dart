@@ -71,6 +71,13 @@ class KeplerDatabase {
     return stars.cast<StarData>();
   }
 
+  Future<List<PlanetData>> getTopOrbits() async{
+    Database db = await database;
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper", limit: 5);
+    final planets = data.map(( Map<String, dynamic>planet) => PlanetData.fromMap(planet)).toList();
+    return planets;
+  }
+
   Future<List<PlanetData>> getSolarSystemPlanets(String star) async{
     Database db = await database;
     final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_massj", "pl_dens", "sy_bmag", "sy_vmag"], where: "hostname='$star'");
