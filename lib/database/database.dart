@@ -49,7 +49,7 @@ class KeplerDatabase {
       Database db = await database;
       await API.getAllData().then((data) async{
         final batch = db.batch();
-        batch.execute("DROP TABLE $table");
+        batch.execute("DROP TABLE IF EXISTS $table");
         batch.execute(createTable);
         data.forEach((item) async {
           batch.insert(table, item);
