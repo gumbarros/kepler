@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
@@ -11,11 +12,11 @@ import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/planets/smallPlanet.dart';
 import 'package:kepler/widgets/planets/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
-
-class SolarSystemView extends StatefulWidget {
+class SolarSystemView extends StatelessWidget {
   final String star;
   final double starTemp;
   final int index;
@@ -23,58 +24,33 @@ class SolarSystemView extends StatefulWidget {
   SolarSystemView(
       {@required this.star, @required this.starTemp, @required this.index});
 
-  @override
-  _SolarSystemViewState createState() => _SolarSystemViewState();
-}
-
-class _SolarSystemViewState extends State<SolarSystemView> {
-  ScrollController _scrollController;
-  ScrollController scrollController;
-  RxDouble position = 0.0.obs;
-
-
-  void changeMinus() {
-    position.value -= 30;
-  }
-
-  void changePlus() {
-    position.value += 30;
-  }
-
-  void changeZero() {
-    position.value = 0;
-  }
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.reverse &&
-          position.value >= -Get.height / 2) {
-        changeMinus();
-      } else if (_scrollController.position.userScrollDirection ==
-              ScrollDirection.forward &&
-          position.value <= -10) {
-        changePlus();
-        if (_scrollController.offset == 0) {
-          changeZero();
-        }
-      }
-    });
-    super.initState();
-  }
-
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+  final ScrollController scrollController = new ScrollController();
+  final RxDouble position = 0.0.obs;
 
   @override
   Widget build(BuildContext context) {
-    print(widget.star);
+    Get.put(PlanetController());
     return GetBuilder<SolarSystemController>(
       init: new SolarSystemController(),
+      dispose: (state) {
+        scrollController.dispose();
+      },
+      initState: (state) {
+        scrollController.addListener(() {
+          if (scrollController.position.userScrollDirection ==
+                  ScrollDirection.reverse &&
+              position.value >= -Get.height / 2) {
+            position.value -= 30;
+          } else if (scrollController.position.userScrollDirection ==
+                  ScrollDirection.forward &&
+              position.value <= -10) {
+            position.value += 30;
+            if (scrollController.offset == 0) {
+              position.value = 0;
+            }
+          }
+        });
+      },
       builder: (_) => Scaffold(
         resizeToAvoidBottomPadding: false,
         body: ListView(
@@ -84,17 +60,15 @@ class _SolarSystemViewState extends State<SolarSystemView> {
               children: [
                 Container(
                   color: Theme.of(context).dialogBackgroundColor,
-                  child: Header(
-                      widget.star + string.text("system"),
-                      //TODO: i18n
+                  child: Header(star + string.text("system"),
                       () => Navigator.pop(context)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Hero(
-                    tag: '${widget.index}',
+                    tag: 'star$index',
                     child: Star(
-                      temperature: widget.starTemp,
+                      temperature: starTemp,
                       size: 200,
                     ),
                   ),
@@ -105,13 +79,13 @@ class _SolarSystemViewState extends State<SolarSystemView> {
               width: Get.width,
               height: Get.height,
               child: FutureBuilder<List<PlanetData>>(
-                future: KeplerDatabase.db.getSolarSystemPlanets(widget.star),
+                future: KeplerDatabase.db.getSolarSystemPlanets(star),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PlanetData>> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
                     case ConnectionState.active:
-                      return Center(child:Loading());
+                      return Center(child: Loading());
                     default:
                       if (snapshot.data.isNull) {
                         return Column(
@@ -126,7 +100,7 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                         );
                       }
                       return ListView.builder(
-                          controller: _scrollController,
+                          controller: scrollController,
                           physics: BouncingScrollPhysics(),
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -134,17 +108,29 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                 visible: !index.isEqual(0),
                                 replacement: Column(
                                   children: [
-                                    Center(
-                                      child: PlanetCard(
-                                          width: Get.width - 20,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: PlanetCard(
+                                          width: Get.width - Get.width / 4,
                                           height: Get.height / 5,
                                           text:
                                               "${snapshot.data[index].planetName}",
                                           onTap: () => Navigator.of(context)
-                                                  .push(route(PlanetView(
-                                                snapshot.data[index],
-                                              ))),
-                                          child: SizedBox()),
+                                              .push(route(PlanetView(
+                                            snapshot.data[index],
+                                            index: index,
+                                          ))),
+                                          child: SmallPlanet(
+                                            index: index,
+                                            color: PlanetController.to
+                                                .getPlanetsColor(
+                                                    snapshot.data[index].bmvj),
+                                            size: 100,
+                                          ),
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -153,18 +139,28 @@ class _SolarSystemViewState extends State<SolarSystemView> {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    Center(
-                                      child: PlanetCard(
-                                          width: Get.width - 20,
-                                          height: Get.height / 5,
-                                          text:
-                                              "${snapshot.data[index].planetName}",
-                                          onTap: () => Navigator.of(context)
-                                                  .push(route(PlanetView(
-                                                snapshot
-                                                    .data[index],
-                                              ))),
-                                          child: SizedBox()),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: PlanetCard(
+                                            width: Get.width - Get.width / 4,
+                                            height: Get.height / 5,
+                                            text:
+                                                "${snapshot.data[index].planetName}",
+                                            onTap: () => Navigator.of(context)
+                                                    .push(route(PlanetView(
+                                                  snapshot.data[index],
+                                                  index: index,
+                                                ))),
+                                            child: SmallPlanet(
+                                              index: index,
+                                              color: PlanetController.to
+                                                  .getPlanetsColor(snapshot
+                                                      .data[index].bmvj),
+                                              size: 100,
+                                            )),
+                                      ),
                                     ),
                                   ],
                                 ));

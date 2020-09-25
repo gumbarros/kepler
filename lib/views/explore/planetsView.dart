@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/widgets/header/header.dart';
-
 import 'package:kepler/widgets/planets/smallPlanet.dart';
 
 class PlanetView extends StatelessWidget {
   final PlanetData planet;
+  final int index;
 
-  PlanetView(this.planet);
+  PlanetView(this.planet, {this.index});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PlanetController>(
         init: new PlanetController(),
         builder: (_) => Scaffold(
-            resizeToAvoidBottomPadding: false,
-            body: //Stack(children: [
-                ListView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                Column(
-                  children: [
+              resizeToAvoidBottomPadding: false,
+              body: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  Column(children: [
                     Column(
                       children: [
-                        //Using temporary color
                         Container(
                             color: Theme.of(context).dialogBackgroundColor,
                             child: Header(
@@ -37,12 +35,10 @@ class PlanetView extends StatelessWidget {
                       ],
                     ),
                     SmallPlanet(
-                      color: PlanetController.to.getPlanetsColor(planet.jmk2),
+                      index: index,
+                      color: PlanetController.to.getPlanetsColor(planet.bmvj),
+                      size: 200,
                     ),
-                    // MediumPlanet(
-                    //   color: PlanetController.to.getPlanetsColor(planet.jmk2),
-                    // ),
-                    //Why 2 planets?
                     SizedBox(
                       height: 10,
                     ),
@@ -62,7 +58,7 @@ class PlanetView extends StatelessWidget {
                                   style: TextStyle(
                                       fontFamily: "Roboto", fontSize: 18.5)),
                               Text(
-                                  "${string.text("orbital_period")}: ${planet.orbitalPeriod.isNull ? "Unknown" : planet.orbitalPeriod.truncate()} ${string.text("days")}",
+                                  "${string.text("orbital_period")}: ${planet.orbitalPeriod == 0.0 ? "Unknown" : planet.orbitalPeriod.truncate()} ${string.text("days")}",
                                   style: TextStyle(
                                       fontFamily: "Roboto", fontSize: 18.5)),
                               Text(
@@ -82,31 +78,28 @@ class PlanetView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            )));
+                    GetBuilder<FavoritesController>(
+                        init: FavoritesController(),
+                        builder: (_) => Align(
+                              alignment: Alignment.bottomRight,
+                              child: IconButton(
+                                iconSize: 32.0,
+                                icon: _.getPlanet(planet.planetName).isNull
+                                    ? Icon(Icons.star_border)
+                                    : Icon(Icons.star),
+                                onPressed: () {
+                                  if (_.getPlanet(planet.planetName).isNull) {
+                                    _.savePlanet(planet.planetName);
+                                  } else {
+                                    _.removePlanet(planet.planetName);
+                                  }
+                                  _.update();
+                                },
+                              ),
+                            )),
+                  ]),
+                ],
+              ),
+            ));
   }
 }
-
-// GetBuilder<FavoritesController>(
-//   builder: (_) => Align(
-//     alignment: Alignment.bottomRight,
-//     child: IconButton(
-//       iconSize: 32.0,
-//       icon: _.getPlanet(planetName).isNull
-//           ? Icon(Icons.star_border)
-//           : Icon(Icons.star),
-//       onPressed: () {
-//         if (_.getPlanet(planetName).isNull) {
-//           _.savePlanet(planetName);
-//         } else {
-//           _.removePlanet(planetName);
-//         }
-//         _.update();
-//         print(_.getPlanet(planetName));
-//       },
-//     ),
-//   ),
-// ),
-//]),

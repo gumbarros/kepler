@@ -20,8 +20,8 @@ class KeplerDatabase {
                   pl_dens REAL,
                   st_teff REAL,
                   st_rad REAL,
-                  sy_jmag REAL,
-                  sy_kmag REAL
+                  sy_bmag REAL,
+                  sy_vmag REAL
                   )""";
 
   static Database _database;
@@ -66,14 +66,14 @@ class KeplerDatabase {
 
   Future<List<StarData>> getAllStars() async{
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad"]);
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad"], distinct: true);
     final stars = data.map(( Map<String, dynamic>star) => StarData.fromMap(star)).toList();
     return stars.cast<StarData>();
   }
 
   Future<List<PlanetData>> getSolarSystemPlanets(String star) async{
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_massj", "pl_dens", "sy_jmag", "sy_kmag"], where: "hostname='$star'");
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_massj", "pl_dens", "sy_bmag", "sy_vmag"], where: "hostname='$star'");
     final planets = data.map(( Map<String, dynamic>star) => PlanetData.fromMap(star)).toList();
     return planets.cast<PlanetData>();
   }

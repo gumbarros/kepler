@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 
 class MediumPlanet extends StatelessWidget {
   final Color color;
+  final double size;
 
-  MediumPlanet({this.color});
+  MediumPlanet({@required this.color, @required this.size});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 200,
+      height: size,
+      width: size,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.all(

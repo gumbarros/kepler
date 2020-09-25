@@ -47,27 +47,42 @@ class _MenuCardState extends State<PlanetCard> with TickerProviderStateMixin {
       child: ScaleTransition(
         scale: _scaleanimation,
         child: Container(
-          height: Get.height / 7,
-          width: Get.width - 30,
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
+          height: widget.height,
+          width: Get.width,
           child: Center(
-            child: Row(
+            child: Stack(
               children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Text(
-                    '${widget.text}',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'JosefinSans'),
+                Container(
+                  height: widget.height,
+                  width: widget.width,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '${widget.text}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'JosefinSans'),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: widget.child),
               ],
             ),
           ),

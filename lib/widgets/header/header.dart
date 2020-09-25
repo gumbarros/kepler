@@ -31,11 +31,15 @@ class Header extends StatelessWidget {
                     ),
                   ),
                 ),
-                IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () async {
-                      backFunction();
-                    })
+                Column(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        onPressed: () async {
+                          backFunction();
+                        })
+                  ],
+                )
               ],
             ),
           ],

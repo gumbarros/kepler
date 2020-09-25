@@ -75,6 +75,8 @@ flutter:
     - assets/flare/clouds.flr
     - assets/flare/land.flr
     - assets/flare/pops.flr
+    - assets/flare/holes.flr
+
 
   #   - images/a_dot_ham.jpeg
 
