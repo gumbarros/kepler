@@ -89,7 +89,7 @@ class PlanetView extends StatelessWidget {
                                     : Icon(Icons.star),
                                 onPressed: () {
                                   if (_.getPlanet(planet.planetName).isNull) {
-                                    _.savePlanet(planet.planetName);
+                                    _.savePlanet(planet);
                                   } else {
                                     _.removePlanet(planet.planetName);
                                   }

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:kepler/models/planetData.dart';
 
 class FavoritesController extends GetxController {
   static FavoritesController get to => Get.find();
@@ -11,7 +12,7 @@ class FavoritesController extends GetxController {
     planets = await Hive.openBox('planets');
   }
 
-  String getPlanet(String name) {
+  PlanetData getPlanet(String name) {
     return planets.get(name);
   }
 
@@ -19,8 +20,8 @@ class FavoritesController extends GetxController {
     return planets.values.map((planet) => planet).toList();
   }
 
-  void savePlanet(String name) async{
-    planets.put(name,name);
+  void savePlanet(PlanetData planet) async{
+    planets.put(planet.planetName,planet);
   }
 
   void removePlanet(String name) {

@@ -51,7 +51,7 @@ class KeplerDatabase {
         final batch = db.batch();
         batch.execute("DROP TABLE IF EXISTS $table");
         batch.execute(createTable);
-        data.forEach((item) async {
+        data.forEach((item){
           batch.insert(table, item);
         });
         await batch.commit(noResult: true);

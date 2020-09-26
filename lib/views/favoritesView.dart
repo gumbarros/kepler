@@ -16,7 +16,7 @@ class FavoritesView extends StatelessWidget{
 
   final RxDouble position = 0.0.obs;
 
-  final List planets = FavoritesController.to.getAllPlanets();
+  final List<PlanetData> planets = FavoritesController.to.getAllPlanets();
 
   final ScrollController scrollController = new ScrollController();
 
@@ -74,10 +74,10 @@ class FavoritesView extends StatelessWidget{
                               child: PlanetCard(
                                   width: Get.width - 20,
                                   height: Get.height / 5,
-                                  text: planets[index],
+                                  text: planets[index].planetName,
                                   onTap: () => Navigator.of(context)
                                           .push(route(PlanetView(
-                                        PlanetData(),
+                                        planets[index],
                                       ))),
                                   child: SizedBox()),
                             )
@@ -92,7 +92,7 @@ class FavoritesView extends StatelessWidget{
                               child: PlanetCard(
                                   width: Get.width - 20,
                                   height: Get.height / 5,
-                                  text: planets[index],
+                                  text: planets[index].planetName,
                                   onTap: () => Navigator.of(context)
                                           .push(route(PlanetView(
                                         PlanetData(),
