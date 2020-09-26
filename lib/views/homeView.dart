@@ -86,7 +86,6 @@ class HomeView extends StatelessWidget {
                       ImageCard(
                         onTap: () {
                           Navigator.of(context).push(route(FavoritesView()));
-                          Snackbars.development();
                         },
                         text: string.text("favourites"),
                         image: 'assets/images/favouritesbg.jpg',

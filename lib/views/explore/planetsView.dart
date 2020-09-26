@@ -58,7 +58,7 @@ class PlanetView extends StatelessWidget {
                                   style: TextStyle(
                                       fontFamily: "Roboto", fontSize: 18.5)),
                               Text(
-                                  "${string.text("orbital_period")}: ${planet.orbitalPeriod == 0.0 ? "Unknown" : planet.orbitalPeriod.truncate()} ${string.text("days")}",
+                                  "${string.text("orbital_period")}: ${planet.orbitalPeriod.isNullOrBlank ? "Unknown" : planet.orbitalPeriod.truncate()} ${string.text("days")}",
                                   style: TextStyle(
                                       fontFamily: "Roboto", fontSize: 18.5)),
                               Text(

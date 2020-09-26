@@ -22,10 +22,10 @@ class Snackbars {
           colorText: Colors.black);
   }
 
-  static void snackbar({String title = "", String text = ""}) {
+  static void snackbar({String title = "", String text = "", Color color = Colors.white}) {
     if (!Get.isSnackbarOpen)
       Get.snackbar(title, text,
-          backgroundColor: Colors.white,
+          backgroundColor: color,
           colorText: Colors.black);
   }
 }

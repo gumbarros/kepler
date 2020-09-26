@@ -4,24 +4,26 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/favoritesController.dart';
+import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/planets/smallPlanet.dart';
 
 
 class FavoritesView extends StatelessWidget{
 
   final RxDouble position = 0.0.obs;
 
-  final List<PlanetData> planets = FavoritesController.to.getAllPlanets();
+  final List planets = FavoritesController.to.getAllPlanets();
 
   final ScrollController scrollController = new ScrollController();
 
   @override
   Widget build(BuildContext context) {
+    Get.put<PlanetController>(PlanetController());
     return GetBuilder<FavoritesController>(
       initState: (state){
         scrollController.addListener(() {
@@ -61,7 +63,7 @@ class FavoritesView extends StatelessWidget{
             Container(
               width: Get.width,
               height: Get.height,
-              child: ListView.builder(
+              child:ListView.builder(
                   controller: scrollController,
                   physics: BouncingScrollPhysics(),
                   itemCount: planets.length,
@@ -70,16 +72,29 @@ class FavoritesView extends StatelessWidget{
                         visible: !index.isEqual(0),
                         replacement: Column(
                           children: [
-                            Center(
-                              child: PlanetCard(
-                                  width: Get.width - 20,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: PlanetCard(
+                                  width: Get.width - Get.width / 4,
                                   height: Get.height / 5,
-                                  text: planets[index].planetName,
+                                  text:
+                                  "${planets[index].planetName}",
                                   onTap: () => Navigator.of(context)
-                                          .push(route(PlanetView(
-                                        planets[index],
-                                      ))),
-                                  child: SizedBox()),
+                                      .push(route(PlanetView(
+                                    planets[index],
+                                    index: index,
+                                  ))),
+                                  child: SmallPlanet(
+                                    index: index,
+                                    color: PlanetController.to
+                                        .getPlanetsColor(
+                                        planets[index].bmvj),
+                                    size: 100,
+                                  ),
+                                ),
+                              ),
                             )
                           ],
                         ),
@@ -88,16 +103,27 @@ class FavoritesView extends StatelessWidget{
                             SizedBox(
                               height: 15,
                             ),
-                            Center(
-                              child: PlanetCard(
-                                  width: Get.width - 20,
-                                  height: Get.height / 5,
-                                  text: planets[index].planetName,
-                                  onTap: () => Navigator.of(context)
-                                          .push(route(PlanetView(
-                                        PlanetData(),
-                                      ))),
-                                  child: SizedBox()),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: PlanetCard(
+                                    width: Get.width - Get.width / 4,
+                                    height: Get.height / 5,
+                                    text:
+                                    "${planets[index].planetName}",
+                                    onTap: () => Navigator.of(context)
+                                        .push(route(PlanetView(
+                                      planets[index][index],
+                                      index: index,
+                                    ))),
+                                    child: SmallPlanet(
+                                      index: index,
+                                      color: PlanetController.to
+                                          .getPlanetsColor(planets[index].bmvj),
+                                      size: 100,
+                                    )),
+                              ),
                             ),
                           ],
                         ));

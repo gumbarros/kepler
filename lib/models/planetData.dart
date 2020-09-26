@@ -1,17 +1,33 @@
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
+part 'planetData.g.dart';
+
+@HiveType(typeId: 0)
 class PlanetData {
+  @HiveField(0)
   String planetName;
+  @HiveField(1)
   double orbitalPeriod;
+  @HiveField(2)
   String star;
+  @HiveField(3)
   double jupiterMass;
+  @HiveField(4)
   double density;
+  @HiveField(5)
   double radius;
+  @HiveField(6)
   int discoveryMethod;
+  @HiveField(7)
   String telescope;
+  @HiveField(8)
   int numOfPlanetsSystem;
+  @HiveField(9)
   double bband;
+  @HiveField(10)
   double vband;
+  @HiveField(11)
   double bmvj;
 
   PlanetData(

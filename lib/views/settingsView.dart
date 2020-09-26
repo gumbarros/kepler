@@ -86,15 +86,19 @@ class SettingsView extends StatelessWidget {
                                   ),
                                 ),
                               ));
-                              Snackbars.snackbar(text: "This may take some time...", title: "Updating data");
+                              Snackbars.snackbar(
+                                  text: "This may take some time...",
+                                  title: "Updating data");
                               KeplerDatabase.db.updateData().then((success) {
                                 if (success) {
                                   Get.back();
-                                  Snackbars.snackbar(title: "Success!");
-                                }
-                                else{
-                                  Get.back();
+                                  Snackbars.snackbar(
+                                      title: "Success!",
+                                      text: "Your data is updated!");
+                                } else {
                                   Snackbars.error("Error :(");
+                                  Get.back();
+                                  Get.back();
                                 }
                               });
                             },

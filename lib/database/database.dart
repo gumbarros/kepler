@@ -52,7 +52,7 @@ class KeplerDatabase {
         batch.execute("DROP TABLE IF EXISTS $table");
         batch.execute(createTable);
         data.forEach((item){
-          batch.insert(table, item);
+           batch.insert(table, item);
         });
         await batch.commit(noResult: true);
       });

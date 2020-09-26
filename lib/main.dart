@@ -12,6 +12,8 @@ import 'package:kepler/theme/theme.dart';
 import 'package:kepler/views/homeView.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
+import 'models/planetData.dart';
+
 final _assetsToWarmup = [
   AssetFlare(bundle: rootBundle, name: "assets/flare/shine.flr"),
   AssetFlare(bundle: rootBundle, name: "assets/flare/clouds.flr"),
@@ -53,4 +55,6 @@ void initializeApp() async{
       "NT8mJyc2IWhia31hfWN9Z2doYmF8YGJ8ampqanNiYmlmamlmanMDHmg0JiAnMiU8PjImITowOjw3NjEyISE8IBM0PjI6P30wPD4=");
   FlareCache.doesPrune = false;
   Get.put<FavoritesController>(FavoritesController());
+  Hive.registerAdapter(PlanetDataAdapter());
 }
+
