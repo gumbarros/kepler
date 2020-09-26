@@ -12,8 +12,8 @@ import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
-import 'package:kepler/widgets/planets/smallPlanet.dart';
-import 'package:kepler/widgets/planets/star.dart';
+import 'package:kepler/widgets/universe/smallPlanet.dart';
+import 'package:kepler/widgets/universe/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
 class SolarSystemView extends StatelessWidget {

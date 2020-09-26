@@ -10,7 +10,7 @@ import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
-import 'package:kepler/widgets/planets/smallPlanet.dart';
+import 'package:kepler/widgets/universe/smallPlanet.dart';
 
 
 class FavoritesView extends StatelessWidget{

@@ -9,8 +9,6 @@ import 'package:kepler/views/favoritesView.dart';
 import 'package:kepler/views/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
-import 'package:kepler/widgets/snackbars/snackbars.dart';
-
 import 'chartsView.dart';
 
 class HomeView extends StatelessWidget {

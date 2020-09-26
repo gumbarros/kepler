@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/views/aboutView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
+import '../cupertinoPageRoute.dart';
 import '../widgets/progress/loading.dart';
 
 class SettingsView extends StatelessWidget {
@@ -46,66 +48,54 @@ class SettingsView extends StatelessWidget {
                             )),
                         Container(
                           width: Get.width / 2.8,
-                          child: MenuCard(
-                            text: string.text("dark_mode"),
-                            onTap: () {
-                              Snackbars.development();
-                            },
-                            icon: Icons.brightness_5,
-                          ),
+                          child:                         Container(
+                              width: Get.width / 2.8,
+                              child: MenuCard(
+                                text: string.text("about"),
+                                onTap: () async {
+                                  Navigator.of(context).push(route(AboutView()));
+                                },
+                                icon: Icons.assignment_ind,
+                              )),
                         )
                       ],
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Container(
-                            width: Get.width / 2.8,
-                            child: MenuCard(
-                              text: string.text("credits"),
-                              onTap: () async {
-                                Snackbars.development();
-                              },
-                              icon: Icons.assignment_ind,
-                            )),
-                        Container(
-                          width: Get.width / 2.8,
-                          child: MenuCard(
-                            text: "Update Data",
-                            onTap: () {
-                              Get.dialog(WillPopScope(
-                                onWillPop: () async=> false,
-                                child: Dialog(
-                                  child: Container(
-                                    width: Get.width / 1.3,
-                                    height: Get.height / 3,
-                                    child: Center(
-                                      child: Loading()
-                                    ),
-                                  ),
+                    Container(
+                      width: Get.width / 1.4,
+                      child: MenuCard(
+                        text: "Update Data",
+                        onTap: () {
+                          Get.dialog(WillPopScope(
+                            onWillPop: () async=> false,
+                            child: Dialog(
+                              child: Container(
+                                width: Get.width /1.4,
+                                height: Get.height / 3,
+                                child: Center(
+                                  child: Loading()
                                 ),
-                              ));
+                              ),
+                            ),
+                          ));
+                          Snackbars.snackbar(
+                              text: "This may take some time...",
+                              title: "Updating data");
+                          KeplerDatabase.db.updateData().then((success) {
+                            if (success) {
+                              Get.back();
                               Snackbars.snackbar(
-                                  text: "This may take some time...",
-                                  title: "Updating data");
-                              KeplerDatabase.db.updateData().then((success) {
-                                if (success) {
-                                  Get.back();
-                                  Snackbars.snackbar(
-                                      title: "Success!",
-                                      text: "Your data is updated!");
-                                } else {
-                                  Snackbars.error("Error :(");
-                                  Get.back();
-                                  Get.back();
-                                }
-                              });
-                            },
-                            icon: Icons.system_update_alt,
-                          ),
-                        )
-                      ],
+                                  title: "Success!",
+                                  text: "Your data is updated!");
+                            } else {
+                              Snackbars.error("Error :(");
+                              Get.back();
+                              Get.back();
+                            }
+                          });
+                        },
+                        icon: Icons.system_update_alt,
+                      ),
                     ),
                   ],
                 ),
