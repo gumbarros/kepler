@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
-import 'file:///D:/Projetos/Barros/kepler/lib/views/settings/aboutView.dart';
+import 'package:kepler/views/settings/aboutView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -48,7 +48,7 @@ class SettingsView extends StatelessWidget {
                             )),
                         Container(
                           width: Get.width / 2.8,
-                          child:                         Container(
+                          child: Container(
                               width: Get.width / 2.8,
                               child: MenuCard(
                                 text: string.text("about"),
@@ -67,26 +67,22 @@ class SettingsView extends StatelessWidget {
                         text: "Update Data",
                         onTap: () {
                           Get.dialog(WillPopScope(
-                            onWillPop: () async=> false,
+                            onWillPop: () async => false,
                             child: Dialog(
                               child: Container(
-                                width: Get.width /1.4,
+                                width: Get.width / 1.4,
                                 height: Get.height / 3,
-                                child: Center(
-                                  child: Loading()
-                                ),
+                                child: Center(child: Loading()),
                               ),
                             ),
                           ));
                           Snackbars.snackbar(
-                              text: "This may take some time...",
-                              title: "Updating data");
+                              text: "This may take some time...", title: "Updating data");
                           KeplerDatabase.db.updateData().then((success) {
                             if (success) {
                               Get.back();
                               Snackbars.snackbar(
-                                  title: "Success!",
-                                  text: "Your data is updated!");
+                                  title: "Success!", text: "Your data is updated!");
                             } else {
                               Snackbars.error("Error :(");
                               Get.back();
