@@ -5,11 +5,11 @@ import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/explore/starsView.dart';
-import 'package:kepler/views/favoritesView.dart';
-import 'package:kepler/views/settingsView.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/views/favorites/favoritesView.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/views/settings/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
-import 'chartsView.dart';
+import '../charts/chartsView.dart';
 
 class HomeView extends StatelessWidget {
   @override

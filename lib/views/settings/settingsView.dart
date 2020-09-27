@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/views/aboutView.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/views/settings/aboutView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
-import '../cupertinoPageRoute.dart';
-import '../widgets/progress/loading.dart';
+import '../../cupertinoPageRoute.dart';
+import '../../widgets/progress/loading.dart';
 
 class SettingsView extends StatelessWidget {
   @override

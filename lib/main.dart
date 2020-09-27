@@ -9,7 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/theme/theme.dart';
-import 'package:kepler/views/homeView.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/views/home/homeView.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
 import 'models/planetData.dart';
