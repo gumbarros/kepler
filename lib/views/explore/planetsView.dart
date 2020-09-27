@@ -84,14 +84,14 @@ class PlanetView extends StatelessWidget {
                               alignment: Alignment.bottomRight,
                               child: IconButton(
                                 iconSize: 32.0,
-                                icon: _.getPlanet(planet.planetName).isNull
+                                icon: _.getFavorite(planet.planetName) == null
                                     ? Icon(Icons.star_border)
                                     : Icon(Icons.star),
                                 onPressed: () {
-                                  if (_.getPlanet(planet.planetName).isNull) {
-                                    _.savePlanet(planet);
+                                  if (_.getFavorite(planet.planetName) == null) {
+                                    _.saveFavorite(planet);
                                   } else {
-                                    _.removePlanet(planet.planetName);
+                                    _.removeFavorite(planet.planetName);
                                   }
                                   _.update();
                                 },

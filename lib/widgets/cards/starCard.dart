@@ -76,11 +76,16 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
                   Expanded(child: SizedBox()),
                   Padding(
                     padding: const EdgeInsets.only(right: 15.0),
-                    child: Text(
-                      widget.text,
-                      overflow: TextOverflow.ellipsis,
+                      child: Text(
+                        widget.text,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'JosefinSans'),
+                      ),
                     ),
-                  )
+
                 ]),
               ),
             ),

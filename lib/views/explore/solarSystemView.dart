@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
+import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -17,12 +19,11 @@ import 'package:kepler/widgets/universe/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
 class SolarSystemView extends StatelessWidget {
-  final String star;
-  final double starTemp;
+  final StarData star;
   final int index;
 
   SolarSystemView(
-      {@required this.star, @required this.starTemp, @required this.index});
+      {@required this.star, @required this.index});
 
   final ScrollController scrollController = new ScrollController();
   final RxDouble position = 0.0.obs;
@@ -60,7 +61,7 @@ class SolarSystemView extends StatelessWidget {
               children: [
                 Container(
                   color: Theme.of(context).dialogBackgroundColor,
-                  child: Header(star + string.text("system"),
+                  child: Header(star.name + string.text("system"),
                       () => Navigator.pop(context)),
                 ),
                 Padding(
@@ -68,18 +69,37 @@ class SolarSystemView extends StatelessWidget {
                   child: Hero(
                     tag: 'star$index',
                     child: Star(
-                      temperature: starTemp,
+                      temperature: star.temperature,
                       size: 200,
                     ),
                   ),
                 ),
               ],
             ),
+            GetBuilder<FavoritesController>(
+                init: FavoritesController(),
+                builder: (_) => Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(
+                    iconSize: 32.0,
+                    icon: _.getFavorite(star.name) == null
+                        ? Icon(Icons.star_border)
+                        : Icon(Icons.star),
+                    onPressed: () {
+                      if (_.getFavorite(star.name) == null) {
+                        _.saveFavorite(star);
+                      } else {
+                        _.removeFavorite(star.name);
+                      }
+                      _.update();
+                    },
+                  ),
+                )),
             Container(
               width: Get.width,
               height: Get.height,
               child: FutureBuilder<List<PlanetData>>(
-                future: KeplerDatabase.db.getSolarSystemPlanets(star),
+                future: KeplerDatabase.db.getSolarSystemPlanets(star.name),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<PlanetData>> snapshot) {
                   switch (snapshot.connectionState) {

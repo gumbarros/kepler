@@ -7,8 +7,11 @@ import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/models/planetData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
+import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
+import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/universe/smallPlanet.dart';
 
@@ -17,7 +20,7 @@ class FavoritesView extends StatelessWidget{
 
   final RxDouble position = 0.0.obs;
 
-  final List planets = FavoritesController.to.getAllPlanets();
+  final List favorites = FavoritesController.to.getAllFavorites();
 
   final ScrollController scrollController = new ScrollController();
 
@@ -66,67 +69,47 @@ class FavoritesView extends StatelessWidget{
               child:ListView.builder(
                   controller: scrollController,
                   physics: BouncingScrollPhysics(),
-                  itemCount: planets.length,
+                  itemCount: favorites.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Visibility(
-                        visible: !index.isEqual(0),
-                        replacement: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: PlanetCard(
-                                  width: Get.width - Get.width / 4,
-                                  height: Get.height / 5,
-                                  text:
-                                  "${planets[index].planetName}",
-                                  onTap: () => Navigator.of(context)
-                                      .push(route(PlanetView(
-                                    planets[index],
-                                    index: index,
-                                  ))),
-                                  child: SmallPlanet(
-                                    index: index,
-                                    color: PlanetController.to
-                                        .getPlanetsColor(
-                                        planets[index].bmvj),
-                                    size: 100,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
+                    if(favorites[index].runtimeType == PlanetData)
+                    return Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: PlanetCard(
+                            width: Get.width - Get.width / 4,
+                            height: Get.height / 5,
+                            text:
+                            "${favorites[index].planetName}",
+                            onTap: () => Navigator.of(context)
+                                .push(route(PlanetView(
+                              favorites[index],
+                              index: index,
+                            ))),
+                            child: SmallPlanet(
+                              index: index,
+                              color: PlanetController.to
+                                  .getPlanetsColor(favorites[index].bmvj),
+                              size: 100,
+                            )),
+                      ),
+                    );
+                    else
+                      return Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: StarCard(
+                          size: Get.width / 3.3,
+                          index: index,
+                          text: favorites[index].name,
+                          temperature:  favorites[index].temperature,
+                          onTap: () =>
+                              Navigator.of(context)
+                                  .push(route(SolarSystemView(
+                                index: index,
+                                star: favorites[index],
+                              ))),
                         ),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: PlanetCard(
-                                    width: Get.width - Get.width / 4,
-                                    height: Get.height / 5,
-                                    text:
-                                    "${planets[index].planetName}",
-                                    onTap: () => Navigator.of(context)
-                                        .push(route(PlanetView(
-                                      planets[index][index],
-                                      index: index,
-                                    ))),
-                                    child: SmallPlanet(
-                                      index: index,
-                                      color: PlanetController.to
-                                          .getPlanetsColor(planets[index].bmvj),
-                                      size: 100,
-                                    )),
-                              ),
-                            ),
-                          ],
-                        ));
+                      );
                   }),
             ),
           ],

@@ -1,11 +1,22 @@
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
+part 'hive/starData.g.dart';
+
+@HiveType(typeId:1)
 class StarData {
+  @HiveField(0)
   String name;
+  @HiveField(1)
   double temperature;
+  @HiveField(2)
   double radius;
+  @HiveField(3)
   double mass;
+  @HiveField(4)
   double age;
+
+  StarData();
 
   StarData.fromMap(Map<String, dynamic> map) {
     this.name = map['hostname'];

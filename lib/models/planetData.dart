@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-part 'planetData.g.dart';
+part 'hive/planetData.g.dart';
 
 @HiveType(typeId: 0)
 class PlanetData {
@@ -30,16 +30,7 @@ class PlanetData {
   @HiveField(11)
   double bmvj;
 
-  PlanetData(
-      {this.planetName,
-      this.orbitalPeriod,
-      this.star,
-      this.jupiterMass,
-      this.density,
-      this.radius,
-      this.discoveryMethod,
-      this.telescope,
-      this.numOfPlanetsSystem});
+  PlanetData();
 
   PlanetData.fromMap(Map<String, dynamic> map) {
     planetName = map['pl_name'];

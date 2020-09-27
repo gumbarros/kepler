@@ -85,8 +85,7 @@ class StarsView extends StatelessWidget{
                                   Navigator.of(context)
                                       .push(route(SolarSystemView(
                                     index: index,
-                                    starTemp: snapshot.data[index].temperature,
-                                    star: snapshot.data[index].name,
+                                    star: snapshot.data[index],
                                   ))),
                             ),
                           ),

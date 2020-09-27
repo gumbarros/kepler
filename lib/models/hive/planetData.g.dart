@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'planetData.dart';
+part of '../planetData.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -16,17 +16,16 @@ class PlanetDataAdapter extends TypeAdapter<PlanetData> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return PlanetData(
-      planetName: fields[0] as String,
-      orbitalPeriod: fields[1] as double,
-      star: fields[2] as String,
-      jupiterMass: fields[3] as double,
-      density: fields[4] as double,
-      radius: fields[5] as double,
-      discoveryMethod: fields[6] as int,
-      telescope: fields[7] as String,
-      numOfPlanetsSystem: fields[8] as int,
-    )
+    return PlanetData()
+      ..planetName = fields[0] as String
+      ..orbitalPeriod = fields[1] as double
+      ..star = fields[2] as String
+      ..jupiterMass = fields[3] as double
+      ..density = fields[4] as double
+      ..radius = fields[5] as double
+      ..discoveryMethod = fields[6] as int
+      ..telescope = fields[7] as String
+      ..numOfPlanetsSystem = fields[8] as int
       ..bband = fields[9] as double
       ..vband = fields[10] as double
       ..bmvj = fields[11] as double;

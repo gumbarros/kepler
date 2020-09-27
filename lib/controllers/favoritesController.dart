@@ -5,26 +5,31 @@ import 'package:kepler/models/planetData.dart';
 class FavoritesController extends GetxController {
   static FavoritesController get to => Get.find();
 
-  Box planets;
+  Box favorites;
 
   @override
   onInit() async {
-    planets = await Hive.openBox('planets');
+    favorites = await Hive.openBox('favorites');
   }
 
-  PlanetData getPlanet(String name) {
-    return planets.get(name);
+  dynamic getFavorite(String name) {
+    return favorites.get(name);
   }
 
-  List getAllPlanets(){
-    return planets.values.map((planet) => planet).toList();
+  List getAllFavorites(){
+    return favorites.values.map((favorite) => favorite).toList();
   }
 
-  void savePlanet(PlanetData planet) async{
-    planets.put(planet.planetName,planet);
+  void saveFavorite(favorite) async{
+    if(favorite.runtimeType == PlanetData){
+      favorites.put(favorite.planetName,favorite);
+    }
+    else{
+      favorites.put(favorite.name,favorite);
+    }
   }
 
-  void removePlanet(String name) {
-    planets.delete(name);
+  void removeFavorite(String name) {
+    favorites.delete(name);
   }
 }
