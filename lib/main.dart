@@ -9,9 +9,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/theme/theme.dart';
-import 'file:///D:/Projetos/Barros/kepler/lib/views/home/homeView.dart';
+import 'package:kepler/views/home/homeView.dart';
 import 'package:syncfusion_flutter_core/core.dart';
-
 import 'models/planetData.dart';
 
 final _assetsToWarmup = [
@@ -44,7 +43,7 @@ void main() async {
   });
 }
 
-void initializeApp() async{
+void initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Hive.initFlutter();
@@ -57,4 +56,3 @@ void initializeApp() async{
   Get.put<FavoritesController>(FavoritesController());
   Hive.registerAdapter(PlanetDataAdapter());
 }
-
