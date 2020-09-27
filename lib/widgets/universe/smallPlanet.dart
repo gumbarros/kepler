@@ -10,7 +10,6 @@ class SmallPlanet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('main smallPlanet$index');
     return Container(
       child: Hero(
         tag: 'smallPlanet$index',
