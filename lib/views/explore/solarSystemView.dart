@@ -147,66 +147,33 @@ class SolarSystemView extends StatelessWidget {
                             physics: BouncingScrollPhysics(),
                             itemCount: snapshot.data.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Visibility(
-                                  visible: !index.isEqual(0),
-                                  replacement: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: PlanetCard(
-                                            width: Get.width - Get.width / 4,
-                                            height: Get.height / 5,
-                                            text:
-                                                "${snapshot.data[index].planetName}",
-                                            onTap: () => Navigator.of(context)
-                                                .push(route(PlanetView(
-                                              snapshot.data[index],
-                                              index: index,
-                                            ))),
-                                            child: SmallPlanet(
-                                              index: index,
-                                              color: PlanetController.to
-                                                  .getPlanetsColor(
-                                                      snapshot.data[index].bmvj),
-                                              size: 100,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: PlanetCard(
-                                              width: Get.width - Get.width / 4,
-                                              height: Get.height / 5,
-                                              text:
-                                                  "${snapshot.data[index].planetName}",
-                                              onTap: () => Navigator.of(context)
-                                                      .push(route(PlanetView(
-                                                    snapshot.data[index],
-                                                    index: index,
-                                                  ))),
-                                              child: SmallPlanet(
-                                                index: index,
-                                                color: PlanetController.to
-                                                    .getPlanetsColor(snapshot
-                                                        .data[index].bmvj),
-                                                size: 100,
-                                              )),
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Container(
+                                      child: PlanetCard(
+                                        width: Get.width - Get.width / 4,
+                                        height: Get.height / 5,
+                                        text:
+                                        "${snapshot.data[index].planetName}",
+                                        onTap: () => Navigator.of(context)
+                                            .push(route(PlanetView(
+                                          snapshot.data[index],
+                                          index: index,
+                                        ))),
+                                        child: SmallPlanet(
+                                          index: index,
+                                          color: PlanetController.to
+                                              .getPlanetsColor(
+                                              snapshot.data[index].bmvj),
+                                          size: 100,
                                         ),
                                       ),
-                                    ],
-                                  ));
+                                    ),
+                                  )
+                                ],
+                              );
                             });
                     }
                   },
