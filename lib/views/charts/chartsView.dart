@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
-import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/charts/orbitChartView.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
 import 'package:kepler/widgets/header/header.dart';
