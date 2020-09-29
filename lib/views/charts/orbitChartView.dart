@@ -152,10 +152,12 @@ class OrbitBuilder extends StatelessWidget {
                       xValueMapper: (data, _) => data.id,
                       // yValueMapper: (data, _) => data.location.first,
                       yValueMapper: (data, _) => 100,
-                      dataLabelMapper: (data, _) => data.id,
+                      dataLabelMapper: (data, _) =>
+                          "${data.instances.length} planets",
                       dataLabelSettings: DataLabelSettings(
-                          isVisible: true,
-                          labelPosition: ChartDataLabelPosition.inside),
+                        isVisible: true,
+                        labelPosition: ChartDataLabelPosition.outside,
+                      ),
                     ),
                   ],
                 );
