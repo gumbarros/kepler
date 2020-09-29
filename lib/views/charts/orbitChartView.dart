@@ -9,7 +9,6 @@ import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class OrbitChartView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChartsController>(
@@ -28,14 +27,19 @@ class OrbitChartView extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: Get.width,
-                  child: FutureBuilder<List<PlanetData>>(
-                    future: KeplerDatabase.db.getTopOrbits(),
-                    builder: (BuildContext context, AsyncSnapshot<List<PlanetData>> snapshot){
-                      switch(snapshot.connectionState){
-                        case ConnectionState.active:
-                        case ConnectionState.waiting:
-                          return Center(child: Loading(),);
+                    height: Get.width,
+                    child: FutureBuilder<List<PlanetData>>(
+                      future: KeplerDatabase.db.getTopOrbits(
+                        limit: 50,
+                      ),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<PlanetData>> snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.active:
+                          case ConnectionState.waiting:
+                            return Center(
+                              child: Loading(),
+                            );
                           default:
                             return SfCircularChart(
                               series: <CircularSeries>[
@@ -47,14 +51,14 @@ class OrbitChartView extends StatelessWidget {
                                   dataLabelMapper: (data, _) => data.planetName,
                                   dataLabelSettings: DataLabelSettings(
                                       isVisible: true,
-                                      labelPosition: ChartDataLabelPosition.inside),
+                                      labelPosition:
+                                          ChartDataLabelPosition.inside),
                                 ),
                               ],
                             );
-                      }
-                    },
-                  )
-                )
+                        }
+                      },
+                    ))
               ],
             ),
           );

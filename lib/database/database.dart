@@ -2,6 +2,7 @@ import 'package:kepler/api/api.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../models/planetData.dart';
 
 class KeplerDatabase {
@@ -43,47 +44,70 @@ class KeplerDatabase {
       await db.execute(_createTable);
       updateData();
     });
-
   }
 
   Future<bool> updateData() async {
-    try{
+    try {
       Database db = await database;
-      await API.getAllData().then((data) async{
+      await API.getAllData().then((data) async {
         final batch = db.batch();
         batch.execute("DROP TABLE IF EXISTS $_table");
         batch.execute(_createTable);
-        data.forEach((item){
-           batch.insert(_table, item);
+        data.forEach((item) {
+          batch.insert(_table, item);
         });
         await batch.commit(noResult: true);
       });
       return true;
-    }
-    catch(e){
+    } catch (e) {
       print(e);
       return false;
     }
   }
 
-  Future<List<StarData>> getAllStars() async{
+  Future<List<StarData>> getAllStars() async {
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","st_teff","st_rad","st_mass","st_age"], distinct: true);
-    final stars = data.map(( Map<String, dynamic>star) => StarData.fromMap(star)).toList();
+    final List<Map<String, dynamic>> data = await db.query("tb_kepler",
+        columns: ["hostname", "st_teff", "st_rad", "st_mass", "st_age"],
+        distinct: true);
+    final stars = data
+        .map((Map<String, dynamic> star) => StarData.fromMap(star))
+        .toList();
     return stars.cast<StarData>();
   }
 
-  Future<List<PlanetData>> getTopOrbits() async{
+  Future<List<PlanetData>> getTopOrbits({int limit = 5}) async {
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper", limit: 5);
-    final planets = data.map(( Map<String, dynamic>planet) => PlanetData.fromMap(planet)).toList();
+    final List<Map<String, dynamic>> data = await db.query(
+      "tb_kepler",
+      columns: ["pl_name", "pl_orbper"],
+      orderBy: "pl_orbper",
+      limit: limit,
+    );
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
     return planets;
   }
 
-  Future<List<PlanetData>> getSolarSystemPlanets(String star) async{
+  Future<List<PlanetData>> getSolarSystemPlanets(String star) async {
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["hostname","pl_name", "disc_year", "pl_orbper", "pl_radj", "pl_bmassj", "pl_dens", "sy_bmag", "sy_vmag"], where: "hostname='$star'");
-    final planets = data.map(( Map<String, dynamic>star) => PlanetData.fromMap(star)).toList();
+    final List<Map<String, dynamic>> data = await db.query("tb_kepler",
+        columns: [
+          "hostname",
+          "pl_name",
+          "disc_year",
+          "pl_orbper",
+          "pl_radj",
+          "pl_bmassj",
+          "pl_dens",
+          "sy_bmag",
+          "sy_vmag"
+        ],
+        where: "hostname='$star'");
+    final planets = data
+        .map((Map<String, dynamic> star) => PlanetData.fromMap(star))
+        .toList();
     return planets.cast<PlanetData>();
   }
 
