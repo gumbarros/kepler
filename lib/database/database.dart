@@ -73,9 +73,9 @@ class KeplerDatabase {
     return stars.cast<StarData>();
   }
 
-  Future<List<PlanetData>> getTopOrbits() async{
+  Future<List<PlanetData>> getSmallestOrbits() async{
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper", limit: 5);
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper asc", limit: 6);
     final planets = data.map(( Map<String, dynamic>planet) => PlanetData.fromMap(planet)).toList();
     return planets;
   }

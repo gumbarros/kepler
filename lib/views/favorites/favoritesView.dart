@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
+import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
@@ -27,6 +28,7 @@ class FavoritesView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Get.put<PlanetController>(PlanetController());
+    Get.put<StarsController>(StarsController());
     return GetBuilder<FavoritesController>(
       initState: (state){
         scrollController.addListener(() {

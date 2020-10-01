@@ -16,6 +16,7 @@ class AboutView extends StatelessWidget {
               Navigator.of(context).pop(context);
             }),
             Container(
+              width: Get.width,
               height: Get.height / 1.3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -26,12 +27,7 @@ class AboutView extends StatelessWidget {
                     title: "Developed with the power of open-source at",
                     url: "https://www.github.com/gumbarros/kepler",
                   ),
-                  AboutCard(
-                    title: "Images by",
-                    image: "assets/images/kurzgesagt.png",
-                    url:
-                        "https://www.youtube.com/channel/UCsXVk37bltHxD1rDPwtNM8Q",
-                  ),
+                  FlutterLogo(size: 65.0),
                   AboutCard(
                     title: "Data by",
                     image: "assets/images/nasa.png",
