@@ -286,42 +286,42 @@ packages:
       name: get
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.11.1"
+    version: "3.12.1"
   get_core:
     dependency: transitive
     description:
       name: get_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.10.2"
+    version: "3.12.0"
   get_instance:
     dependency: transitive
     description:
       name: get_instance
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.10.2"
+    version: "3.12.0"
   get_navigation:
     dependency: transitive
     description:
       name: get_navigation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.10.2"
+    version: "3.12.0"
   get_rx:
     dependency: transitive
     description:
       name: get_rx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.10.2"
+    version: "3.12.0"
   get_state_manager:
     dependency: transitive
     description:
       name: get_state_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.10.2"
+    version: "3.12.0"
   get_storage:
     dependency: "direct main"
     description:
@@ -335,7 +335,7 @@ packages:
       name: get_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.10.2"
+    version: "3.12.0"
   glob:
     dependency: transitive
     description:
@@ -405,7 +405,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.17"
+    version: "2.1.18"
   intl:
     dependency: transitive
     description:
@@ -441,6 +441,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1"
+  k_means_cluster:
+    dependency: "direct main"
+    description:
+      name: k_means_cluster
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.2"
   logging:
     dependency: transitive
     description:
@@ -559,7 +566,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   pool:
     dependency: transitive
     description:

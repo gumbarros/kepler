@@ -14,6 +14,7 @@ import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/universe/gasPlanet.dart';
 import 'package:kepler/widgets/universe/smallPlanet.dart';
 
 
@@ -65,55 +66,61 @@ class FavoritesView extends StatelessWidget{
                 ),
               ],
             ),
-            Container(
-              width: Get.width,
-              height: Get.height,
-              child:ListView.builder(
-                  controller: scrollController,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: favorites.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if(favorites[index].runtimeType == PlanetData)
+            ListView.builder(
+              shrinkWrap: true,
+                controller: scrollController,
+                physics: BouncingScrollPhysics(),
+                itemCount: favorites.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if(favorites[index].runtimeType == PlanetData)
+                  return Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: PlanetCard(
+                          width: Get.width - Get.width / 4,
+                          height: Get.height / 5,
+                          text:
+                          "${favorites[index].planetName}",
+                          onTap: () => Navigator.of(context)
+                              .push(route(PlanetView(
+                            favorites[index],
+                            index: index,
+                          ))),
+                          child: PlanetController.to
+                              .getPlanetsColor(favorites[index].bmvj) ==
+                              Colors.yellow[100]
+                              ? GasPlanet(
+                            index: index,
+                            color: PlanetController.to
+                                .getPlanetsColor(favorites[index].bmvj),
+                            size: 100,
+                          )
+                              : SmallPlanet(
+                            index: index,
+                            color: PlanetController.to
+                                .getPlanetsColor(favorites[index].bmvj),
+                            size: 100,
+                          ),),
+                    ),
+                  );
+                  else
                     return Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: PlanetCard(
-                            width: Get.width - Get.width / 4,
-                            height: Get.height / 5,
-                            text:
-                            "${favorites[index].planetName}",
-                            onTap: () => Navigator.of(context)
-                                .push(route(PlanetView(
-                              favorites[index],
+                      child: StarCard(
+                        size: Get.width / 3.3,
+                        index: index,
+                        text: favorites[index].name,
+                        temperature:  favorites[index].temperature,
+                        onTap: () =>
+                            Navigator.of(context)
+                                .push(route(SolarSystemView(
                               index: index,
+                              star: favorites[index],
                             ))),
-                            child: SmallPlanet(
-                              index: index,
-                              color: PlanetController.to
-                                  .getPlanetsColor(favorites[index].bmvj),
-                              size: 100,
-                            )),
                       ),
                     );
-                    else
-                      return Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: StarCard(
-                          size: Get.width / 3.3,
-                          index: index,
-                          text: favorites[index].name,
-                          temperature:  favorites[index].temperature,
-                          onTap: () =>
-                              Navigator.of(context)
-                                  .push(route(SolarSystemView(
-                                index: index,
-                                star: favorites[index],
-                              ))),
-                        ),
-                      );
-                  }),
-            ),
+                }),
           ],
         ),
       ),
