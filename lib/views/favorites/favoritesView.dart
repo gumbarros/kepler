@@ -13,6 +13,7 @@ import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/universe/gasPlanet.dart';
 import 'package:kepler/widgets/universe/smallPlanet.dart';
 
 
@@ -84,12 +85,21 @@ class FavoritesView extends StatelessWidget{
                             favorites[index],
                             index: index,
                           ))),
-                          child: SmallPlanet(
+                          child: PlanetController.to
+                              .getPlanetsColor(favorites[index].bmvj) ==
+                              Colors.yellow[100]
+                              ? GasPlanet(
                             index: index,
                             color: PlanetController.to
                                 .getPlanetsColor(favorites[index].bmvj),
                             size: 100,
-                          )),
+                          )
+                              : SmallPlanet(
+                            index: index,
+                            color: PlanetController.to
+                                .getPlanetsColor(favorites[index].bmvj),
+                            size: 100,
+                          ),),
                     ),
                   );
                   else

@@ -14,6 +14,7 @@ import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/universe/gasPlanet.dart';
 import 'package:kepler/widgets/universe/smallPlanet.dart';
 import 'package:kepler/widgets/universe/star.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -145,7 +146,7 @@ class SolarSystemView extends StatelessWidget {
                         );
                       }
                       return ListView.builder(
-                        shrinkWrap: true,
+                          shrinkWrap: true,
                           controller: scrollController,
                           physics: BouncingScrollPhysics(),
                           itemCount: snapshot.data.length,
@@ -165,13 +166,24 @@ class SolarSystemView extends StatelessWidget {
                                         snapshot.data[index],
                                         index: index,
                                       ))),
-                                      child: SmallPlanet(
-                                        index: index,
-                                        color: PlanetController.to
-                                            .getPlanetsColor(
-                                                snapshot.data[index].bmvj),
-                                        size: 100,
-                                      ),
+                                      child: PlanetController.to
+                                                  .getPlanetsColor(snapshot
+                                                      .data[index].bmvj) ==
+                                              Colors.yellow[100]
+                                          ? GasPlanet(
+                                              index: index,
+                                              color: PlanetController.to
+                                                  .getPlanetsColor(snapshot
+                                                      .data[index].bmvj),
+                                              size: 100,
+                                            )
+                                          : SmallPlanet(
+                                              index: index,
+                                              color: PlanetController.to
+                                                  .getPlanetsColor(snapshot
+                                                      .data[index].bmvj),
+                                              size: 100,
+                                            ),
                                     ),
                                   ),
                                 ),

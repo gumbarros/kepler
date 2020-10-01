@@ -6,6 +6,7 @@ import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/widgets/header/header.dart';
+import 'package:kepler/widgets/universe/gasPlanet.dart';
 import 'package:kepler/widgets/universe/smallPlanet.dart';
 
 class PlanetView extends StatelessWidget {
@@ -34,9 +35,19 @@ class PlanetView extends StatelessWidget {
                             )),
                       ],
                     ),
-                    SmallPlanet(
+                    PlanetController.to
+                        .getPlanetsColor(planet.bmvj) ==
+                        Colors.yellow[100]
+                        ? GasPlanet(
                       index: index,
-                      color: PlanetController.to.getPlanetsColor(planet.bmvj),
+                      color: PlanetController.to
+                          .getPlanetsColor(planet.bmvj),
+                      size: 200,
+                    )
+                        : SmallPlanet(
+                      index: index,
+                      color: PlanetController.to
+                          .getPlanetsColor(planet.bmvj),
                       size: 200,
                     ),
                     SizedBox(
