@@ -1,4 +1,4 @@
-# Kepler: Discover exoplanets with NASA data 🪐
+# Kepler: Discover the universe with NASA data 🪐
 
 ![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
 ![Image1](https://i.ibb.co/gz54pQT/Screenshot-1.png)
