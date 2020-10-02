@@ -3,6 +3,7 @@
 ![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
 ![Image1](https://i.ibb.co/gz54pQT/Screenshot-1.png)
 ![Image2](https://i.ibb.co/zfyGhxW/Screenshot-2.png)
+![Image3](https://i.ibb.co/jLS8GVc/Screenshot-3.png)
 
 # How to contribute 💻
 - Developing the charts (largest planets, longest orbits)
