@@ -2,6 +2,7 @@ import 'package:kepler/api/api.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../models/planetData.dart';
 
 class KeplerDatabase {
@@ -75,10 +76,36 @@ class KeplerDatabase {
     return stars.cast<StarData>();
   }
 
-  Future<List<PlanetData>> getPlanetsOrbits(String orderBy) async{
+  Future<List<PlanetData>> getAllPlanetsOrbits() async {
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper " + orderBy, where: "pl_orbper IS NOT NULL and pl_orbper != ''", limit: 6);
-    final planets = data.map(( Map<String, dynamic>planet) => PlanetData.fromMap(planet)).toList();
+    final List<Map<String, dynamic>> data = await db.query(
+      "tb_kepler",
+      columns: ["pl_name", "pl_orbper"],
+      orderBy: "pl_orbper ",
+      where: "pl_orbper IS NOT NULL and pl_orbper != ''",
+    );
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
+    // planets.forEach((PlanetData planet) {
+    //   if(planet)
+    // });
+    return planets;
+  }
+
+  Future<List<PlanetData>> getPlanetsOrbits(
+    String orderBy, {
+    int limit = 6,
+  }) async {
+    Database db = await database;
+    final List<Map<String, dynamic>> data = await db.query("tb_kepler",
+        columns: ["pl_name", "pl_orbper"],
+        orderBy: "pl_orbper " + orderBy,
+        where: "pl_orbper IS NOT NULL and pl_orbper != ''",
+        limit: limit);
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
     // planets.forEach((PlanetData planet) {
     //   if(planet)
     // });
