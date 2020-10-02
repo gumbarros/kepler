@@ -18,12 +18,11 @@ class OrbitChartView extends StatelessWidget {
         init: ChartsController(),
         builder: (controller) {
           return Scaffold(
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
+            body: ListView(
               children: [
                 Header(
                   "Orbit Comparison", //TODO - LOCALIZE - ORBIT COMPARISON
-                  () => Navigator.of(
+                      () => Navigator.of(
                     context,
                   ).pop(
                     context,
@@ -107,61 +106,63 @@ class OrbitBuilder extends StatelessWidget {
       );
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: Get.width,
-        child: FutureBuilder<List<Cluster>>(
-          future: this.future.then(
-                (List<PlanetData> planetData) async => (planetData.length > 10)
-                    ? await this.getClusters(planetData, 10)
-                    : await this.getClusters(planetData, 1),
+    return FutureBuilder<List<Cluster>>(
+      future: this.future.then(
+            (List<PlanetData> planetData) async => (planetData.length > 10)
+                ? await this.getClusters(planetData, 10)
+                : await this.getClusters(planetData, 1),
+          ),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<Cluster>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+            return Center(
+              child: Loading(),
+            );
+          default:
+            return Container(
+              width: Get.width,
+              height: Get.height,
+              child: SfCircularChart(
+
+                legend: Legend(
+                    isVisible: true,
+                    iconHeight: 10,
+                    width: Get.width.toString(),
+                    height: (Get.height / 2).toString(),
+                    iconWidth: 10,
+                    position: LegendPosition.bottom,
+                    overflowMode: LegendItemOverflowMode.wrap
+                ),
+
+                series: <CircularSeries>[
+                  // Renders radial bar chart
+                  DoughnutSeries<Cluster, String>(
+                    innerRadius: '50%',
+                    radius: '80%',
+                    dataSource: snapshot.data,
+
+                    xValueMapper: (data, _){
+                      if(getMaxForCluster(data) < 365 || (getMinForCluster(data)/365).truncate()== 0){
+                        return "${getMinForCluster(data).toStringAsFixed(2)} - ${getMaxForCluster(data).toStringAsFixed(2)} days: ${data.instances.length} planets";
+                      }
+                      else{
+                       return "${(getMinForCluster(data)/365).toStringAsFixed(0)} - ${(getMaxForCluster(data)/365).toStringAsFixed(0)} years: ${data.instances.length} planets";
+                      }
+                    },
+
+                    // yValueMapper: (data, _) => data.location.first,
+                    yValueMapper: (data, _) => data.instances.length,
+                    legendIconType: LegendIconType.circle,
+
+                    dataLabelSettings: DataLabelSettings(isVisible: false),
+                  ),
+                ],
               ),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Cluster>> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.active:
-              case ConnectionState.waiting:
-                return Center(
-                  child: Loading(),
-                );
-              default:
-                List<Cluster> clusters = snapshot.data;
-                final maxRadius = getMaxForClusterList(clusters);
-                return SfCircularChart(
-                  legend: Legend(
-                      isVisible: true,
-                      iconHeight: 10,
-                      iconWidth: 10,
-                      position: LegendPosition.bottom,
-                      overflowMode: LegendItemOverflowMode.wrap),
-                  series: <CircularSeries>[
-                    // Renders radial bar chart
-                    DoughnutSeries<Cluster, String>(
-                      innerRadius: '30%',
-                      radius: '100%',
-                      dataSource: snapshot.data,
-
-                      // maximumValue: snapshot.data
-                      //     .map(
-                      //       (cluster) => cluster.instances
-                      //           .map(
-                      //             (planet) => planet.location.first,
-                      //           )
-                      //           .reduce(max),
-                      //     )
-                      //     .reduce(max),
-
-                      xValueMapper: (data, _) =>
-                          "${getMinForCluster(data).toStringAsFixed(2)} - ${getMaxForCluster(data).toStringAsFixed(2)}: ${data.instances.length} planets",
-                      // yValueMapper: (data, _) => data.location.first,
-                      yValueMapper: (data, _) => data.instances.length,
-                      legendIconType: LegendIconType.circle,
-
-                      dataLabelSettings: DataLabelSettings(isVisible: false),
-                    ),
-                  ],
-                );
-            }
-          },
-        ));
+            );
+        }
+      },
+    );
   }
 }
