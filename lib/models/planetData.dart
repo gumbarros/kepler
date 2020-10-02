@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-
+import 'package:kepler/models/universeData.dart';
 part 'hive/planetData.g.dart';
 
 @HiveType(typeId: 0)
-class PlanetData {
+class PlanetData extends UniverseData{
   @HiveField(0)
   String planetName;
   @HiveField(1)
@@ -30,8 +30,10 @@ class PlanetData {
   @HiveField(11)
   double bmvj;
 
+  @override
   PlanetData();
 
+  @override
   PlanetData.fromMap(Map<String, dynamic> map) {
     planetName = map['pl_name'];
     orbitalPeriod = map['pl_orbper'].toString().isNullOrBlank ? 0.0 : map['pl_orbper'];

@@ -95,11 +95,11 @@ class PlanetView extends StatelessWidget {
                               alignment: Alignment.bottomRight,
                               child: IconButton(
                                 iconSize: 32.0,
-                                icon: _.getFavorite(planet.planetName) == null
+                                icon: _.getFavorite(planet.planetName).isNull
                                     ? Icon(Icons.star_border)
                                     : Icon(Icons.star),
                                 onPressed: () {
-                                  if (_.getFavorite(planet.planetName) == null) {
+                                  if (_.getFavorite(planet.planetName).isNull) {
                                     _.saveFavorite(planet);
                                   } else {
                                     _.removeFavorite(planet.planetName);
