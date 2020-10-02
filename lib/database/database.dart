@@ -75,10 +75,13 @@ class KeplerDatabase {
     return stars.cast<StarData>();
   }
 
-  Future<List<PlanetData>> getSmallestOrbits() async{
+  Future<List<PlanetData>> getPlanetsOrbits(String orderBy) async{
     Database db = await database;
-    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper asc", limit: 6);
+    final List<Map<String, dynamic>>data = await db.query("tb_kepler", columns: ["pl_name","pl_orbper"], orderBy: "pl_orbper " + orderBy, where: "pl_orbper IS NOT NULL and pl_orbper != ''", limit: 6);
     final planets = data.map(( Map<String, dynamic>planet) => PlanetData.fromMap(planet)).toList();
+    // planets.forEach((PlanetData planet) {
+    //   if(planet)
+    // });
     return planets;
   }
 
