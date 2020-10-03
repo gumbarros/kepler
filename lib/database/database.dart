@@ -70,6 +70,19 @@ class KeplerDatabase {
     }
   }
 
+  Future<PlanetData> getPlanetByName(String name)async{
+    Database db = await database;
+    final List<Map<String, dynamic>> data = await db.query(
+      "tb_kepler",
+      where:
+      "pl_name like '%$name%'",
+    );
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
+    return planets[0];
+  }
+
   Future<List<StarData>> getAllStars() async {
     Database db = await database;
     final List<Map<String, dynamic>> data = await db.query("tb_kepler",

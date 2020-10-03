@@ -9,6 +9,7 @@ import 'package:kepler/views/favorites/favoritesView.dart';
 import 'package:kepler/views/settings/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
+import 'package:kepler/widgets/snackbars/snackbars.dart';
 import '../charts/chartsView.dart';
 
 class HomeView extends StatelessWidget {
@@ -84,6 +85,15 @@ class HomeView extends StatelessWidget {
                             Navigator.of(context).push(route(FavoritesView())),
                         text: string.text("favourites"),
                         colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ColorsCard(
+                        onTap: () =>
+                            Snackbars.development(),
+                        text: "Nasa Image of The Day",
+                      colorList: [ Colors.lightGreen,Colors.green,],
                       ),
                     ],
                   ),
