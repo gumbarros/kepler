@@ -111,11 +111,11 @@ class SolarSystemView extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: IconButton(
                           iconSize: 32.0,
-                          icon: _.getFavorite(star.name) == null
+                          icon: _.getFavorite(star.name).isNull
                               ? Icon(Icons.star_border)
                               : Icon(Icons.star),
                           onPressed: () {
-                            if (_.getFavorite(star.name) == null) {
+                            if (_.getFavorite(star.name).isNull) {
                               _.saveFavorite(star);
                             } else {
                               _.removeFavorite(star.name);

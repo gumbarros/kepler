@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:kepler/models/planetData.dart';
+import 'package:kepler/models/universeData.dart';
 
 class FavoritesController extends GetxController {
   static FavoritesController get to => Get.find();
@@ -8,15 +9,15 @@ class FavoritesController extends GetxController {
   Box favorites;
 
   @override
-  onInit() async {
+  void onInit() async {
     favorites = await Hive.openBox('favorites');
   }
 
-  dynamic getFavorite(String name) {
+  UniverseData getFavorite(String name) {
     return favorites.get(name);
   }
 
-  List getAllFavorites(){
+  List<UniverseData> getAllFavorites(){
     return favorites.values.map((favorite) => favorite).toList();
   }
 

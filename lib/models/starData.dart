@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-
+import 'package:kepler/models/universeData.dart';
 part 'hive/starData.g.dart';
 
 @HiveType(typeId:1)
-class StarData {
+class StarData extends UniverseData{
   @HiveField(0)
   String name;
   @HiveField(1)
@@ -16,8 +16,10 @@ class StarData {
   @HiveField(4)
   double age;
 
+  @override
   StarData();
 
+  @override
   StarData.fromMap(Map<String, dynamic> map) {
     this.name = map['hostname'];
     this.temperature =  map['st_teff'].toString().isNullOrBlank ? 0.0 : map['st_teff'];
