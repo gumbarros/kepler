@@ -67,8 +67,10 @@ class OrbitBuilder extends StatelessWidget {
 
     // Create the list of instances.
     List<Instance> instances = planets
-        .map((PlanetData planet) =>
-            Instance([planet.orbitalPeriod, 0], id: planet.planetName))
+        .map((PlanetData planet) => Instance(
+              [planet.orbitalPeriod, 0],
+              id: planet.planetName,
+            ))
         .toList();
 
     // Randomly create the initial clusters.
@@ -146,6 +148,25 @@ class OrbitBuilder extends StatelessWidget {
               width: Get.width,
               height: Get.height,
               child: SfCircularChart(
+                onLegendTapped: (isDoughnut)
+                    ? (pointData) => Navigator.of(context).push(
+                          route(
+                            OrbitChartView.subChart(
+                              this.getTitle(
+                                clusterData[pointData.pointIndex],
+                              ),
+                              KeplerDatabase.db.getPlanetsOrbitsBetween(
+                                getMinForCluster(
+                                  clusterData[pointData.pointIndex],
+                                ),
+                                getMaxForCluster(
+                                  clusterData[pointData.pointIndex],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                    : (_) {},
                 onPointTapped: (isDoughnut)
                     ? (pointData) => Navigator.of(context).push(
                           route(
@@ -172,6 +193,7 @@ class OrbitBuilder extends StatelessWidget {
                     height: (Get.height / 2).toString(),
                     iconWidth: 10,
                     position: LegendPosition.bottom,
+                    toggleSeriesVisibility: false,
                     overflowMode: LegendItemOverflowMode.wrap),
                 series: (isDoughnut)
                     ? <CircularSeries>[
