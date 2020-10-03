@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:kepler/api/api.dart';
+import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -41,9 +43,12 @@ class KeplerDatabase {
 
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int newerVersion) async {
-      await db.execute(_createTable);
-      updateData();
     });
+  }
+
+  Future<void> dropTable() async{
+    Database db = await database;
+    db.execute("DROP TABLE IF EXISTS $_table");
   }
 
   Future<bool> updateData() async {

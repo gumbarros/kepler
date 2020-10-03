@@ -28,4 +28,11 @@ class Snackbars {
           backgroundColor: color,
           colorText: Colors.black);
   }
+
+  static void success({String title = "", String text = "", Color color = Colors.green}) {
+    if (!Get.isSnackbarOpen)
+      Get.snackbar(title, text,
+          backgroundColor: color,
+          colorText: Colors.white);
+  }
 }

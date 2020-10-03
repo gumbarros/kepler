@@ -18,7 +18,7 @@ class FavoritesController extends GetxController {
   }
 
   List<UniverseData> getAllFavorites(){
-    return favorites.values.map((favorite) => favorite).toList();
+    return favorites.values.map((favorite) => favorite).toList().cast<UniverseData>();
   }
 
   void saveFavorite(favorite) async{
