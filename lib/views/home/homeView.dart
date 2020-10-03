@@ -93,7 +93,13 @@ class HomeView extends StatelessWidget {
                         onTap: () =>
                             Navigator.of(context).push(route(DailyImageView())),
                         text: "Nasa Image of The Day",
-                      colorList: [ Colors.lightGreen,Colors.green,],
+                        colorList: [
+                          Colors.lightGreen,
+                          Colors.green,
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
                       ),
                     ],
                   ),

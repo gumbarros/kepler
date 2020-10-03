@@ -19,6 +19,7 @@ class ColorsCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+            margin: const EdgeInsets.all(5.0),
             height: Get.height / 8,
             width: Get.width - 20,
             decoration: BoxDecoration(
