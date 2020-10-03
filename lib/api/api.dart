@@ -21,8 +21,6 @@ class API {
       print("HTTP GET - " + dailyUrl);
       final Map data = await jsonDecodeAsyncMap(response.body);
       final DailyImageData image = DailyImageData.fromMap(data);
-      dynamic a;
-      if(a.isNull) print("pam");
       return image;
     }
     catch(e){
