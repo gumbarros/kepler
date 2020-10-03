@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/views/dailyImage/dailyImageView.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/favorites/favoritesView.dart';
 import 'package:kepler/views/settings/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/homeBackground.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
-import 'package:kepler/widgets/snackbars/snackbars.dart';
 import '../charts/chartsView.dart';
 
 class HomeView extends StatelessWidget {
@@ -91,7 +91,7 @@ class HomeView extends StatelessWidget {
                       ),
                       ColorsCard(
                         onTap: () =>
-                            Snackbars.development(),
+                            Navigator.of(context).push(route(DailyImageView())),
                         text: "Nasa Image of The Day",
                       colorList: [ Colors.lightGreen,Colors.green,],
                       ),

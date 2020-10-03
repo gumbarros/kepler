@@ -5,13 +5,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/database/database.dart';
-import 'package:kepler/locale/translations.dart';
-import 'package:kepler/views/settings/aboutView.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
-import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
-import '../../cupertinoPageRoute.dart';
 
 class SecretDeveloperMenuView extends StatelessWidget {
   @override

@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
 import 'package:kepler/api/api.dart';
-import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
