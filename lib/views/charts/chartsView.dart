@@ -23,8 +23,8 @@ class ChartsView extends StatelessWidget {
                       right: 16.0,
                       top: 8.0,
                     ),
-                    child: ImageCard(
-                      image: 'assets/images/chartsbg.png',
+                    child: ColorsCard(
+                      colorList: [Colors.blue[100], Colors.green[100]],
                       text:
                           "Orbit Size Ranking", //TODO - LOCALIZE - ORBIT SIZE RANKING
                       onTap: () {

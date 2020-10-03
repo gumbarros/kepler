@@ -61,32 +61,29 @@ class HomeView extends StatelessWidget {
                       SizedBox(
                         height: Get.height / 15,
                       ),
-                      ImageCard(
-                        onTap: () {
-                          Navigator.of(context).push(route(StarsView()));
-                        },
+                      ColorsCard(
+                        onTap: () =>
+                            Navigator.of(context).push(route(StarsView())),
                         text: string.text("explore"),
-                        image: 'assets/images/explorebg.png',
+                        colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                       ),
                       SizedBox(
-                        height: Get.height / 20,
+                        height: 30,
                       ),
-                      ImageCard(
-                        onTap: () {
-                          Navigator.of(context).push(route(ChartsView()));
-                        },
+                      ColorsCard(
+                        onTap: () =>
+                            Navigator.of(context).push(route(ChartsView())),
                         text: string.text("charts"),
-                        image: 'assets/images/chartsbg.png',
+                        colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)],
                       ),
                       SizedBox(
-                        height: Get.height / 20,
+                        height: 30,
                       ),
-                      ImageCard(
-                        onTap: () {
-                          Navigator.of(context).push(route(FavoritesView()));
-                        },
+                      ColorsCard(
+                        onTap: () =>
+                            Navigator.of(context).push(route(FavoritesView())),
                         text: string.text("favourites"),
-                        image: 'assets/images/favouritesbg.jpg',
+                        colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)],
                       ),
                     ],
                   ),

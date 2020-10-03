@@ -19,15 +19,14 @@ class AboutView extends StatelessWidget {
               width: Get.width,
               height: Get.height / 1.3,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AboutCard(
                     image: "assets/images/github.png",
-                    title: "Developed with the power of open-source at",
+                    title: "Developed at",
                     url: "https://www.github.com/gumbarros/kepler",
                   ),
-                  FlutterLogo(size: 65.0),
                   AboutCard(
                     title: "Data by",
                     image: "assets/images/nasa.png",
