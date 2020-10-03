@@ -73,17 +73,19 @@ class OrbitBuilder extends StatelessWidget {
     // Randomly create the initial clusters.
     List<Cluster> clusters = initialClusters(clusterCount, instances, seed: 0);
 
-    // // Run the algorithm. - Never Used
-    // var info = kmeans(clusters: clusters, instances: instances);
-    // clusters.sort(
-    //   (a, b) => getMaxForCluster(
-    //     a,
-    //   ).compareTo(
-    //     getMaxForCluster(
-    //       b,
-    //     ),
-    //   ),
-    // );
+    ///TODO: Dont comment this out it does the clustering inplace the info variable just is for error information or other information from the algorithm
+    var info = kmeans(clusters: clusters, instances: instances);
+
+    ///TODO: Dont comment this out either, this sorts the clusters in order of their orbital size.
+    clusters.sort(
+      (a, b) => getMaxForCluster(
+        a,
+      ).compareTo(
+        getMaxForCluster(
+          b,
+        ),
+      ),
+    );
     return clusters;
   }
 
