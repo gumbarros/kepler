@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:k_means_cluster/k_means_cluster.dart';
 import 'package:kepler/controllers/chartsController.dart';
+import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -12,6 +13,16 @@ import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class OrbitChartView extends StatelessWidget {
+  final Future<List<PlanetData>> planetsOrbits;
+  final String title;
+
+  OrbitChartView.subChart(this.title, this.planetsOrbits, {Key key})
+      : super(key: key);
+
+  OrbitChartView({Key key})
+      : title = "Orbit Comparison",
+        planetsOrbits = KeplerDatabase.db.getAllPlanetsOrbits(),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChartsController>(
@@ -21,15 +32,15 @@ class OrbitChartView extends StatelessWidget {
             body: ListView(
               children: [
                 Header(
-                  "Orbit Comparison", //TODO - LOCALIZE - ORBIT COMPARISON
-                      () => Navigator.of(
+                  this.title,
+                  () => Navigator.of(
                     context,
                   ).pop(
                     context,
                   ),
                 ),
                 OrbitBuilder(
-                  future: KeplerDatabase.db.getAllPlanetsOrbits(),
+                  future: planetsOrbits,
                 )
               ],
             ),
@@ -104,6 +115,12 @@ class OrbitBuilder extends StatelessWidget {
       .reduce(
         min,
       );
+
+  String getTitle(Cluster data) => (getMaxForCluster(data) < 365 ||
+          (getMinForCluster(data) / 365).truncate() == 0)
+      ? "${getMinForCluster(data).toStringAsFixed(2)} - ${getMaxForCluster(data).toStringAsFixed(2)} days: ${data.instances.length} planets"
+      : "${(getMinForCluster(data) / 365).toStringAsFixed(0)} - ${(getMaxForCluster(data) / 365).toStringAsFixed(0)} years: ${data.instances.length} planets";
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Cluster>>(
@@ -112,8 +129,7 @@ class OrbitBuilder extends StatelessWidget {
                 ? await this.getClusters(planetData, 10)
                 : await this.getClusters(planetData, 1),
           ),
-      builder:
-          (BuildContext context, AsyncSnapshot<List<Cluster>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Cluster>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.active:
           case ConnectionState.waiting:
@@ -125,7 +141,25 @@ class OrbitBuilder extends StatelessWidget {
               width: Get.width,
               height: Get.height,
               child: SfCircularChart(
-
+                onPointTapped: (pointData) {
+                  Navigator.of(context).push(
+                    route(
+                      OrbitChartView.subChart(
+                        this.getTitle(
+                          snapshot.data[pointData.pointIndex],
+                        ),
+                        KeplerDatabase.db.getPlanetsOrbitsBetween(
+                          getMinForCluster(
+                            snapshot.data[pointData.pointIndex],
+                          ),
+                          getMaxForCluster(
+                            snapshot.data[pointData.pointIndex],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
                 legend: Legend(
                     isVisible: true,
                     iconHeight: 10,
@@ -133,24 +167,14 @@ class OrbitBuilder extends StatelessWidget {
                     height: (Get.height / 2).toString(),
                     iconWidth: 10,
                     position: LegendPosition.bottom,
-                    overflowMode: LegendItemOverflowMode.wrap
-                ),
-
+                    overflowMode: LegendItemOverflowMode.wrap),
                 series: <CircularSeries>[
                   // Renders radial bar chart
                   DoughnutSeries<Cluster, String>(
                     innerRadius: '50%',
                     radius: '80%',
                     dataSource: snapshot.data,
-
-                    xValueMapper: (data, _){
-                      if(getMaxForCluster(data) < 365 || (getMinForCluster(data)/365).truncate()== 0){
-                        return "${getMinForCluster(data).toStringAsFixed(2)} - ${getMaxForCluster(data).toStringAsFixed(2)} days: ${data.instances.length} planets";
-                      }
-                      else{
-                       return "${(getMinForCluster(data)/365).toStringAsFixed(0)} - ${(getMaxForCluster(data)/365).toStringAsFixed(0)} years: ${data.instances.length} planets";
-                      }
-                    },
+                    xValueMapper: (data, _) => getTitle(data),
 
                     // yValueMapper: (data, _) => data.location.first,
                     yValueMapper: (data, _) => data.instances.length,
