@@ -29,6 +29,7 @@ class OrbitChartView extends StatelessWidget {
         init: ChartsController(),
         builder: (controller) {
           return Scaffold(
+            //TODO - make this a custom scroll view with a sliver header and a sliver view
             body: ListView(
               children: [
                 Header(
@@ -74,7 +75,7 @@ class OrbitBuilder extends StatelessWidget {
     List<Cluster> clusters = initialClusters(clusterCount, instances, seed: 0);
 
     ///TODO: Dont comment this out it does the clustering inplace the info variable just is for error information or other information from the algorithm
-    var info = kmeans(clusters: clusters, instances: instances);
+    var _ = kmeans(clusters: clusters, instances: instances);
 
     ///TODO: Dont comment this out either, this sorts the clusters in order of their orbital size.
     clusters.sort(
@@ -139,29 +140,31 @@ class OrbitBuilder extends StatelessWidget {
               child: Loading(),
             );
           default:
+            var clusterData = snapshot.data;
+            final isDoughnut = clusterData.length > 1;
             return Container(
               width: Get.width,
               height: Get.height,
               child: SfCircularChart(
-                onPointTapped: (pointData) {
-                  Navigator.of(context).push(
-                    route(
-                      OrbitChartView.subChart(
-                        this.getTitle(
-                          snapshot.data[pointData.pointIndex],
-                        ),
-                        KeplerDatabase.db.getPlanetsOrbitsBetween(
-                          getMinForCluster(
-                            snapshot.data[pointData.pointIndex],
+                onPointTapped: (isDoughnut)
+                    ? (pointData) => Navigator.of(context).push(
+                          route(
+                            OrbitChartView.subChart(
+                              this.getTitle(
+                                clusterData[pointData.pointIndex],
+                              ),
+                              KeplerDatabase.db.getPlanetsOrbitsBetween(
+                                getMinForCluster(
+                                  clusterData[pointData.pointIndex],
+                                ),
+                                getMaxForCluster(
+                                  clusterData[pointData.pointIndex],
+                                ),
+                              ),
+                            ),
                           ),
-                          getMaxForCluster(
-                            snapshot.data[pointData.pointIndex],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                        )
+                    : (_) {},
                 legend: Legend(
                     isVisible: true,
                     iconHeight: 10,
@@ -170,21 +173,41 @@ class OrbitBuilder extends StatelessWidget {
                     iconWidth: 10,
                     position: LegendPosition.bottom,
                     overflowMode: LegendItemOverflowMode.wrap),
-                series: <CircularSeries>[
-                  // Renders radial bar chart
-                  DoughnutSeries<Cluster, String>(
-                    innerRadius: '50%',
-                    radius: '80%',
-                    dataSource: snapshot.data,
-                    xValueMapper: (data, _) => getTitle(data),
+                series: (isDoughnut)
+                    ? <CircularSeries>[
+                        // Renders radial bar chart
+                        DoughnutSeries<Cluster, String>(
+                          innerRadius: '50%',
+                          radius: '80%',
+                          dataSource: clusterData,
+                          xValueMapper: (data, _) => getTitle(data),
 
-                    // yValueMapper: (data, _) => data.location.first,
-                    yValueMapper: (data, _) => data.instances.length,
-                    legendIconType: LegendIconType.circle,
+                          // yValueMapper: (data, _) => data.location.first,
+                          yValueMapper: (data, _) => data.instances.length,
+                          legendIconType: LegendIconType.circle,
 
-                    dataLabelSettings: DataLabelSettings(isVisible: false),
-                  ),
-                ],
+                          dataLabelSettings:
+                              DataLabelSettings(isVisible: false),
+                        ),
+                      ]
+                    : <CircularSeries>[
+                        RadialBarSeries<Instance, String>(
+                          gap: '9%',
+                          innerRadius: '0%',
+                          radius: '100%',
+                          pointRadiusMapper: (data, _) =>
+                              "${data.location[0] / getMaxForClusterList(clusterData) * 100}%",
+                          dataSource: clusterData[0].instances,
+                          maximumValue: 100,
+                          xValueMapper: (data, _) =>
+                              "${data.id} - ${data.location[0]} days",
+                          yValueMapper: (data, _) => 100,
+                          dataLabelMapper: (data, _) => data.id,
+                          dataLabelSettings: DataLabelSettings(
+                              isVisible: false,
+                              labelPosition: ChartDataLabelPosition.inside),
+                        )
+                      ],
               ),
             );
         }

@@ -83,7 +83,7 @@ class KeplerDatabase {
       columns: ["pl_name", "pl_orbper"],
       orderBy: "pl_orbper desc",
       where:
-          "pl_orbper IS NOT NULL and pl_orbper != '' and pl_orbper >= ${lower} and pl_orbper <= ${upper}",
+          "pl_orbper IS NOT NULL and pl_orbper != '' and pl_orbper >= $lower and pl_orbper <= $upper",
     );
     final planets = data
         .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))

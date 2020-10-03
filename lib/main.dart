@@ -15,7 +15,7 @@ import 'package:kepler/views/home/homeView.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
- await _initializeApp().then((_) {
+  await _initializeApp().then((_) {
     runApp(GetMaterialApp(
       title: string.text('app_title'),
       theme: KeplerTheme.theme,
@@ -29,7 +29,7 @@ void main() async {
   });
 }
 
-Future<void> _initializeApp() async{
+Future<void> _initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Hive.initFlutter();
@@ -59,4 +59,3 @@ Future<void> _warmupFlare() async {
     await cachedActor(asset);
   }
 }
-
