@@ -21,40 +21,67 @@ class DailyImageView extends StatelessWidget {
           resizeToAvoidBottomPadding: false,
           body: FutureBuilder<DailyImageData>(
               future: _.getImageOfTheDay(),
-              builder: (BuildContext context,AsyncSnapshot<DailyImageData> snapshot) {
+              builder: (BuildContext context,
+                  AsyncSnapshot<DailyImageData> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                   case ConnectionState.active:
                     return Loading();
                   default:
-                    if(snapshot.data.isNull){
+                    if (snapshot.data.isNull) {
                       return Loading();
                     }
-                    return ListView(
+                    return CustomScrollView(
                       physics: BouncingScrollPhysics(),
-                      children: [
-                        Column(
-                          children: [
+                      slivers: [
+                        SliverAppBar(
+                          shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(40),
+                                  bottomLeft: Radius.circular(40))),
+                          automaticallyImplyLeading: false,
+                          actions: [
+                            IconButton(
+                                icon: Icon(Icons.arrow_back), onPressed: null)
+                          ],
+                          stretch: true,
+                          expandedHeight: 250,
+                          pinned: true,
+                          flexibleSpace: FlexibleSpaceBar(
+                            titlePadding: EdgeInsets.only(
+                                top: 10.0, left: 10, right: 40, bottom: 10),
+                            background: ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                ),
+                                child: Image.network(snapshot.data.url)),
+                            title: Text(snapshot.data.title),
+                            stretchModes: [
+                              StretchMode.blurBackground,
+                              StretchMode.fadeTitle,
+                              StretchMode.zoomBackground
+                            ],
+                          ),
+                        ),
+                        SliverList(
+                          delegate: SliverChildListDelegate([
                             Container(
-                              color: Theme.of(context).dialogBackgroundColor,
-                              child: Header(snapshot.data.title,
-                                  () => Navigator.pop(context)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child:Container(
-                                height: Get.height / 2.5,
-                                width: Get.width / 1.1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: NetworkImage(snapshot.data.url))
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
                                 ),
                               ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(snapshot.data.explanation,
+                                    style: TextStyle(
+                                        fontFamily: "Roboto", fontSize: 20)),
+                              ),
                             ),
-                          ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.all(20.0),
-                            child: Text(snapshot.data.explanation,style:TextStyle(fontFamily: "Roboto", fontSize: 24.5))),
+                          ]),
+                        )
                       ],
                     );
                 }
