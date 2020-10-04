@@ -46,7 +46,7 @@ class DailyImageView extends StatelessWidget {
                                 height: Get.height / 2.5,
                                 width: Get.width / 1.1,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(image: NetworkImage(snapshot.data.hdurl))
+                                  image: DecorationImage(image: NetworkImage(snapshot.data.url))
                                 ),
                               ),
                             ),
