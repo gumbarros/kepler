@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomeBackground extends StatelessWidget {
+class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
