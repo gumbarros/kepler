@@ -8,7 +8,7 @@ import 'package:kepler/views/dailyImage/dailyImageView.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/favorites/favoritesView.dart';
 import 'package:kepler/views/settings/settingsView.dart';
-import 'package:kepler/widgets/backgrounds/homeBackground.dart';
+import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
 import '../charts/chartsView.dart';
 
@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
       init: HomeController(),
       builder: (home) => Stack(
         children: [
-          HomeBackground(),
+          Background(),
           Scaffold(
             backgroundColor: Colors.transparent,
             body: Container(

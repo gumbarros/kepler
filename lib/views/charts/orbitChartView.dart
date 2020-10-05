@@ -8,6 +8,7 @@ import 'package:kepler/controllers/chartsController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/models/planetData.dart';
+import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -28,23 +29,29 @@ class OrbitChartView extends StatelessWidget {
     return GetBuilder<ChartsController>(
         init: ChartsController(),
         builder: (controller) {
-          return Scaffold(
-            //TODO - make this a custom scroll view with a sliver header and a sliver view
-            body: ListView(
-              children: [
-                Header(
-                  this.title,
-                  () => Navigator.of(
-                    context,
-                  ).pop(
-                    context,
-                  ),
+          return Stack(
+            children: [
+              Background(),
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                //TODO - make this a custom scroll view with a sliver header and a sliver view
+                body: ListView(
+                  children: [
+                    Header(
+                      this.title,
+                      () => Navigator.of(
+                        context,
+                      ).pop(
+                        context,
+                      ),
+                    ),
+                    OrbitBuilder(
+                      future: planetsOrbits,
+                    )
+                  ],
                 ),
-                OrbitBuilder(
-                  future: planetsOrbits,
-                )
-              ],
-            ),
+              ),
+            ],
           );
         });
   }
