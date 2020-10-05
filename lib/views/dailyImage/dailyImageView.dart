@@ -47,7 +47,7 @@ class DailyImageView extends StatelessWidget {
                               automaticallyImplyLeading: false,
                               actions: [
                                 IconButton(
-                                    icon: Icon(Icons.arrow_back), onPressed: null)
+                                    icon: Icon(Icons.arrow_back), onPressed: () => Navigator.of(context).pop(), color: Colors.white,)
                               ],
                               stretch: true,
                               expandedHeight: 250,
@@ -63,7 +63,6 @@ class DailyImageView extends StatelessWidget {
                                     child: Image.network(snapshot.data.url)),
                                 title: Text(snapshot.data.title),
                                 stretchModes: [
-                                  StretchMode.blurBackground,
                                   StretchMode.fadeTitle,
                                   StretchMode.zoomBackground
                                 ],
