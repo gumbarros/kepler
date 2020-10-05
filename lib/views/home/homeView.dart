@@ -24,6 +24,7 @@ class HomeView extends StatelessWidget {
             backgroundColor: Colors.transparent,
             body: Container(
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: [
                   Align(
                     alignment: Alignment.topRight,

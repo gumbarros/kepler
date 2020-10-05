@@ -77,24 +77,26 @@ class StarsView extends StatelessWidget{
                         physics: BouncingScrollPhysics(),
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Obx(()=>Visibility(
-                              visible: _.find(snapshot.data[index].name),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: StarCard(
-                                  size: Get.width / 3.3,
-                                  index: index,
-                                  text: snapshot.data[index].name,
-                                  temperature: snapshot.data[index].temperature,
-                                  onTap: () =>
-                                      Navigator.of(context)
-                                          .push(route(SolarSystemView(
-                                        index: index,
-                                        star: snapshot.data[index],
-                                      ))),
-                                ),
+                          if (index == 0) {
+                            return SizedBox(height: Get.height / 3.5);
+                          } return Obx(()=>Visibility(
+                            visible: _.find(snapshot.data[index - 1].name),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: StarCard(
+                                size: Get.width / 3.3,
+                                index: index,
+                                text: snapshot.data[index - 1].name,
+                                temperature: snapshot.data[index].temperature,
+                                onTap: () =>
+                                    Navigator.of(context)
+                                        .push(route(SolarSystemView(
+                                      index: index - 1,
+                                      star: snapshot.data[index - 1],
+                                    ))),
                               ),
                             ),
+                          ),
                           );
                         });
                   }
