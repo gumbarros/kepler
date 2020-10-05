@@ -24,6 +24,7 @@ class PlanetView extends StatelessWidget {
           children: [
             Background(),
             Scaffold(
+              backgroundColor: Colors.transparent,
                   resizeToAvoidBottomPadding: false,
                   body: ListView(
                     physics: BouncingScrollPhysics(),
@@ -32,7 +33,7 @@ class PlanetView extends StatelessWidget {
                         Column(
                           children: [
                             Container(
-                                color: Theme.of(context).dialogBackgroundColor,
+                                color: Colors.transparent,
                                 child: Header(
                                   planet.planetName,
                                   () => Navigator.pop(context),

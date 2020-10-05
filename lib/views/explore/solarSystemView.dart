@@ -67,7 +67,7 @@ class SolarSystemView extends StatelessWidget {
                   Column(
                     children: [
                       Container(
-                        color: Theme.of(context).dialogBackgroundColor,
+                        color: Colors.transparent,
                         child: Header(star.name + string.text("system"),
                             () => Navigator.pop(context)),
                       ),
