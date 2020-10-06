@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:k_means_cluster/k_means_cluster.dart';
 import 'package:kepler/controllers/chartsController.dart';
-import 'file:///D:/Projetos/Barros/kepler/lib/utils/cupertinoPageRoute.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';

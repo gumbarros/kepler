@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
-import 'file:///D:/Projetos/Barros/kepler/lib/utils/cupertinoPageRoute.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/dailyImage/dailyImageView.dart';
 import 'package:kepler/views/explore/starsView.dart';
