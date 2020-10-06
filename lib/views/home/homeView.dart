@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
-import 'package:kepler/cupertinoPageRoute.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/utils/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/views/dailyImage/dailyImageView.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/favorites/favoritesView.dart';
 import 'package:kepler/views/settings/settingsView.dart';
-import 'package:kepler/widgets/backgrounds/homeBackground.dart';
+import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
 import '../charts/chartsView.dart';
 
@@ -18,11 +19,12 @@ class HomeView extends StatelessWidget {
       init: HomeController(),
       builder: (home) => Stack(
         children: [
-          HomeBackground(),
+          Background(),
           Scaffold(
             backgroundColor: Colors.transparent,
             body: Container(
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: [
                   Align(
                     alignment: Alignment.topRight,
@@ -84,6 +86,21 @@ class HomeView extends StatelessWidget {
                             Navigator.of(context).push(route(FavoritesView())),
                         text: string.text("favourites"),
                         colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ColorsCard(
+                        onTap: () =>
+                            Navigator.of(context).push(route(DailyImageView())),
+                        text: "Nasa Image of The Day",
+                        colorList: [
+                          Colors.lightGreen,
+                          Colors.green,
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
                       ),
                     ],
                   ),

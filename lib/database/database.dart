@@ -1,7 +1,8 @@
-import 'package:get/get.dart';
+import 'dart:async';
+
 import 'package:kepler/api/api.dart';
-import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/models/starData.dart';
+import 'package:kepler/utils/keplerUtils.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -55,19 +56,36 @@ class KeplerDatabase {
     try {
       Database db = await database;
       await API.getAllData().then((data) async {
-        final batch = db.batch();
+        final Batch batch = db.batch();
         batch.execute("DROP TABLE IF EXISTS $_table");
+        KeplerUtils.syncUpdate("Creating database table...", 0.50);
         batch.execute(_createTable);
+        KeplerUtils.syncUpdate("Inserting data...", 0.60);
         data.forEach((item) {
           batch.insert(_table, item);
         });
+        KeplerUtils.syncUpdate("Commiting database changes...", 0.7);
         await batch.commit(noResult: true);
+        KeplerUtils.syncUpdate("Finishing...", 0.9);
       });
       return true;
     } catch (e) {
       print(e);
       return false;
     }
+  }
+
+  Future<PlanetData> getPlanetByName(String name)async{
+    Database db = await database;
+    final List<Map<String, dynamic>> data = await db.query(
+      "tb_kepler",
+      where:
+      "pl_name like '%$name%'",
+    );
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
+    return planets[0];
   }
 
   Future<List<StarData>> getAllStars() async {

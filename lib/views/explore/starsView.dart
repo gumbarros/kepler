@@ -4,11 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/starsController.dart';
-import 'package:kepler/cupertinoPageRoute.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/utils/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
+import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -44,92 +45,100 @@ class StarsView extends StatelessWidget{
           }
         });
       },
-      builder: (_) => Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Stack(children: [
-          Container(
-            width: Get.width,
-            height: Get.height,
-            child: FutureBuilder<List<StarData>>(
-              future: KeplerDatabase.db.getAllStars(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<StarData>> snapshot) {
-                switch(snapshot.connectionState) {
-                  case(ConnectionState.waiting):
-                  case(ConnectionState.active):
-                    return Center(child: Loading(),);
-                  default:
-                if (snapshot.data.isNull) {
-                  return Center(
-                    child: Text(
-                      string.text("no_stars"),
-                      style: TextStyle(fontFamily: "Roboto"),
-                    ),
-                  );
-                }
-                return ListView.builder(
-                    controller: scrollController,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Obx(()=>Visibility(
-                          visible: _.find(snapshot.data[index].name),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: StarCard(
-                              size: Get.width / 3.3,
-                              index: index,
-                              text: snapshot.data[index].name,
-                              temperature: snapshot.data[index].temperature,
-                              onTap: () =>
-                                  Navigator.of(context)
-                                      .push(route(SolarSystemView(
-                                    index: index,
-                                    star: snapshot.data[index],
-                                  ))),
-                            ),
-                          ),
+      builder: (_) => Stack(
+        children: [
+          Background(),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomPadding: false,
+            body: Stack(children: [
+              Container(
+                width: Get.width,
+                height: Get.height,
+                child: FutureBuilder<List<StarData>>(
+                  future: KeplerDatabase.db.getAllStars(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<StarData>> snapshot) {
+                    switch(snapshot.connectionState) {
+                      case(ConnectionState.waiting):
+                      case(ConnectionState.active):
+                        return Center(child: Loading(),);
+                      default:
+                    if (snapshot.data.isNull) {
+                      return Center(
+                        child: Text(
+                          string.text("no_stars"),
+                          style: TextStyle(fontFamily: "Roboto"),
                         ),
                       );
-                    });
-              }
-              },
-            ),
-          ),
-          Obx(
-            () => Positioned(
-              top: position.value,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: Get.height / 10,
-                width: Get.width,
-                child: Column(
-                  children: [
-                    Container(
-                      color: Theme.of(context).dialogBackgroundColor,
-                      child: Column(
-                        children: [
-
-                          Header(string.text("stars"),
-                              () => Navigator.pop(context)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      color: Theme.of(context).dialogBackgroundColor,
-                      width: Get.width,
-                      child: SearchBar(
-                        _.search
-                      ),
-                    ),
-                  ],
+                    }
+                    return ListView.builder(
+                        controller: scrollController,
+                        physics: BouncingScrollPhysics(),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 0) {
+                            return SizedBox(height: Get.height / 3.5);
+                          } return Obx(()=>Visibility(
+                            visible: _.find(snapshot.data[index - 1].name),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: StarCard(
+                                size: Get.width / 3.3,
+                                index: index,
+                                text: snapshot.data[index - 1].name,
+                                temperature: snapshot.data[index].temperature,
+                                onTap: () =>
+                                    Navigator.of(context)
+                                        .push(route(SolarSystemView(
+                                      index: index - 1,
+                                      star: snapshot.data[index - 1],
+                                    ))),
+                              ),
+                            ),
+                          ),
+                          );
+                        });
+                  }
+                  },
                 ),
               ),
-            ),
+              Obx(
+                () => Positioned(
+                  top: position.value,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    height: Get.height / 10,
+                    width: Get.width,
+                    child: Column(
+                      children: [
+                        Container(
+                          color: Theme.of(context).dialogBackgroundColor,
+                          child: Column(
+                            children: [
+
+                              Header(string.text("stars"),
+                                  () => Navigator.pop(context)),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          color: Theme.of(context).dialogBackgroundColor,
+                          width: Get.width,
+                          child: SearchBar(
+                            _.search
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ]),
           ),
-        ]),
+        ],
       ),
     );
   }
