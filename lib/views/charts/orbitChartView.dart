@@ -8,13 +8,22 @@ import 'package:kepler/controllers/chartsController.dart';
 import 'package:kepler/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/models/planetData.dart';
+import 'package:kepler/views/charts/clustered_chart_view.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class OrbitChartView extends StatelessWidget {
-  final Future<List<PlanetData>> planetsOrbits;
-  final String title;
+class OrbitChartView extends ClusteredChartView<PlanetData> {
+  OrbitChartView()
+      : super(
+          title: "Orbit Comparison",
+          data: KeplerDatabase.db.getAllPlanetsOrbits(),
+          locationFunction: (PlanetData planet) => planet.orbitalPeriod,
+          identifierFunction: (PlanetData planet) => planet.planetName,
+          subdataFunction: (low, high) =>
+              KeplerDatabase.db.getPlanetsOrbitsBetween(low, high),
+    clusteredChartBuilder: (clusterData, subDataFuture) => SfCircularChart(),
+leafOnClickData: (identifier) =>        );
 
   OrbitChartView.subChart(this.title, this.planetsOrbits, {Key key})
       : super(key: key);
