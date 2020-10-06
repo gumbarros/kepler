@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/starsController.dart';
-import 'package:kepler/cupertinoPageRoute.dart';
+import 'file:///D:/Projetos/Barros/kepler/lib/utils/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';

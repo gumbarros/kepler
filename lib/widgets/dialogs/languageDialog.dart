@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/utils/keplerUtils.dart';
 
 class LanguageDialog extends StatelessWidget {
   @override
@@ -57,38 +58,7 @@ class LanguageDialog extends StatelessWidget {
                         conf.lang = value;
                         conf.upd();
                       },
-                      items: <DropdownMenuItem>[
-                        DropdownMenuItem(
-                          child: Text("English"),
-                          value: "en",
-                        ),
-                        DropdownMenuItem(
-                          child: Text(
-                              "Brazilian Portuguese"),
-                          value: "br",
-                        ),
-                        DropdownMenuItem(
-                          child:
-                          Text("Vietnamese"),
-                          value: "vt",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Hindi"),
-                          value: "hi",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Telugu"),
-                          value: "te",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("German"),
-                          value: "de",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Polish"),
-                          value: "pl",
-                        ),
-                      ],
+                      items: KeplerUtils.languageDropdownItems,
                     ),
                   ),
                 ),

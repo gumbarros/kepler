@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/widgets/progress/loading.dart';
+import 'package:kepler/utils/keplerUtils.dart';
+import 'package:kepler/widgets/dialogs/syncDialog.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
 
 class SettingsController extends GetxController {
@@ -11,6 +11,9 @@ class SettingsController extends GetxController {
 
   String lang;
   final RxBool success = false.obs;
+
+  final RxString syncMessage = "".obs;
+  final RxDouble syncPercentage = 0.0.obs;
 
   Future<void> setLanguage(String code) async {
     await string.setNewLanguage(code).then((_) {
@@ -21,29 +24,16 @@ class SettingsController extends GetxController {
   }
 
   Future<void> updateData() async {
-    Get.dialog(
-
-      Obx(
-        ()=> Visibility(
-          visible: !success.value,
-          child: WillPopScope(
-            onWillPop: () async => success.value,
-            child: Dialog(
-
-              child: Container(
-                  width: Get.width / 1.4,
-                  height: Get.height / 3,
-                  child: Center(
-                      child: Loading()),
-                ),
-            ),
-          ),
-        ),
-      ),
-    );
+    success.value = false;
+    Get.dialog(SyncDialog(
+      success: success,
+      syncMessage: syncMessage,
+      syncPercentage: syncPercentage,
+    ));
     Snackbars.snackbar(
         text: "This may take some time...", title: "Updating data");
     success.value = await KeplerDatabase.db.updateData().then((success) {
+      KeplerUtils.syncUpdate("Finished!", 1);
       Get.back();
       if (success) {
         Snackbars.success(title: "Success!", text: "Your data is updated!");

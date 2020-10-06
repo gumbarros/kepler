@@ -7,7 +7,6 @@ import 'package:kepler/controllers/dailyImageController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/models/dailyImageData.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
-import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
 class DailyImageView extends StatelessWidget {
