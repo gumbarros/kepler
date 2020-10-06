@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'file:///D:/Projetos/Barros/kepler/lib/utils/cupertinoPageRoute.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/charts/orbitChartView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
