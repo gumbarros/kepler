@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -59,7 +60,7 @@ class DailyImageView extends StatelessWidget {
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20),
                                     ),
-                                    child: Image.network(snapshot.data.url)),
+                                    child: ExtendedImage.network(snapshot.data.hdurl,)),
                                 title: Text(snapshot.data.title),
                                 stretchModes: [
                                   StretchMode.fadeTitle,

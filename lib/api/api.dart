@@ -10,7 +10,7 @@ class API {
   static const String dailyUrl = "https://api.nasa.gov/planetary/apod?api_key=nrXAZMcugA46nocWFcJrgKkDV65dxpYWX1NDoFjj";
 
   static Future<List> getAllData() async {
-    KeplerUtils.syncUpdate("Downloading data from NASA...", 0.1);
+    KeplerUtils.syncUpdate("Downloading data from NASA...", 0.2);
     print("HTTP GET - " + url);
     final http.Response response = await http.get(url);
     KeplerUtils.syncUpdate("Decoding NASA data...", 0.45);
