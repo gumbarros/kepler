@@ -9,6 +9,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
         child: Column(

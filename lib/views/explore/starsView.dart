@@ -75,7 +75,7 @@ class StarsView extends StatelessWidget{
                     return ListView.builder(
                         controller: scrollController,
                         physics: BouncingScrollPhysics(),
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data.length+1,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == 0) {
                             return SizedBox(height: Get.height / 3.5);
@@ -115,7 +115,7 @@ class StarsView extends StatelessWidget{
                     child: Column(
                       children: [
                         Container(
-                          color: Theme.of(context).dialogBackgroundColor,
+                          color: Colors.transparent,
                           child: Column(
                             children: [
 
@@ -125,7 +125,7 @@ class StarsView extends StatelessWidget{
                           ),
                         ),
                         Container(
-                          color: Theme.of(context).dialogBackgroundColor,
+                          color:Colors.transparent,
                           width: Get.width,
                           child: SearchBar(
                             _.search

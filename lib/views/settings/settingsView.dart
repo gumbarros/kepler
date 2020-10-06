@@ -59,8 +59,7 @@ class SettingsView extends StatelessWidget {
                                     child: MenuCard(
                                       text: string.text("about"),
                                       onTap: () async {
-                                        Navigator.of(context)
-                                            .push(route(AboutView()));
+                                        Navigator.of(context).push(route(AboutView()));
                                       },
                                       icon: Icons.assignment_ind,
                                     )),
