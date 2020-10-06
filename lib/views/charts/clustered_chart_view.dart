@@ -15,10 +15,10 @@ class ClusteredChartView<CHART_DATA> extends StatelessWidget {
   final Future<List<CHART_DATA>> Function(double, double) subdataFunction;
   final Future<CHART_DATA> Function(String) leafOnClickData;
 
+  final Widget Function(BuildContext, List<Cluster>,
+      Future<List<CHART_DATA>> Function(double, double)) clusteredChartBuilder;
   final Widget Function(
-          List<Cluster>, Future<List<CHART_DATA>> Function(double, double))
-      clusteredChartBuilder;
-  final Widget Function(Cluster, Future<CHART_DATA> Function(String))
+          BuildContext, Cluster, Future<CHART_DATA> Function(String))
       leafChartBuilder;
 
   final String title;
@@ -57,6 +57,8 @@ class ClusteredChartView<CHART_DATA> extends StatelessWidget {
                   identifierFunction: identifierFunction,
                   subdataFunction: subdataFunction,
                   clusteredChartBuilder: clusteredChartBuilder,
+                  leafChartBuilder: leafChartBuilder,
+                  leafOnClickData: leafOnClickData,
                 ),
               ],
             ),
@@ -69,13 +71,24 @@ class ClusterChart<CHART_DATA> extends StatelessWidget {
   final Future<List<CHART_DATA>> data;
   final double Function(CHART_DATA) locationFunction;
   final String Function(CHART_DATA) identifierFunction;
-  final Future<List<CHART_DATA>> Function(double, double) subdataFunction;
+  final Future<List<CHART_DATA>> Function(
+    double,
+    double,
+  ) subdataFunction;
   final Widget Function(
-          List<Cluster>, Future<List<CHART_DATA>> Function(double, double))
-      clusteredChartBuilder;
+    BuildContext,
+    List<Cluster>,
+    Future<List<CHART_DATA>> Function(
+      double,
+      double,
+    ),
+  ) clusteredChartBuilder;
   final Widget Function(
-          Cluster, Future<List<CHART_DATA>> Function(double, double))
-      leafChartBuilder;
+    BuildContext,
+    Cluster,
+    Future<CHART_DATA> Function(String),
+  ) leafChartBuilder;
+  final Future<CHART_DATA> Function(String) leafOnClickData;
 
   const ClusterChart({
     Key key,
@@ -85,6 +98,7 @@ class ClusterChart<CHART_DATA> extends StatelessWidget {
     this.clusteredChartBuilder,
     this.subdataFunction,
     this.leafChartBuilder,
+    this.leafOnClickData,
   }) : super(key: key);
 
   getClusters(List<CHART_DATA> planets, int clusterCount) async {
@@ -121,28 +135,28 @@ class ClusterChart<CHART_DATA> extends StatelessWidget {
     return clusters;
   }
 
-  num getMaxForClusterList(List<Cluster> clusterlist) => clusterlist
+  static num getMaxForClusterList(List<Cluster> clusterlist) => clusterlist
       .map(
         (cluster) => getMaxForCluster(cluster),
       )
       .reduce(
         max,
       );
-  num getMinForClusterList(List<Cluster> clusterlist) => clusterlist
+  static num getMinForClusterList(List<Cluster> clusterlist) => clusterlist
       .map(
         (cluster) => getMinForCluster(cluster),
       )
       .reduce(
         min,
       );
-  num getMaxForCluster(Cluster cluster) => cluster.instances
+  static num getMaxForCluster(Cluster cluster) => cluster.instances
       .map(
         (planet) => planet.location.first,
       )
       .reduce(
         max,
       );
-  num getMinForCluster(Cluster cluster) => cluster.instances
+  static num getMinForCluster(Cluster cluster) => cluster.instances
       .map(
         (planet) => planet.location.first,
       )
@@ -154,8 +168,8 @@ class ClusterChart<CHART_DATA> extends StatelessWidget {
   Widget build(BuildContext context) => FutureBuilder<List<Cluster>>(
       future: this.data.then(
             (List<CHART_DATA> planetData) async => (planetData.length > 10)
-                ? await this.getClusters(planetData, 10)
-                : await this.getClusters(planetData, 1),
+                ? await getClusters(planetData, 10)
+                : await getClusters(planetData, 1),
           ),
       builder: (BuildContext context, AsyncSnapshot<List<Cluster>> snapshot) {
         switch (snapshot.connectionState) {
@@ -171,8 +185,16 @@ class ClusterChart<CHART_DATA> extends StatelessWidget {
               width: Get.width,
               height: Get.height,
               child: isClusterChart
-                  ? clusteredChartBuilder(clusterData, subdataFunction)
-                  : leafChartBuilder(clusterData.first, subdataFunction),
+                  ? clusteredChartBuilder(
+                      context,
+                      clusterData,
+                      subdataFunction,
+                    )
+                  : leafChartBuilder(
+                      context,
+                      clusterData.first,
+                      leafOnClickData,
+                    ),
             );
         }
       });
