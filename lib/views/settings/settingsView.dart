@@ -10,13 +10,13 @@ import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/header/header.dart';
-import '../../cupertinoPageRoute.dart';
+import '../../utils/cupertinoPageRoute.dart';
 
 class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPressMoveUpdate: (_) =>
+      onVerticalDragEnd: (value) =>
           Navigator.of(context).push(route(SecretDeveloperMenuView())),
       child: GetBuilder<SettingsController>(
         init: SettingsController(),
@@ -59,8 +59,7 @@ class SettingsView extends StatelessWidget {
                                     child: MenuCard(
                                       text: string.text("about"),
                                       onTap: () async {
-                                        Navigator.of(context)
-                                            .push(route(AboutView()));
+                                        Navigator.of(context).push(route(AboutView()));
                                       },
                                       icon: Icons.assignment_ind,
                                     )),

@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,7 +8,6 @@ import 'package:kepler/controllers/dailyImageController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/models/dailyImageData.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
-import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
 class DailyImageView extends StatelessWidget {
@@ -60,7 +60,7 @@ class DailyImageView extends StatelessWidget {
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20),
                                     ),
-                                    child: Image.network(snapshot.data.url)),
+                                    child: ExtendedImage.network(snapshot.data.hdurl,)),
                                 title: Text(snapshot.data.title),
                                 stretchModes: [
                                   StretchMode.fadeTitle,
