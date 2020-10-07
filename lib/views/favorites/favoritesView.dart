@@ -6,9 +6,9 @@ import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/starsController.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
-import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
@@ -76,8 +76,8 @@ class FavoritesView extends StatelessWidget{
                     physics: BouncingScrollPhysics(),
                     itemCount: favorites.length,
                     itemBuilder: (BuildContext context, int index) {
-                      if(favorites[index].runtimeType == PlanetData) {
-                        return Padding(
+                      if(favorites[index].runtimeType == PlanetData)
+                      return Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -108,7 +108,7 @@ class FavoritesView extends StatelessWidget{
                               ),),
                         ),
                       );
-                      } else
+                      else
                         return Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: StarCard(

@@ -4,10 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/starsController.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
-import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
@@ -75,7 +75,7 @@ class StarsView extends StatelessWidget{
                     return ListView.builder(
                         controller: scrollController,
                         physics: BouncingScrollPhysics(),
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data.length+1,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == 0) {
                             return SizedBox(height: Get.height / 3.5);
@@ -115,7 +115,7 @@ class StarsView extends StatelessWidget{
                     child: Column(
                       children: [
                         Container(
-                          color: Theme.of(context).dialogBackgroundColor,
+                          color: Colors.transparent,
                           child: Column(
                             children: [
 
@@ -125,7 +125,7 @@ class StarsView extends StatelessWidget{
                           ),
                         ),
                         Container(
-                          color: Theme.of(context).dialogBackgroundColor,
+                          color:Colors.transparent,
                           width: Get.width,
                           child: SearchBar(
                             _.search

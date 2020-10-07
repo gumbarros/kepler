@@ -6,11 +6,11 @@ import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/favoritesController.dart';
 import 'package:kepler/controllers/planetController.dart';
 import 'package:kepler/controllers/solarSystemController.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/models/starData.dart';
-import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/planetCard.dart';
@@ -67,7 +67,7 @@ class SolarSystemView extends StatelessWidget {
                   Column(
                     children: [
                       Container(
-                        color: Theme.of(context).dialogBackgroundColor,
+                        color: Colors.transparent,
                         child: Header(star.name + string.text("system"),
                             () => Navigator.pop(context)),
                       ),

@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/homeController.dart';
-import 'package:kepler/locale/translations.dart';
 import 'package:kepler/utils/cupertinoPageRoute.dart';
-import 'package:kepler/views/charts/chartsView.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/views/dailyImage/dailyImageView.dart';
 import 'package:kepler/views/explore/starsView.dart';
 import 'package:kepler/views/favorites/favoritesView.dart';
 import 'package:kepler/views/settings/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
+import '../charts/chartsView.dart';
 
 class HomeView extends StatelessWidget {
   @override
