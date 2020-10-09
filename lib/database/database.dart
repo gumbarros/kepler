@@ -42,12 +42,11 @@ class KeplerDatabase {
     final databasesPath = await getDatabasesPath();
     final path = join(databasesPath, "kepler.db");
 
-    return await openDatabase(path, version: 1,
-        onCreate: (Database db, int newerVersion) async {
-    });
+    return await openDatabase(path,
+        version: 1, onCreate: (Database db, int newerVersion) async {});
   }
 
-  Future<void> dropTable() async{
+  Future<void> dropTable() async {
     Database db = await database;
     db.execute("DROP TABLE IF EXISTS $_table");
   }
@@ -75,12 +74,11 @@ class KeplerDatabase {
     }
   }
 
-  Future<PlanetData> getPlanetByName(String name)async{
+  Future<PlanetData> getPlanetByName(String name) async {
     Database db = await database;
     final List<Map<String, dynamic>> data = await db.query(
       "tb_kepler",
-      where:
-      "pl_name like '%$name%'",
+      where: "pl_name like '%$name%'",
     );
     final planets = data
         .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
@@ -99,6 +97,24 @@ class KeplerDatabase {
     return stars.cast<StarData>();
   }
 
+  Future<List<PlanetData>> getPlanetsRadiusBetween(lower, upper) async {
+    Database db = await database;
+    final List<Map<String, dynamic>> data = await db.query(
+      "tb_kepler",
+      columns: ["pl_name", "pl_radj"],
+      orderBy: "pl_radj desc",
+      where:
+          "pl_radj IS NOT NULL and pl_radj != '' and pl_radj >= $lower and pl_radj <= $upper",
+    );
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
+    // planets.forEach((PlanetData planet) {
+    //   if(planet)
+    // });
+    return planets;
+  }
+
   Future<List<PlanetData>> getPlanetsOrbitsBetween(lower, upper) async {
     Database db = await database;
     final List<Map<String, dynamic>> data = await db.query(
@@ -107,6 +123,23 @@ class KeplerDatabase {
       orderBy: "pl_orbper desc",
       where:
           "pl_orbper IS NOT NULL and pl_orbper != '' and pl_orbper >= $lower and pl_orbper <= $upper",
+    );
+    final planets = data
+        .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
+        .toList();
+    // planets.forEach((PlanetData planet) {
+    //   if(planet)
+    // });
+    return planets;
+  }
+
+  Future<List<PlanetData>> getAllPlanetsRadius() async {
+    Database db = await database;
+    final List<Map<String, dynamic>> data = await db.query(
+      "tb_kepler",
+      columns: ["pl_name", "pl_radj"],
+      orderBy: "pl_radj desc",
+      where: "pl_radj IS NOT NULL and pl_radj != ''",
     );
     final planets = data
         .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
