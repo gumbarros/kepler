@@ -7,7 +7,7 @@ import 'package:kepler/controllers/chartsController.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 
-class ClusteredChartView<CHART_DATA> extends StatelessWidget {
+abstract class ClusteredChartView<CHART_DATA> extends StatelessWidget {
   final Future<List<CHART_DATA>> data;
   final Function(CHART_DATA) locationFunction;
   final Function(CHART_DATA) identifierFunction;
@@ -179,8 +179,8 @@ class ClusterChart<CHART_DATA> extends StatelessWidget {
               child: Loading(),
             );
           default:
-            final clusterData = snapshot.data;
-            final isClusterChart = clusterData.length > 1;
+            final List<Cluster> clusterData = snapshot.data;
+            final bool isClusterChart = clusterData.isNull ? true : clusterData.length > 1;
             return Container(
               width: Get.width,
               height: Get.height,

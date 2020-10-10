@@ -43,8 +43,8 @@ class PlanetData extends UniverseData{
     radius = map['pl_radj'].toString().isNullOrBlank ? 0.0 : map['pl_radj'];
     discoveryMethod = map['pl_disc'];
     telescope = map['pl_telescope'];
-    bband = map['sy_jmag'].toString().isNullOrBlank ? 0.0 : map['sy_bmag'];
-    vband = map['sy_kmag'].toString().isNullOrBlank ? 0.0 : map['sy_vmag'];
+    bband = map['sy_bmag'].toString().isNullOrBlank ? 0.0 : map['sy_bmag'];
+    vband = map['sy_vmag'].toString().isNullOrBlank ? 0.0 : map['sy_vmag'];
     bmvj = ((bband.isNullOrBlank ? 0.0 : bband) - (vband.isNullOrBlank ? 0.0 : vband)).abs();
   }
 }

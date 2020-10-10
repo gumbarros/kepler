@@ -122,7 +122,7 @@ class KeplerDatabase {
     final List<Map<String, dynamic>> data = await db.query(
       "tb_kepler",
       columns: ["pl_name", "pl_orbper"],
-      orderBy: "pl_orbper desc",
+      orderBy: "pl_orbper asc",
       where: "pl_orbper IS NOT NULL and pl_orbper != ''",
     );
     final planets = data

@@ -9,6 +9,7 @@ import 'package:kepler/database/database.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/charts/clustered_chart_view.dart';
+import 'package:kepler/views/explore/planetsView.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -32,7 +33,7 @@ class OrbitChartView extends ClusteredChartView<PlanetData> {
     locationFunction: (PlanetData planet) => planet.orbitalPeriod,
     identifierFunction: (PlanetData planet) => planet.planetName,
     subdataFunction: (low, high) =>
-        KeplerDatabase.db.getPlanetsOrbitsBetween(low, high),
+        KeplerDatabase.db.getPlanetsOrbitsBetween(high, low),
     clusteredChartBuilder:
         (context, clusterData, subDataFutureFunction) =>
         SfCircularChart(
@@ -75,6 +76,7 @@ class OrbitChartView extends ClusteredChartView<PlanetData> {
             legend: Legend(
               isVisible: true,
               iconHeight: 10,
+
               width: Get.width.toString(),
               height: (Get.height / 2).toString(),
               iconWidth: 10,
@@ -101,6 +103,14 @@ class OrbitChartView extends ClusteredChartView<PlanetData> {
         KeplerDatabase.db.getPlanetByName(identifier),
     leafChartBuilder: (context, cluster, leafDataFutureFunction) =>
         SfCircularChart(
+          onPointTapped: (pointData)async{
+            final PlanetData planet =  await KeplerDatabase.db.getPlanetByName(cluster.instances[pointData.pointIndex].id);
+            Get.to(PlanetView(planet, index: planet.hashCode,));
+          },
+          onLegendTapped: (pointData) async{
+            final PlanetData planet =  await KeplerDatabase.db.getPlanetByName(cluster.instances[pointData.pointIndex].id);
+            Get.to(PlanetView(planet, index: planet.hashCode,));
+            },
             legend: Legend(
               isVisible: true,
               iconHeight: 10,

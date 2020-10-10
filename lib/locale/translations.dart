@@ -138,4 +138,4 @@ class GlobalTranslations {
   GlobalTranslations._internal();
 }
 
-GlobalTranslations string = new GlobalTranslations();
+final GlobalTranslations string = new GlobalTranslations();
