@@ -51,12 +51,7 @@ flutter:
   assets:
     - lib/locale/
     - assets/images/
-    - assets/flare/shine.flr
-    - assets/flare/clouds.flr
-    - assets/flare/land.flr
-    - assets/flare/pops.flr
-    - assets/flare/holes.flr
-    - assets/flare/gas.flr
+    - assets/flare/
 
 
   #   - images/a_dot_ham.jpeg
