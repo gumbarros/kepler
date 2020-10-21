@@ -33,6 +33,10 @@ class KeplerUtils{
       child: Text("Polish"),
       value: "pl",
     ),
+    DropdownMenuItem(
+      child: Text("Svenska"),
+      value: "sv",
+    ),
   ];
 
   static syncUpdate(String syncMessage, double percentage){
