@@ -1,15 +1,15 @@
 {
   "app_title": "Kepler",
-  "explore": "Explorar",
   "charts": "Tablas",
-  "star": "Estrella",
-  "orbital_period": "Período Orbital",
   "days": "Días",
-  "mass": "Masa",
   "density": "Densidad",
-  "radius": "Radio",
+  "explore": "Explorar",
   "jupiter_radius": "Radio de Júpiter",
-  "settings": "Configuración",
+  "mass": "Masa",
   "no_planet": "No se encontró ningún planeta",
-  "solar_radius": "Solar Radius"
+  "orbital_period": "Período Orbital",
+  "radius": "Radio",
+  "settings": "Configuración",
+  "solar_radius": "Solar Radius",
+  "star": "Estrella"
 }

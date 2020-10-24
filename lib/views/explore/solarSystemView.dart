@@ -103,7 +103,7 @@ class SolarSystemView extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          "${string.text("age")}: ${star.age.isNullOrBlank || star.age == 0.0 ? string.text("unknown") : star.age.toString() + string.text("milion_years")}",
+                          "${string.text("age")}: ${star.age.isNullOrBlank || star.age == 0.0 ? string.text("unknown") : star.age.toString() + string.text("million_years")}",
                           style: TextStyle(fontFamily: "Roboto", fontSize: 18.5),
                           textAlign: TextAlign.center,
                         )

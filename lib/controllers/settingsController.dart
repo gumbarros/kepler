@@ -5,6 +5,7 @@ import 'package:kepler/controllers/homeController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/utils/keplerUtils.dart';
+import 'package:kepler/widgets/dialogs/languageDialog.dart';
 import 'package:kepler/widgets/dialogs/syncDialog.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
 
@@ -28,11 +29,15 @@ class SettingsController extends GetxController {
   Future<void> updateData() async {
     try{
       success.value = false;
-      Get.dialog(SyncDialog(
-        success: success,
-        syncMessage: syncMessage,
-        syncPercentage: syncPercentage,
-      ));
+
+      Get.dialog(LanguageDialog()).then((_){
+        Get.dialog(SyncDialog(
+          success: success,
+          syncMessage: syncMessage,
+          syncPercentage: syncPercentage,
+        ));
+      });
+
       Snackbars.snackbar(
           text: string.text("this_may_take_some_time"), title: string.text("updating_data"));
 

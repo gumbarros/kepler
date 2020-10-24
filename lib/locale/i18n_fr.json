@@ -1,15 +1,15 @@
 {
 	"app_title": "Kepler",
-	"explore": "Explorer",
 	"charts": "Graphique",
-	"star": "Étoile",
-	"orbital_period": "Periode Orbitale",
 	"days": "jours",
-	"mass": "Masse",
 	"density": "Densité",
-	"radius": "Rayon",
+	"explore": "Explorer",
 	"jupiter_radius": "  Rayon de Jupiter",
-	"settings": "Paramètres",
+	"mass": "Masse",
 	"no_planet": "Aucune planète trouvée.",
-	"solar_radius": "Rayon du soleil"
-  }
+	"orbital_period": "Periode Orbitale",
+	"radius": "Rayon",
+	"settings": "Paramètres",
+	"solar_radius": "Rayon du soleil",
+	"star": "Étoile"
+}
