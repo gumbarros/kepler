@@ -1,4 +1,4 @@
-package com.br.barros.kepler
+package br.com.barros.kepler
 
 import io.flutter.embedding.android.FlutterActivity
 

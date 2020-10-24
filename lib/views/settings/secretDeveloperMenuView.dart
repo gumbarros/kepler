@@ -10,6 +10,7 @@ import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/snackbars/snackbars.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SecretDeveloperMenuView extends StatelessWidget {
   @override
@@ -60,7 +61,7 @@ class SecretDeveloperMenuView extends StatelessWidget {
                                       child: MenuCard(
                                         text: string.text("nice_easter_egg_here"),
                                         onTap: () async {
-                                         Snackbars.development();
+                                         launch("https://www.youtube.com/watch?v=Wl959QnD3lM");
                                         },
                                         icon: Icons.android,
                                       )),

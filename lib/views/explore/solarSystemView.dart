@@ -68,7 +68,7 @@ class SolarSystemView extends StatelessWidget {
                     children: [
                       Container(
                         color: Colors.transparent,
-                        child: Header(string.currentLanguage == "br" /*Add your language here if system sounds strange with the star name*/? star.name : string.text("system") + star.name,
+                        child: Header(string.currentLanguage == "br" /*Add your language here if system sounds strange with the star name*/? star.name :  star.name + string.text("system"),
                             () => Navigator.pop(context)),
                       ),
                       Padding(
