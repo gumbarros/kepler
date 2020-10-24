@@ -68,7 +68,7 @@ class SolarSystemView extends StatelessWidget {
                     children: [
                       Container(
                         color: Colors.transparent,
-                        child: Header(star.name + string.text("system"),
+                        child: Header(string.currentLanguage == "br" /*Add your language here if system sounds strange with the star name*/? star.name : string.text("system") + star.name,
                             () => Navigator.pop(context)),
                       ),
                       Padding(
@@ -93,17 +93,17 @@ class SolarSystemView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Mass: ${star.mass.isNullOrBlank || star.mass == 0.0 ? "Unknown" : star.mass.toString() + " Solar Mass"}",
+                          "${string.text("mass")}: ${star.mass.isNullOrBlank || star.mass == 0.0 ? string.text("unknown") : star.mass.toString() + string.text("solar_mass")}",
                           style: TextStyle(fontFamily: "Roboto", fontSize: 18.5),
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          "Radius: ${star.radius.isNullOrBlank || star.radius == 0.0 ? "Unknown" : star.radius.toString() + " Solar Radius"}",
+                          "${string.text("radius")}: ${star.radius.isNullOrBlank || star.radius == 0.0 ? string.text("unknown") : star.radius.toString() + string.text("solar_radius")}",
                           style: TextStyle(fontFamily: "Roboto", fontSize: 18.5),
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          "Age: ${star.age.isNullOrBlank || star.age == 0.0 ? "Unknown" : star.age.toString() + " Milion Years"}",
+                          "${string.text("age")}: ${star.age.isNullOrBlank || star.age == 0.0 ? string.text("unknown") : star.age.toString() + string.text("milion_years")}",
                           style: TextStyle(fontFamily: "Roboto", fontSize: 18.5),
                           textAlign: TextAlign.center,
                         )

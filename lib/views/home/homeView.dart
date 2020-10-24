@@ -10,7 +10,6 @@ import 'package:kepler/views/favorites/favoritesView.dart';
 import 'package:kepler/views/settings/settingsView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/imageCard.dart';
-import '../charts/chartsView.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -69,15 +68,15 @@ class HomeView extends StatelessWidget {
                         text: string.text("explore"),
                         colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      ColorsCard(
-                        onTap: () =>
-                            Navigator.of(context).push(route(ChartsView())),
-                        text: string.text("charts"),
-                        colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)],
-                      ),
+                      // SizedBox(
+                      //   height: 30,
+                      // ),
+                      // ColorsCard(
+                      //   onTap: () =>
+                      //       Navigator.of(context).push(route(ChartsView())),
+                      //   text: string.text("charts"),
+                      //   colorList: [Color(0XFFFFDA085), Color(0xFFFF6D365)],
+                      // ),
                       SizedBox(
                         height: 30,
                       ),
@@ -93,7 +92,7 @@ class HomeView extends StatelessWidget {
                       ColorsCard(
                         onTap: () =>
                             Navigator.of(context).push(route(DailyImageView())),
-                        text: "Nasa Image of The Day",
+                        text: string.text("nasa_image"),
                         colorList: [
                           Colors.lightGreen,
                           Colors.green,

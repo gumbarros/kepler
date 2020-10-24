@@ -1,16 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:k_means_cluster/k_means_cluster.dart';
-import 'package:kepler/controllers/chartsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/models/planetData.dart';
 import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/charts/clustered_chart_view.dart';
-import 'package:kepler/widgets/header/header.dart';
-import 'package:kepler/widgets/progress/loading.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class OrbitChartView extends ClusteredChartView<PlanetData> {

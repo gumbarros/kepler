@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:kepler/api/api.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/utils/keplerUtils.dart';
 import 'package:path/path.dart';
@@ -58,15 +59,15 @@ class KeplerDatabase {
       await API.getAllData().then((data) async {
         final Batch batch = db.batch();
         batch.execute("DROP TABLE IF EXISTS $_table");
-        KeplerUtils.syncUpdate("Creating database table...", 0.50);
+        KeplerUtils.syncUpdate(string.text("creating_table"), 0.50);
         batch.execute(_createTable);
-        KeplerUtils.syncUpdate("Inserting data...", 0.60);
+        KeplerUtils.syncUpdate(string.text("inserting_data"), 0.60);
         data.forEach((item) {
           batch.insert(_table, item);
         });
-        KeplerUtils.syncUpdate("Commiting database changes...", 0.7);
+        KeplerUtils.syncUpdate(string.text("commit_data"), 0.7);
         await batch.commit(noResult: true);
-        KeplerUtils.syncUpdate("Finishing...", 0.9);
+        KeplerUtils.syncUpdate(string.text("finishing"), 0.9);
       });
       return true;
     } catch (e) {

@@ -36,7 +36,7 @@ class GlobalTranslations {
   String text(String key) {
     // Return the requested string
     return (_localizedValues == null || _localizedValues[key] == null)
-        ? '** $key not found'
+        ? key
         : _localizedValues[key];
   }
 

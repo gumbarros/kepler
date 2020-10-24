@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/database/database.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/menuCard.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -23,7 +24,7 @@ class SecretDeveloperMenuView extends StatelessWidget {
             body: SingleChildScrollView(
                 child: Stack(
                   children: [
-                    Header("Secret Developer Menu", () {
+                    Header(string.text("secret_developer_menu"), () {
                       Navigator.of(context).pop(context);
                     }),
                     Container(
@@ -41,12 +42,12 @@ class SecretDeveloperMenuView extends StatelessWidget {
                                 Container(
                                     width: Get.width / 2.8,
                                     child: MenuCard(
-                                      text: "Clear App Data",
+                                      text: string.text("clear_app_data"),
                                       onTap: () async {
                                         final GetStorage getStorage = GetStorage();
                                         await getStorage.erase();
                                         await KeplerDatabase.db.dropTable().then((_){
-                                          Snackbars.snackbar(title: "Data cleared", text: "All app data is deleted");
+                                          Snackbars.snackbar(title: string.text("data_cleared"), text: string.text("all_data_deleted"));
                                         });
 
                                       },
@@ -57,7 +58,7 @@ class SecretDeveloperMenuView extends StatelessWidget {
                                   child: Container(
                                       width: Get.width / 2.8,
                                       child: MenuCard(
-                                        text: "Nice Easter Egg Here",
+                                        text: string.text("nice_easter_egg_here"),
                                         onTap: () async {
                                          Snackbars.development();
                                         },

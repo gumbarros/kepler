@@ -70,7 +70,7 @@ class SettingsView extends StatelessWidget {
                           Container(
                             width: Get.width / 1.4,
                             child: MenuCard(
-                              text: "Update Data",
+                              text: string.text("update_data"),
                               onTap: () {
                                 conf.updateData();
                               },

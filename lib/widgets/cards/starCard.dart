@@ -68,23 +68,27 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
             ),
             Center(
               child: Container(
-                child: Row(children: [
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
                   Hero(
                       tag: "star${widget.index}",
                       child: Star(
                           size: widget.size, temperature: widget.temperature)),
                   Expanded(child: SizedBox()),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15.0),
-                      child: Text(
-                        widget.text,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'JosefinSans'),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 15.0),
+                        child: Text(
+                          widget.text + "\n",
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'JosefinSans'),
+                        ),
                       ),
-                    ),
+                  ),
 
                 ]),
               ),

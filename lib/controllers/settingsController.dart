@@ -34,22 +34,22 @@ class SettingsController extends GetxController {
         syncPercentage: syncPercentage,
       ));
       Snackbars.snackbar(
-          text: "This may take some time...", title: "Updating data");
+          text: string.text("this_may_take_some_time"), title: string.text("updating_data"));
 
-      KeplerUtils.syncUpdate("Caching NASA daily image...", 0.1);
+      KeplerUtils.syncUpdate(string.text("caching_nasa"), 0.1);
       final cacheDailyImage = await API.getImageOfTheDay();
 
       new ExtendedImage.network(cacheDailyImage.url);
 
       success.value = await KeplerDatabase.db.updateData().then((success){
-        KeplerUtils.syncUpdate("Finished...", 1);
+        KeplerUtils.syncUpdate(string.text("finished"), 1);
         Get.back();
         if (success) {
-          Snackbars.success(title: "Success!", text: "Your data is updated!");
+          Snackbars.success(title:string.text("success"), text: string.text("your_data_updated"));
           return true;
         }
         else{
-          Snackbars.error("Error :(");
+          Snackbars.error(string.text("error"));
           return false;
         }
       });
@@ -57,7 +57,7 @@ class SettingsController extends GetxController {
     }
     catch(e){
       print(e);
-      Snackbars.error("Error :(");
+      Snackbars.error(string.text("error"));
     }
   }
 

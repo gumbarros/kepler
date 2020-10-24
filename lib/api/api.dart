@@ -1,6 +1,7 @@
 
 import 'package:http/http.dart' as http;
 import 'package:json_async/json_async.dart';
+import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/dailyImageData.dart';
 import 'package:kepler/utils/keplerUtils.dart';
 
@@ -10,10 +11,10 @@ class API {
   static const String dailyUrl = "https://api.nasa.gov/planetary/apod?api_key=nrXAZMcugA46nocWFcJrgKkDV65dxpYWX1NDoFjj";
 
   static Future<List> getAllData() async {
-    KeplerUtils.syncUpdate("Downloading data from NASA...", 0.2);
+    KeplerUtils.syncUpdate(string.text("downloading_nasa"), 0.2);
     print("HTTP GET - " + url);
     final http.Response response = await http.get(url);
-    KeplerUtils.syncUpdate("Decoding NASA data...", 0.45);
+    KeplerUtils.syncUpdate(string.text("decoding_nasa"), 0.45);
     final List data = await jsonDecodeAsync(response.body);
     return data;
   }
