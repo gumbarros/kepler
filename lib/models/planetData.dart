@@ -29,12 +29,14 @@ class PlanetData extends UniverseData{
   double vband;
   @HiveField(11)
   double bmvj;
-
+  @HiveField(12)
+  int id;
   @override
   PlanetData();
 
   @override
   PlanetData.fromMap(Map<String, dynamic> map) {
+    id=map['id'];
     planetName = map['pl_name'];
     orbitalPeriod = map['pl_orbper'].toString().isNullOrBlank ? 0.0 : map['pl_orbper'];
     star = map['hostname'];

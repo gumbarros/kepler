@@ -26,17 +26,25 @@ class SettingsController extends GetxController {
     HomeController.to.upd();
   }
 
-  Future<void> updateData() async {
+  Future<void> updateData(bool welcome) async {
     try{
       success.value = false;
-
-      Get.dialog(LanguageDialog()).then((_){
+      if(welcome){
+        Get.dialog(LanguageDialog()).then((_){
+          Get.dialog(SyncDialog(
+            success: success,
+            syncMessage: syncMessage,
+            syncPercentage: syncPercentage,
+          ));
+        });
+      }
+      else{
         Get.dialog(SyncDialog(
           success: success,
           syncMessage: syncMessage,
           syncPercentage: syncPercentage,
         ));
-      });
+      }
 
       Snackbars.snackbar(
           text: string.text("this_may_take_some_time"), title: string.text("updating_data"));

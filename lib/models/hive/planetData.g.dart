@@ -28,13 +28,13 @@ class PlanetDataAdapter extends TypeAdapter<PlanetData> {
       ..numOfPlanetsSystem = fields[8] as int
       ..bband = fields[9] as double
       ..vband = fields[10] as double
-      ..bmvj = fields[11] as double;
+      ..bmvj = fields[11] as double
+      ..id = fields[12] as int;
   }
 
   @override
   void write(BinaryWriter writer, PlanetData obj) {
     writer
-      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.planetName)
       ..writeByte(1)
@@ -58,7 +58,9 @@ class PlanetDataAdapter extends TypeAdapter<PlanetData> {
       ..writeByte(10)
       ..write(obj.vband)
       ..writeByte(11)
-      ..write(obj.bmvj);
+      ..write(obj.bmvj)
+      ..writeByte(12)
+      ..writeByte(obj.id);
   }
 
   @override

@@ -2,17 +2,17 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class GasPlanet extends StatelessWidget {
+  final int id;
   final Color color;
   final double size;
   final int index;
 
-  GasPlanet({@required this.color, @required this.size, @required this.index});
+  GasPlanet(this.id,{@required this.color, @required this.size, @required this.index});
 
   @override
   Widget build(BuildContext context) {
-    print('Gas Planet');
     return Hero(
-      tag: 'smallPlanet$index',
+      tag: id,
       child: Container(
         height: size,
         width: size,

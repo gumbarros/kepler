@@ -15,12 +15,14 @@ class StarData extends UniverseData{
   double mass;
   @HiveField(4)
   double age;
-
+  @HiveField(5)
+  int id;
   @override
   StarData();
 
   @override
   StarData.fromMap(Map<String, dynamic> map) {
+    this.id = map['id'];
     this.name = map['hostname'];
     this.temperature =  map['st_teff'].toString().isNullOrBlank ? 0.0 : map['st_teff'];
     this.radius = map['st_rad'].toString().isNullOrBlank ? 0.0 : map['st_rad'];

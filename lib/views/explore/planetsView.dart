@@ -44,12 +44,14 @@ class PlanetView extends StatelessWidget {
                             .getPlanetsColor(planet.bmvj) ==
                             Colors.yellow[100]
                             ? GasPlanet(
+                          planet.id,
                           index: index,
                           color: PlanetController.to
                               .getPlanetsColor(planet.bmvj),
                           size: 200,
                         )
                             : SmallPlanet(
+                          planet.id,
                           index: index,
                           color: PlanetController.to
                               .getPlanetsColor(planet.bmvj),
@@ -105,7 +107,7 @@ class PlanetView extends StatelessWidget {
                                         : Icon(Icons.star),
                                     onPressed: () {
                                       if (_.getFavorite(planet.planetName).isNull) {
-                                        _.saveFavorite(planet);
+                                        _.setFavorite(planet);
                                       } else {
                                         _.removeFavorite(planet.planetName);
                                       }

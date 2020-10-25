@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kepler/controllers/settingsController.dart';
-import 'package:kepler/widgets/dialogs/languageDialog.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
@@ -9,7 +8,7 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     if(getStorage.read("welcome") == null){
-      SettingsController.to.updateData();
+      SettingsController.to.updateData(true);
       getStorage.write("welcome", true);
     }
   }

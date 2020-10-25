@@ -21,7 +21,7 @@ class FavoritesController extends GetxController {
     return favorites.values.map((favorite) => favorite).toList().cast<UniverseData>();
   }
 
-  void saveFavorite(favorite) async{
+  void setFavorite(favorite) async{
     if(favorite.runtimeType == PlanetData){
       favorites.put(favorite.planetName,favorite);
     }

@@ -73,7 +73,7 @@ class SettingsView extends StatelessWidget {
                             child: MenuCard(
                               text: string.text("update_data"),
                               onTap: () {
-                                conf.updateData();
+                                conf.updateData(false);
                               },
                               icon: Icons.system_update_alt,
                             ),

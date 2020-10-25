@@ -21,13 +21,13 @@ class StarDataAdapter extends TypeAdapter<StarData> {
       ..temperature = fields[1] as double
       ..radius = fields[2] as double
       ..mass = fields[3] as double
-      ..age = fields[4] as double;
+      ..age = fields[4] as double
+      ..id = fields[5] as int;
   }
 
   @override
   void write(BinaryWriter writer, StarData obj) {
     writer
-      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -37,7 +37,9 @@ class StarDataAdapter extends TypeAdapter<StarData> {
       ..writeByte(3)
       ..write(obj.mass)
       ..writeByte(4)
-      ..write(obj.age);
+      ..write(obj.age)
+      ..writeByte(5)
+      ..writeByte(obj.id);
   }
 
   @override

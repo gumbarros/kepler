@@ -15,7 +15,7 @@ class KeplerDatabase {
 
   final String _table = "tb_kepler";
   final String _createTable = """CREATE TABLE tb_kepler(
-                  id INTEGER PRIMARY KEY,
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
                   pl_name TEXT,
                   hostname TEXT,
                   disc_year INT,
@@ -92,8 +92,9 @@ class KeplerDatabase {
   Future<List<StarData>> getAllStars() async {
     Database db = await database;
     final List<Map<String, dynamic>> data = await db.query("tb_kepler",
-        columns: ["hostname", "st_teff", "st_rad", "st_mass", "st_age"],
-        distinct: true);
+        columns: ["id","hostname", "st_teff", "st_rad", "st_mass", "st_age"],
+        groupBy: "hostname",
+                distinct: true);
     final stars = data
         .map((Map<String, dynamic> star) => StarData.fromMap(star))
         .toList();
@@ -158,6 +159,7 @@ class KeplerDatabase {
     Database db = await database;
     final List<Map<String, dynamic>> data = await db.query("tb_kepler",
         columns: [
+          "id",
           "hostname",
           "pl_name",
           "disc_year",

@@ -4,10 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/controllers/starsController.dart';
-import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
+import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
@@ -74,28 +74,31 @@ class StarsView extends StatelessWidget{
                     }
                     return ListView.builder(
                         controller: scrollController,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: snapshot.data.length+1,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == 0) {
-                            return SizedBox(height: Get.height / 3.5);
-                          } return Obx(()=>Visibility(
-                            visible: _.find(snapshot.data[index - 1].name),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: StarCard(
-                                size: Get.width / 3.3,
-                                index: index,
-                                text: snapshot.data[index - 1].name,
-                                temperature: snapshot.data[index].temperature,
-                                onTap: () =>
-                                    Navigator.of(context)
-                                        .push(route(SolarSystemView(
-                                      index: index - 1,
-                                      star: snapshot.data[index - 1],
-                                    ))),
-                              ),
+                            physics: BouncingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Obx(
+                                () => Visibility(
+                                  visible: _.find(snapshot.data[index].name),
+                                  child: Container(
+                                    margin: index.isEqual(0) ? EdgeInsets.only(top: Get.height / 3.5) : null,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: StarCard(
+                                        snapshot.data[index].id,
+                                        size: Get.width / 3.3,
+                                        index: index,
+                                        text: snapshot.data[index].name,
+                                        temperature:
+                                            snapshot.data[index].temperature,
+                                        onTap: () => Navigator.of(context)
+                                            .push(route(SolarSystemView(
+                                          index: index,
+                                          star: snapshot.data[index],
+                                        ))),
+                                      ),
                             ),
+                                  ),
                           ),
                           );
                         });

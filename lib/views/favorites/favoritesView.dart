@@ -95,12 +95,14 @@ class FavoritesView extends StatelessWidget{
                                   .getPlanetsColor(favorites[index].bmvj) ==
                                   Colors.yellow[100]
                                   ? GasPlanet(
+                                favorites[index].id,
                                 index: index,
                                 color: PlanetController.to
                                     .getPlanetsColor(favorites[index].bmvj),
                                 size: 100,
                               )
                                   : SmallPlanet(
+                                favorites[index].id,
                                 index: index,
                                 color: PlanetController.to
                                     .getPlanetsColor(favorites[index].bmvj),
@@ -112,6 +114,7 @@ class FavoritesView extends StatelessWidget{
                         return Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: StarCard(
+                            favorites[index].id,
                             size: Get.width / 3.3,
                             index: index,
                             text: favorites[index].name,

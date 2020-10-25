@@ -121,7 +121,7 @@ class SolarSystemView extends StatelessWidget {
                                   : Icon(Icons.star),
                               onPressed: () {
                                 if (_.getFavorite(star.name).isNull) {
-                                  _.saveFavorite(star);
+                                  _.setFavorite(star);
                                 } else {
                                   _.removeFavorite(star.name);
                                 }
@@ -176,6 +176,7 @@ class SolarSystemView extends StatelessWidget {
                                                           .data[index].bmvj) ==
                                                   Colors.yellow[100]
                                               ? GasPlanet(
+                                            snapshot.data[index].id,
                                                   index: index,
                                                   color: PlanetController.to
                                                       .getPlanetsColor(snapshot
@@ -183,6 +184,7 @@ class SolarSystemView extends StatelessWidget {
                                                   size: 100,
                                                 )
                                               : SmallPlanet(
+                                                  snapshot.data[index].id,
                                                   index: index,
                                                   color: PlanetController.to
                                                       .getPlanetsColor(snapshot
