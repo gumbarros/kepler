@@ -7,10 +7,12 @@ import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
+
 import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
+
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
 import 'package:kepler/widgets/progress/loading.dart';
@@ -130,9 +132,7 @@ class StarsView extends StatelessWidget{
                         Container(
                           color:Colors.transparent,
                           width: Get.width,
-                          child: SearchBar(
-                            _.search
-                          ),
+                          child: SearchBar(_.search),
                         ),
                       ],
                     ),
@@ -140,6 +140,17 @@ class StarsView extends StatelessWidget{
                 ),
               ),
             ]),
+            // floatingActionButton: Obx(() => Visibility(
+            //       child: FloatingActionButton(
+            //         child: Icon(Icons.filter_list),
+            //         backgroundColor: KeplerTheme.theme.dialogBackgroundColor,
+            //         foregroundColor: Colors.white,
+            //         onPressed: (){
+            //             Get.dialog(FilterDialog());
+            //         },
+            //       ),
+            //       visible: position.value.isEqual(0),
+            //     )),
           ),
         ],
       ),

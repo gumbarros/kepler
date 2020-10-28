@@ -93,6 +93,11 @@ class SolarSystemView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
+                          "${string.text("temperature")}: ${star.temperature.isNullOrBlank || star.temperature == 0.0 ? string.text("unknown") : star.temperature.toString() + " K"}",
+                          style: TextStyle(fontFamily: "Roboto", fontSize: 18.5),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
                           "${string.text("mass")}: ${star.mass.isNullOrBlank || star.mass == 0.0 ? string.text("unknown") : star.mass.toString() + string.text("solar_mass")}",
                           style: TextStyle(fontFamily: "Roboto", fontSize: 18.5),
                           textAlign: TextAlign.center,
