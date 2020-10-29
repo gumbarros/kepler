@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kepler/controllers/settingsController.dart';
+import 'package:kepler/locale/translations.dart';
 
 class KeplerUtils{
   static get languageDropdownItems => <DropdownMenuItem<String>>[
@@ -36,6 +37,30 @@ class KeplerUtils{
     DropdownMenuItem(
       child: Text("Svenska"),
       value: "sv",
+    ),
+  ];
+  static get colorDropdownItems => <DropdownMenuItem<String>>[
+    DropdownMenuItem(
+      child: Text(string.text("blue")),
+      value: "blu",
+    ),
+    DropdownMenuItem(
+      child: Text(
+          string.text("white")),
+      value: "wht",
+    ),
+    DropdownMenuItem(
+      child:
+      Text(string.text("yellow")),
+      value: "yel",
+    ),
+    DropdownMenuItem(
+      child: Text(string.text("orange")),
+      value: "org",
+    ),
+    DropdownMenuItem(
+      child: Text(string.text("red")),
+      value: "red",
     ),
   ];
 

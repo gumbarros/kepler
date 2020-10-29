@@ -7,11 +7,13 @@ import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/database/database.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/models/starData.dart';
+import 'package:kepler/theme/theme.dart';
 
 import 'package:kepler/utils/cupertinoPageRoute.dart';
 import 'package:kepler/views/explore/solarSystemView.dart';
 import 'package:kepler/widgets/backgrounds/background.dart';
 import 'package:kepler/widgets/cards/starCard.dart';
+import 'package:kepler/widgets/dialogs/filterDialog.dart';
 
 import 'package:kepler/widgets/forms/searchBar.dart';
 import 'package:kepler/widgets/header/header.dart';
@@ -83,7 +85,7 @@ class StarsView extends StatelessWidget{
                                 () => Visibility(
                                   visible: _.find(snapshot.data[index].name),
                                   child: Container(
-                                    margin: index.isEqual(0) ? EdgeInsets.only(top: Get.height / 3.5) : null,
+                                    margin: index.isEqual(0) || !_.search.value.isNullOrBlank ? EdgeInsets.only(top: Get.height / 3.5) : null,
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
                                       child: StarCard(
@@ -125,7 +127,10 @@ class StarsView extends StatelessWidget{
                             children: [
 
                               Header(string.text("stars"),
-                                  () => Navigator.pop(context)),
+                                  (){
+                                Navigator.pop(context);
+                                _.search.value = "";
+                                  }),
                             ],
                           ),
                         ),
@@ -140,17 +145,18 @@ class StarsView extends StatelessWidget{
                 ),
               ),
             ]),
-            // floatingActionButton: Obx(() => Visibility(
-            //       child: FloatingActionButton(
-            //         child: Icon(Icons.filter_list),
-            //         backgroundColor: KeplerTheme.theme.dialogBackgroundColor,
-            //         foregroundColor: Colors.white,
-            //         onPressed: (){
-            //             Get.dialog(FilterDialog());
-            //         },
-            //       ),
-            //       visible: position.value.isEqual(0),
-            //     )),
+            floatingActionButton: Obx(() => Visibility(
+                  child: FloatingActionButton(
+                    child: Icon(Icons.filter_list),
+                    backgroundColor: KeplerTheme.theme.dialogBackgroundColor,
+                    foregroundColor: Colors.white,
+                    onPressed: (){
+
+                        Get.dialog(FilterDialog());
+                    },
+                  ),
+                  visible: position.value.isEqual(0),
+                )),
           ),
         ],
       ),

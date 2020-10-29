@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/utils/keplerUtils.dart';
 import 'package:kepler/widgets/forms/textField.dart';
 
 class FilterDialog extends StatelessWidget {
@@ -17,7 +18,7 @@ class FilterDialog extends StatelessWidget {
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           child: Container(
-            height: Get.height / 2,
+            height: Get.height / 1.1,
             padding: EdgeInsets.only(
               top: 16,
               bottom: 16,
@@ -39,37 +40,78 @@ class FilterDialog extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+
               children: <Widget>[
                 Container(
                   width: Get.width,
-                  height: Get.height / 7,
-                  child: Column(children: [
-                    Text(string.text("temperature") + " (K)"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
-                        Text(string.text("to")),
-                        Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                  height: Get.height / 1.5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                    Column(children: [
+                      Text(string.text("color")),
+                      DropdownButton(
+                          value: conf.lang,
+                          style: TextStyle(),
+                          onChanged: (value) {
+                          },
+                          items: KeplerUtils.colorDropdownItems)
+                      ,
+                    ],),
+                    Column(children: [
+                      Text(string.text("temperature") + " (K)"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                          Text(string.text("to")),
+                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
 
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
-                        Text(string.text("to")),
-                        Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                        ],
+                      ),
+                    ],),
+                    Column(children: [
+                      Text(string.text("age") + " (${string.text("million_years")})"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                          Text(string.text("to")),
+                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
 
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],),
+                    Column(children: [
+                      Text(string.text("mass") + " (${string.text("solar_mass")})"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                          Text(string.text("to")),
+                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+
+                        ],
+                      ),
+                    ],),
+                      Column(children: [
+                        Text(string.text("radius") + " (${string.text("solar_radius")})"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                            Text(string.text("to")),
+                            Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+
+                          ],
+                        ),
+                      ],)
                   ],)
                 ),
                 RaisedButton(
                   color: Theme.of(context).primaryColor,
-                  child: Text(string.text('save')),
+                  child: Text(string.text('filter')),
                   onPressed: () {
-                    conf.setLanguage(conf.lang);
                     Get.back();
                   },
                 ),
