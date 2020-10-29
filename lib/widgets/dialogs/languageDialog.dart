@@ -17,7 +17,7 @@ class LanguageDialog extends StatelessWidget {
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           child: Container(
-            height: Get.height / 4.5,
+            height: Get.height / 4,
             padding: EdgeInsets.only(
               top: 16,
               bottom: 16,

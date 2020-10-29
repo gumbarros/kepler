@@ -1,12 +1,13 @@
 import 'dart:async';
-
+import 'package:get/get.dart';
+import 'package:flutter/foundation.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/models/enums/starColor.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/utils/keplerUtils.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../models/planetData.dart';
 
 class KeplerDatabase {
@@ -89,12 +90,24 @@ class KeplerDatabase {
     return planets[0];
   }
 
-  Future<List<StarData>> getAllStars() async {
+  Future<List<StarData>> getAllStars({@required String temperature}) async {
     Database db = await database;
+
+
+    ///Here we will develop the where logic with a .NET like StringBuilder
+    final StringBuffer where = new StringBuffer();
+    if(!temperature.isNullOrBlank){
+      where.write(temperature + " AND st_teff != '' ");
+    }
+    print(where.toString());
+
+
     final List<Map<String, dynamic>> data = await db.query("tb_kepler",
         columns: ["id","hostname", "st_teff", "st_rad", "st_mass", "st_age"],
+        where: where.isEmpty ? null : where.toString(),
         groupBy: "hostname",
                 distinct: true);
+    print(data);
     final stars = data
         .map((Map<String, dynamic> star) => StarData.fromMap(star))
         .toList();

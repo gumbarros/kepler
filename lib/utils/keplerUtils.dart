@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kepler/controllers/settingsController.dart';
 import 'package:kepler/locale/translations.dart';
+import 'package:kepler/models/enums/starColor.dart';
 
 class KeplerUtils{
   static get languageDropdownItems => <DropdownMenuItem<String>>[
@@ -39,28 +40,28 @@ class KeplerUtils{
       value: "sv",
     ),
   ];
-  static get colorDropdownItems => <DropdownMenuItem<String>>[
+  static get colorDropdownItems => <DropdownMenuItem<StarColor>>[
     DropdownMenuItem(
       child: Text(string.text("blue")),
-      value: "blu",
+      value: StarColor.BLUE,
     ),
     DropdownMenuItem(
       child: Text(
           string.text("white")),
-      value: "wht",
+      value: StarColor.WHITE,
     ),
     DropdownMenuItem(
       child:
       Text(string.text("yellow")),
-      value: "yel",
+      value: StarColor.YELLOW,
     ),
     DropdownMenuItem(
       child: Text(string.text("orange")),
-      value: "org",
+      value: StarColor.ORANGE,
     ),
     DropdownMenuItem(
       child: Text(string.text("red")),
-      value: "red",
+      value: StarColor.RED,
     ),
   ];
 

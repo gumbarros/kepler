@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/controllers/settingsController.dart';
+import 'package:kepler/controllers/starsController.dart';
 import 'package:kepler/locale/translations.dart';
 import 'package:kepler/utils/keplerUtils.dart';
 import 'package:kepler/widgets/forms/textField.dart';
@@ -9,16 +9,16 @@ import 'package:kepler/widgets/forms/textField.dart';
 class FilterDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SettingsController>(
-      init: SettingsController(),
-      builder: (conf) => Dialog(
+    return GetBuilder<StarsController>(
+      init: StarsController(),
+      builder: (_) => Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           child: Container(
-            height: Get.height / 1.1,
+            height: Get.height / 1,
             padding: EdgeInsets.only(
               top: 16,
               bottom: 16,
@@ -38,22 +38,22 @@ class FilterDialog extends StatelessWidget {
                 ),
               ],
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-
+            child: ListView(
               children: <Widget>[
                 Container(
                   width: Get.width,
-                  height: Get.height / 1.5,
+                  height: Get.height / 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                     Column(children: [
                       Text(string.text("color")),
                       DropdownButton(
-                          value: conf.lang,
+                          value: _.colorFilter,
                           style: TextStyle(),
                           onChanged: (value) {
+                            _.colorFilter = value;
+                            _.update();
                           },
                           items: KeplerUtils.colorDropdownItems)
                       ,
@@ -112,6 +112,7 @@ class FilterDialog extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                   child: Text(string.text('filter')),
                   onPressed: () {
+                    _.update();
                     Get.back();
                   },
                 ),

@@ -60,7 +60,7 @@ class StarsView extends StatelessWidget{
                 width: Get.width,
                 height: Get.height,
                 child: FutureBuilder<List<StarData>>(
-                  future: KeplerDatabase.db.getAllStars(),
+                  future: KeplerDatabase.db.getAllStars(temperature: _.getStarTemperature(_.colorFilter)),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<StarData>> snapshot) {
                     switch(snapshot.connectionState) {
