@@ -59,26 +59,19 @@ class FilterDialog extends StatelessWidget {
                       ,
                     ],),
                     Column(children: [
-                      Text(string.text("temperature") + " (K)"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
-                          Text(string.text("to")),
-                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
-
-                        ],
-                      ),
-                    ],),
-                    Column(children: [
                       Text(string.text("age") + " (${string.text("million_years")})"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                          Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.ageFrom,textAlign: TextAlign.center,numeral: true,onChanged: (value){
+                               _.ageFrom = value;
+                               _.update();
+                          },)),
                           Text(string.text("to")),
-                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
-
+                          Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.ageTo,textAlign: TextAlign.center,numeral: true,onChanged: (value){
+                            _.ageTo = value;
+                            _.update();
+                          },)),
                         ],
                       ),
                     ],),
@@ -87,9 +80,15 @@ class FilterDialog extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                          Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.massFrom,textAlign: TextAlign.center,numeral: true,onChanged: (value){
+                            _.massFrom = value;
+                            _.update();
+                          },)),
                           Text(string.text("to")),
-                          Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                          Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.massTo,textAlign: TextAlign.center,numeral: true,onChanged: (value){
+                            _.massTo = value;
+                            _.update();
+                          },)),
 
                         ],
                       ),
@@ -99,9 +98,15 @@ class FilterDialog extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                            Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.radiusFrom,textAlign: TextAlign.center,numeral: true,onChanged: (value){
+                              _.radiusFrom = value;
+                              _.update();
+                            },)),
                             Text(string.text("to")),
-                            Container(width: Get.width / 4, child: KeplerTextField(textAlign: TextAlign.center,)),
+                            Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.radiusTo,textAlign: TextAlign.center,numeral: true,onChanged: (value){
+                              _.radiusTo = value;
+                              _.update();
+                            },)),
 
                           ],
                         ),
@@ -112,10 +117,10 @@ class FilterDialog extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                   child: Text(string.text('filter')),
                   onPressed: () {
-                    _.update();
                     Get.back();
                   },
                 ),
+
               ],
             ),
           )),

@@ -10,6 +10,15 @@ class StarsController extends GetxController {
   ///FILTERS
   StarColor colorFilter;
 
+  String ageFrom;
+  String ageTo;
+
+  String massFrom;
+  String massTo;
+
+  String radiusFrom;
+  String radiusTo;
+
   Color getStarColor(double temperature) {
     temperature = temperature ?? 0;
     if (temperature >= 25000) {

@@ -60,7 +60,15 @@ class StarsView extends StatelessWidget{
                 width: Get.width,
                 height: Get.height,
                 child: FutureBuilder<List<StarData>>(
-                  future: KeplerDatabase.db.getAllStars(temperature: _.getStarTemperature(_.colorFilter)),
+                  future: KeplerDatabase.db.getAllStars(
+                      temperature: _.getStarTemperature(_.colorFilter),
+                      ageFrom: _.ageFrom,
+                      ageTo: _.ageTo,
+                      massFrom: _.massFrom,
+                      massTo: _.massTo,
+                      radiusFrom:_.radiusFrom,
+                      radiusTo: _.radiusTo
+                  ),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<StarData>> snapshot) {
                     switch(snapshot.connectionState) {
@@ -69,6 +77,14 @@ class StarsView extends StatelessWidget{
                         return Center(child: Loading(),);
                       default:
                     if (snapshot.data.isNull) {
+                      return Center(
+                        child: Text(
+                          string.text("no_stars"),
+                          style: TextStyle(fontFamily: "Roboto"),
+                        ),
+                      );
+                    }
+                    if(snapshot.data.length.isEqual(0)){
                       return Center(
                         child: Text(
                           string.text("no_stars"),

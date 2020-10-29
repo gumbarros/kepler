@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kepler/api/api.dart';
 import 'package:kepler/locale/translations.dart';
-import 'package:kepler/models/enums/starColor.dart';
 import 'package:kepler/models/starData.dart';
 import 'package:kepler/utils/keplerUtils.dart';
 import 'package:path/path.dart';
@@ -90,24 +89,75 @@ class KeplerDatabase {
     return planets[0];
   }
 
-  Future<List<StarData>> getAllStars({@required String temperature}) async {
-    Database db = await database;
+  Future<List<StarData>> getAllStars({
+    @required String temperature,
 
+    @required String ageFrom,
+    @required String ageTo,
+
+    @required String massFrom,
+    @required String massTo,
+
+    @required String radiusFrom,
+    @required String radiusTo,
+  }) async {
+    Database db = await database;
 
     ///Here we will develop the where logic with a .NET like StringBuilder
     final StringBuffer where = new StringBuffer();
+
+    ///Color / Temperature
     if(!temperature.isNullOrBlank){
-      where.write(temperature + " AND st_teff != '' ");
+      where.writeln(temperature + " AND st_teff != '' ");
     }
+
+    ///AGE
+    if(!ageFrom.isNullOrBlank && !ageTo.isNullOrBlank){
+      where.writeln("AND st_age >=" + ageFrom + " AND st_age <=" + ageTo + " AND st_age != '' ");
+    }
+
+    else if(!ageFrom.isNullOrBlank && ageTo.isNullOrBlank){
+      where.writeln("AND st_age >=" + ageFrom+ " AND st_age != '' ");
+    }
+
+    else if(ageFrom.isNullOrBlank && !ageTo.isNullOrBlank){
+      where.writeln("AND st_age <=" + ageTo+ " AND st_age != '' ");
+    }
+
+    ///MASS
+    if(!massFrom.isNullOrBlank && !massTo.isNullOrBlank){
+      where.writeln("AND st_mass >=" + massFrom + " AND st_mass <=" + massTo+ " AND st_mass != ''");
+    }
+
+    else if(!massFrom.isNullOrBlank && massTo.isNullOrBlank){
+      where.writeln("AND st_mass >=" + massFrom+ " AND st_mass != ''");
+    }
+
+    else if(massFrom.isNullOrBlank && !massTo.isNullOrBlank){
+      where.writeln("AND st_mass <=" + massTo+ " AND st_mass != ''");
+    }
+
+    ///RADIUS
+    if(!radiusFrom.isNullOrBlank && !radiusTo.isNullOrBlank){
+      where.writeln("AND st_rad >=" + radiusFrom + " AND st_rad <=" + radiusTo+ " AND st_rad != ''");
+    }
+
+    else if(!radiusFrom.isNullOrBlank && radiusTo.isNullOrBlank){
+      where.writeln("AND st_rad >=" + radiusFrom+ " AND st_rad != ''");
+    }
+
+    else if(radiusFrom.isNullOrBlank && !radiusTo.isNullOrBlank){
+      where.writeln("AND st_rad <=" + radiusTo+ " AND st_rad != ''");
+    }
+
+    print("-=- Query Where -=-");
     print(where.toString());
 
-
-    final List<Map<String, dynamic>> data = await db.query("tb_kepler",
+    final List<Map<String, dynamic>> data = await db.query(_table,
         columns: ["id","hostname", "st_teff", "st_rad", "st_mass", "st_age"],
         where: where.isEmpty ? null : where.toString(),
         groupBy: "hostname",
                 distinct: true);
-    print(data);
     final stars = data
         .map((Map<String, dynamic> star) => StarData.fromMap(star))
         .toList();
@@ -117,7 +167,7 @@ class KeplerDatabase {
   Future<List<PlanetData>> getPlanetsOrbitsBetween(lower, upper) async {
     Database db = await database;
     final List<Map<String, dynamic>> data = await db.query(
-      "tb_kepler",
+      _table,
       columns: ["pl_name", "pl_orbper"],
       orderBy: "pl_orbper desc",
       where:
@@ -126,9 +176,6 @@ class KeplerDatabase {
     final planets = data
         .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
         .toList();
-    // planets.forEach((PlanetData planet) {
-    //   if(planet)
-    // });
     return planets;
   }
 
