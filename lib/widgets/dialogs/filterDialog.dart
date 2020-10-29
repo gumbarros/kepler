@@ -40,6 +40,17 @@ class FilterDialog extends StatelessWidget {
             ),
             child: ListView(
               children: <Widget>[
+                Align(alignment: Alignment.topRight,child: IconButton(icon: Icon(Icons.replay, size: 20, semanticLabel: string.text("clear_filters"),),onPressed: (){
+                  _.colorFilter = null;
+                  _.massFrom = null;
+                  _.massTo = null;
+                  _.ageTo = null;
+                  _.ageFrom = null;
+                  _.radiusFrom = null;
+                  _.radiusTo = null;
+                  _.update();
+                  Get.back();
+                },),),
                 Container(
                   width: Get.width,
                   height: Get.height / 1,

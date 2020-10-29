@@ -106,48 +106,53 @@ class KeplerDatabase {
     ///Here we will develop the where logic with a .NET like StringBuilder
     final StringBuffer where = new StringBuffer();
 
-    ///Color / Temperature
-    if(!temperature.isNullOrBlank){
-      where.writeln(temperature + " AND st_teff != '' ");
-    }
+    if(!temperature.isNullOrBlank || !ageFrom.isNullOrBlank || !ageTo.isNullOrBlank || !massFrom.isNullOrBlank || !massTo.isNullOrBlank || !radiusFrom.isNullOrBlank || !radiusTo.isNullOrBlank){
 
-    ///AGE
-    if(!ageFrom.isNullOrBlank && !ageTo.isNullOrBlank){
-      where.writeln("AND st_age >=" + ageFrom + " AND st_age <=" + ageTo + " AND st_age != '' ");
-    }
+      ///Color / Temperature
+      if(!temperature.isNullOrBlank){
+        where.writeln(temperature + " AND st_teff != '' AND ");
+      }
 
-    else if(!ageFrom.isNullOrBlank && ageTo.isNullOrBlank){
-      where.writeln("AND st_age >=" + ageFrom+ " AND st_age != '' ");
-    }
+      ///AGE
+      if(!ageFrom.isNullOrBlank && !ageTo.isNullOrBlank){
+        where.writeln("st_age >=" + ageFrom + " AND st_age <=" + ageTo + " AND st_age != '' AND ");
+      }
 
-    else if(ageFrom.isNullOrBlank && !ageTo.isNullOrBlank){
-      where.writeln("AND st_age <=" + ageTo+ " AND st_age != '' ");
-    }
+      else if(!ageFrom.isNullOrBlank && ageTo.isNullOrBlank){
+        where.writeln("st_age >=" + ageFrom+ " AND st_age != '' AND ");
+      }
 
-    ///MASS
-    if(!massFrom.isNullOrBlank && !massTo.isNullOrBlank){
-      where.writeln("AND st_mass >=" + massFrom + " AND st_mass <=" + massTo+ " AND st_mass != ''");
-    }
+      else if(ageFrom.isNullOrBlank && !ageTo.isNullOrBlank){
+        where.writeln("st_age <=" + ageTo+ " AND st_age != '' AND ");
+      }
 
-    else if(!massFrom.isNullOrBlank && massTo.isNullOrBlank){
-      where.writeln("AND st_mass >=" + massFrom+ " AND st_mass != ''");
-    }
+      ///MASS
+      if(!massFrom.isNullOrBlank && !massTo.isNullOrBlank){
+        where.writeln("st_mass >=" + massFrom + " AND st_mass <=" + massTo+ " AND st_mass != '' AND ");
+      }
 
-    else if(massFrom.isNullOrBlank && !massTo.isNullOrBlank){
-      where.writeln("AND st_mass <=" + massTo+ " AND st_mass != ''");
-    }
+      else if(!massFrom.isNullOrBlank && massTo.isNullOrBlank){
+        where.writeln("st_mass >=" + massFrom+ " AND st_mass != '' AND ");
+      }
 
-    ///RADIUS
-    if(!radiusFrom.isNullOrBlank && !radiusTo.isNullOrBlank){
-      where.writeln("AND st_rad >=" + radiusFrom + " AND st_rad <=" + radiusTo+ " AND st_rad != ''");
-    }
+      else if(massFrom.isNullOrBlank && !massTo.isNullOrBlank){
+        where.writeln("st_mass <=" + massTo+ " AND st_mass != '' AND ");
+      }
 
-    else if(!radiusFrom.isNullOrBlank && radiusTo.isNullOrBlank){
-      where.writeln("AND st_rad >=" + radiusFrom+ " AND st_rad != ''");
-    }
+      ///RADIUS
+      if(!radiusFrom.isNullOrBlank && !radiusTo.isNullOrBlank){
+        where.writeln("st_rad >=" + radiusFrom + " AND st_rad <=" + radiusTo+ " AND st_rad != '' AND ");
+      }
 
-    else if(radiusFrom.isNullOrBlank && !radiusTo.isNullOrBlank){
-      where.writeln("AND st_rad <=" + radiusTo+ " AND st_rad != ''");
+      else if(!radiusFrom.isNullOrBlank && radiusTo.isNullOrBlank){
+        where.writeln("st_rad >=" + radiusFrom+ " AND st_rad != '' AND ");
+      }
+
+      else if(radiusFrom.isNullOrBlank && !radiusTo.isNullOrBlank){
+        where.writeln("st_rad <=" + radiusTo+ " AND st_rad != '' AND ");
+      }
+
+      where.writeln("1=1");
     }
 
     print("-=- Query Where -=-");
