@@ -1,5 +1,8 @@
 # Kepler: Discover the universe with NASA data 🪐
 
+<a href="https://play.google.com/store/apps/details?id=br.com.barros.kepler">![PlayStore](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)</a>
+<br/>
+![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
 ![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
 ![Image1](https://i.ibb.co/gz54pQT/Screenshot-1.png)
 ![Image2](https://i.ibb.co/zfyGhxW/Screenshot-2.png)
