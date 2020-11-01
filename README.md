@@ -2,16 +2,12 @@
 
 <a href="https://play.google.com/store/apps/details?id=br.com.barros.kepler">![PlayStore](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)</a>
 <br/>
-![Icon](https://i.ibb.co/wyp3wgb/IMG-20200907-WA0002.jpg)
-![Image1](https://i.ibb.co/gz54pQT/Screenshot-1.png)
-![Image2](https://i.ibb.co/zfyGhxW/Screenshot-2.png)
-![Image3](https://i.ibb.co/jLS8GVc/Screenshot-3.png)
-![Image4](https://i.ibb.co/DWTkJ8H/Screenshot-1.png)
 
 # How to contribute 💻
 - Developing the charts (largest planets, longest orbits)
 - Refactoring the code to better performance and UI
 - Translating the app 
+
 > The only requirements to contribute are to speak English and know Flutter.
 > You can join our discord server by PM-ing RonanHansel#0059 or BeachThanos#0493
 
