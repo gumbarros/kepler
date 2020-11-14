@@ -135,14 +135,10 @@ class StarsView extends StatelessWidget {
                       children: [
                         Container(
                           color: Colors.transparent,
-                          child: Column(
-                            children: [
-                              Header(string.text("stars"), () {
-                               Get.back(canPop: true);
-                                _.search.value = "";
-                              }),
-                            ],
-                          ),
+                          child: Header(string.text("stars"), () {
+                           Get.back(canPop: true);
+                            _.search.value = "";
+                          }),
                         ),
                         Container(
                           color: Colors.transparent,

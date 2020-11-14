@@ -5,6 +5,7 @@ import 'package:kepler/src/ui/views/explore/solarSystemView.dart';
 import 'package:kepler/src/ui/views/explore/starsView.dart';
 import 'package:kepler/src/ui/views/favorites/favoritesView.dart';
 import 'package:kepler/src/ui/views/home/homeView.dart';
+import 'package:kepler/src/ui/views/mars/marsRoversView.dart';
 import 'package:kepler/src/ui/views/settings/secretDeveloperMenuView.dart';
 import 'package:kepler/src/ui/views/settings/settingsView.dart';
 
@@ -20,7 +21,8 @@ class Routes {
       GetPage(name: '/settings/secret', page: ()=>SecretDeveloperMenuView()),
       GetPage(name: '/planet', page: ()=> PlanetView()),
       GetPage(name: '/favorites', page: ()=>FavoritesView()),
-      GetPage(name: '/dailyImage', page: ()=>DailyImageView())
+      GetPage(name: '/dailyImage', page: ()=>DailyImageView()),
+      GetPage(name: '/mars/rovers', page: ()=>MarsRoversView())  
     ];
   }
 }

@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
                     child: IconButton(
                         icon: Icon(Icons.settings),
                         onPressed: () {
-                         Get.toNamed('/settings');
+                          Get.toNamed('/settings');
                         }),
                   ),
                   Column(
@@ -58,8 +58,7 @@ class HomeView extends StatelessWidget {
                         height: Get.height / 15,
                       ),
                       ColorsCard(
-                        onTap: () =>
-                            Get.toNamed('/stars'),
+                        onTap: () => Get.toNamed('/stars'),
                         text: string.text("explore"),
                         colorList: [Color(0xFFF667EEA), Color(0xFFF764BA2)],
                       ),
@@ -76,8 +75,7 @@ class HomeView extends StatelessWidget {
                         height: 30,
                       ),
                       ColorsCard(
-                        onTap: () =>
-                       Get.toNamed('/favorites'),
+                        onTap: () => Get.toNamed('/favorites'),
                         text: string.text("favourites"),
                         colorList: [Color(0xFFFA18CD1), Color(0XFFFFBC2EB)],
                       ),
@@ -85,14 +83,25 @@ class HomeView extends StatelessWidget {
                         height: 30,
                       ),
                       ColorsCard(
-                        onTap: () =>
-                            Get.toNamed('/dailyImage'),
+                        onTap: () => Get.toNamed('/mars/rovers'),
+                        text: string.text("mars"),
+                        colorList: [
+                          Colors.red,
+                          Colors.deepOrangeAccent,
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ColorsCard(
+                        onTap: () => Get.toNamed('/dailyImage'),
                         text: string.text("nasa_image"),
                         colorList: [
                           Colors.lightGreen,
                           Colors.green,
                         ],
                       ),
+
                       SizedBox(
                         height: 30,
                       ),

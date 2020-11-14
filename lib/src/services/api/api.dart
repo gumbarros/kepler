@@ -1,14 +1,18 @@
 
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:json_async/json_async.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/dailyImageData.dart';
+import 'package:kepler/src/models/roverData.dart';
 import 'package:kepler/src/utils/keplerUtils.dart';
 
 
 class API {
   static const String url = "https://kepler-api-1.herokuapp.com/";
   static const String dailyUrl = "https://api.nasa.gov/planetary/apod?api_key=nrXAZMcugA46nocWFcJrgKkDV65dxpYWX1NDoFjj";
+  static const String marsUrl = "https://mars-photos.herokuapp.com/api/v1";
 
   static Future<List> getAllData() async {
     KeplerUtils.syncUpdate(string.text("downloading_nasa"), 0.2);
@@ -42,4 +46,15 @@ class API {
     }
   }
 
+    static Future<List<RoverData>> getMarsRovers() async{
+    
+    final http.Response response = await http.get(marsUrl+'/rovers');
+    print("HTTP GET - " + marsUrl+'/rovers');
+    final Map res = await jsonDecodeAsyncMap(response.body);
+    final List data = res.values.first;
+    final List<RoverData> rovers = data.map((e) => new RoverData.fromMap(e)).toList();
+    return rovers;
+    }
+
+  
 }
