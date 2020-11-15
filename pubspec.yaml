@@ -17,10 +17,11 @@ dependencies:
   hive: ^1.4.4
   hive_flutter: ^0.3.1
   extended_image: ^1.1.2
+  share: ^0.6.5+4
   get: ^3.4.2
   http: any
   get_storage: ^1.2.1
-  csv: ^4.0.3
+  transparent_image: ^1.0.0
   sqflite: any
   url_launcher: any
   json_async: ^0.1.1

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/src/controllers/mars/marsRoversController.dart';
-import 'package:kepler/src/controllers/starsController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/roverData.dart';
 import 'package:kepler/src/services/api/api.dart';
+import 'package:kepler/src/ui/theme.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/cards/imageCard.dart';
 import 'package:kepler/src/ui/widgets/header/header.dart';
@@ -27,8 +27,8 @@ class MarsRoversView extends StatelessWidget {
               children: [
                 Container(
                     color: Colors.transparent,
-                    child: Header(string.text("rovers"), () {
-                      Get.back(canPop: true);
+                    child: Header(string.text("rovers"), (){
+                      Navigator.pop(context);
                     })),
                 FutureBuilder(
                     future: API.getMarsRovers(),
@@ -44,16 +44,8 @@ class MarsRoversView extends StatelessWidget {
                           if (snapshot.data.isNull) {
                             return Center(
                               child: Text(
-                                string.text("no_stars"),
-                                style: TextStyle(fontFamily: "Roboto"),
-                              ),
-                            );
-                          }
-                          if (snapshot.data.length.isEqual(0)) {
-                            return Center(
-                              child: Text(
-                                string.text("no_stars"),
-                                style: TextStyle(fontFamily: "Roboto"),
+                                string.text("server_error"),
+                                style: KeplerTheme.theme.textTheme.caption,
                               ),
                             );
                           }
@@ -76,7 +68,7 @@ class MarsRoversView extends StatelessWidget {
                                               Colors.blueGrey
                                             ],
                                             onTap: () => Get.toNamed(
-                                                    '/solarSystem',
+                                                    '/mars?rover=${snapshot.data[index].name}',
                                                     arguments: [
                                                       index,
                                                       snapshot.data[index]

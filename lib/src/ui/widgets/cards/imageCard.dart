@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:kepler/src/ui/theme.dart';
 
 class ColorsCard extends StatelessWidget {
   final Function onTap;
@@ -32,10 +33,7 @@ class ColorsCard extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     text,
-                    style: TextStyle(
-                        fontFamily: "JosefinSans",
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold),
+                    style: KeplerTheme.theme.textTheme.headline2,
                   ),
                 ),
               ),

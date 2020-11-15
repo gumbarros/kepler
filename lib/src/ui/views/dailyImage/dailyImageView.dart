@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/src/controllers/dailyImageController.dart';
-import 'package:kepler/src/controllers/planetController.dart';
 import 'package:kepler/src/models/dailyImageData.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/progress/loading.dart';
@@ -13,7 +12,6 @@ import 'package:kepler/src/ui/widgets/progress/loading.dart';
 class DailyImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.put(PlanetController());
     return Container(
       width: Get.width,
       child: GetBuilder<DailyImageController>(

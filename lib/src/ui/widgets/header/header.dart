@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kepler/src/ui/theme.dart';
 
 class Header extends StatelessWidget {
   final String title;
-  final Function backFunction;
+  final Function onPressed;
 
-  Header(this.title, this.backFunction);
+  Header(this.title, this.onPressed);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,7 @@ class Header extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
                       title,
-                      style: TextStyle(
-                          fontFamily: "JosefinSans",
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold),
+                      style: KeplerTheme.theme.textTheme.headline1,
                     ),
                   ),
                 ),
@@ -36,9 +34,7 @@ class Header extends StatelessWidget {
                   children: <Widget>[
                     IconButton(
                         icon: Icon(Icons.arrow_back),
-                        onPressed: () async {
-                          backFunction();
-                        })
+                        onPressed: onPressed)
                   ],
                 )
               ],
