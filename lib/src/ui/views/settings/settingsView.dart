@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:kepler/src/controllers/settingsController.dart';
+import 'package:kepler/src/controllers/settings/settingsController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/cards/menuCard.dart';

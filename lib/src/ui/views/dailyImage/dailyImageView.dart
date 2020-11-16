@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/src/controllers/dailyImageController.dart';
+import 'package:kepler/src/controllers/daily/dailyImageController.dart';
 import 'package:kepler/src/models/dailyImageData.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/progress/loading.dart';

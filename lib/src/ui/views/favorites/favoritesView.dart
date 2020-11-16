@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/src/controllers/favoritesController.dart';
-import 'package:kepler/src/controllers/planetController.dart';
-import 'package:kepler/src/controllers/starsController.dart';
+import 'package:kepler/src/controllers/favorites/favoritesController.dart';
+import 'package:kepler/src/controllers/explore/planetController.dart';
+import 'package:kepler/src/controllers/explore/starsController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/planetData.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
@@ -81,20 +81,20 @@ class FavoritesView extends StatelessWidget{
                               width: Get.width - Get.width / 4,
                               height: Get.height / 5,
                               text:
-                              "${favorites[index].planetName}",
+                              "${favorites[index].planetName}" ?? "",
                               onTap: () => Get.toNamed('/planet',arguments:[index,favorites[index]]),
                               child: PlanetController.to
                                   .getPlanetsColor(favorites[index].bmvj) ==
                                   Colors.yellow[100]
                                   ? GasPlanet(
-                                favorites[index].id,
+                                favorites[index].planetName,
                                 index: index,
                                 color: PlanetController.to
                                     .getPlanetsColor(favorites[index].bmvj),
                                 size: 100,
                               )
                                   : SmallPlanet(
-                                favorites[index].id,
+                                favorites[index].planetName,
                                 index: index,
                                 color: PlanetController.to
                                     .getPlanetsColor(favorites[index].bmvj),
@@ -106,9 +106,9 @@ class FavoritesView extends StatelessWidget{
                         return Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: StarCard(
-                            favorites[index].id,
                             size: Get.width / 3.3,
                             index: index,
+                            
                             text: favorites[index].name,
                             temperature:  favorites[index].temperature,
                             onTap: () =>

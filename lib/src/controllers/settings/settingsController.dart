@@ -1,7 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:get/get.dart';
 import 'package:kepler/src/services/api/api.dart';
-import 'package:kepler/src/controllers/homeController.dart';
+import 'package:kepler/src/controllers/home/homeController.dart';
 import 'package:kepler/src/services/database/database.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/utils/keplerUtils.dart';

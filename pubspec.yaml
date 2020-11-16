@@ -22,6 +22,7 @@ dependencies:
   http: any
   get_storage: ^1.2.1
   transparent_image: ^1.0.0
+  date_time_picker: "^1.1.0"
   sqflite: any
   url_launcher: any
   json_async: ^0.1.1

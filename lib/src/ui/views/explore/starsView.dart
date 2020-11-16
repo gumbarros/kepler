@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/src/controllers/starsController.dart';
+import 'package:kepler/src/controllers/explore/starsController.dart';
 import 'package:kepler/src/services/database/database.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/starData.dart';
@@ -104,7 +104,6 @@ class StarsView extends StatelessWidget {
                                         child: Padding(
                                             padding: const EdgeInsets.all(15.0),
                                             child: StarCard(
-                                                snapshot.data[index].id,
                                                 size: Get.width / 3.3,
                                                 index: index,
                                                 text: snapshot.data[index].name,

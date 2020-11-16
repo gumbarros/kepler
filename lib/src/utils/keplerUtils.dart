@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kepler/src/controllers/settingsController.dart';
+import 'package:kepler/src/controllers/settings/settingsController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/enums/starColor.dart';
 

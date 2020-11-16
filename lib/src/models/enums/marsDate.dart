@@ -1,0 +1,4 @@
+enum MarsDate{
+  SOL,
+  EARTH
+}

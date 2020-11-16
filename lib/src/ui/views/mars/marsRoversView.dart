@@ -68,7 +68,7 @@ class MarsRoversView extends StatelessWidget {
                                               Colors.blueGrey
                                             ],
                                             onTap: () => Get.toNamed(
-                                                    '/mars?rover=${snapshot.data[index].name}',
+                                                    '/mars',
                                                     arguments: [
                                                       index,
                                                       snapshot.data[index]

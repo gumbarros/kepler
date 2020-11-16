@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/src/controllers/favoritesController.dart';
-import 'package:kepler/src/controllers/planetController.dart';
-import 'package:kepler/src/controllers/solarSystemController.dart';
+import 'package:kepler/src/controllers/favorites/favoritesController.dart';
+import 'package:kepler/src/controllers/explore/planetController.dart';
+import 'package:kepler/src/controllers/explore/solarSystemController.dart';
 import 'package:kepler/src/models/starData.dart';
 import 'package:kepler/src/services/database/database.dart';
 import 'package:kepler/src/locale/translations.dart';
@@ -71,7 +71,7 @@ class SolarSystemView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Hero(
-                          tag: 'star$index',
+                          tag: star.name,
                           child: Star(
                             temperature: star.temperature,
                             size: 200,
@@ -174,7 +174,7 @@ class SolarSystemView extends StatelessWidget {
                                                           .data[index].bmvj) ==
                                                   Colors.yellow[100]
                                               ? GasPlanet(
-                                            snapshot.data[index].id,
+                                            snapshot.data[index].planetName,
                                                   index: index,
                                                   color: PlanetController.to
                                                       .getPlanetsColor(snapshot
@@ -182,7 +182,7 @@ class SolarSystemView extends StatelessWidget {
                                                   size: 100,
                                                 )
                                               : SmallPlanet(
-                                                  snapshot.data[index].id,
+                                                  snapshot.data[index].planetName,
                                                   index: index,
                                                   color: PlanetController.to
                                                       .getPlanetsColor(snapshot

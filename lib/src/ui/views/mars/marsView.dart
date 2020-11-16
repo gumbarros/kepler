@@ -6,15 +6,17 @@ import 'package:get/route_manager.dart';
 import 'package:kepler/src/controllers/mars/marsController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/marsData.dart';
+import 'package:kepler/src/models/roverData.dart';
 import 'package:kepler/src/services/api/api.dart';
 import 'package:kepler/src/ui/theme.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
+import 'package:kepler/src/ui/widgets/dialogs/marsFIndDialog.dart';
 import 'package:kepler/src/ui/widgets/progress/loading.dart';
 import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MarsView extends StatelessWidget {
-  final String rover = Get.parameters['rover'];
+  final RoverData rover = Get.arguments[1];
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +30,19 @@ class MarsView extends StatelessWidget {
             Scaffold(
               appBar: AppBar(
                 elevation: 0,
-                title: Text("$rover - ${string.text('latest_photos')}"),
+                title: Text("${rover.name} - ${string.text('latest_photos')}", style: KeplerTheme.theme.textTheme.caption,),
                 centerTitle: true,
                 backgroundColor: Colors.transparent,
-                // leading: IconButton(
-                //   icon: Icon(Icons.arrow_back),
-                //   onPressed: () {
-                //     Navigator.pop(context);
-                //   },
-                // ),
+                actions: [
+                  IconButton(icon: Icon(Icons.search), onPressed: (){
+                     Get.dialog(MarsFindDialog(rover));
+                  })
+                ],
               ),
               backgroundColor: Colors.transparent,
               resizeToAvoidBottomPadding: false,
               body: FutureBuilder<List<MarsData>>(
-                  future: API.getLatestMarsData(rover, _.page),
+                  future: API.getLatestMarsData(rover.name, _.page),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<MarsData>> snapshot) {
                     switch (snapshot.connectionState) {

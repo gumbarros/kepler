@@ -2,18 +2,18 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class SmallPlanet extends StatelessWidget {
-  final int id;
+  final String name;
   final Color color;
   final double size;
   final int index;
 
-  SmallPlanet(this.id,{@required this.color, @required this.size, @required this.index});
+  SmallPlanet(this.name,{@required this.color, @required this.size, @required this.index});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Hero(
-        tag: id,
+        tag: name,
         child: Container(
           height: size,
           width: size,

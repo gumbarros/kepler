@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/src/controllers/starsController.dart';
+import 'package:kepler/src/controllers/explore/starsController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/utils/keplerUtils.dart';
 import 'package:kepler/src/ui/widgets/forms/textField.dart';

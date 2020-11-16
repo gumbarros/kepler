@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/src/controllers/homeController.dart';
+import 'package:kepler/src/controllers/home/homeController.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/cards/imageCard.dart';

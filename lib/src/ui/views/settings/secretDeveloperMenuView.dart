@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:kepler/src/controllers/settingsController.dart';
+import 'package:hive/hive.dart';
+import 'package:kepler/src/controllers/settings/settingsController.dart';
 import 'package:kepler/src/services/database/database.dart';
 import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
@@ -47,6 +48,7 @@ class SecretDeveloperMenuView extends StatelessWidget {
                                       onTap: () async {
                                         final GetStorage getStorage = GetStorage();
                                         await getStorage.erase();
+                                        Hive.deleteFromDisk();
                                         await KeplerDatabase.db.dropTable().then((_){
                                           Snackbars.snackbar(title: string.text("data_cleared"), text: string.text("all_data_deleted"));
                                         });

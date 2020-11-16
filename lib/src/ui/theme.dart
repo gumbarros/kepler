@@ -7,6 +7,7 @@ class KeplerTheme {
         dialogBackgroundColor: Color(0xFFF312F31),
         cardColor: Colors.grey[600],
         textTheme: TextTheme(
+          subtitle1: TextStyle(fontSize: 13.5, fontFamily: 'Roboto'),
           headline1: TextStyle(
                           fontFamily: "JosefinSans",
                           fontSize: 50,

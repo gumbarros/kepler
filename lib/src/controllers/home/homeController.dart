@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:kepler/src/controllers/settingsController.dart';
+import 'package:kepler/src/controllers/settings/settingsController.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();

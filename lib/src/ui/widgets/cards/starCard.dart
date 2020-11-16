@@ -5,13 +5,11 @@ import 'package:kepler/src/ui/widgets/universe/star.dart';
 class StarCard extends StatefulWidget {
   final Function onTap;
   final String text;
-  final int id;
   final int index;
   final double temperature;
   final double size;
 
   StarCard(
-      this.id,
       {@required this.onTap,
       @required this.text,
       @required this.temperature,
@@ -74,7 +72,7 @@ class _StarCardState extends State<StarCard> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                   Hero(
-                      tag: "star${widget.index}",
+                      tag: widget.text,
                       child: Star(
                           size: widget.size, temperature: widget.temperature)),
                   Expanded(child: SizedBox()),
