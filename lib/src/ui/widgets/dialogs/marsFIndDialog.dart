@@ -56,6 +56,7 @@ class MarsFindDialog extends StatelessWidget {
                           semanticLabel: string.text("clear_filters"),
                         ),
                         onPressed: () {
+                          _.marsDate.value = MarsDate.NONE;
                           _.update();
                           Get.back();
                         },
@@ -100,7 +101,9 @@ class MarsFindDialog extends StatelessWidget {
                         )),
                     Obx(
                       () => Visibility(
-                        replacement: GestureDetector(
+                        replacement: Visibility(
+                          visible: _.marsDate.value != MarsDate.NONE,
+                          child: GestureDetector(
                           onTap: () {
                             _.setEarthDate(context, rover);
                           },
@@ -110,6 +113,7 @@ class MarsFindDialog extends StatelessWidget {
                             icon: Icons.calendar_today_rounded,
                             onChanged: (value) {},
                           ),
+                        ),
                         ),
                         visible: _.marsDate.value == MarsDate.SOL,
                         child: Container(
@@ -131,13 +135,17 @@ class MarsFindDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                    RaisedButton(
-                      color: Theme.of(context).primaryColor,
-                      child: Text(string.text('filter')),
-                      onPressed: () {
-                        Get.back();
-                      },
-                    ),
+                    Obx(()=>Visibility(
+                      visible: _.marsDate.value != MarsDate.NONE,
+                                          child: RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        child: Text(string.text('filter')),
+                        onPressed: () {
+                          _.update();  
+                          Get.back();
+                        },
+                      ),
+                    ),)
                   ],
                 ))));
   }
