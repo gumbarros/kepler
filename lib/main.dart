@@ -38,6 +38,9 @@ Future<void> _initializeApp() async {
   await string.init();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
   FlareCache.doesPrune = false;
   await _warmupFlare();
   Get.put<FavoritesController>(FavoritesController());

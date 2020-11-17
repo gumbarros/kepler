@@ -136,7 +136,7 @@ class MarsFindDialog extends StatelessWidget {
                       ),
                     ),
                     Obx(()=>Visibility(
-                      visible: _.marsDate.value != MarsDate.NONE,
+                      visible: _.marsDate.value != MarsDate.NONE && (!_.solDate.value.isNullOrBlank || _.apiDate.value != ""),
                                           child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         child: Text(string.text('filter')),

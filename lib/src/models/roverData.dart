@@ -9,18 +9,7 @@ class RoverData {
   int maxSol;
   DateTime maxDate;
   int totalPhotos;
-  List<Cameras> cameras;
-
-  RoverData(
-      {this.id,
-      this.name,
-      this.landingDate,
-      this.launchDate,
-      this.status,
-      this.maxSol,
-      this.maxDate,
-      this.totalPhotos,
-      this.cameras});
+  List<CameraData> cameras;
 
   RoverData.fromMap(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,9 +21,9 @@ class RoverData {
     maxDate = DateTime.parse(json['max_date']);
     totalPhotos = json['total_photos'];
     if (json['cameras'] != null) {
-      cameras = new List<Cameras>();
+      cameras = new List<CameraData>();
       json['cameras'].forEach((v) {
-        cameras.add(new Cameras.fromJson(v));
+        cameras.add(new CameraData.fromJson(v));
       });
     }
   }
@@ -56,15 +45,13 @@ class RoverData {
   }
 }
 
-class Cameras {
+class CameraData {
   int id;
   String name;
   int roverId;
   String fullName;
 
-  Cameras({this.id, this.name, this.roverId, this.fullName});
-
-  Cameras.fromJson(Map<String, dynamic> json) {
+  CameraData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     roverId = json['rover_id'];
@@ -76,7 +63,6 @@ class Cameras {
     data['id'] = this.id;
     data['name'] = this.name;
     data['rover_id'] = this.roverId;
-    data['full_name'] = this.fullName;
     return data;
   }
 }

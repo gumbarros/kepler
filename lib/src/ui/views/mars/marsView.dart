@@ -1,5 +1,3 @@
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:date_format/date_format.dart' as f;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -11,7 +9,7 @@ import 'package:kepler/src/models/marsData.dart';
 import 'package:kepler/src/models/roverData.dart';
 import 'package:kepler/src/ui/theme.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
-import 'package:kepler/src/ui/widgets/dialogs/marsFIndDialog.dart';
+import 'package:kepler/src/ui/widgets/dialogs/marsFindDialog.dart';
 import 'package:kepler/src/ui/widgets/progress/loading.dart';
 import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -84,7 +82,9 @@ class MarsView extends StatelessWidget {
                                     height: 300.0,
                                     fit: BoxFit.cover,
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed('/mars/photo',arguments:[snapshot.data[index], rover]);
+                                  },
                                   onLongPress: () {
                                     Share.share(snapshot.data[index].imgSrc);
                                   },

@@ -17,7 +17,7 @@ class MarsController extends GetxController {
   final Rx<MarsDate> marsDate = MarsDate.NONE.obs;
   final Rx<TextEditingController> earthDate = TextEditingController().obs;
   final RxString solDate = "".obs;
-  String _apiDate;
+  final RxString apiDate = "".obs;
 
   void setEarthDate(BuildContext context, RoverData rover) async {
     DateTime date = await PlatformDatePicker.showDate(
@@ -34,7 +34,7 @@ class MarsController extends GetxController {
       earthDate.value.text = UtilData.obterDataDDMMAAAA(date).toString();
     }
 
-    _apiDate = format
+    apiDate.value = format
           .formatDate(date, [format.yyyy, '-', format.mm, '-', format.dd]);
 
   }
@@ -66,7 +66,7 @@ class MarsController extends GetxController {
     if (marsDate.value == MarsDate.SOL) {
       mars = await API.getMarsImagesBySol(rover, page, solDate.value.substring(solDate.value.indexOf(" ")+1));
     } else if (marsDate.value == MarsDate.EARTH) {
-      mars = await API.getMarsImagesByEarthDate(rover, page, _apiDate);
+      mars = await API.getMarsImagesByEarthDate(rover, page, apiDate.value);
     } else {
       mars = await API.getLatestMarsImages(rover, page);
     }

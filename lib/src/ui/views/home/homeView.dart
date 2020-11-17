@@ -86,7 +86,7 @@ class HomeView extends StatelessWidget {
                         onTap: () => Get.toNamed('/mars/rovers'),
                         text: string.text("mars"),
                         colorList: [
-                          Colors.red,
+                          Colors.redAccent,
                           Colors.deepOrangeAccent,
                         ],
                       ),

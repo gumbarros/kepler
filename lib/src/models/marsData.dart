@@ -1,20 +1,16 @@
+import 'package:kepler/src/models/roverData.dart';
+
 class MarsData {
   int id;
   int sol;
   String imgSrc;
+  CameraData camera;
   String earthDate;
-
-
-  MarsData(
-      {this.id,
-      this.sol,
-      this.imgSrc,
-      this.earthDate
-      });
 
   MarsData.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     sol = json['sol'];
+    camera = json['camera'] != null ? new CameraData.fromJson(json['camera']) : null;
     imgSrc = json['img_src'];
     earthDate = json['earth_date'];
   }

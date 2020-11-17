@@ -26,6 +26,7 @@ dependencies:
   date_format: ^1.0.9
   brasil_fields: ^0.5.0
   dropdown_search: ^0.4.6
+  photo_view: ^0.10.3
   sqflite: any
   url_launcher: any
   json_async: ^0.1.1
