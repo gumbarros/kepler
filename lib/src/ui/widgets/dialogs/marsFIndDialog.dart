@@ -1,4 +1,4 @@
-import 'package:date_time_picker/date_time_picker.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +15,7 @@ class MarsFindDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(rover.toMap().toString());
     return GetBuilder<MarsController>(
         init: MarsController(),
         builder: (_) => Dialog(
@@ -99,24 +100,35 @@ class MarsFindDialog extends StatelessWidget {
                         )),
                     Obx(
                       () => Visibility(
-                        replacement: DateTimePicker(
-                          initialValue: '',
-                          //firstDate: DateTime.parse(rover.landingDate) ,
-                          icon: Icon(Icons.date_range),
-                          lastDate:DateTime.parse(rover.maxDate),
-                          dateLabelText: string.text("date"),
-                          onChanged: (val){
-                            print(val);
+                        replacement: GestureDetector(
+                          onTap: () {
+                            _.setEarthDate(context, rover);
                           },
+                          child: KeplerTextField(
+                            enabled: false,
+                            controller: _.earthDate.value,
+                            icon: Icons.calendar_today_rounded,
+                            onChanged: (value) {},
+                          ),
                         ),
                         visible: _.marsDate.value == MarsDate.SOL,
                         child: Container(
-                            height: Get.height / 8,
-                            child: KeplerTextField(
-                              textAlign: TextAlign.center,
+                          height: Get.height / 8,
+                          child: DropdownSearch<String>(
+                              mode: Mode.BOTTOM_SHEET,
+                              showSelectedItem: true,
+                              showSearchBox: true,
+                              items: _.getItems(rover.maxSol),
                               label: "SOL",
-                              onChanged: (value) {},
-                            )),
+                              emptyBuilder: (BuildContext context, String s) {
+                                return Center(
+                                    child: Text(string.text("no_sol")));
+                              },
+                              onChanged: (value) {
+                                _.solDate.value = value;
+                              },
+                              selectedItem: _.solDate.value),
+                        ),
                       ),
                     ),
                     RaisedButton(

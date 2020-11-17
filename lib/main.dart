@@ -14,7 +14,6 @@ import 'package:kepler/src/models/starData.dart';
 import 'package:kepler/src/routes.dart';
 import 'package:kepler/src/ui/theme.dart';
 
-
 void main() async {
   await _initializeApp().then((_) {
     runApp(GetMaterialApp(

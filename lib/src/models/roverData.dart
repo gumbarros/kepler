@@ -1,11 +1,13 @@
+
+
 class RoverData {
   int id;
   String name;
-  String landingDate;
-  String launchDate;
+  DateTime landingDate;
+  DateTime launchDate;
   String status;
   int maxSol;
-  String maxDate;
+  DateTime maxDate;
   int totalPhotos;
   List<Cameras> cameras;
 
@@ -23,11 +25,11 @@ class RoverData {
   RoverData.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    landingDate = json['landing_date'];
-    launchDate = json['launch_date'];
+    landingDate = DateTime.parse(json['landing_date']);
+    launchDate = DateTime.parse(json['launch_date']);
     status = json['status'];
     maxSol = json['max_sol'];
-    maxDate = json['max_date'];
+    maxDate = DateTime.parse(json['max_date']);
     totalPhotos = json['total_photos'];
     if (json['cameras'] != null) {
       cameras = new List<Cameras>();

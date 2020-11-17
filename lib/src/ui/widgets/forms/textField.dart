@@ -22,7 +22,7 @@ class KeplerTextField extends StatelessWidget {
         this.enabled = true,
         this.password = false,
         this.multiline = false,
-        @required this.textAlign,
+        this.textAlign = TextAlign.left,
         this.maxLength,
         this.icon,
         this.onChanged});

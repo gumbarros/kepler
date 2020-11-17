@@ -22,7 +22,10 @@ dependencies:
   http: any
   get_storage: ^1.2.1
   transparent_image: ^1.0.0
-  date_time_picker: "^1.1.0"
+  platform_date_picker: ^0.0.4+1
+  date_format: ^1.0.9
+  brasil_fields: ^0.5.0
+  dropdown_search: ^0.4.6
   sqflite: any
   url_launcher: any
   json_async: ^0.1.1

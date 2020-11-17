@@ -4,6 +4,8 @@ import 'package:kepler/src/locale/translations.dart';
 import 'package:kepler/src/models/enums/starColor.dart';
 
 class KeplerUtils{
+
+  ///Current languages: Brazilian Portuguese & English. We need to help to finish the others translations.
   static get languageDropdownItems => <DropdownMenuItem<String>>[
     DropdownMenuItem(
       child: Text("English"),
@@ -14,31 +16,31 @@ class KeplerUtils{
           "Brazilian Portuguese"),
       value: "br",
     ),
-    DropdownMenuItem(
-      child:
-      Text("Vietnamese"),
-      value: "vn",
-    ),
-    DropdownMenuItem(
-      child: Text("Hindi"),
-      value: "hi",
-    ),
-    DropdownMenuItem(
-      child: Text("Telugu"),
-      value: "te",
-    ),
-    DropdownMenuItem(
-      child: Text("German"),
-      value: "de",
-    ),
-    DropdownMenuItem(
-      child: Text("Polish"),
-      value: "pl",
-    ),
-    DropdownMenuItem(
-      child: Text("Svenska"),
-      value: "sv",
-    ),
+    // DropdownMenuItem(
+    //   child:
+    //   Text("Vietnamese"),
+    //   value: "vn",
+    // ),
+    // DropdownMenuItem(
+    //   child: Text("Hindi"),
+    //   value: "hi",
+    // ),
+    // DropdownMenuItem(
+    //   child: Text("Telugu"),
+    //   value: "te",
+    // ),
+    // DropdownMenuItem(
+    //   child: Text("German"),
+    //   value: "de",
+    // ),
+    // DropdownMenuItem(
+    //   child: Text("Polish"),
+    //   value: "pl",
+    // ),
+    // DropdownMenuItem(
+    //   child: Text("Svenska"),
+    //   value: "sv",
+    // ),
   ];
   static get colorDropdownItems => <DropdownMenuItem<StarColor>>[
     DropdownMenuItem(
@@ -70,3 +72,4 @@ class KeplerUtils{
     SettingsController.to.syncPercentage.value = percentage;
   }
 }
+
