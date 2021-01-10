@@ -16,6 +16,11 @@ class KeplerUtils{
           "Brazilian Portuguese"),
       value: "br",
     ),
+    DropdownMenuItem(
+      child: Text(
+          "Swedish"),
+      value: "sv",
+    ),
     // DropdownMenuItem(
     //   child:
     //   Text("Vietnamese"),

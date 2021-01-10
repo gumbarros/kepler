@@ -63,7 +63,7 @@ class SecretDeveloperMenuView extends StatelessWidget {
                                       child: MenuCard(
                                         text: string.text("nice_easter_egg_here"),
                                         onTap: () async {
-                                         launch("https://www.youtube.com/watch?v=Wl959QnD3lM");
+                                         launch("https://steamcommunity.com/id/beachthanos");
                                         },
                                         icon: Icons.android,
                                       )),
