@@ -54,7 +54,7 @@ class LanguageDialog extends StatelessWidget {
                       style: TextStyle(),
                       onChanged: (value) {
                         conf.lang = value;
-                        conf.upd();
+                        conf.update();
                       },
                       items: KeplerUtils.languageDropdownItems,
                     ),
