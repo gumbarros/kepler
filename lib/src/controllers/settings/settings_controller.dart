@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:extended_image/extended_image.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kepler/src/controllers/home/home_controller.dart';
@@ -24,9 +23,8 @@ class SettingsController extends GetxController {
   Future<void> setLanguage(String code) async {
     Get.updateLocale(Locale(code));
     gs.write('locale', code);
-    print(Get.locale);
-    upd();
-    HomeController.to.upd();
+    update();
+    HomeController.to.update();
   }
 
   Future<void> updateData(bool welcome) async {
@@ -61,9 +59,5 @@ class SettingsController extends GetxController {
       print(e);
       Snackbars.error("error".tr);
     }
-  }
-
-  void upd() {
-    update();
   }
 }

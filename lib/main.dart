@@ -46,9 +46,8 @@ void main() async {
 Future<void> _initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init().then((_) async{
-    //final GetStorage gs = GetStorage();
-    //locale = await gs.read("locale");
-    //print("pan: " + locale);
+    final GetStorage gs = GetStorage();
+    locale = await gs.read("locale");
   });
   await Hive.initFlutter();
   await SystemChrome.setPreferredOrientations(

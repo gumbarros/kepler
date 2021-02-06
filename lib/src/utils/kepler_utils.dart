@@ -24,7 +24,7 @@ class KeplerUtils{
      DropdownMenuItem(
        child:
        Text("Vietnamese"),
-       value: "vn",
+       value: "vi",
      ),
     // DropdownMenuItem(
     //   child: Text("Hindi"),
