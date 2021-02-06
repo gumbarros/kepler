@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:json_async/json_async.dart';
-import 'package:kepler/src/locale/translations.dart';
-import 'package:kepler/src/models/dailyImageData.dart';
-import 'package:kepler/src/models/marsData.dart';
-import 'package:kepler/src/models/roverData.dart';
-import 'package:kepler/src/utils/keplerUtils.dart';
+import 'package:get/get.dart';
+import 'package:kepler/src/models/daily_image_data.dart';
+import 'package:kepler/src/models/mars_data.dart';
+import 'package:kepler/src/models/rover_data.dart';
+import 'package:kepler/src/utils/kepler_utils.dart';
 
 class API {
   static const String url = "https://kepler-api-1.herokuapp.com/";
@@ -13,12 +13,12 @@ class API {
   static const String marsUrl = "https://mars-photos.herokuapp.com/api/v1";
 
   static Future<List> getAllData() async {
-    KeplerUtils.syncUpdate(string.text("downloading_nasa"), 0.2);
+    KeplerUtils.syncUpdate("downloading_nasa".tr, 0.2);
 
     print("HTTP GET - " + url);
 
     final http.Response response = await http.get(url);
-    KeplerUtils.syncUpdate(string.text("decoding_nasa"), 0.45);
+    KeplerUtils.syncUpdate("decoding_nasa".tr, 0.45);
     final List data = await jsonDecodeAsync(response.body);
     return data;
   }

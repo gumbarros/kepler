@@ -1,16 +1,16 @@
 import 'package:get/get.dart';
-import 'package:kepler/src/ui/views/dailyImage/dailyImageView.dart';
-import 'package:kepler/src/ui/views/explore/planetsView.dart';
-import 'package:kepler/src/ui/views/explore/solarSystemView.dart';
-import 'package:kepler/src/ui/views/explore/starsView.dart';
-import 'package:kepler/src/ui/views/favorites/favoritesView.dart';
-import 'package:kepler/src/ui/views/home/homeView.dart';
-import 'package:kepler/src/ui/views/mars/marsPhotoView.dart';
-import 'package:kepler/src/ui/views/mars/marsRoversView.dart';
-import 'package:kepler/src/ui/views/mars/marsView.dart';
-import 'package:kepler/src/ui/views/settings/aboutView.dart';
-import 'package:kepler/src/ui/views/settings/secretDeveloperMenuView.dart';
-import 'package:kepler/src/ui/views/settings/settingsView.dart';
+import 'package:kepler/src/ui/views/dailyImage/daily_image_view.dart';
+import 'package:kepler/src/ui/views/explore/planets_view.dart';
+import 'package:kepler/src/ui/views/explore/solar_system_view.dart';
+import 'package:kepler/src/ui/views/explore/stars_view.dart';
+import 'package:kepler/src/ui/views/favorites/favorites_view.dart';
+import 'package:kepler/src/ui/views/home/home_view.dart';
+import 'package:kepler/src/ui/views/mars/mars_photo_view.dart';
+import 'package:kepler/src/ui/views/mars/mars_rover_view.dart';
+import 'package:kepler/src/ui/views/mars/mars_view.dart';
+import 'package:kepler/src/ui/views/settings/about_view.dart';
+import 'package:kepler/src/ui/views/settings/secret_developer_menu_view.dart';
+import 'package:kepler/src/ui/views/settings/settings_view.dart';
 
 
 class Routes {

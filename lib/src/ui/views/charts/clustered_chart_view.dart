@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_means_cluster/k_means_cluster.dart';
-import 'package:kepler/src/controllers/charts/chartsController.dart';
+import 'package:kepler/src/controllers/charts/charts_controller.dart';
 import 'package:kepler/src/ui/widgets/header/header.dart';
 import 'package:kepler/src/ui/widgets/progress/loading.dart';
 

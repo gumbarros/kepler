@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kepler/src/models/planetData.dart';
+import 'package:kepler/src/models/planet_data.dart';
 import 'package:kepler/src/services/api/api.dart';
-import 'package:kepler/src/locale/translations.dart';
-import 'package:kepler/src/models/starData.dart';
-import 'package:kepler/src/utils/keplerUtils.dart';
+import 'package:kepler/src/models/star_data.dart';
+import 'package:kepler/src/utils/kepler_utils.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -60,15 +59,15 @@ class KeplerDatabase {
       await API.getAllData().then((data) async {
         final Batch batch = db.batch();
         batch.execute("DROP TABLE IF EXISTS $_table");
-        KeplerUtils.syncUpdate(string.text("creating_table"), 0.50);
+        KeplerUtils.syncUpdate("creating_table".tr, 0.50);
         batch.execute(_createTable);
-        KeplerUtils.syncUpdate(string.text("inserting_data"), 0.60);
+        KeplerUtils.syncUpdate("inserting_data".tr,0.60);
         data.forEach((item) {
           batch.insert(_table, item);
         });
-        KeplerUtils.syncUpdate(string.text("commit_data"), 0.7);
+        KeplerUtils.syncUpdate("commit_data".tr, 0.7);
         await batch.commit(noResult: true);
-        KeplerUtils.syncUpdate(string.text("finishing"), 0.9);
+        KeplerUtils.syncUpdate("finishing", 0.9);
       });
       return true;
     } catch (e) {

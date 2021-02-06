@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kepler/src/locale/translations.dart';
 
 class Snackbars {
   static void error(String description) {
     if (!Get.isSnackbarOpen)
       Get.snackbar(
-        string.text("error"),
+        "error".tr,
         description,
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -17,7 +16,7 @@ class Snackbars {
 
   static void development() {
     if (!Get.isSnackbarOpen)
-      Get.snackbar(string.text("coming_soon"), string.text("under_development"),
+      Get.snackbar("coming_soon".tr, "under_development".tr,
           backgroundColor: Colors.white,
           colorText: Colors.black);
   }
