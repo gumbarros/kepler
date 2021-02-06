@@ -3,7 +3,7 @@ description: Discover the universe with NASA data
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 2021.01.09+5
+version: 2021.02.05+6
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
