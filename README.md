@@ -9,7 +9,7 @@
 - Translating the app 
 
 > The only requirements to contribute are to speak English and know Flutter.
-> You can join our discord server by PM-ing RonanHansel#0059 or BeachThanos#0493
+> You can join our discord server by PM-ing RonanHansel#0059 or Gustavo Mauricio#1914
 
 ## [Kepler API](https://www.github.com/ronanhansel/kepler-api) 🪐
 > Also see the API to convert the .csv from NASA to .json for our app
