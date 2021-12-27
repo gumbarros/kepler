@@ -43,7 +43,7 @@ class MarsView extends StatelessWidget {
                 ],
               ),
               backgroundColor: Colors.transparent,
-              resizeToAvoidBottomPadding: false,
+              resizeToAvoidBottomInset: false,
               body: FutureBuilder<List<MarsData>>(
                   future: _.getMarsData(rover.name, _.page),
                   builder: (BuildContext context,

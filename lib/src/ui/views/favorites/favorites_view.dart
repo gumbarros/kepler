@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/src/controllers/favorites/favorites_controller.dart';
 import 'package:kepler/src/controllers/explore/planet_controller.dart';
 import 'package:kepler/src/controllers/explore/stars_controller.dart';
+import 'package:kepler/src/controllers/favorites/favorites_controller.dart';
 import 'package:kepler/src/models/planet_data.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/cards/planet_card.dart';
@@ -53,15 +53,17 @@ class FavoritesView extends StatelessWidget{
           Background(),
           Scaffold(
             backgroundColor: Colors.transparent,
-            resizeToAvoidBottomPadding: false,
+            resizeToAvoidBottomInset: false,
             body: ListView(
               physics: BouncingScrollPhysics(),
               children: [
                 Column(
                   children: [
                     Container(
-                      child: Header("favourites".tr, () => Get.back(canPop: true),
-                    ),
+                      child: Header(
+                        "favourites".tr,
+                        () => Get.back(canPop: true),
+                      ),
                     )
                   ],
                 ),

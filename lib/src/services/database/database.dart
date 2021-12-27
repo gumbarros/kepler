@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'package:get/get.dart';
+
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:kepler/src/models/planet_data.dart';
-import 'package:kepler/src/services/api/api.dart';
 import 'package:kepler/src/models/star_data.dart';
+import 'package:kepler/src/services/api/api.dart';
 import 'package:kepler/src/utils/kepler_utils.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -195,9 +196,7 @@ class KeplerDatabase {
     final planets = data
         .map((Map<String, dynamic> planet) => PlanetData.fromMap(planet))
         .toList();
-    // planets.forEach((PlanetData planet) {
-    //   if(planet)
-    // });
+
     return planets;
   }
 

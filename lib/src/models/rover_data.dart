@@ -21,7 +21,7 @@ class RoverData {
     maxDate = DateTime.parse(json['max_date']);
     totalPhotos = json['total_photos'];
     if (json['cameras'] != null) {
-      cameras = new List<CameraData>();
+      cameras = <CameraData>[];
       json['cameras'].forEach((v) {
         cameras.add(new CameraData.fromJson(v));
       });

@@ -10,6 +10,7 @@ import 'package:kepler/src/ui/widgets/forms/text_field.dart';
 
 class MarsFindDialog extends StatelessWidget {
   final RoverData rover;
+
   MarsFindDialog(this.rover);
 
   @override
@@ -103,16 +104,16 @@ class MarsFindDialog extends StatelessWidget {
                         replacement: Visibility(
                           visible: _.marsDate.value != MarsDate.NONE,
                           child: GestureDetector(
-                          onTap: () {
-                            _.setEarthDate(context, rover);
-                          },
-                          child: KeplerTextField(
-                            enabled: false,
-                            controller: _.earthDate.value,
-                            icon: Icons.calendar_today_rounded,
-                            onChanged: (value) {},
+                            onTap: () {
+                              _.setEarthDate(context, rover);
+                            },
+                            child: KeplerTextField(
+                              enabled: false,
+                              controller: _.earthDate.value,
+                              icon: Icons.calendar_today_rounded,
+                              onChanged: (value) {},
+                            ),
                           ),
-                        ),
                         ),
                         visible: _.marsDate.value == MarsDate.SOL,
                         child: Container(
@@ -124,8 +125,7 @@ class MarsFindDialog extends StatelessWidget {
                               items: _.getItems(rover.maxSol),
                               label: "SOL",
                               emptyBuilder: (BuildContext context, String s) {
-                                return Center(
-                                    child: Text("no_sol".tr));
+                                return Center(child: Text("no_sol".tr));
                               },
                               onChanged: (value) {
                                 _.solDate.value = value;
@@ -134,17 +134,22 @@ class MarsFindDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Obx(()=>Visibility(
-                      visible: _.marsDate.value != MarsDate.NONE && (!_.solDate.value.isNullOrBlank || _.apiDate.value != ""),
-                                          child: RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        child: Text('filter'.tr),
-                        onPressed: () {
-                          _.update();  
-                          Get.back();
-                        },
+                    Obx(
+                      () => Visibility(
+                        visible: _.marsDate.value != MarsDate.NONE &&
+                            (!_.solDate.value.isNullOrBlank ||
+                                _.apiDate.value != ""),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Get.theme.primaryColor),
+                          child: Text('filter'.tr),
+                          onPressed: () {
+                            _.update();
+                            Get.back();
+                          },
+                        ),
                       ),
-                    ),)
+                    )
                   ],
                 ))));
   }

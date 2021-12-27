@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/src/controllers/explore/stars_controller.dart';
-import 'package:kepler/src/utils/kepler_utils.dart';
 import 'package:kepler/src/ui/widgets/forms/text_field.dart';
+import 'package:kepler/src/utils/kepler_utils.dart';
 
 class FilterDialog extends StatelessWidget {
   @override
@@ -113,24 +113,31 @@ class FilterDialog extends StatelessWidget {
                               _.update();
                             },)),
                             Text("to".tr),
-                            Container(width: Get.width / 4, child: KeplerTextField(initialValue: _.radiusTo,textAlign: TextAlign.center,numeral: true,onChanged: (value){
-                              _.radiusTo = value;
-                              _.update();
-                            },)),
-
+                                Container(
+                                    width: Get.width / 4,
+                                    child: KeplerTextField(
+                                      initialValue: _.radiusTo,
+                                      textAlign: TextAlign.center,
+                                      numeral: true,
+                                      onChanged: (value) {
+                                        _.radiusTo = value;
+                                        _.update();
+                                      },
+                                    )),
+                              ],
+                            ),
                           ],
-                        ),
-                      ],)
-                  ],)
-                ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
+                        )
+                      ],
+                    )),
+                TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Get.theme.primaryColor),
                   child: Text('filter'.tr),
                   onPressed: () {
                     Get.back();
                   },
                 ),
-
               ],
             ),
           )),

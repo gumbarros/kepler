@@ -9,7 +9,7 @@ class LanguageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
       init: SettingsController(),
-      builder: (conf)=> Dialog(
+      builder: (conf) => Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -27,8 +27,7 @@ class LanguageDialog extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               shape: BoxShape.rectangle,
-              borderRadius:
-              BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black26,
@@ -38,17 +37,14 @@ class LanguageDialog extends StatelessWidget {
               ],
             ),
             child: Column(
-              mainAxisAlignment:
-              MainAxisAlignment.center,
-              crossAxisAlignment:
-              CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   height: Get.height / 10,
                   width: Get.width / 1,
                   child: Center(
-                    child:
-                    DropdownButton(
+                    child: DropdownButton(
                       value: conf.lang,
                       hint: Text("language".tr),
                       style: TextStyle(),
@@ -60,8 +56,9 @@ class LanguageDialog extends StatelessWidget {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
+                TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor),
                   child: Text('save'.tr),
                   onPressed: () {
                     conf.setLanguage(conf.lang);

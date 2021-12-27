@@ -4,13 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kepler/src/controllers/explore/stars_controller.dart';
-import 'package:kepler/src/services/database/database.dart';
 import 'package:kepler/src/models/star_data.dart';
+import 'package:kepler/src/services/database/database.dart';
 import 'package:kepler/src/ui/theme.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/cards/star_card.dart';
 import 'package:kepler/src/ui/widgets/dialogs/filter_dialog.dart';
-
 import 'package:kepler/src/ui/widgets/forms/search_bar.dart';
 import 'package:kepler/src/ui/widgets/header/header.dart';
 import 'package:kepler/src/ui/widgets/progress/loading.dart';
@@ -47,7 +46,7 @@ class StarsView extends StatelessWidget {
           Background(),
           Scaffold(
             backgroundColor: Colors.transparent,
-            resizeToAvoidBottomPadding: false,
+            resizeToAvoidBottomInset: false,
             body: Stack(children: [
               Container(
                 width: Get.width,

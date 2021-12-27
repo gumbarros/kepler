@@ -21,12 +21,12 @@ class MarsRoversView extends StatelessWidget {
         Background(),
         Scaffold(
             backgroundColor: Colors.transparent,
-            resizeToAvoidBottomPadding: false,
+            resizeToAvoidBottomInset: false,
             body: Stack(
               children: [
                 Container(
                     color: Colors.transparent,
-                    child: Header("rovers".tr, (){
+                    child: Header("rovers".tr, () {
                       Get.toNamed('/home');
                     })),
                 FutureBuilder(

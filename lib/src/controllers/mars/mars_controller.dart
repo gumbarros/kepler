@@ -1,4 +1,4 @@
-import 'package:brasil_fields/brasil_fields.dart';
+import 'package:date_format/date_format.dart' as format;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kepler/src/models/enums/mars_date.dart';
@@ -6,7 +6,6 @@ import 'package:kepler/src/models/mars_data.dart';
 import 'package:kepler/src/models/rover_data.dart';
 import 'package:kepler/src/services/api/api.dart';
 import 'package:platform_date_picker/platform_date_picker.dart';
-import 'package:date_format/date_format.dart' as format;
 
 class MarsController extends GetxController {
   static MarsController get to => Get.find();
@@ -30,7 +29,8 @@ class MarsController extends GetxController {
       earthDate.value.text = format
           .formatDate(date, [format.mm, '/', format.dd, '/', format.yyyy]);
     } else {
-      earthDate.value.text = UtilData.obterDataDDMMAAAA(date).toString();
+      earthDate.value.text = format
+          .formatDate(date, [format.dd, '/', format.mm, '/', format.yyyy]);
     }
 
     apiDate.value = format

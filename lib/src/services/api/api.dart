@@ -1,13 +1,14 @@
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_async/json_async.dart';
-import 'package:get/get.dart';
 import 'package:kepler/src/models/daily_image_data.dart';
 import 'package:kepler/src/models/mars_data.dart';
 import 'package:kepler/src/models/rover_data.dart';
 import 'package:kepler/src/utils/kepler_utils.dart';
 
 class API {
-  static const String url = "https://kepler-api-1.herokuapp.com/";
+  static const String url =
+      "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,hostname,disc_year,pl_orbper,pl_bmassj,pl_radj,pl_dens,st_teff,st_rad,st_mass,st_age,sy_bmag,sy_vmag+from+pscomppars+where+pl_controv_flag=0&format=json";
   static const String dailyUrl =
       "https://api.nasa.gov/planetary/apod?api_key=nrXAZMcugA46nocWFcJrgKkDV65dxpYWX1NDoFjj";
   static const String marsUrl = "https://mars-photos.herokuapp.com/api/v1";
@@ -56,14 +57,13 @@ class API {
     final Map res = await jsonDecodeAsyncMap(response.body);
     final List data = res.values.first;
     final List<RoverData> rovers =
-        data.map((e) => new RoverData.fromMap(e)).toList();
+    data.map((e) => new RoverData.fromMap(e)).toList();
     return rovers;
   }
 
-  static Future<List<MarsData>> getLatestMarsImages(
-      String rover, int page) async {
+  static Future<List<MarsData>> getLatestMarsImages(String rover, int page) async {
     final http.Response response =
-        await http.get(marsUrl + '/rovers/$rover/latest_photos?page=$page');
+    await http.get(marsUrl + '/rovers/$rover/latest_photos?page=$page');
     print("HTTP GET - " + marsUrl + '/rovers/$rover/latest_photos?page=$page');
     final Map res = await jsonDecodeAsyncMap(response.body);
     final List data = res.values.first;
@@ -73,8 +73,7 @@ class API {
     return mars;
   }
 
-  static Future<List<MarsData>> getMarsImagesBySol(
-      String rover, int page, String sol) async {
+  static Future<List<MarsData>> getMarsImagesBySol(String rover, int page, String sol) async {
     final http.Response response = await http
         .get(marsUrl + '/rovers/$rover/photos?page=$page&sol=$sol');
     print("HTTP GET - " + marsUrl + '/rovers/$rover/photos??page=$page&sol=$sol');
@@ -86,8 +85,7 @@ class API {
     return mars;
   }
 
-  static Future<List<MarsData>> getMarsImagesByEarthDate(
-      String rover, int page, String date) async {
+  static Future<List<MarsData>> getMarsImagesByEarthDate(String rover, int page, String date) async {
     final http.Response response = await http.get(
         marsUrl + '/rovers/$rover/photos?page=$page&earth_date=$date');
     print("HTTP GET - " + marsUrl +'/rovers/$rover/photos?page=$page&earth_date=$date');

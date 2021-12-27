@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:kepler/src/controllers/favorites/favorites_controller.dart';
 import 'package:kepler/src/controllers/explore/planet_controller.dart';
 import 'package:kepler/src/controllers/explore/solar_system_controller.dart';
+import 'package:kepler/src/controllers/favorites/favorites_controller.dart';
+import 'package:kepler/src/models/planet_data.dart';
 import 'package:kepler/src/models/star_data.dart';
 import 'package:kepler/src/services/database/database.dart';
-import 'package:kepler/src/models/planet_data.dart';
 import 'package:kepler/src/ui/theme.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
 import 'package:kepler/src/ui/widgets/cards/planet_card.dart';
 import 'package:kepler/src/ui/widgets/header/header.dart';
+import 'package:kepler/src/ui/widgets/progress/loading.dart';
 import 'package:kepler/src/ui/widgets/universe/gas_planet.dart';
 import 'package:kepler/src/ui/widgets/universe/small_planet.dart';
 import 'package:kepler/src/ui/widgets/universe/star.dart';
-import 'package:kepler/src/ui/widgets/progress/loading.dart';
 
 class SolarSystemView extends StatelessWidget {
 
@@ -56,7 +56,7 @@ class SolarSystemView extends StatelessWidget {
             Background(),
             Scaffold(
               backgroundColor: Colors.transparent,
-              resizeToAvoidBottomPadding: false,
+              resizeToAvoidBottomInset: false,
               body: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
@@ -64,7 +64,12 @@ class SolarSystemView extends StatelessWidget {
                     children: [
                       Container(
                         color: Colors.transparent,
-                        child: Header(Get.locale == Locale("pt") /*Add your language here if system sounds strange with the star name*/? star.name :  star.name + "system".tr,
+                        child: Header(
+                            Get.locale ==
+                                    Locale(
+                                        "pt") /*Add your language here if system sounds strange with the star name*/
+                                ? star.name
+                                : star.name + "system".tr,
                             () => Get.back(canPop: true)),
                       ),
                       Padding(

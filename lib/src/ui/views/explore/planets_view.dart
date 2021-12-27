@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:kepler/src/controllers/favorites/favorites_controller.dart';
 import 'package:kepler/src/controllers/explore/planet_controller.dart';
+import 'package:kepler/src/controllers/favorites/favorites_controller.dart';
 import 'package:kepler/src/models/planet_data.dart';
 import 'package:kepler/src/ui/theme.dart';
 import 'package:kepler/src/ui/widgets/backgrounds/background.dart';
@@ -23,7 +23,7 @@ class PlanetView extends StatelessWidget {
             Background(),
             Scaffold(
               backgroundColor: Colors.transparent,
-                  resizeToAvoidBottomPadding: false,
+                  resizeToAvoidBottomInset: false,
                   body: ListView(
                     physics: BouncingScrollPhysics(),
                     children: [
